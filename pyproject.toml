@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools-scm>=8", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pen-assemble"
+description = "Computational hypothesis generation for chimeric non-DSB editors"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Anees Ahmed", email = "anees.ahmed2022@vitstudent.ac.in"}]
+requires-python = ">=3.10"
+dynamic = ["version"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "pen-core>=0.1.0",
+    "genome-atlas>=0.1.0",
+    "pen-score>=0.1.0",
+    "torch>=2.2",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "click>=8.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.1", "pytest-cov>=5.0", "ruff>=0.3", "mypy>=1.9", "pre-commit>=3.7"]
+docs = ["sphinx>=7.3", "sphinx-autodoc-typehints", "furo", "myst-nb"]
+
+[project.scripts]
+pen-assemble = "pen_assemble.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ahmedanees-m/pen-assemble"
+Repository = "https://github.com/ahmedanees-m/pen-assemble"
+
+[tool.setuptools.packages.find]
+include = ["pen_assemble*"]
+
+[tool.setuptools_scm]
+write_to = "pen_assemble/_version.py"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I", "N", "D", "UP", "B", "C4", "SIM"]
+ignore = ["D100", "D104", "D203", "D213"]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra --cov=pen_assemble --cov-report=term-missing --cov-report=xml --strict-markers"
+testpaths = ["tests"]
