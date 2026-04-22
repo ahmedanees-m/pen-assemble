@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Sphinx
+docs/_build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Pipeline data (large binary files (not in git); tracked via checksums.sha256)
+pipeline_results_local_test/
+pipeline_data/
+vm_source/*.fasta
+vm_source/*.log
+vm_source/*.sh
+
+# PDB structure files (large; provided separately as raw data)
+catalog/release_v0.5.0/structures/
+**/*.pdb
+
+# Helper/survey scripts
+_vm_survey.py
+_vm_detail.py
+_vm_download.py
+
+# Private scripts (underscored)
+scripts/_*.py
+
+# VM credentials / keys
+*.pem
+*.key
+*.p12
+
+# Large package wheels
+*.whl
