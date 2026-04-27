@@ -1,0 +1,178 @@
+# Design strategy specifications v1.0.0
+# Locked before any design generation. Part of SHA-256 pre-registration target files.
+# Four orthogonal strategies in parallel (Strategy D added 2026-06 after P1 math analysis).
+
+strategies:
+
+  strategy_A_domain_swap:
+    name: Domain-Swap Chimera Generation
+    target_n_designs: 30
+    method: combinatorial_recombination
+    inputs:
+      - scaffold_universe.yaml
+    output_format:
+      protein_sequence: str
+      bRNA_or_guide_sequence: str
+      scaffold_provenance: dict        # {module_name: source_editor_id}
+      linker_design: list[dict]        # [{position, length_aa, composition}]
+      predicted_pen_score: float
+      predicted_mech_class: str
+    formula: |
+      For each scaffold S in scaffold_universe:
+        For each module M_donor in scaffolds (different from S):
+          Generate chimera = S backbone + M_donor's contributed_module
+          Optimize linkers (GS, EAAAK, or natural insertions)
+          Validate via Boltz-1 in Step 12
+    constraints:
+      max_protein_size_aa: 1200
+      min_protein_size_aa: 250
+      require_RNA_guided: true
+      require_DSB_free: true
+      max_modules_per_chimera: 3
+      dCas9_requirement: |
+        Any Cas9-derived module MUST use catalytically-dead dCas9 (D10A + H840A double
+        mutation; UniProt Q99ZW2 modified). RNA-binding scaffold reuse only; nuclease
+        activity engineered out. Verified by MECH-CLASS in Step 15.
+
+  strategy_B_ortholog_discovery:
+    name: Bridge Recombinase Ortholog Discovery
+    target_n_designs: 50
+    # ~50 candidates entering triage; expect ~10-15 surviving all 7 gates
+    method: triage_pipeline
+    inputs:
+      - is110_triage_catalog      # 31,871 candidates
+      - fanzor_candidates         # 2,463 auxiliary candidates
+    output_format:
+      uniprot_acc: str
+      protein_sequence: str
+      organism: str
+      composite_prob: float
+      tier_a_confidence: float
+      pen_score_axes_estimate: dict
+    triage_gates:
+      - gate_1_composite_prob:
+          formula: "composite_prob >= 0.85"
+          rationale: "High-confidence IS110-class composite architecture"
+      - gate_2_tier_a:
+          formula: "tier_a_confidence >= 0.80 AND tier_a == 'DSB_FREE_TRANSEST_RECOMBINASE'"
+          rationale: "Confirmed DSB-free mechanism"
+      - gate_3_size:
+          formula: "200 <= protein_length_aa <= 400"
+          rationale: "Compact for AAV deliverability"
+      - gate_4_genus_diversity:
+          formula: "genus_count_within_top_N <= 5"
+          rationale: "Avoid over-sampling Escherichia/Mycobacterium clades"
+      - gate_5_structure_plausibility:
+          formula: "AF3_mean_pLDDT >= 70 AND active_site_pLDDT >= 75"
+          rationale: "Reliable structural prediction in catalytic region"
+      - gate_6_literature_novelty:
+          formula: |
+            (NCBI protein name NOT IN known_IS110_members) AND
+            (ATLAS embedding distance to IS621 > 0.30) AND
+            (ATLAS embedding distance to IS621_2 > 0.30) AND
+            (ATLAS embedding distance to all named IS110-family > 0.30)
+          rationale: |
+            Prevents rediscovering IS621 or other already-characterized IS110 members.
+          implementation: |
+            1. Build known_IS110_members from PEN-SCORE editor_universe.yaml v1.0.4
+               + ISfinder IS110-family list + Durrant 2024 + Perry 2025 + Wei 2025 SI
+            2. Compute distance in ATLAS GraphSAGE 128-dim embedding space
+            3. Flag 'known' if nearest-neighbor distance < 0.30 to any known member
+      - gate_7_bRNA_interface:
+          formula: |
+            (PF01548 in HMMER hits, E-value < 1e-10) AND
+            (PF02371 in HMMER hits, E-value < 1e-10)
+          rationale: |
+            MECH-CLASS v0.5.1 biochemical gate: bona-fide IS110 composite requires both
+            PF01548 (DEDD transposase fold) AND PF02371 (Transposase_20). Ensures
+            Strategy B candidates have the bRNA-interface infrastructure intact.
+          implementation: |
+            Run HMMER (pen-stack/data image) against Pfam-A.hmm for each candidate.
+    funnel_estimate: |
+      31,871 (IS110 catalog) -> ~500 (gates 1-2) -> ~150 (gates 3-4) -> ~50 (gate 5)
+      -> ~20-30 (gate 6) -> ~10-20 (gate 7). Pre-registered threshold: >= 10 survivors.
+
+  strategy_C_deimmunization:
+    name: Computational Deimmunization of IS621
+    target_n_designs: 10
+    method: iterative_monte_carlo_surface_redesign
+    inputs:
+      - IS621_canonical_sequence
+      - mhc_alleles_HLA_A_B_DRB
+      - IS621_structure_8WT6
+    output_format:
+      variant_id: str
+      protein_sequence: str
+      mutations_introduced: list[dict]   # [{position, WT_aa, mut_aa, ddG_pred}]
+      n_mhc_i_epitopes_removed: int
+      n_mhc_ii_epitopes_removed: int
+      total_mutations: int
+      predicted_S_Immuno_delta: float
+      predicted_ddG_total: float
+    constraints:
+      - preserve_active_site: "No mutations within 10 Angstrom of catalytic D11/E60/D102/D105/S241 residues (Hiraizumi 2024)"
+      - preserve_bRNA_interface: "No mutations at bRNA-contact residues per Hiraizumi 2024"
+      - max_mutations: 15
+      - max_total_ddG: 8.0                # kcal/mol cumulative
+      - max_per_mutation_ddG: 3.0         # kcal/mol per single mutation
+    optimization_target: |
+      Minimize: (n_MHC_I_epitopes + 0.5 * n_MHC_II_epitopes)
+      Subject to: ddG_total <= 8.0 AND active_site_preserved AND bRNA_interface_preserved
+    mhc_calling_convention:
+      tool_class_I: netMHCpan-4.1
+      tool_class_II: netMHCIIpan-4.0
+      ic50_threshold_nM: 500
+      rank_column: "%Rank_EL"
+      calling_mode: direct_subprocess     # NOT mhctools wrapper
+    constraint_landscape_note: |
+      Effective redesignable surface: ~100-120 residues after removing active-site
+      buffer (~30-50 residues frozen) from the ~150 surface-exposed residues. Each
+      mutation must eliminate ~1.7-2 weighted epitope units to reach P3 target (+0.10
+      S_Immuno delta) within 15 mutations. Tight but feasible per netMHCpan literature.
+
+  strategy_D_protmpnn_backbone_redesign:
+    name: ProteinMPNN Backbone-Conditioned IS621 Redesign
+    target_n_designs: 25
+    method: protmpnn_inverse_folding
+    inputs:
+      - IS621_canonical_structure_8WT6
+      - catalytic_residues_to_pin         # D11, E60, D102, D105, S241
+      - bRNA_contact_residues_to_pin      # TBL + DBL per Hiraizumi 2024
+    rationale: |
+      P1 math analysis: Strategy A chimeras face ~-0.07 PenScore disadvantage from
+      S_Deliv (larger protein) and S_Mature (no citations). Strategy D preserves
+      IS621's protein size while generating novel sequences via inverse folding.
+    method_steps:
+      1: "Load IS621 backbone from PDB 8WT6"
+      2: "Pin catalytic residues D11, E60, D102, D105, S241 (Hiraizumi 2024 Nature 630:994-1002)"
+      3: "Pin bRNA-binding loop contact residues (TBL + DBL per Hiraizumi 2024)"
+      4: "Pin domain-domain interface residues (per structural analysis)"
+      5: "Allow redesign of all other residues (~150 of ~300 aa)"
+      6: "Generate 30 candidates via ProteinMPNN sampling (temp=0.1, seed=42)"
+      7: "Filter: backbone RMSD to 8WT6 <= 1.5 Angstrom AND sequence identity 50-75%"
+      8: "Survivors proceed to MECH-CLASS + PEN-SCORE evaluation"
+    output_format:
+      design_id: str
+      strategy: "D_protmpnn_redesign"
+      protmpnn_sequence: str
+      pinned_positions: list[int]
+      backbone_rmsd_to_WT_A: float
+      sequence_identity_to_WT: float
+      novel_residues_count: int
+    constraints:
+      - preserve_active_site: "Catalytic residues D11/E60/D102/D105/S241 pinned (Hiraizumi 2024)"
+      - preserve_bRNA_interface: "TBL/DBL contact residues pinned (Hiraizumi 2024)"
+      - preserve_backbone: "Final structure backbone RMSD to WT 8WT6 <= 1.5 Angstrom"
+      - max_sequence_divergence: "Sequence identity 50-75% - novel but structurally plausible"
+    s_mature_inheritance: "0.5 x parent IS621 S_Mature (0.792) = 0.396"
+    protmpnn_commit: "8907e6671bfbfc92303b5f79c4b5e6ce47cdef57"
+    expected_benefit:
+      S_Deliv: "Preserved (same size as IS621 ~300 aa)"
+      S_DSB: "Preserved (same composite architecture)"
+      S_Cargo: "Preserved (same enzymatic mechanism)"
+      S_Prog: "Preserved (same bRNA interface)"
+      S_Immuno: "Can improve - ProteinMPNN samples filterable for low MHC binding"
+      S_Mature: "Partially inherited (0.396) per pre-registered rule"
+
+version: "1.0.0"
+locked_date: "2026-07-08"
