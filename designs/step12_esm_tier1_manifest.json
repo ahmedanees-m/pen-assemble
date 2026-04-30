@@ -1,0 +1,17 @@
+{
+  "step": "step12_esm_tier1",
+  "total_designs": 1058,
+  "strategy_A": 30,
+  "strategy_B": 996,
+  "strategy_C_v1": 1,
+  "strategy_C_v2": 1,
+  "strategy_D": 30,
+  "strategy_C_v2_delta": 0.1183,
+  "strategy_C_v2_passes_p3": true,
+  "strategy_D_identity_range": [
+    0.731,
+    0.766
+  ],
+  "strategy_D_n_pass_strict_identity": 16,
+  "strategy_D_note": "All 30 retained; 16/30 pass strict 50-75% filter; range 73.1-76.6% (near upper bound); ProteinMPNN T=0.1 seed=42"
+}

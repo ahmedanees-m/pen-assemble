@@ -1,0 +1,25 @@
+{
+  "step": "step12b_boltz1_tier2",
+  "description": "Boltz-1 Tier 2 input \u2014 filtered from ESMFold gate5 survivors",
+  "gate5_survivors": 1049,
+  "filters_applied": {
+    "strategy_A": "gate5_pass only (21/30)",
+    "strategy_B": "gate5_pass + top-150 by pLDDT*pTM (all composite_prob equal at 0.9991)",
+    "strategy_C": "gate5_pass all (2/2)",
+    "strategy_D": "gate5_pass + identity <=0.75 (16/30)"
+  },
+  "total_designs": 188,
+  "strategy_A": 21,
+  "strategy_B": 150,
+  "strategy_C": 1,
+  "strategy_D": 16,
+  "strategy_B_ranking": "pLDDT * pTM descending (composite_prob uniform at 0.9991 across all B candidates)",
+  "strategy_B_top150_score_range": [
+    91.9726,
+    88.8688
+  ],
+  "strategy_D_identity_filter": "<=0.75 (pre-registered; 14/30 dropped: identity 0.751-0.766)",
+  "estimated_boltz1_runtime_h": 31.3,
+  "c_v1_removed": "C_targeted_001 discarded \u2014 wrong IS621 pos-275 baseline (N instead of L); archived to designs/discarded/",
+  "c_v2_retained": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V"
+}

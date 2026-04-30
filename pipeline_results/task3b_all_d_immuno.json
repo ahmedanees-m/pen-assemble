@@ -1,0 +1,237 @@
+{
+  "results": {
+    "IS621_reference": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": null
+    },
+    "D001_IS621_ProtMPNN_T0.1_sample14": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D002_IS621_ProtMPNN_T0.1_sample25": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D003_IS621_ProtMPNN_T0.1_sample5": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D004_IS621_ProtMPNN_T0.1_sample2": {
+      "length": 342,
+      "n_binders": 34,
+      "epitope_density": 0.09942,
+      "S_Immuno": 0.716,
+      "pen_score_actual": 0.9278
+    },
+    "D005_IS621_ProtMPNN_T0.1_sample28": {
+      "length": 342,
+      "n_binders": 34,
+      "epitope_density": 0.09942,
+      "S_Immuno": 0.716,
+      "pen_score_actual": 0.9278
+    },
+    "D006_IS621_ProtMPNN_T0.1_sample10": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D007_IS621_ProtMPNN_T0.1_sample9": {
+      "length": 342,
+      "n_binders": 37,
+      "epitope_density": 0.10819,
+      "S_Immuno": 0.6909,
+      "pen_score_actual": 0.9252
+    },
+    "D008_IS621_ProtMPNN_T0.1_sample11": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D009_IS621_ProtMPNN_T0.1_sample21": {
+      "length": 342,
+      "n_binders": 36,
+      "epitope_density": 0.10526,
+      "S_Immuno": 0.6992,
+      "pen_score_actual": 0.9261
+    },
+    "D010_IS621_ProtMPNN_T0.1_sample17": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D011_IS621_ProtMPNN_T0.1_sample18": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D012_IS621_ProtMPNN_T0.1_sample24": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D013_IS621_ProtMPNN_T0.1_sample20": {
+      "length": 342,
+      "n_binders": 34,
+      "epitope_density": 0.09942,
+      "S_Immuno": 0.716,
+      "pen_score_actual": 0.9278
+    },
+    "D014_IS621_ProtMPNN_T0.1_sample3": {
+      "length": 342,
+      "n_binders": 35,
+      "epitope_density": 0.10234,
+      "S_Immuno": 0.7076,
+      "pen_score_actual": 0.9269
+    },
+    "D015_IS621_ProtMPNN_T0.1_sample26": {
+      "length": 342,
+      "n_binders": 39,
+      "epitope_density": 0.11404,
+      "S_Immuno": 0.6742,
+      "pen_score_actual": 0.9236
+    },
+    "D016_IS621_ProtMPNN_T0.1_sample23": {
+      "length": 342,
+      "n_binders": 29,
+      "epitope_density": 0.0848,
+      "S_Immuno": 0.7577,
+      "pen_score_actual": 0.9319
+    },
+    "D017_IS621_ProtMPNN_T0.1_sample13": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D018_IS621_ProtMPNN_T0.1_sample22": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D019_IS621_ProtMPNN_T0.1_sample30": {
+      "length": 342,
+      "n_binders": 36,
+      "epitope_density": 0.10526,
+      "S_Immuno": 0.6992,
+      "pen_score_actual": 0.9261
+    },
+    "D020_IS621_ProtMPNN_T0.1_sample6": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D021_IS621_ProtMPNN_T0.1_sample12": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D022_IS621_ProtMPNN_T0.1_sample27": {
+      "length": 342,
+      "n_binders": 30,
+      "epitope_density": 0.08772,
+      "S_Immuno": 0.7494,
+      "pen_score_actual": 0.9311
+    },
+    "D023_IS621_ProtMPNN_T0.1_sample8": {
+      "length": 342,
+      "n_binders": 29,
+      "epitope_density": 0.0848,
+      "S_Immuno": 0.7577,
+      "pen_score_actual": 0.9319
+    },
+    "D024_IS621_ProtMPNN_T0.1_sample15": {
+      "length": 342,
+      "n_binders": 30,
+      "epitope_density": 0.08772,
+      "S_Immuno": 0.7494,
+      "pen_score_actual": 0.9311
+    },
+    "D025_IS621_ProtMPNN_T0.1_sample19": {
+      "length": 342,
+      "n_binders": 31,
+      "epitope_density": 0.09064,
+      "S_Immuno": 0.741,
+      "pen_score_actual": 0.9303
+    },
+    "D026_IS621_ProtMPNN_T0.1_sample4": {
+      "length": 342,
+      "n_binders": 32,
+      "epitope_density": 0.09357,
+      "S_Immuno": 0.7327,
+      "pen_score_actual": 0.9294
+    },
+    "D027_IS621_ProtMPNN_T0.1_sample16": {
+      "length": 342,
+      "n_binders": 34,
+      "epitope_density": 0.09942,
+      "S_Immuno": 0.716,
+      "pen_score_actual": 0.9278
+    },
+    "D028_IS621_ProtMPNN_T0.1_sample1": {
+      "length": 342,
+      "n_binders": 35,
+      "epitope_density": 0.10234,
+      "S_Immuno": 0.7076,
+      "pen_score_actual": 0.9269
+    },
+    "D029_IS621_ProtMPNN_T0.1_sample29": {
+      "length": 342,
+      "n_binders": 33,
+      "epitope_density": 0.09649,
+      "S_Immuno": 0.7243,
+      "pen_score_actual": 0.9286
+    },
+    "D030_IS621_ProtMPNN_T0.1_sample7": {
+      "length": 342,
+      "n_binders": 30,
+      "epitope_density": 0.08772,
+      "S_Immuno": 0.7494,
+      "pen_score_actual": 0.9311
+    },
+    "D7BKC8": {
+      "length": 399,
+      "n_binders": 33,
+      "epitope_density": 0.08271,
+      "S_Immuno": 0.7637,
+      "pen_score_actual": 0.9325
+    },
+    "D8PEA4": {
+      "length": 314,
+      "n_binders": 28,
+      "epitope_density": 0.08917,
+      "S_Immuno": 0.7452,
+      "pen_score_actual": 0.9307
+    }
+  },
+  "is621_s_immuno_computed": 0.7243,
+  "is621_s_immuno_published": 0.7594
+}

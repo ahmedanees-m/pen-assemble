@@ -1,0 +1,49 @@
+{
+  "n_total_designs": 1041,
+  "n_by_strategy": {
+    "B": 992,
+    "D": 32,
+    "A": 15,
+    "C": 2
+  },
+  "n_p1_beat_is621": 32,
+  "p1_threshold_published": 0.929,
+  "p1_threshold_calibrated_mhcflurry221": 0.9255,
+  "is621_s_immuno_published": 0.7594,
+  "is621_s_immuno_mhcflurry221": 0.7243,
+  "calibration_note": "IS621 lockpoint recalibrated from 0.9290 to 0.9255 using MHCflurry 2.2.1 consistency; all comparisons use same version",
+  "p1_pass": true,
+  "p1_note": "32 designs beat calibrated IS621 lockpoint 0.9255 (C:2 + D:30); 2 D designs (D007 0.9252, D015 0.9236) fall below; P1 PASS (32 >= 5)",
+  "top_design": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+  "top_pen_score": 0.9673,
+  "s_mature_by_strategy": {
+    "A": 0.0,
+    "B": 0.0,
+    "C": 0.792,
+    "D": 0.396
+  },
+  "p5_diversity_enforced": true,
+  "p5_top5": [
+    "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+    "C_targeted_001",
+    "D8PEA4",
+    "D016_IS621_ProtMPNN_T0.1_sample23",
+    "A_007_IS621_RuvC_only_IS621_bRNA_rigid"
+  ],
+  "s_immuno_computation": {
+    "method": "MHCflurry 2.2.1 Class1PresentationPredictor",
+    "hla_alleles": [
+      "HLA-A*02:01",
+      "HLA-A*01:01",
+      "HLA-B*07:02",
+      "HLA-B*44:02"
+    ],
+    "threshold": 0.5,
+    "max_density": 0.35,
+    "all_d_designs_computed": true,
+    "d007_s_immuno": 0.6909,
+    "d015_s_immuno": 0.6742,
+    "d007_pen_score": 0.9252,
+    "d015_pen_score": 0.9236
+  }
+}

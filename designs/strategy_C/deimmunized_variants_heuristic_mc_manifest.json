@@ -1,0 +1,29 @@
+{
+  "scaffold_id": "IS621",
+  "n_variants": 10,
+  "n_p3_pass": 0,
+  "p3_threshold_delta": 0.1,
+  "wt_s_immuno": 0.7594,
+  "best_variant_id": "C_001",
+  "best_s_immuno": 0.783,
+  "best_delta": 0.0236,
+  "netmhcpan_used": true,
+  "netmhciipan_used": true,
+  "mhc_i_rank_threshold": 0.5,
+  "mhc_ii_rank_threshold": 10.0,
+  "s_immuno_max_total": 253.5,
+  "wt_mhc_i_count": 15,
+  "wt_mhc_ii_count": 92,
+  "variant_ids": [
+    "C_001",
+    "C_002",
+    "C_003",
+    "C_004",
+    "C_005",
+    "C_006",
+    "C_007",
+    "C_008",
+    "C_009",
+    "C_010"
+  ]
+}

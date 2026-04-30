@@ -1,0 +1,10 @@
+{
+  "total_sequences": 1058,
+  "gate5_pass": 1049,
+  "gate5_fail": 9,
+  "gate5_pass_rate": 0.9915,
+  "plddt_threshold": 70.0,
+  "ptm_threshold": 0.5,
+  "elapsed_h": 0.0,
+  "completed_at": "2026-05-19 08:28:37"
+}

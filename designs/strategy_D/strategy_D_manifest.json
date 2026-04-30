@@ -1,0 +1,23 @@
+{
+  "strategy": "D",
+  "method": "ProteinMPNN",
+  "pdb": "8WT6",
+  "chain": "A",
+  "proteinmpnn_commit": "8907e6671bfbfc92303b5f79c4b5e6ce47cdef57",
+  "sampling_temp": 0.1,
+  "seed": 42,
+  "n_generated": 30,
+  "n_pass_identity": 16,
+  "n_final": 30,
+  "identity_range": [
+    0.731,
+    0.766
+  ],
+  "identity_filter": [
+    0.5,
+    0.75
+  ],
+  "n_pinned_chain_a": 118,
+  "chain_a_len": 318,
+  "is621_len": 342
+}

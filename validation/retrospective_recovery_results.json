@@ -1,0 +1,51 @@
+{
+  "run_date": "2026-05-16",
+  "run_context": "local (no Docker/GPU/MECH-CLASS/Boltz-1)",
+  "blocking_policy": "Tests 1 and 3 require Docker image; Test 2 run locally",
+  "tests": [
+    {
+      "test": "T1_IS621_composite",
+      "status": "INCONCLUSIVE",
+      "reason": "pen_assemble.verification.mechclass not available locally (needs MECH-CLASS v0.5.1 Docker image). To run: docker run pen-stack/biophysics:0.1.0 python scripts/04_retrospective_recovery_validation.py"
+    },
+    {
+      "test": "T2_evoCAST_recovery",
+      "status": "FAIL",
+      "recovery_rate": 0.0,
+      "witte_positions": [
+        65,
+        89,
+        134,
+        201,
+        247
+      ],
+      "recovered_positions": [
+        38,
+        158,
+        219,
+        309,
+        337,
+        407,
+        434,
+        438,
+        586,
+        620
+      ],
+      "overlap": [],
+      "caveats": [
+        "Witte 2025 positions are placeholder (5 of 12; full list needs SI Table S1)",
+        "Position alignment to CAST_VK (A0A8M0FGU0) not verified; evoCAST numbered relative to PseCAST TnsB",
+        "maximize_aav_deliverability objective uses size-preference heuristic, not evoCAST fitness function",
+        "PACE evolved under DNA integration pressure, not AAV delivery; objective mismatch expected"
+      ],
+      "recommended_action": "Complete Witte 2025 position alignment to CAST_VK before asserting failure"
+    },
+    {
+      "test": "T3_Bxb1_geometry",
+      "status": "INCONCLUSIVE",
+      "reason": "pen_assemble.verification.structure not available locally (needs Boltz-1 + GPU). To run: docker run --gpus all pen-stack/design:0.1.0 python scripts/04_retrospective_recovery_validation.py"
+    }
+  ],
+  "overall_status": "BLOCKED_PENDING",
+  "note": "Tests 1 and 3 require infrastructure not available on Windows local machine. Test 2 fails but with significant methodological caveats (position alignment). Full validation should be run with a GPU before final claim. Current State: Strategy C designs are preliminary; awaiting full retrospective gate."
+}

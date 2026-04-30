@@ -1,0 +1,22 @@
+{
+  "strategy_A": {
+    "total": 21,
+    "pass_active_site_plddt_75": 15,
+    "fail": 6
+  },
+  "strategy_B": {
+    "total": 994,
+    "pass_active_site_plddt_75": 992,
+    "fail": 2
+  },
+  "strategy_C": {
+    "total": 2,
+    "pass_active_site_plddt_75": 2,
+    "fail": 0
+  },
+  "strategy_D": {
+    "total": 32,
+    "pass_active_site_plddt_75": 32,
+    "fail": 0
+  }
+}
