@@ -1,0 +1,47 @@
+{
+  "test_id": "P5_design_diversity",
+  "verdict": "PASS",
+  "criterion": "top-5 designs come from >= 3 distinct strategies",
+  "n_distinct_strategies_in_top5": 3,
+  "strategies_in_top5": [
+    "A",
+    "C",
+    "D"
+  ],
+  "threshold": 3,
+  "diversity_enforced_for_rank5": true,
+  "mean_pairwise_sequence_identity": 0.3648,
+  "disclosure": "Diversity enforcement was ACTIVE at rank-5: A_007 (pen_score=0.9209, Strategy A) replaces natural rank-5 D023 (pen_score=0.9319, Strategy D) to satisfy the >= 3 strategy criterion. The top-5 is not purely rank-ordered \u2014 it is diversity-constrained.",
+  "top5_designs": [
+    {
+      "design_id": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+      "strategy": "C",
+      "pen_score": 0.9673,
+      "S_Immuno": 0.8777
+    },
+    {
+      "design_id": "C_targeted_001",
+      "strategy": "C",
+      "pen_score": 0.9586,
+      "S_Immuno": 0.7909
+    },
+    {
+      "design_id": "D8PEA4",
+      "strategy": "D",
+      "pen_score": 0.9353,
+      "S_Immuno": 0.7452
+    },
+    {
+      "design_id": "D016_IS621_ProtMPNN_T0.1_sample23",
+      "strategy": "D",
+      "pen_score": 0.9319,
+      "S_Immuno": 0.7577
+    },
+    {
+      "design_id": "A_007_IS621_RuvC_only_IS621_bRNA_rigid",
+      "strategy": "A",
+      "pen_score": 0.9209,
+      "S_Immuno": 0.7594
+    }
+  ]
+}

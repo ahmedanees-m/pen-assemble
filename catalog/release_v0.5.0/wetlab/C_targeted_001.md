@@ -1,0 +1,136 @@
+# Wet-Lab Reference: `C_targeted_001`
+
+** Beats IS621 verbatim (0.929)**
+**P5-compliant top-5**
+
+## Design Summary
+
+| Field | Value |
+|-------|-------|
+| Design ID | `C_targeted_001` |
+| Strategy | Strategy C (IS621 targeted deimmunization) |
+| PenScore | **0.9586** (IS621 = 0.929) |
+| Length | 342 aa &nbsp;~&nbsp; 38 kDa |
+| Source organism | *IS621 (Firmicutes bacterium)* |
+| Genus | *-* |
+| Protein name | Bridge recombinase / IS110-family transposase |
+
+## PenScore Axis Breakdown
+
+| Axis | Score | Weight | Contribution |
+|------|-------|--------|-------------|
+| S_DSB (double-strand break) | 1.0000 | 0.25 | 0.2500 |
+| S_Spec (target specificity) | 0.9891 | 0.10 | 0.0989 |
+| S_Cargo (payload compatibility) | 1.0000 | 0.20 | 0.2000 |
+| S_Deliv (delivery suitability) | 0.9552 | 0.15 | 0.1433 |
+| S_Immuno (de-immunization) | 0.7909 | 0.10 | 0.0791 |
+| S_Prog (programmability) | 0.9851 | 0.15 | 0.1478 |
+| S_Mature (maturity / TRL) | 0.7920 | 0.05 | 0.0396 |
+
+## Computational Structure Quality
+
+| Metric | Value |
+|--------|-------|
+| ESMFold mean pLDDT | 91.6 (threshold > 70) |
+| Active-site pLDDT  | 92.8 (threshold > 70) |
+| Rosetta ΔΔG        | -40622.3 kcal/mol *(cross-protein absolute energy; not true ΔΔG - see Note 5)* |
+| PDB path (VM)      | `~/esm_tier1_output/pdbs/C_targeted_001.pdb` |
+
+## Codon-Optimised DNA (Human Expression)
+
+> **Codons**: Kazusa Homo sapiens preferred codons - rule-based, not CAI-maximised.  
+> **GC content**: 66.4%  
+> **Restriction sites**: None of the common 8 screened.  
+> **ORF length**: 1026 bp  
+> **Recommendation**: Add Kozak (GCCACC) before ATG; add stop codon (TGA appended).  
+
+### Amino acid sequence
+```
+MDRFFPVIRICKVGFTMEHELHYIGIDTAKEKLDVDVLRPDGRHRTKKFANTTKGHDELV
+SWLKGHKIDHAHICIEATGTYMEPVAECNYDAGYIVSVINPALGKAFAQSEGLRNKTDTV
+DARMLAEFCRQKRPAAWEAPHPLERALRALVVRHQALTDMHTQENNRTETAREVQRPSID
+AHLTWLEAELKRLEKQIKDLTDDDPDMKHRRKNLESIPGIGEKCSAVLLAYIGLKDRFAH
+ARQFAAFAGLTPRRYESGSSVRGASRMSKAGHVSNRRALYMPAMVATSKTEWGRAFRDRL
+AANGKKGKVILGAMMRKLAQVAYGVLKSGVPFDASRHNPVAA
+```
+
+### Codon-optimised ORF (no Kozak, no stop - append as needed)
+```
+ATGGACAGGTTCTTCCCCGTGATCAGGATCTGCAAGGTGGGCTTCACCATGGAGCACGAG
+CTGCACTACATCGGCATCGACACCGCCAAGGAGAAGCTGGACGTGGACGTGCTGAGGCCC
+GACGGCAGGCACAGGACCAAGAAGTTCGCCAACACCACCAAGGGCCACGACGAGCTGGTG
+AGCTGGCTGAAGGGCCACAAGATCGACCACGCCCACATCTGCATCGAGGCCACCGGCACC
+TACATGGAGCCCGTGGCCGAGTGCAACTACGACGCCGGCTACATCGTGAGCGTGATCAAC
+CCCGCCCTGGGCAAGGCCTTCGCCCAGAGCGAGGGCCTGAGGAACAAGACCGACACCGTG
+GACGCCAGGATGCTGGCCGAGTTCTGCAGGCAGAAGAGGCCCGCCGCCTGGGAGGCCCCC
+CACCCCCTGGAGAGGGCCCTGAGGGCCCTGGTGGTGAGGCACCAGGCCCTGACCGACATG
+CACACCCAGGAGAACAACAGGACCGAGACCGCCAGGGAGGTGCAGAGGCCCAGCATCGAC
+GCCCACCTGACCTGGCTGGAGGCCGAGCTGAAGAGGCTGGAGAAGCAGATCAAGGACCTG
+ACCGACGACGACCCCGACATGAAGCACAGGAGGAAGAACCTGGAGAGCATCCCCGGCATC
+GGCGAGAAGTGCAGCGCCGTGCTGCTGGCCTACATCGGCCTGAAGGACAGGTTCGCCCAC
+GCCAGGCAGTTCGCCGCCTTCGCCGGCCTGACCCCCAGGAGGTACGAGAGCGGCAGCAGC
+GTGAGGGGCGCCAGCAGGATGAGCAAGGCCGGCCACGTGAGCAACAGGAGGGCCCTGTAC
+ATGCCCGCCATGGTGGCCACCAGCAAGACCGAGTGGGGCAGGGCCTTCAGGGACAGGCTG
+GCCGCCAACGGCAAGAAGGGCAAGGTGATCCTGGGCGCCATGATGAGGAAGCTGGCCCAG
+GTGGCCTACGGCGTGCTGAAGAGCGGCGTGCCCTTCGACGCCAGCAGGCACAACCCCGTG
+GCCGCC
+```
+
+### With Kozak + stop (ready-to-order)
+```
+GCCACCATGGACAGGTTCTTCCCCGTGATCAGGATCTGCAAGGTGGGCTTCACCATGGAG
+CACGAGCTGCACTACATCGGCATCGACACCGCCAAGGAGAAGCTGGACGTGGACGTGCTG
+AGGCCCGACGGCAGGCACAGGACCAAGAAGTTCGCCAACACCACCAAGGGCCACGACGAG
+CTGGTGAGCTGGCTGAAGGGCCACAAGATCGACCACGCCCACATCTGCATCGAGGCCACC
+GGCACCTACATGGAGCCCGTGGCCGAGTGCAACTACGACGCCGGCTACATCGTGAGCGTG
+ATCAACCCCGCCCTGGGCAAGGCCTTCGCCCAGAGCGAGGGCCTGAGGAACAAGACCGAC
+ACCGTGGACGCCAGGATGCTGGCCGAGTTCTGCAGGCAGAAGAGGCCCGCCGCCTGGGAG
+GCCCCCCACCCCCTGGAGAGGGCCCTGAGGGCCCTGGTGGTGAGGCACCAGGCCCTGACC
+GACATGCACACCCAGGAGAACAACAGGACCGAGACCGCCAGGGAGGTGCAGAGGCCCAGC
+ATCGACGCCCACCTGACCTGGCTGGAGGCCGAGCTGAAGAGGCTGGAGAAGCAGATCAAG
+GACCTGACCGACGACGACCCCGACATGAAGCACAGGAGGAAGAACCTGGAGAGCATCCCC
+GGCATCGGCGAGAAGTGCAGCGCCGTGCTGCTGGCCTACATCGGCCTGAAGGACAGGTTC
+GCCCACGCCAGGCAGTTCGCCGCCTTCGCCGGCCTGACCCCCAGGAGGTACGAGAGCGGC
+AGCAGCGTGAGGGGCGCCAGCAGGATGAGCAAGGCCGGCCACGTGAGCAACAGGAGGGCC
+CTGTACATGCCCGCCATGGTGGCCACCAGCAAGACCGAGTGGGGCAGGGCCTTCAGGGAC
+AGGCTGGCCGCCAACGGCAAGAAGGGCAAGGTGATCCTGGGCGCCATGATGAGGAAGCTG
+GCCCAGGTGGCCTACGGCGTGCTGAAGAGCGGCGTGCCCTTCGACGCCAGCAGGCACAAC
+CCCGTGGCCGCCTGA
+```
+
+### Recommended Validation Experiments
+
+#### Tier 1 - In vitro (priority)
+1. **Recombination assay (attB x attP)**: Incubate purified protein (0.5-5 µM) with
+   supercoiled plasmid carrying cognate attB/attP sites. Resolve on 1% agarose gel.
+   Positive: appearance of lower-molecular-weight relaxed/linear product.
+2. **EMSA (electrophoretic mobility shift)**: Titrate protein against Cy5-attB dsDNA
+   (40 bp). Confirm specific binding (Kd target < 500 nM).
+3. **Thermal stability (nanoDSF)**: Confirm Tm > 40 °C (minimum for activity at 37 °C).
+   Target Tm >= 50 °C.
+
+#### Tier 2 - Cell-based
+4. **HEK293T transient transfection**: Co-transfect codon-optimised ORF (in pCMV-FLAG)
+   with dual-reporter plasmid (mCherry-attB-attP-EGFP). Gate on mCherry+ cells; score
+   EGFP+ fraction by flow cytometry at 48 h. Threshold: > 5% recombination above background.
+5. **Western blot**: Anti-FLAG; confirm expected MW (see table above); flag truncations.
+6. **Immunofluorescence**: Confirm nuclear localisation if NLS is appended; cytoplasmic
+   distribution is acceptable for HDR-coupled delivery.
+
+#### Tier 3 - Deep characterisation (after Tier 1-2 pass)
+7. **Specificity panel**: Test against 10 scrambled attB sequences; confirm < 1%
+   off-target recombination.
+8. **Dose-response**: 0.1-10 µM protein; fit Hill equation; report EC50.
+9. **T7E1 assay**: Rule out NHEJ at attB target site (< 0.5% indel rate threshold).
+
+---
+
+> **COMPUTATIONAL DISCLAIMER**
+> This sequence was designed computationally using the PEN-ASSEMBLE v0.5.0 pipeline.
+> PenScore is a composite *in silico* metric - it does not guarantee biological activity.
+> Stability assessment used ESMFold pLDDT as a proxy (Rosetta ΔΔG gate was non-functional
+> for all designs; see Note 5 in DESIGN_PROVENANCE.md).
+> All IS110/bridge-recombinase activity claims require experimental validation.
+> Codon optimisation is rule-based (Kazusa preferred codons); verify codon-adaptation
+> index (CAI) with a commercial tool before synthesis order.
+> This file is for research use only.

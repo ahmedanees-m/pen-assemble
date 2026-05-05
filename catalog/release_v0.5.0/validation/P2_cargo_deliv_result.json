@@ -1,0 +1,45 @@
+{
+  "test_id": "P2_megabase_aav",
+  "verdict": "PASS",
+  "criterion": "S_Cargo == 1.0 AND S_Deliv >= 0.9 (joint constraint)",
+  "threshold": ">= 1 design satisfies both",
+  "n_designs_satisfying_joint_constraint": 1029,
+  "interpretation": "EXISTENCE CLAIM \u2014 not a per-design gate. IS110-family mechanism gives S_Cargo=1.0 to all designs by definition (transesterification imposes no cargo-size limit). S_Deliv >= 0.9 satisfied by compact IS110 orthologs (200-400 aa). Future experimental validation needed for delivery efficiency in vivo.",
+  "top5_designs": [
+    {
+      "design_id": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+      "strategy": "C",
+      "S_Cargo": 1.0,
+      "S_Deliv": 0.9552,
+      "pen_score": 0.9673
+    },
+    {
+      "design_id": "C_targeted_001",
+      "strategy": "C",
+      "S_Cargo": 1.0,
+      "S_Deliv": 0.9552,
+      "pen_score": 0.9586
+    },
+    {
+      "design_id": "D8PEA4",
+      "strategy": "D",
+      "S_Cargo": 1.0,
+      "S_Deliv": 0.9705,
+      "pen_score": 0.9353
+    },
+    {
+      "design_id": "D023_IS621_ProtMPNN_T0.1_sample8",
+      "strategy": "D",
+      "S_Cargo": 1.0,
+      "S_Deliv": 0.9552,
+      "pen_score": 0.9319
+    },
+    {
+      "design_id": "D016_IS621_ProtMPNN_T0.1_sample23",
+      "strategy": "D",
+      "S_Cargo": 1.0,
+      "S_Deliv": 0.9552,
+      "pen_score": 0.9319
+    }
+  ]
+}

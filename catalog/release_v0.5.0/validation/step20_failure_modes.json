@@ -1,0 +1,27 @@
+{
+  "n_failed": 12,
+  "n_total": 1041,
+  "failure_mode_counts": {
+    "gate_7_brna": 12
+  },
+  "by_strategy": {
+    "A": {
+      "n_failed": 12,
+      "modes": {
+        "gate_7_brna": 12
+      }
+    },
+    "B": {
+      "n_failed": 0,
+      "modes": {}
+    },
+    "C": {
+      "n_failed": 0,
+      "modes": {}
+    },
+    "D": {
+      "n_failed": 0,
+      "modes": {}
+    }
+  }
+}

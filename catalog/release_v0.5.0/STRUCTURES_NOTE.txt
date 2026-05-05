@@ -1,0 +1,1 @@
+ESMFold PDB structures are stored at ~/esm_tier1_output/pdbs/. The path per design is recorded in the final_pdb column of pen_assemble_catalog.csv.
