@@ -1,0 +1,1 @@
+ESMFold PDB structures reside on VM at /home/anees_22phd0670/esm_tier1_output/pdbs/. VM path per design is stored in the final_pdb column of pen_assemble_catalog.csv. Transfer via SFTP when preparing the Zenodo deposit.

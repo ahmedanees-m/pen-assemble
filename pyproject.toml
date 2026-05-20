@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "pen-assemble"
+version = "0.5.0"
+description = "Programmable Editor Nomination: pipeline for IS110-family bridge recombinase design and scoring"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Anees Ahmed", email = "ahmedaneesm@gmail.com" },
+]
+keywords = [
+    "genome editing",
+    "bridge recombinase",
+    "IS110",
+    "protein design",
+    "pen-score",
+    "bioinformatics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+docs = [
+    "sphinx>=7.0",
+    "sphinx-autodoc-typehints>=1.25",
+    "furo>=2024.1.29",
+]
+
+[project.urls]
+Homepage      = "https://github.com/ahmedaneesm/pen-assemble"
+Documentation = "https://pen-assemble.readthedocs.io"
+Repository    = "https://github.com/ahmedaneesm/pen-assemble"
+"Bug Tracker" = "https://github.com/ahmedaneesm/pen-assemble/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pen_assemble*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["pen_assemble"]
+omit   = ["tests/*"]
