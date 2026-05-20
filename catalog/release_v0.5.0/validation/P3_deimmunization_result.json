@@ -1,0 +1,29 @@
+{
+  "test_id": "P3_deimmunization",
+  "verdict": "PASS",
+  "criterion": "best Strategy C S_Immuno > IS621 S_Immuno + 0.1",
+  "wt_is621_s_immuno_published": 0.7594,
+  "wt_is621_s_immuno_mhcfl221": 0.7243,
+  "best_deimm_design": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+  "best_deimm_s_immuno": 0.8777,
+  "delta_vs_published": 0.1183,
+  "delta_vs_mhcfl221": 0.1534,
+  "threshold_delta": 0.1,
+  "correction_note": "Execution plan placeholder WT_IS621_S_IMMUNO=0.250 was incorrect. Corrected to Paper 3 published value 0.7594. IS621_deimmunized_v2 uses a 14-mutation greedy MHC-I+II anchor reduction strategy with cumDDG budget 15.0 kcal/mol.",
+  "all_strategy_c": [
+    {
+      "design_id": "C_targeted_001",
+      "S_Immuno": 0.7909,
+      "pen_score": 0.9586,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552
+    },
+    {
+      "design_id": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+      "S_Immuno": 0.8777,
+      "pen_score": 0.9673,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552
+    }
+  ]
+}

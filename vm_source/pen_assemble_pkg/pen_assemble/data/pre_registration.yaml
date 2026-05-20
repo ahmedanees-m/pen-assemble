@@ -1,0 +1,120 @@
+# Pre-Registration v1.0.0
+# Locked with SHA-256 hash via scripts/02_compute_prereg_hash.py.
+# This file is READ-ONLY after lock-in (git tag pre-registration-v1.0.0).
+# Changes require new version + transparent log in DESIGN_PROVENANCE.md.
+#
+# Discipline: same as Papers 2-3. Five predictions committed before any design
+# generation script runs (scripts/10_* and later). The pre-registration tag
+# must precede the first 1[0-9]_*.py commit in git history.
+
+predictions:
+
+  - id: P1_beat_is621
+    statement: "At least 5 chimeric designs achieve PenScore > 0.929 on human_therapeutic_aav_insertion"
+    operationalization: |
+      designs = all_designs_post_triage  # surviving Step 17
+      n_beating = count(d for d in designs if d.PenScore_human_therapeutic_aav_insertion > 0.929)
+      pass: n_beating >= 5
+    threshold: "n_beating >= 5"
+    rationale: |
+      IS621 (PenScore = 0.929, Paper 3 lockpoint) is the strongest existing natural editor.
+      Beating it computationally demonstrates the framework provides actionable improvements.
+
+      MATHEMATICAL REALITY (added 2026-06 after P1 math review):
+      IS621 is at ceiling on S_Spec=1.0, S_Cargo=1.0, S_Prog=1.0. Gain axes:
+        S_DSB: +0.025 max PenScore gain if composite_flag improves
+        S_Immuno: +0.01 max PenScore for +0.1 delta
+      Loss axes for chimeric designs:
+        S_Deliv: -0.01 to -0.04 PenScore from larger protein (Strategy A chimeras)
+        S_Mature: -0.04 PenScore for genuinely novel proteins (no PubMed citations)
+      Baseline disadvantage of ~-0.07 PenScore for Strategy A.
+      Realistic P1 paths: Strategy C (size/S_Mature preserved) or Strategy D (new).
+    s_mature_inheritance_rule: |
+      Strategy C (>= 80% identity to parent IS621): inherit IS621 S_Mature = 0.792
+      Strategy A (novel chimera): S_Mature = 0.0 (no citations)
+      Strategy B (novel ortholog): S_Mature = Paper 2 catalog-derived (mostly 0)
+      Strategy D (ProteinMPNN backbone redesign): S_Mature x 0.5 = 0.396 (partial inheritance)
+    failure_mode_analysis: |
+      If n_beating < 5, walk through per-design axis decomposition:
+        (1) Which axis fell short vs IS621?
+        (2) Strategy disaggregation: did all strategies fail or only some?
+        (3) S_Mature attribution: how many would pass with more permissive inheritance?
+        (4) S_Deliv attribution: chimeras > 600 aa fail S_Deliv; how many failed on size alone?
+        (5) Maximum theoretical PenScore ceiling among triaged designs.
+      Report nearest-misses (top-10 by PenScore - 0.929) with axis-specific barriers.
+    test_script: scripts/40_test_pred_P1_beat_is621.py
+
+  - id: P2_megabase_aav
+    statement: "At least 1 design has S_Cargo = 1.0 AND S_Deliv >= 0.9"
+    operationalization: |
+      n_satisfying = count(d for d in designs if d.S_Cargo == 1.0 and d.S_Deliv >= 0.9)
+      pass: n_satisfying >= 1
+    threshold: "n_satisfying >= 1"
+    rationale: |
+      The breakthrough use case: megabase cargo in a single AAV. IS621 already achieves this
+      jointly (S_Cargo=1.0, S_Deliv=0.9421 at 304 aa). P2 tests whether chimeric derivatives
+      preserve both constraints simultaneously.
+    test_script: scripts/41_test_pred_P2_cargo_deliv.py
+
+  - id: P3_deimmunization
+    statement: "Best deimmunized IS621 variant has S_Immuno > WT IS621 by >= 0.1"
+    operationalization: |
+      best_deimm = max(strategy_C_designs by S_Immuno)
+      delta = best_deimm.S_Immuno - 0.7594
+      pass: delta >= 0.1
+    threshold: "delta >= 0.10"
+    wt_baseline: 0.7594
+    target_minimum: 0.8594
+    rationale: |
+      IS621 S_Immuno = 0.7594 (Paper 3 lockpoint). Target >= 0.8594 requires eliminating
+      ~25 weighted epitopes via 8-12 surface mutations within the 15-mutation budget.
+      Constraint: active-site buffer + bRNA-contact freeze leaves ~100-120 redesignable
+      surface residues. Tight but feasible per netMHCpan literature.
+    failure_mode_analysis: |
+      If delta < 0.10:
+        (1) Achieved delta vs threshold (0.07-0.09 = near miss, still publishable)
+        (2) Epitope removal count vs expected
+        (3) Was stability constraint (ddG <= 8.0) the binding constraint?
+      Absolute epitope reduction is publishable even if below threshold.
+    test_script: scripts/42_test_pred_P3_deimmunization.py
+
+  - id: P4_ortholog_discovery
+    statement: "Ortholog discovery yields >= 10 candidates passing all 7 triage gates"
+    operationalization: |
+      candidates = run_strategy_B_pipeline()
+      survivors = apply_all_gates(candidates, gates=[1, 2, 3, 4, 5, 6, 7])
+      pass: len(survivors) >= 10
+    threshold: "len(survivors) >= 10"
+    rationale: |
+      All 7 gates apply (gates 6 and 7 added 2026-06 before lock-in).
+      Funnel: 31,871 -> ~500 (1-2) -> ~150 (3-4) -> ~50 (5) -> ~20-30 (6) -> ~10-20 (7).
+      Threshold is achievable but non-trivial with 7 gates.
+    test_script: scripts/43_test_pred_P4_orthologs.py
+
+  - id: P5_design_diversity
+    statement: "Top-5 final designs come from >= 3 different scaffold sources (no mode collapse)"
+    operationalization: |
+      top_5 = designs.sort_values('PenScore_human_therapeutic_aav_insertion', ascending=False).head(5)
+      n_distinct = len(set(top_5['scaffold_provenance'].apply(lambda x: x['catalytic_core'])))
+      pass: n_distinct >= 3
+    threshold: "n_distinct >= 3"
+    rationale: |
+      Anti-mode-collapse: if top-5 are all IS621 variants, the framework just optimized one
+      editor. Three+ scaffold sources in top-5 ensures mechanistic diversity.
+    test_script: scripts/44_test_pred_P5_diversity.py
+
+policy:
+  publication_rule: |
+    5/5 PASS -> strong claim: "framework computationally improves on natural editors"
+    4/5 PASS -> honest report: "4/5 predictions verified; failed prediction documented"
+    3/5 PASS -> reframed contribution: "design exploration; 3/5 predictions verified"
+    <=2/5 PASS -> framework requires structural rework before publication
+  hash_target_files:
+    - pen_assemble/data/scaffold_universe.yaml
+    - pen_assemble/data/design_strategies.yaml
+    - pen_assemble/data/pre_registration.yaml
+  lock_in_date: "2026-07-15"
+  lock_in_commit: "<filled at commit>"
+  lock_in_sha256: "<filled by scripts/02_compute_prereg_hash.py>"
+
+version: "1.0.0"

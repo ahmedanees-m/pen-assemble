@@ -1,0 +1,186 @@
+# Scaffold Universe v1.0.0
+# Sourced from Paper 3 editor_universe.yaml v1.0.4 (27 sequence corrections inherited).
+# 12 scaffold editors selected by: DSB-free mechanism + PenScore >= 0.70,
+# or RNA-guided module carve-out (MmeFz2/TwinPE/IscB).
+#
+# CORRECTIONS APPLIED 2026-06 (independent database verification):
+#   - IS621 catalytic residues: D11/E60/D102/D105 (DEDD) + S241 (Tnp-Ser)
+#     per Hiraizumi 2024 Nature 630:994-1002 (was D14/E56/D70/D87/S180)
+#   - IS621_2 accession A0A2X3M8B1: INACTIVE in UniProt; REQUIRES_REPLACEMENT
+#   - CAST_IF accession A0A0H3CNI3: was ribosomal bL19 (entirely wrong protein);
+#     replaced with A0A656A320 (TnsB from V. cholerae, best available unreviewed match)
+#   - CAST_IF canonical_pdb: removed (5US4 reference invalid; 6PIF unconfirmed)
+#   - IscB classification: NOT a recombinase; corrected to N5_RNA_Guided_Nuclease
+#   - IscB total_aa: 400 (was 410; per UniProt K9VH02)
+#   - IscB modules: HNH_catalytic_compact removed (DSB-creating; excluded from writers)
+
+scaffolds:
+
+  - id: IS621
+    canonical_accession: A0A2X3M8B0
+    canonical_pdb: 8WT6
+    paper3_pen_score: 0.929
+    tier_b: B3_Programmable_Recombinase
+    is_composite: true
+    contributes_modules:
+      - RuvC_fold_DEDD          # N-term catalytic (residues 1-110; D11/E60/D102/D105 DEDD tetrad)
+      - Tnp_serine_C_term       # C-term catalytic (residues 150-260; S241 Tnp serine)
+      - bRNA_binding_loop       # central loop (residues 110-150)
+    canonical_protospacer: "ACCTGTACCGAGGGCCTGTA"
+    cargo_capacity_bp: 1000000
+    total_aa: 304
+    paper3_axes:
+      S_DSB: 0.90
+      S_Spec: 1.0000
+      S_Cargo: 1.0000
+      S_Deliv: 0.9421
+      S_Immuno: 0.7594
+      S_Prog: 1.0
+      S_Mature: 0.792
+
+  - id: IS621_2
+    canonical_accession: REQUIRES_REPLACEMENT
+    # A0A2X3M8B1 is INACTIVE in UniProt (redundant proteome; entry removed).
+    # Replacement IS621-family ortholog must be found and verified in Step 8.
+    canonical_pdb: null
+    paper3_pen_score: 0.900
+    tier_b: B3_Programmable_Recombinase
+    is_composite: true
+    total_aa: null
+    contributes_modules:
+      - bRNA_binding_loop_v2
+
+  - id: Lambda_Int
+    canonical_accession: P03700
+    canonical_pdb: 1Z19
+    paper3_pen_score: 0.823
+    tier_b: B4_Tyrosine_Recombinase
+    is_composite: false
+    total_aa: 356
+    contributes_modules:
+      - catalytic_tyrosine
+      - attL_attR_recognition_HTH
+      - integrase_HU_IHF_binding
+
+  - id: CAST_IF
+    canonical_accession: A0A656A320
+    # TnsB (integrase catalytic region) from Vibrio cholerae strain A325.
+    # Best available UniProt match for VcCAST-I-F (Tn6677, Klompe 2019 Nature 571:219-225).
+    # Unreviewed (TrEMBL). CORRECTED 2026-06: prior entry A0A0H3CNI3 was ribosomal
+    # bL19 from Enterobacter cloacae (entirely wrong protein).
+    # Verify against NCBI Tn6677 annotation in Step 8.
+    canonical_pdb: null
+    # canonical_pdb removed: original reference "5US4" does not exist in RCSB PDB;
+    # "6PIF" correspondence to CAST-I-F is unconfirmed. Use Klompe 2019 cryo-EM maps.
+    paper3_pen_score: 0.800
+    tier_b: B2_CAST_Integrase
+    is_composite: false
+    total_aa: 715
+    contributes_modules:
+      - cascade_RNP
+      - TnsB_DDE_atypical
+
+  - id: Cre
+    canonical_accession: P06956
+    canonical_pdb: 1CRX
+    paper3_pen_score: 0.798
+    tier_b: B4_Tyrosine_Recombinase
+    is_composite: false
+    total_aa: 343
+    contributes_modules:
+      - loxP_HTH
+      - catalytic_tyrosine_compact
+
+  - id: eePASSIGE_v2
+    canonical_accession: "<inherits_eePASSIGE>"
+    # Sentinel: engineered variant from Pandey 2025 Nat Biomed Eng.
+    # Resolve sequence from primary paper SI in Step 8.
+    canonical_pdb: null
+    paper3_pen_score: 0.797
+    tier_b: B5_Serine_Recombinase
+    is_composite: false
+    total_aa: null
+    contributes_modules:
+      - large_serine_engineered
+
+  - id: Bxb1
+    canonical_accession: Q9B086
+    # Corrected in Paper 2 (was Q8VVR2) and confirmed in Paper 3.
+    canonical_pdb: 9IU2
+    paper3_pen_score: 0.788
+    tier_b: B5_Serine_Recombinase
+    is_composite: false
+    total_aa: 500
+    contributes_modules:
+      - catalytic_serine_recombinase
+      - attP_attB_binding_DNA_binding_domain
+
+  - id: phiC31
+    canonical_accession: Q9T221
+    canonical_pdb: null
+    paper3_pen_score: 0.785
+    tier_b: B5_Serine_Recombinase
+    is_composite: false
+    total_aa: 613
+    contributes_modules:
+      - phiC31_serine_catalytic
+      - phiC31_attP_attB_compact
+
+  - id: IscB
+    canonical_accession: K9VH02
+    canonical_pdb: null
+    paper3_pen_score: 0.784
+    tier_b: N5_RNA_Guided_Nuclease
+    # CORRECTED 2026-06: IscB is a Cas9 ancestor / RNA-guided HNH+RuvC endonuclease
+    # (Altae-Tran 2021 Science 374:57-65). NOT a recombinase.
+    # Carve-out: only the omega_RNA_binding scaffold is extracted for Strategy A chimeras.
+    is_composite: false
+    total_aa: 400
+    contributes_modules:
+      - omega_RNA_binding
+    # HNH_catalytic_compact intentionally excluded: creates DSBs.
+
+  - id: CAST_VK
+    canonical_accession: A0A8M0FGU0
+    canonical_pdb: 7N3O
+    paper3_pen_score: 0.756
+    tier_b: B2_CAST_Integrase
+    is_composite: false
+    total_aa: 600
+    contributes_modules:
+      - Cas12k_compact_RNP
+      - TnsB_TnsC_TniQ_quartet
+
+  - id: MmeFz2
+    canonical_accession: REQUIRES_STEP7
+    # Sentinel: sequence not in UniProt; resolve from Wang 2026 Nat Commun SI in Step 8.
+    canonical_pdb: null
+    paper3_pen_score: null
+    tier_b: N2_Fanzor_OMEGA
+    is_composite: false
+    total_aa: null
+    contributes_modules_carveout_only:
+      - TnpB_compact_scaffold
+
+  - id: TwinPE
+    canonical_accession: TWINPE_FUSION
+    # Composite of Cas9-H840A + M-MLV RT. Not a single UniProt accession.
+    canonical_pdb: null
+    paper3_pen_score: 0.38
+    tier_b: N4_Editor_Fusion
+    is_composite: false
+    total_aa: null
+    contributes_modules_carveout_only:
+      - pegRNA_encoded_payload_delivery
+
+version: "1.0.0"
+n_scaffolds: 12
+selection_criteria:
+  mechanism_class:
+    - DSB_FREE_TRANSEST_RECOMBINASE
+  min_pen_score: 0.70
+  carve_out_allowed: true
+carve_outs:
+  IscB: "omega_RNA_binding scaffold only; HNH nuclease activity (DSB-creating) excluded"
+  MmeFz2: "TnpB compact scaffold only; DSB nuclease activity engineered out in chimeras"
+  TwinPE: "pegRNA payload delivery module only; Cas9 backbone not used"

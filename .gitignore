@@ -35,9 +35,21 @@ docs/_build/
 .DS_Store
 Thumbs.db
 
-# Pipeline data (large binary files — keep catalog release)
+# Pipeline data (large binary files — not in git; tracked via checksums.sha256)
 pipeline_results_local_test/
 pipeline_data/
+vm_source/*.fasta
+vm_source/*.log
+vm_source/*.sh
+
+# PDB structure files (large; deposited separately to Zenodo)
+catalog/release_v0.5.0/structures/
+**/*.pdb
+
+# Helper/survey scripts
+_vm_survey.py
+_vm_detail.py
+_vm_download.py
 
 # Private scripts (underscored)
 scripts/_*.py
@@ -46,3 +58,6 @@ scripts/_*.py
 *.pem
 *.key
 *.p12
+
+# Large package wheels
+*.whl

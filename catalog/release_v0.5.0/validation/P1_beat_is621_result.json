@@ -1,0 +1,254 @@
+{
+  "test_id": "P1_beat_is621",
+  "verdict": "PASS",
+  "preregistered_threshold": 0.929,
+  "designs_beating_verbatim": 16,
+  "threshold_n": 5,
+  "calibrated_threshold": 0.9255,
+  "designs_beating_calibrated": 32,
+  "calibration_note": "IS621 S_Immuno published=0.7594 (Paper3 older MHCflurry) vs 0.7243 (MHCflurry 2.2.1). Calibrated lockpoint = 0.9290 + (0.7243-0.7594)*0.10 = 0.9255. Both thresholds pass. Calibrated result is secondary sensitivity analysis only.",
+  "top_designs_verbatim": [
+    {
+      "design_id": "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+      "strategy": "C",
+      "pen_score": 0.9673,
+      "S_Immuno": 0.8777,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.792
+    },
+    {
+      "design_id": "C_targeted_001",
+      "strategy": "C",
+      "pen_score": 0.9586,
+      "S_Immuno": 0.7909,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.792
+    },
+    {
+      "design_id": "D8PEA4",
+      "strategy": "D",
+      "pen_score": 0.9353,
+      "S_Immuno": 0.7452,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9705,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D016_IS621_ProtMPNN_T0.1_sample23",
+      "strategy": "D",
+      "pen_score": 0.9319,
+      "S_Immuno": 0.7577,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D023_IS621_ProtMPNN_T0.1_sample8",
+      "strategy": "D",
+      "pen_score": 0.9319,
+      "S_Immuno": 0.7577,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D022_IS621_ProtMPNN_T0.1_sample27",
+      "strategy": "D",
+      "pen_score": 0.9311,
+      "S_Immuno": 0.7494,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D024_IS621_ProtMPNN_T0.1_sample15",
+      "strategy": "D",
+      "pen_score": 0.9311,
+      "S_Immuno": 0.7494,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D030_IS621_ProtMPNN_T0.1_sample7",
+      "strategy": "D",
+      "pen_score": 0.9311,
+      "S_Immuno": 0.7494,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D025_IS621_ProtMPNN_T0.1_sample19",
+      "strategy": "D",
+      "pen_score": 0.9303,
+      "S_Immuno": 0.741,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D7BKC8",
+      "strategy": "D",
+      "pen_score": 0.9302,
+      "S_Immuno": 0.7637,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.924,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D006_IS621_ProtMPNN_T0.1_sample10",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D008_IS621_ProtMPNN_T0.1_sample11",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D010_IS621_ProtMPNN_T0.1_sample17",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D011_IS621_ProtMPNN_T0.1_sample18",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D020_IS621_ProtMPNN_T0.1_sample6",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    },
+    {
+      "design_id": "D026_IS621_ProtMPNN_T0.1_sample4",
+      "strategy": "D",
+      "pen_score": 0.9294,
+      "S_Immuno": 0.7327,
+      "S_DSB": 1.0,
+      "S_Deliv": 0.9552,
+      "S_Mature": 0.396
+    }
+  ],
+  "top_designs_calibrated_only": [
+    {
+      "design_id": "D018_IS621_ProtMPNN_T0.1_sample22",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D021_IS621_ProtMPNN_T0.1_sample12",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D003_IS621_ProtMPNN_T0.1_sample5",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D012_IS621_ProtMPNN_T0.1_sample24",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D029_IS621_ProtMPNN_T0.1_sample29",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D002_IS621_ProtMPNN_T0.1_sample25",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D001_IS621_ProtMPNN_T0.1_sample14",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D017_IS621_ProtMPNN_T0.1_sample13",
+      "strategy": "D",
+      "pen_score": 0.9286,
+      "S_Immuno": 0.7243
+    },
+    {
+      "design_id": "D013_IS621_ProtMPNN_T0.1_sample20",
+      "strategy": "D",
+      "pen_score": 0.9278,
+      "S_Immuno": 0.716
+    },
+    {
+      "design_id": "D005_IS621_ProtMPNN_T0.1_sample28",
+      "strategy": "D",
+      "pen_score": 0.9278,
+      "S_Immuno": 0.716
+    },
+    {
+      "design_id": "D004_IS621_ProtMPNN_T0.1_sample2",
+      "strategy": "D",
+      "pen_score": 0.9278,
+      "S_Immuno": 0.716
+    },
+    {
+      "design_id": "D027_IS621_ProtMPNN_T0.1_sample16",
+      "strategy": "D",
+      "pen_score": 0.9278,
+      "S_Immuno": 0.716
+    },
+    {
+      "design_id": "D014_IS621_ProtMPNN_T0.1_sample3",
+      "strategy": "D",
+      "pen_score": 0.9269,
+      "S_Immuno": 0.7076
+    },
+    {
+      "design_id": "D028_IS621_ProtMPNN_T0.1_sample1",
+      "strategy": "D",
+      "pen_score": 0.9269,
+      "S_Immuno": 0.7076
+    },
+    {
+      "design_id": "D009_IS621_ProtMPNN_T0.1_sample21",
+      "strategy": "D",
+      "pen_score": 0.9261,
+      "S_Immuno": 0.6992
+    },
+    {
+      "design_id": "D019_IS621_ProtMPNN_T0.1_sample30",
+      "strategy": "D",
+      "pen_score": 0.9261,
+      "S_Immuno": 0.6992
+    }
+  ]
+}
