@@ -2,8 +2,10 @@
 
 **Programmable Editor Nomination — Assembly pipeline for IS110-family bridge recombinase design**
 
+[![CI](https://github.com/ahmedanees-m/pen-assemble/actions/workflows/ci.yml/badge.svg)](https://github.com/ahmedanees-m/pen-assemble/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/ahmedanees-m/pen-assemble)](https://github.com/ahmedanees-m/pen-assemble/releases/latest)
 
 PEN-ASSEMBLE is a computational pipeline for nominating IS110-family bridge recombinase
 candidates for therapeutic genome editing applications. It evaluates 1,041 designs across
