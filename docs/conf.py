@@ -46,11 +46,6 @@ intersphinx_mapping = {
 # -- HTML output ---------------------------------------------------------------
 html_theme = "furo"
 html_title = "PEN-ASSEMBLE v0.5.0"
-html_static_path = ["_static"]
-html_theme_options = {
-    "light_logo": "pen_assemble_logo.png",
-    "dark_logo":  "pen_assemble_logo.png",
-}
 
 # -- doctest -------------------------------------------------------------------
 doctest_global_setup = "import pen_assemble"
