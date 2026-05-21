@@ -82,11 +82,7 @@ class Designer:
                 f"Available: {sorted(scaffold_map)}"
             )
 
-        designs = generate_chimera_designs(
-            scaffolds=scaffolds,
-            guide_module_filter=guide_module,
-            target_cargo_bp=target_cargo_bp,
-        )
+        designs = generate_chimera_designs()
         if not designs:
             raise ValueError(
                 f"No chimera designs generated for scaffold={scaffold}, "
@@ -97,8 +93,8 @@ class Designer:
         return DesignResult(
             design_id=best.design_id,
             strategy="A",
-            protein_sequence=best.protein_sequence,
-            guide_rna_sequence=getattr(best, "bRNA_sequence", None),
+            protein_sequence=best.full_sequence,
+            guide_rna_sequence=getattr(best, "bRNA_or_guide_template", None),
             scaffold_provenance={"scaffold": scaffold, "guide_module": guide_module},
         )
 
@@ -181,26 +177,26 @@ class Designer:
             )
 
         output_dir = self._data_dir / "pen-assemble" / "strategy_c"
-        variants_df = run_deimmunization(
-            scaffold_fasta=scaffolds_fasta,
-            output_dir=output_dir,
+        variants: list[DesignResult] = []
+        deimm_variants = run_deimmunization(
+            scaffold_id=scaffold_id,
+            max_mutations=max_mutations,
             n_variants=n_variants,
-            max_n_mutations=max_mutations,
+            output_dir=output_dir,
             seed=seed,
         )
 
-        results = []
-        for _, row in variants_df.head(n_variants).iterrows():
-            results.append(
+        for i, v in enumerate(deimm_variants[:n_variants]):
+            variants.append(
                 DesignResult(
-                    design_id=str(row.get("design_id", f"{scaffold_id}_deimm_{len(results) + 1}")),
+                    design_id=getattr(v, "variant_id", f"{scaffold_id}_deimm_{i + 1}"),
                     strategy="C",
-                    protein_sequence=str(row.get("protein_sequence", "")),
+                    protein_sequence=getattr(v, "protein_sequence", ""),
                     scaffold_provenance={"parent": scaffold_id, "strategy": "C_deimm"},
-                    predicted_pen_score=row.get("pen_score"),
+                    predicted_pen_score=getattr(v, "predicted_s_immuno", None),
                 )
             )
-        return results
+        return variants
 
     def redesign_backbone(
         self,
