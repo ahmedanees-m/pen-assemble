@@ -9,13 +9,13 @@
 - Phase 2 (MHC-II): FAILED — DDG budget exhausted by Phase 1 (only 1.09 remaining)
 - Final: n_I=7, n_II=92, combined=53.0, S_Immuno=0.7909, delta=+0.0315
 - P3 pass: NO (need delta>=0.10)
-- **DISCARDED — canonical sequence error:** The canonical IS621 sequence (UniProt Q9X9T5,
+- **DISCARDED — canonical sequence error:** The canonical IS621 sequence (UniProt A0A2X3M8B0,
   342 aa) was verified against the UniProt reference; residue 275 is leucine (L). This
   runner inadvertently held asparagine (N) at position 275 due to a sequence-parsing
   error in an internal draft scaffold. C_targeted_001 (Attempt 1) was discarded and is
   excluded from the final catalog. **Manuscript Methods note:** *"Strategy C variant v1
   was discarded because it was computed against a draft scaffold carrying N at position
-  275; the canonical IS621 sequence (UniProt Q9X9T5) has L at position 275, as confirmed
+  275; the canonical IS621 sequence (UniProt A0A2X3M8B0) has L at position 275, as confirmed
   from the reference FASTA. All results reported use the verified canonical sequence."*
   Attempt 2 (IS621_deimmunized_v2) correctly uses IS621 WT with L at position 275,
   verified explicitly in the mutation log (mutation #13 is L275I).
