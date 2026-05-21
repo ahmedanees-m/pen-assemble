@@ -21,36 +21,37 @@ The 7 axes and their computation sources:
   S_Prog    : programmability model (RNA-guide inference from sequence)
   S_Mature  : citations × expertise inheritance (pre-registered rules above)
 """
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
-IS621_PENSCORE  = 0.929    # P1 lockpoint (Paper 3 v0.1.0, human_therapeutic_aav_insertion)
-IS621_S_MATURE  = 0.792    # Paper 3 v0.1.0 public_scorecard.parquet
-IS621_S_IMMUNO  = 0.7594   # Paper 3 v0.1.0 (P3 deimm baseline)
-IS621_S_DELIV   = 0.949    # estimated from Paper 3 (~260 aa, AAV-compact)
+IS621_PENSCORE = 0.929  # P1 lockpoint (Paper 3 v0.1.0, human_therapeutic_aav_insertion)
+IS621_S_MATURE = 0.792  # Paper 3 v0.1.0 public_scorecard.parquet
+IS621_S_IMMUNO = 0.7594  # Paper 3 v0.1.0 (P3 deimm baseline)
+IS621_S_DELIV = 0.949  # estimated from Paper 3 (~260 aa, AAV-compact)
 
 P1_THRESHOLD_N_DESIGNS = 5  # pre-registered: >= 5 designs beat 0.929
 
 # Pre-registered S_Mature inheritance rules
 S_MATURE_RULES: dict[str, float] = {
-    "A_domain_swap":    0.0,
-    "B_ortholog":       0.0,
-    "C_deimm":          IS621_S_MATURE,           # 0.792 (inherit parent)
-    "D_protmpnn":       IS621_S_MATURE * 0.5,     # 0.396 (partial inheritance)
+    "A_domain_swap": 0.0,
+    "B_ortholog": 0.0,
+    "C_deimm": IS621_S_MATURE,  # 0.792 (inherit parent)
+    "D_protmpnn": IS621_S_MATURE * 0.5,  # 0.396 (partial inheritance)
 }
 
 # Axis weights (from Paper 3 pen-score v0.1.0; must be identical for comparability)
 AXIS_WEIGHTS: dict[str, float] = {
-    "S_DSB":    0.25,
-    "S_Spec":   0.10,
-    "S_Cargo":  0.20,
-    "S_Deliv":  0.15,
+    "S_DSB": 0.25,
+    "S_Spec": 0.10,
+    "S_Cargo": 0.20,
+    "S_Deliv": 0.15,
     "S_Immuno": 0.10,
-    "S_Prog":   0.15,
+    "S_Prog": 0.15,
     "S_Mature": 0.05,
 }
 assert abs(sum(AXIS_WEIGHTS.values()) - 1.0) < 1e-6, "Axis weights must sum to 1.0"
@@ -59,6 +60,7 @@ assert abs(sum(AXIS_WEIGHTS.values()) - 1.0) < 1e-6, "Axis weights must sum to 1
 # ---------------------------------------------------------------------------
 # Axis computation helpers
 # ---------------------------------------------------------------------------
+
 
 def _compute_s_dsb(tier_a: str) -> float:
     """S_DSB: 1.0 if DSB-free, 0.0 if DSB-creating, 0.5 if uncertain."""
@@ -86,9 +88,9 @@ def _compute_s_deliv(protein_length_aa: int) -> float:
     """
     n = protein_length_aa
     if n <= 260:
-        return 1.0 - max(0.0, (260 - n) / 260) * 0.2   # slight penalty for very small
+        return 1.0 - max(0.0, (260 - n) / 260) * 0.2  # slight penalty for very small
     if n <= 900:
-        return 1.0 - (n - 260) / (900 - 260) * 0.35    # linear decline
+        return 1.0 - (n - 260) / (900 - 260) * 0.35  # linear decline
     if n <= 1200:
         return 0.65 - (n - 900) / (1200 - 900) * 0.65  # steep decline
     return 0.0  # > 1200 aa: AAV cannot package
@@ -97,7 +99,7 @@ def _compute_s_deliv(protein_length_aa: int) -> float:
 def _compute_s_immuno(
     sequence: str,
     strategy: str,
-    precomputed_s_immuno: Optional[float] = None,
+    precomputed_s_immuno: float | None = None,
 ) -> float:
     """S_Immuno: if precomputed (from Strategy C deimm), use that directly.
     Otherwise, use heuristic from deimmunization module.
@@ -109,16 +111,22 @@ def _compute_s_immuno(
         return IS621_S_IMMUNO  # fallback to WT value
     # For other strategies: use heuristic via deimmunization module
     try:
-        from pen_assemble.strategies.deimmunization import compute_epitope_profile, IS621_S_IMMUNO_WT
+        from pen_assemble.strategies.deimmunization import (
+            IS621_S_IMMUNO_WT,
+            compute_epitope_profile,
+        )
+
         profile = compute_epitope_profile(sequence, use_netmhcpan=False)
         # Normalize relative to IS621 WT: if same epitope load, return IS621_S_IMMUNO_WT
         # (different sequences will have different loads; this is a rough estimate)
-        return min(1.0, max(0.0, IS621_S_IMMUNO_WT * (1.0 + (0.7594 - profile.weighted_load / 50.0) * 0.1)))
+        return min(
+            1.0, max(0.0, IS621_S_IMMUNO_WT * (1.0 + (0.7594 - profile.weighted_load / 50.0) * 0.1))
+        )
     except Exception:
         return IS621_S_IMMUNO  # safe fallback
 
 
-def _compute_s_mature(strategy: str, sequence: str, parent_sequence: Optional[str] = None) -> float:
+def _compute_s_mature(strategy: str, sequence: str, parent_sequence: str | None = None) -> float:
     """S_Mature: pre-registered inheritance rules."""
     if strategy.startswith("A"):
         return S_MATURE_RULES["A_domain_swap"]
@@ -129,7 +137,7 @@ def _compute_s_mature(strategy: str, sequence: str, parent_sequence: Optional[st
     if strategy.startswith("C"):
         # Verify >= 80% identity to IS621 WT
         if parent_sequence and sequence:
-            n_match = sum(a == b for a, b in zip(sequence, parent_sequence))
+            n_match = sum(a == b for a, b in zip(sequence, parent_sequence, strict=False))
             identity = n_match / max(len(parent_sequence), len(sequence))
             if identity >= 0.80:
                 return S_MATURE_RULES["C_deimm"]
@@ -143,9 +151,11 @@ def _compute_s_mature(strategy: str, sequence: str, parent_sequence: Optional[st
 # Full PEN-SCORE computation
 # ---------------------------------------------------------------------------
 
+
 def _check_penscore_package() -> bool:
     try:
         import penscore  # noqa: F401
+
         return True
     except ImportError:
         return False
@@ -159,9 +169,9 @@ def compute_penscore(
     tier_a_confidence: float = 1.0,
     composite: bool = True,
     composite_prob: float = 1.0,
-    structure_pdb: Optional[Path] = None,
-    precomputed_s_immuno: Optional[float] = None,
-    parent_sequence: Optional[str] = None,
+    structure_pdb: Path | None = None,
+    precomputed_s_immuno: float | None = None,
+    parent_sequence: str | None = None,
     use_package: bool = True,
 ) -> dict[str, Any]:
     """Compute full 7-axis PEN-SCORE for a single design.
@@ -189,6 +199,7 @@ def compute_penscore(
     if use_package and _check_penscore_package():
         try:
             import penscore
+
             ps = penscore.PenScore(use_case="human_therapeutic_aav_insertion")
             result = ps.score(
                 sequence=protein_sequence,
@@ -201,10 +212,18 @@ def compute_penscore(
             result_dict = result.to_dict() if hasattr(result, "to_dict") else dict(result)
             result_dict["S_Mature"] = s_mature
             # Recompute total with corrected S_Mature
-            total = sum(result_dict.get(f"S_{ax}", 0.0) * w
-                        for ax, w in [("DSB", 0.25), ("Spec", 0.10), ("Cargo", 0.20),
-                                      ("Deliv", 0.15), ("Immuno", 0.10), ("Prog", 0.15),
-                                      ("Mature", 0.05)])
+            total = sum(
+                result_dict.get(f"S_{ax}", 0.0) * w
+                for ax, w in [
+                    ("DSB", 0.25),
+                    ("Spec", 0.10),
+                    ("Cargo", 0.20),
+                    ("Deliv", 0.15),
+                    ("Immuno", 0.10),
+                    ("Prog", 0.15),
+                    ("Mature", 0.05),
+                ]
+            )
             result_dict["pen_score"] = round(total, 4)
             result_dict["design_id"] = design_id
             result_dict["strategy"] = strategy
@@ -214,22 +233,27 @@ def compute_penscore(
             pass  # fall through to local implementation
 
     # Local axis implementations
-    S_DSB    = _compute_s_dsb(tier_a)
-    S_Cargo  = _compute_s_cargo(tier_a, composite)
-    S_Deliv  = _compute_s_deliv(n_aa)
+    S_DSB = _compute_s_dsb(tier_a)
+    S_Cargo = _compute_s_cargo(tier_a, composite)
+    S_Deliv = _compute_s_deliv(n_aa)
     S_Immuno = _compute_s_immuno(protein_sequence, strategy, precomputed_s_immuno)
     S_Mature = _compute_s_mature(strategy, protein_sequence, parent_sequence)
 
     # S_Spec and S_Prog require the pen-score package; use proxy values
     # S_Spec proxy: high confidence MECH-CLASS → high specificity (sequence-based)
-    S_Spec   = round(min(1.0, tier_a_confidence * 0.9 + 0.1 * composite_prob), 4)
+    S_Spec = round(min(1.0, tier_a_confidence * 0.9 + 0.1 * composite_prob), 4)
     # S_Prog proxy: composite architecture with RNA-binding module → programmable
-    S_Prog   = round(min(1.0, composite_prob * 0.8 + 0.2 * (1.0 if composite else 0.0)), 4)
+    S_Prog = round(min(1.0, composite_prob * 0.8 + 0.2 * (1.0 if composite else 0.0)), 4)
 
     pen_score = round(
-        S_DSB * 0.25 + S_Spec * 0.10 + S_Cargo * 0.20 +
-        S_Deliv * 0.15 + S_Immuno * 0.10 + S_Prog * 0.15 + S_Mature * 0.05,
-        4
+        S_DSB * 0.25
+        + S_Spec * 0.10
+        + S_Cargo * 0.20
+        + S_Deliv * 0.15
+        + S_Immuno * 0.10
+        + S_Prog * 0.15
+        + S_Mature * 0.05,
+        4,
     )
 
     return {
@@ -250,7 +274,8 @@ def compute_penscore(
         "pen_score_method": "local_axis_implementations",
         "pen_score_note": (
             "S_Spec and S_Prog are proxies; run with pen-score package for exact values."
-            if not _check_penscore_package() else ""
+            if not _check_penscore_package()
+            else ""
         ),
     }
 
@@ -262,9 +287,9 @@ def run_penscore_batch(
     strategy_col: str = "strategy",
     tier_a_col: str = "tier_a",
     composite_col: str = "composite",
-    s_immuno_col: Optional[str] = "predicted_s_immuno",
-    parent_sequence: Optional[str] = None,
-    structure_col: Optional[str] = "final_pdb",
+    s_immuno_col: str | None = "predicted_s_immuno",
+    parent_sequence: str | None = None,
+    structure_col: str | None = "final_pdb",
 ) -> pd.DataFrame:
     """Run PEN-SCORE on all designs. Adds pen_score and 7 axis columns."""
     rows: list[dict] = []
@@ -287,8 +312,18 @@ def run_penscore_batch(
 
     pen_df = pd.DataFrame(rows)
     out = designs_df.copy()
-    score_cols = ["S_DSB", "S_Spec", "S_Cargo", "S_Deliv", "S_Immuno", "S_Prog",
-                  "S_Mature", "pen_score", "beats_is621", "pen_score_method"]
+    score_cols = [
+        "S_DSB",
+        "S_Spec",
+        "S_Cargo",
+        "S_Deliv",
+        "S_Immuno",
+        "S_Prog",
+        "S_Mature",
+        "pen_score",
+        "beats_is621",
+        "pen_score_method",
+    ]
     for col in score_cols:
         if col in pen_df.columns:
             out[col] = pen_df[col].values

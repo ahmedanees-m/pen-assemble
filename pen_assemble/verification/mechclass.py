@@ -10,31 +10,33 @@ Critical v0.5.1 gate:
 All designs must pass: tier_a == 'DSB_FREE_TRANSEST_RECOMBINASE'.
 Designs with tier_a == 'UNCLASSIFIED' are flagged for manual review.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
-
 
 # ---------------------------------------------------------------------------
 # MECH-CLASS result dataclass
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class MechClassResult:
     """Result from a single MECH-CLASS evaluation."""
+
     design_id: str
-    tier_a: str                         # DSB_FREE_TRANSEST_RECOMBINASE | DSB_NUCLEASE | UNCLASSIFIED
-    tier_a_confidence: float            # 0–1
-    composite: bool                     # IS110-class composite architecture detected
-    composite_prob: float               # 0–1
-    mechanism_label: str                # human-readable label
-    pfam_hits: list[str]               # Pfam domains detected
+    tier_a: str  # DSB_FREE_TRANSEST_RECOMBINASE | DSB_NUCLEASE | UNCLASSIFIED
+    tier_a_confidence: float  # 0–1
+    composite: bool  # IS110-class composite architecture detected
+    composite_prob: float  # 0–1
+    mechanism_label: str  # human-readable label
+    pfam_hits: list[str]  # Pfam domains detected
     mech_class_version: str = "0.5.1"
-    error: Optional[str] = None
+    error: str | None = None
 
     def is_dsb_free(self) -> bool:
         return self.tier_a == "DSB_FREE_TRANSEST_RECOMBINASE"
@@ -58,17 +60,20 @@ class MechClassResult:
 # MECH-CLASS invocation
 # ---------------------------------------------------------------------------
 
+
 def _check_mechclass() -> bool:
     try:
         import mechclass  # noqa: F401
+
         return True
     except ImportError:
         return False
 
 
-def _check_mechclass_version() -> Optional[str]:
+def _check_mechclass_version() -> str | None:
     try:
         import importlib.metadata
+
         return importlib.metadata.version("mech-class")
     except Exception:
         return None
@@ -77,7 +82,7 @@ def _check_mechclass_version() -> Optional[str]:
 def run_mech_class_on_sequence(
     sequence: str,
     design_id: str = "query",
-    pfam_hmm_path: Optional[Path] = None,
+    pfam_hmm_path: Path | None = None,
 ) -> MechClassResult:
     """Run mech-class v0.5.1 Predictor on a single sequence.
 
@@ -111,6 +116,7 @@ def run_mech_class_on_sequence(
         # Older API: try mech_class.Classifier
         try:
             from mech_class import Classifier
+
             clf = Classifier()
             result = clf.classify(sequence)
             return MechClassResult(
@@ -152,8 +158,8 @@ def run_mech_class_on_sequence(
 def evaluate_design_mechanism(
     accession: str,
     sequence: str,
-    pfam_hints: Optional[list[str]] = None,
-    pfam_hmm_path: Optional[Path] = None,
+    pfam_hints: list[str] | None = None,
+    pfam_hmm_path: Path | None = None,
 ) -> dict[str, Any]:
     """Run mech-class on a single design. Returns dict with all MECH-CLASS fields.
 
@@ -186,9 +192,8 @@ def filter_dsb_free(
 
     unclassified_mask = designs_df[tier_a_col] == "UNCLASSIFIED"
     dsb_nuclease_mask = designs_df[tier_a_col] == "DSB_NUCLEASE"
-    pass_mask = (
-        (designs_df[tier_a_col] == "DSB_FREE_TRANSEST_RECOMBINASE")
-        & (designs_df[confidence_col] >= min_confidence)
+    pass_mask = (designs_df[tier_a_col] == "DSB_FREE_TRANSEST_RECOMBINASE") & (
+        designs_df[confidence_col] >= min_confidence
     )
 
     designs_df = designs_df.copy()
@@ -211,7 +216,7 @@ def run_mechclass_batch(
     designs_df: pd.DataFrame,
     sequence_col: str = "protein_sequence",
     id_col: str = "design_id",
-    pfam_hmm_path: Optional[Path] = None,
+    pfam_hmm_path: Path | None = None,
 ) -> pd.DataFrame:
     """Run MECH-CLASS on all designs in DataFrame. Adds MECH-CLASS columns in-place."""
     rows: list[dict] = []

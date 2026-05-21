@@ -1,8 +1,8 @@
 """Load scaffold universe and pre-registration configs with Pydantic validation."""
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import yaml
 from pydantic import BaseModel
@@ -15,17 +15,17 @@ class ScaffoldEntry(BaseModel):
 
     id: str
     canonical_accession: str
-    canonical_pdb: Optional[str] = None
-    paper3_pen_score: Optional[float] = None   # null for carve-out sentinels (MmeFz2)
+    canonical_pdb: str | None = None
+    paper3_pen_score: float | None = None  # null for carve-out sentinels (MmeFz2)
     tier_b: str
     is_composite: bool = False
     contributes_modules: list[str] = []
     contributes_modules_carveout_only: list[str] = []
-    canonical_protospacer: Optional[str] = None
-    cargo_capacity_bp: Optional[int] = None
+    canonical_protospacer: str | None = None
+    cargo_capacity_bp: int | None = None
     paper3_axes: dict = {}
     paper3_pen_score_breakdown: dict = {}
-    total_aa: Optional[int] = None
+    total_aa: int | None = None
 
 
 class PreRegistrationPrediction(BaseModel):
@@ -69,7 +69,6 @@ def load_design_strategies() -> dict:
     path = DATA_DIR / "design_strategies.yaml"
     if not path.exists():
         raise FileNotFoundError(
-            f"design_strategies.yaml not found at {path}. "
-            "Complete Step 5 first."
+            f"design_strategies.yaml not found at {path}. Complete Step 5 first."
         )
     return yaml.safe_load(path.read_text())

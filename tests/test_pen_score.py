@@ -1,14 +1,16 @@
 """
 Tests for pen_assemble.pen_score
 """
+
 import pytest
+
 from pen_assemble.pen_score import (
-    WEIGHTS,
     IS621_LOCKPOINT,
     IS621_LOCKPOINT_CALIBRATED,
+    WEIGHTS,
     PenScoreAxes,
-    pen_score,
     beats_is621,
+    pen_score,
 )
 
 
@@ -31,8 +33,7 @@ class TestPenScoreAxes:
         assert pen_score(ax) == pytest.approx(0.0)
 
     def test_all_ones(self):
-        ax = PenScoreAxes(S_DSB=1, S_Spec=1, S_Cargo=1, S_Deliv=1,
-                          S_Immuno=1, S_Prog=1, S_Mature=1)
+        ax = PenScoreAxes(S_DSB=1, S_Spec=1, S_Cargo=1, S_Deliv=1, S_Immuno=1, S_Prog=1, S_Mature=1)
         assert pen_score(ax) == pytest.approx(1.0)
 
     def test_as_dict_keys(self):
@@ -40,10 +41,17 @@ class TestPenScoreAxes:
         assert set(ax.as_dict().keys()) == set(WEIGHTS.keys())
 
     def test_contributions_sum_equals_pen_score(self):
-        ax = PenScoreAxes(S_DSB=0.9, S_Spec=0.8, S_Cargo=1.0,
-                          S_Deliv=0.95, S_Immuno=0.75, S_Prog=0.85, S_Mature=0.5)
-        s  = pen_score(ax)
-        c  = sum(ax.contributions().values())
+        ax = PenScoreAxes(
+            S_DSB=0.9,
+            S_Spec=0.8,
+            S_Cargo=1.0,
+            S_Deliv=0.95,
+            S_Immuno=0.75,
+            S_Prog=0.85,
+            S_Mature=0.5,
+        )
+        s = pen_score(ax)
+        c = sum(ax.contributions().values())
         assert s == pytest.approx(c, abs=1e-12)
 
 
@@ -53,19 +61,28 @@ class TestPenScoreFormula:
         # All mechanical axes = 1.0 for IS621 family; S_Immuno = 0.8777
         # pen_score = 0.25+0.10+0.20+0.15 + 0.8777*0.10 + 0.15+0.05 = 0.9678
         # (small float differences expected — just verify it beats IS621)
-        ax = PenScoreAxes(S_DSB=1.0, S_Spec=1.0, S_Cargo=1.0,
-                          S_Deliv=1.0, S_Immuno=0.8777, S_Prog=1.0, S_Mature=1.0)
+        ax = PenScoreAxes(
+            S_DSB=1.0,
+            S_Spec=1.0,
+            S_Cargo=1.0,
+            S_Deliv=1.0,
+            S_Immuno=0.8777,
+            S_Prog=1.0,
+            S_Mature=1.0,
+        )
         s = pen_score(ax)
         assert s > IS621_LOCKPOINT
 
     def test_weighted_sum_manual(self):
-        ax = PenScoreAxes(S_DSB=0.5, S_Spec=0.0, S_Cargo=1.0,
-                          S_Deliv=0.0, S_Immuno=0.0, S_Prog=0.0, S_Mature=0.0)
+        ax = PenScoreAxes(
+            S_DSB=0.5, S_Spec=0.0, S_Cargo=1.0, S_Deliv=0.0, S_Immuno=0.0, S_Prog=0.0, S_Mature=0.0
+        )
         # 0.5*0.25 + 1.0*0.20 = 0.125 + 0.200 = 0.325
         assert pen_score(ax) == pytest.approx(0.325, abs=1e-9)
 
     def test_score_bounded(self):
         import random
+
         random.seed(0)
         for _ in range(200):
             vals = {k: random.random() for k in WEIGHTS}
@@ -89,6 +106,7 @@ class TestBeatsIS621:
         """16 designs should beat verbatim lockpoint."""
         try:
             from pen_assemble.catalog import load_catalog
+
             df = load_catalog()
             n = (df["pen_score"] > IS621_LOCKPOINT).sum()
             assert n == 16, f"Expected 16 P1 beaters, got {n}"

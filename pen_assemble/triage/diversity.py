@@ -3,6 +3,7 @@
 P5: Top-5 final designs must come from >=3 different scaffold sources (strategies).
 Prevents the framework from collapsing to IS621-only variants in the final ranking.
 """
+
 from __future__ import annotations
 
 import pandas as pd
@@ -59,8 +60,11 @@ def enforce_diversity(
         df = df.sort_values("pen_score", ascending=False).reset_index(drop=True)
 
     strategy_col = next(
-        (c for c in ["strategy", "scaffold_provenance_catalytic_core", "scaffold_source"]
-         if c in df.columns),
+        (
+            c
+            for c in ["strategy", "scaffold_provenance_catalytic_core", "scaffold_source"]
+            if c in df.columns
+        ),
         None,
     )
 
@@ -75,21 +79,23 @@ def enforce_diversity(
         if dominant_count >= 4:
             # Find top non-dominant design not already in top-5
             top5_ids = set(top5.index)
-            alt = df[
-                (df[strategy_col] != dominant_strategy) & (~df.index.isin(top5_ids))
-            ]
+            alt = df[(df[strategy_col] != dominant_strategy) & (~df.index.isin(top5_ids))]
             if not alt.empty:
                 swap_idx = alt.index[0]
                 # Replace the 4th dominant design in top-5
                 dominant_positions = top5[top5[strategy_col] == dominant_strategy].index.tolist()
-                replace_pos = dominant_positions[3] if len(dominant_positions) >= 4 else dominant_positions[-1]
+                replace_pos = (
+                    dominant_positions[3]
+                    if len(dominant_positions) >= 4
+                    else dominant_positions[-1]
+                )
 
                 # Build new top-5 by swapping
                 new_top5_indices = [i for i in top5.index if i != replace_pos] + [swap_idx]
                 # Re-sort by pen_score
                 new_top5 = df.loc[new_top5_indices].sort_values("pen_score", ascending=False)
                 new_top5.at[swap_idx, "diversity_note"] = (
-                    f"anti_mode_collapse: replaced rank-{replace_pos+1} {dominant_strategy} "
+                    f"anti_mode_collapse: replaced rank-{replace_pos + 1} {dominant_strategy} "
                     f"with {df.at[swap_idx, strategy_col]}"
                 )
                 rest_indices = [i for i in df.index if i not in set(new_top5_indices)]
@@ -97,20 +103,21 @@ def enforce_diversity(
 
     # Pad each strategy to min_per_strategy if possible
     if strategy_col and min_per_strategy > 0:
-        result_rows = [df.head(top_k)]  # start with top_k
         # Check representation
         result = df.head(top_k)
-        for strat in (df[strategy_col].unique() if strategy_col else []):
+        for strat in df[strategy_col].unique() if strategy_col else []:
             strat_in_result = result[result[strategy_col] == strat]
             if len(strat_in_result) < min_per_strategy:
                 # Add more from this strategy from the tail
-                strat_extra = df[
-                    (df[strategy_col] == strat) & (~df.index.isin(result.index))
-                ].head(min_per_strategy - len(strat_in_result))
+                strat_extra = df[(df[strategy_col] == strat) & (~df.index.isin(result.index))].head(
+                    min_per_strategy - len(strat_in_result)
+                )
                 if not strat_extra.empty:
-                    result = pd.concat([result, strat_extra]).sort_values(
-                        "pen_score", ascending=False
-                    ).head(top_k)
+                    result = (
+                        pd.concat([result, strat_extra])
+                        .sort_values("pen_score", ascending=False)
+                        .head(top_k)
+                    )
 
         df = result.reset_index(drop=True)
     else:

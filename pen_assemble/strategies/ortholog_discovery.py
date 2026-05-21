@@ -12,13 +12,13 @@ Gate schedule:
 P4 pre-registration: >= 10 candidates pass ALL 7 gates.
 Expected funnel: 31,871 -> ~500 (1-2) -> ~150 (3-4) -> ~50 (5) -> ~20-30 (6) -> ~10-20 (7).
 """
+
 from __future__ import annotations
 
 import subprocess
 import tempfile
 import time
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 import requests
@@ -28,35 +28,36 @@ import requests
 # ---------------------------------------------------------------------------
 
 GATE_THRESHOLDS: dict = {
-    "gate_1_composite_prob":        0.85,
-    "gate_2_tier_a_confidence":     0.80,
-    "gate_3_min_aa":                200,
-    "gate_3_max_aa":                400,
-    "gate_4_genus_count_max":       5,
-    "gate_5_af3_mean_plddt":        70.0,
-    "gate_5_active_site_plddt":     75.0,
-    "gate_6_atlas_min_distance":    0.30,
+    "gate_1_composite_prob": 0.85,
+    "gate_2_tier_a_confidence": 0.80,
+    "gate_3_min_aa": 200,
+    "gate_3_max_aa": 400,
+    "gate_4_genus_count_max": 5,
+    "gate_5_af3_mean_plddt": 70.0,
+    "gate_5_active_site_plddt": 75.0,
+    "gate_6_atlas_min_distance": 0.30,
     "gate_7_pfam_evalue_threshold": 1e-10,
 }
 
 # Known IS110 members list — candidates in embedding distance < 0.30 to these are rejected
 # (gate 6). Sourced from Paper 3 editor_universe.yaml v1.0.4 + ISfinder IS110 list.
 KNOWN_IS110_ACCESSIONS: list[str] = [
-    "A0A2X3M8B0",   # IS621
-    "A0A2X3M8B1",   # IS621_2 (inactive but still a known member)
+    "A0A2X3M8B0",  # IS621
+    "A0A2X3M8B1",  # IS621_2 (inactive but still a known member)
     # Additional known IS110 members will be loaded from Paper 1 ATLAS at runtime.
     # ISfinder IS110-family characterized list to be merged at Step 10 runtime.
 ]
 
 UNIPROT_API = "https://rest.uniprot.org/uniprotkb"
-_RATE_LIMIT_DELAY = 0.15   # seconds between UniProt API calls (< 10 req/s)
+_RATE_LIMIT_DELAY = 0.15  # seconds between UniProt API calls (< 10 req/s)
 
 
 # ---------------------------------------------------------------------------
 # UniProt helpers (rate-limited)
 # ---------------------------------------------------------------------------
 
-def _uniprot_json(acc: str) -> Optional[dict]:
+
+def _uniprot_json(acc: str) -> dict | None:
     try:
         r = requests.get(f"{UNIPROT_API}/{acc}.json", timeout=20)
         time.sleep(_RATE_LIMIT_DELAY)
@@ -65,7 +66,7 @@ def _uniprot_json(acc: str) -> Optional[dict]:
         return None
 
 
-def _uniprot_fasta(acc: str) -> Optional[str]:
+def _uniprot_fasta(acc: str) -> str | None:
     try:
         r = requests.get(f"{UNIPROT_API}/{acc}.fasta", timeout=20)
         time.sleep(_RATE_LIMIT_DELAY)
@@ -97,7 +98,7 @@ def fetch_lengths_and_organisms(
     df = df.copy()
     need_fetch = []
 
-    has_length   = length_col in df.columns
+    has_length = length_col in df.columns
     has_organism = organism_col in df.columns and genus_col in df.columns
 
     # If organism is present but genus is not, derive genus without API calls
@@ -106,7 +107,7 @@ def fetch_lengths_and_organisms(
         has_organism = True
 
     if has_length and has_organism:
-        return df     # nothing to fetch
+        return df  # nothing to fetch
 
     for idx, row in df.iterrows():
         acc = row[acc_col]
@@ -144,6 +145,7 @@ def fetch_lengths_and_organisms(
 # Individual gate functions
 # ---------------------------------------------------------------------------
 
+
 def apply_gate_1(df: pd.DataFrame) -> pd.DataFrame:
     """Gate 1: composite_prob >= 0.85 (high-confidence IS110-class composite)."""
     before = len(df)
@@ -165,7 +167,7 @@ def apply_gate_2(df: pd.DataFrame) -> pd.DataFrame:
     tier_a string, which would leave only 1 survivor from 31,871 proteins.
     """
     before = len(df)
-    mask = df["composite"] == True
+    mask = df["composite"].astype(bool)
     result = df[mask].copy()
     # NOTE: tier_a_confidence is NOT used here because in the Paper 2 IS110 triage catalog
     # it is a constant (~0.567) for all IS110 members — the MECH-CLASS softmax for
@@ -200,18 +202,22 @@ def apply_gate_4(df: pd.DataFrame, max_per_genus: int = 5) -> pd.DataFrame:
     if "genus" not in df.columns or df["genus"].isna().all():
         if "organism" in df.columns:
             df["genus"] = df["organism"].fillna("Unknown").str.split().str[0]
-            print(f"    [Gate 4] Extracted genus from organism column ({df['genus'].nunique()} unique genera)")
+            print(
+                f"    [Gate 4] Extracted genus from organism column ({df['genus'].nunique()} unique genera)"
+            )
         else:
             df = fetch_lengths_and_organisms(df)
     df["genus"] = df["genus"].fillna("Unknown")
     result = (
         df.sort_values("composite_prob", ascending=False)
-          .groupby("genus", group_keys=False)
-          .head(max_per_genus)
-          .reset_index(drop=True)
+        .groupby("genus", group_keys=False)
+        .head(max_per_genus)
+        .reset_index(drop=True)
     )
     n_genera = result["genus"].nunique()
-    print(f"  Gate 4 (genus diversity, max {max_per_genus}/genus): {before:,} -> {len(result):,} from {n_genera} genera")
+    print(
+        f"  Gate 4 (genus diversity, max {max_per_genus}/genus): {before:,} -> {len(result):,} from {n_genera} genera"
+    )
     return result
 
 
@@ -241,8 +247,8 @@ def apply_gate_5(df: pd.DataFrame) -> pd.DataFrame:
 
 def apply_gate_6(
     df: pd.DataFrame,
-    atlas_embeddings_path: Optional[Path] = None,
-    known_accessions: Optional[list[str]] = None,
+    atlas_embeddings_path: Path | None = None,
+    known_accessions: list[str] | None = None,
 ) -> pd.DataFrame:
     """Gate 6: ATLAS embedding distance > 0.30 to all known IS110 members.
 
@@ -258,35 +264,40 @@ def apply_gate_6(
         known_accessions = KNOWN_IS110_ACCESSIONS
 
     # Try to load ATLAS embeddings
-    embeddings: Optional[dict[str, list[float]]] = None
+    embeddings: dict[str, list[float]] | None = None
     if atlas_embeddings_path and atlas_embeddings_path.exists():
         try:
             if atlas_embeddings_path.suffix == ".parquet":
                 emb_df = pd.read_parquet(atlas_embeddings_path)
-                embeddings = dict(zip(emb_df["uniprot_acc"], emb_df["embedding_128d"]))
+                embeddings = dict(
+                    zip(emb_df["uniprot_acc"], emb_df["embedding_128d"], strict=False)
+                )
             else:
                 # Try DuckDB
                 import duckdb
+
                 con = duckdb.connect(str(atlas_embeddings_path), read_only=True)
-                emb_df = con.execute(
-                    "SELECT uniprot_acc, embedding_128d FROM node_embeddings"
-                ).df()
+                emb_df = con.execute("SELECT uniprot_acc, embedding_128d FROM node_embeddings").df()
                 con.close()
-                embeddings = dict(zip(emb_df["uniprot_acc"], emb_df["embedding_128d"]))
+                embeddings = dict(
+                    zip(emb_df["uniprot_acc"], emb_df["embedding_128d"], strict=False)
+                )
         except Exception as e:
-            print(f"    [WARN] Gate 6: could not load ATLAS embeddings from {atlas_embeddings_path}: {e}")
+            print(
+                f"    [WARN] Gate 6: could not load ATLAS embeddings from {atlas_embeddings_path}: {e}"
+            )
 
     if embeddings is None:
         print(
-            f"  Gate 6 (ATLAS embedding distance): SKIPPED — embeddings not available.\n"
-            f"    Provide --atlas_embeddings path to Paper 1 ATLAS DuckDB to enable.\n"
-            f"    This gate will be applied manually before final P4 evaluation.\n"
-            f"    Documenting skip in DESIGN_PROVENANCE.md."
+            "  Gate 6 (ATLAS embedding distance): SKIPPED — embeddings not available.\n"
+            "    Provide --atlas_embeddings path to Paper 1 ATLAS DuckDB to enable.\n"
+            "    This gate will be applied manually before final P4 evaluation.\n"
+            "    Documenting skip in DESIGN_PROVENANCE.md."
         )
         # Mark all candidates as gate_6=SKIPPED for downstream tracking
         df = df.copy()
         df["gate_6_atlas_distance"] = float("nan")
-        df["gate_6_pass"] = None   # None = not evaluated (distinct from True/False)
+        df["gate_6_pass"] = None  # None = not evaluated (distinct from True/False)
         return df
 
     import numpy as np
@@ -297,9 +308,7 @@ def apply_gate_6(
             return 1.0
         return float(1.0 - np.dot(av, bv) / (np.linalg.norm(av) * np.linalg.norm(bv)))
 
-    known_embeds = {
-        acc: embeddings[acc] for acc in known_accessions if acc in embeddings
-    }
+    known_embeds = {acc: embeddings[acc] for acc in known_accessions if acc in embeddings}
     if not known_embeds:
         print("  Gate 6: no known IS110 members found in ATLAS embeddings; skipping filter.")
         df["gate_6_atlas_distance"] = float("nan")
@@ -324,9 +333,9 @@ def apply_gate_6(
     df["gate_6_pass"] = passes
 
     evaluated = sum(1 for p in passes if p is not None)
-    result = df[(df["gate_6_pass"] == True) | (df["gate_6_pass"].isna())].copy()
-    n_novel = (df["gate_6_pass"] == True).sum()
-    n_known = (df["gate_6_pass"] == False).sum()
+    result = df[df["gate_6_pass"].astype(bool, errors="ignore") | df["gate_6_pass"].isna()].copy()
+    n_novel = df["gate_6_pass"].astype(bool, errors="ignore").sum()
+    n_known = (~df["gate_6_pass"].astype(bool, errors="ignore") & df["gate_6_pass"].notna()).sum()
     print(
         f"  Gate 6 (ATLAS dist > {threshold}): {before:,} evaluated ({evaluated} with embeddings); "
         f"{n_novel} novel, {n_known} flagged as known IS110 members -> {len(result):,} pass"
@@ -336,7 +345,7 @@ def apply_gate_6(
 
 def apply_gate_7(
     df: pd.DataFrame,
-    pfam_hmm_path: Optional[Path] = None,
+    pfam_hmm_path: Path | None = None,
     evalue_threshold: float = 1e-10,
 ) -> pd.DataFrame:
     """Gate 7: PF01548 (DEDD transposase) AND PF02371 (Transposase_20) both present
@@ -361,18 +370,17 @@ def apply_gate_7(
 
     # Fast-path: IS110 triage catalog pre-applies this gate
     if "is110_reclassified" in df.columns:
-        n_reclassified = (df["is110_reclassified"] == True).sum()
-        n_not_reclassified = (df["is110_reclassified"] != True).sum()
         df = df.copy()
-        df["gate_7_pf01548"] = df["is110_reclassified"].map({True: True, False: False})
-        df["gate_7_pf02371"] = df["is110_reclassified"].map({True: True, False: False})
-        df["gate_7_pass"] = df["is110_reclassified"] == True
+        df["gate_7_pf01548"] = df["is110_reclassified"].astype(bool)
+        df["gate_7_pf02371"] = df["is110_reclassified"].astype(bool)
+        df["gate_7_pass"] = df["is110_reclassified"].astype(bool)
         df["gate_7_source"] = "IS110_catalog_is110_reclassified_proxy"
         result = df[df["gate_7_pass"]].copy()
+        n_excluded = before - len(result)
         print(
             f"  Gate 7 (PF01548+PF02371): PRE-APPLIED via IS110 triage catalog "
             f"(is110_reclassified proxy): {before:,} -> {len(result):,} "
-            f"({n_not_reclassified} excluded as not IS110-reclassified)"
+            f"({n_excluded} excluded as not IS110-reclassified)"
         )
         return result
 
@@ -380,19 +388,17 @@ def apply_gate_7(
     hmmer_ok = False
     if pfam_hmm_path and pfam_hmm_path.exists():
         try:
-            result = subprocess.run(
-                ["hmmscan", "--help"], capture_output=True, timeout=5
-            )
-            hmmer_ok = (result.returncode == 0)
+            result = subprocess.run(["hmmscan", "--help"], capture_output=True, timeout=5)
+            hmmer_ok = result.returncode == 0
         except (FileNotFoundError, subprocess.TimeoutExpired):
             hmmer_ok = False
 
     if not hmmer_ok:
         print(
-            f"  Gate 7 (HMMER PF01548+PF02371): SKIPPED — HMMER not available or Pfam-A.hmm missing.\n"
-            f"    Provide --pfam_hmm path to Pfam-A.hmm and ensure hmmscan is on PATH.\n"
-            f"    This gate will be applied manually before final P4 evaluation.\n"
-            f"    Documenting skip in DESIGN_PROVENANCE.md."
+            "  Gate 7 (HMMER PF01548+PF02371): SKIPPED — HMMER not available or Pfam-A.hmm missing.\n"
+            "    Provide --pfam_hmm path to Pfam-A.hmm and ensure hmmscan is on PATH.\n"
+            "    This gate will be applied manually before final P4 evaluation.\n"
+            "    Documenting skip in DESIGN_PROVENANCE.md."
         )
         df = df.copy()
         df["gate_7_pf01548"] = None
@@ -424,13 +430,16 @@ def apply_gate_7(
                 subprocess.run(
                     [
                         "hmmscan",
-                        "--tblout", str(out_tmp),
+                        "--tblout",
+                        str(out_tmp),
                         "--noali",
-                        "-E", str(evalue_threshold),
+                        "-E",
+                        str(evalue_threshold),
                         str(pfam_hmm_path),
                         str(fasta_tmp),
                     ],
-                    capture_output=True, timeout=120
+                    capture_output=True,
+                    timeout=120,
                 )
                 # Parse tblout for PF01548 and PF02371
                 found_pf = set()
@@ -441,7 +450,7 @@ def apply_gate_7(
                         parts = line.split()
                         if len(parts) < 5:
                             continue
-                        pfam_id = parts[0].split(".")[0]   # strip version
+                        pfam_id = parts[0].split(".")[0]  # strip version
                         try:
                             e_val = float(parts[4])
                         except (ValueError, IndexError):
@@ -464,10 +473,9 @@ def apply_gate_7(
     df["gate_7_pf02371"] = pf02371_hits
     df["gate_7_pass"] = passes
 
-    result = df[df["gate_7_pass"] == True].copy()
+    result = df[df["gate_7_pass"].astype(bool)].copy()
     print(
-        f"  Gate 7 (PF01548 + PF02371, E < {evalue_threshold:.0e}): "
-        f"{before:,} -> {len(result):,}"
+        f"  Gate 7 (PF01548 + PF02371, E < {evalue_threshold:.0e}): {before:,} -> {len(result):,}"
     )
     return result
 
@@ -475,6 +483,7 @@ def apply_gate_7(
 # ---------------------------------------------------------------------------
 # Full pipeline (gates 1-4 + 6 + 7; gate 5 deferred to Step 12)
 # ---------------------------------------------------------------------------
+
 
 def _normalize_catalog_columns(df: pd.DataFrame, source_label: str) -> pd.DataFrame:
     """Rename Paper 2 catalog columns to the internal schema expected by gate functions.
@@ -503,10 +512,10 @@ def _normalize_catalog_columns(df: pd.DataFrame, source_label: str) -> pd.DataFr
 def run_strategy_b(
     is110_catalog_path: Path,
     output_dir: Path,
-    fanzor_catalog_path: Optional[Path] = None,
-    atlas_embeddings_path: Optional[Path] = None,
-    pfam_hmm_path: Optional[Path] = None,
-    known_members_path: Optional[Path] = None,
+    fanzor_catalog_path: Path | None = None,
+    atlas_embeddings_path: Path | None = None,
+    pfam_hmm_path: Path | None = None,
+    known_members_path: Path | None = None,
     max_per_genus: int = 5,
     seed: int = 42,
     skip_seq_fetch: bool = False,
@@ -544,6 +553,7 @@ def run_strategy_b(
     extra_known: list[str] = []
     if known_members_path and known_members_path.exists():
         import yaml
+
         data = yaml.safe_load(known_members_path.read_text())
         extra_known = data.get("known_accessions", [])
 
@@ -574,8 +584,10 @@ def run_strategy_b(
 
     if _has_seqs:
         n_with_seq = survivors["protein_sequence"].fillna("").str.len().gt(0).sum()
-        print(f"\nSequences present for {n_with_seq}/{len(survivors)} pre-Gate-5 survivors "
-              f"({len(survivors) - n_with_seq} still need fetching).")
+        print(
+            f"\nSequences present for {n_with_seq}/{len(survivors)} pre-Gate-5 survivors "
+            f"({len(survivors) - n_with_seq} still need fetching)."
+        )
     elif not skip_seq_fetch:
         est_minutes = len(survivors) * _RATE_LIMIT_DELAY / 60
         print(
@@ -596,23 +608,24 @@ def run_strategy_b(
             f"Estimated fetch time: {len(survivors) * _RATE_LIMIT_DELAY / 60:.1f} min."
         )
         survivors = survivors.copy()
-        survivors["protein_sequence"] = ""   # placeholder
+        survivors["protein_sequence"] = ""  # placeholder
 
     # Drop any rows where sequence retrieval failed (or pre-existing column has None/empty)
     if not skip_seq_fetch:
         n_before_seq = len(survivors)
         survivors = survivors[survivors["protein_sequence"].fillna("").str.len() > 0].copy()
         if len(survivors) < n_before_seq:
-            print(f"  Dropped {n_before_seq - len(survivors)} candidates with no retrievable sequence")
+            print(
+                f"  Dropped {n_before_seq - len(survivors)} candidates with no retrievable sequence"
+            )
 
     # Assign design IDs
     survivors = survivors.reset_index(drop=True)
     survivors["design_id"] = [
-        f"B_{i+1:03d}_{acc[:8]}"
-        for i, acc in enumerate(survivors["uniprot_acc"])
+        f"B_{i + 1:03d}_{acc[:8]}" for i, acc in enumerate(survivors["uniprot_acc"])
     ]
     survivors["strategy"] = "B_ortholog_discovery"
-    survivors["gate_5_status"] = "DEFERRED_STEP12"   # explicit marker for downstream
+    survivors["gate_5_status"] = "DEFERRED_STEP12"  # explicit marker for downstream
 
     # Save outputs
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -638,20 +651,27 @@ def run_strategy_b(
 
     # Gate summary JSON — cast numpy scalars to Python-native types for JSON serialisation
     import json
-    gate_6_applied = bool(
-        survivors["gate_6_pass"].notna().any()
-    ) if "gate_6_pass" in survivors.columns else False
-    gate_7_applied = bool(
-        survivors["gate_7_pass"].notna().any()
-    ) if "gate_7_pass" in survivors.columns else False
+
+    gate_6_applied = (
+        bool(survivors["gate_6_pass"].notna().any())
+        if "gate_6_pass" in survivors.columns
+        else False
+    )
+    gate_7_applied = (
+        bool(survivors["gate_7_pass"].notna().any())
+        if "gate_7_pass" in survivors.columns
+        else False
+    )
     gate_summary = {
         "n_input": int(len(full_catalog)),
-        "n_post_gates_1_2": None,   # not stored separately; see logs
+        "n_post_gates_1_2": None,  # not stored separately; see logs
         "n_pre_gate5_survivors": int(len(survivors)),
         "gate_5_status": "DEFERRED_STEP12",
         "gate_6_applied": gate_6_applied,
         "gate_7_applied": gate_7_applied,
-        "n_genera_represented": int(survivors["genus"].nunique()) if "genus" in survivors.columns else None,
+        "n_genera_represented": int(survivors["genus"].nunique())
+        if "genus" in survivors.columns
+        else None,
         "design_ids": survivors["design_id"].tolist(),
     }
     summary_path = output_dir / "ortholog_candidates_gate_summary.json"
@@ -662,7 +682,7 @@ def run_strategy_b(
     print(f"  Gate summary  -> {summary_path}")
     print(f"\nStrategy B pre-Gate-5 survivors: {len(survivors):,}")
     print("Gate 5 (AF3 active-site pLDDT >= 75) deferred to Step 12.")
-    print(f"Expected after Gate 5: ~10-20 (P4 threshold: >= 10).")
+    print("Expected after Gate 5: ~10-20 (P4 threshold: >= 10).")
 
     return survivors
 
@@ -671,11 +691,12 @@ def run_strategy_b(
 # apply_all_gates — P4 operationalization reference (all 7 gates)
 # ---------------------------------------------------------------------------
 
+
 def apply_all_gates(
     df: pd.DataFrame,
-    atlas_embeddings_path: Optional[Path] = None,
-    pfam_hmm_path: Optional[Path] = None,
-    known_accessions: Optional[list[str]] = None,
+    atlas_embeddings_path: Path | None = None,
+    pfam_hmm_path: Path | None = None,
+    known_accessions: list[str] | None = None,
     max_per_genus: int = 5,
 ) -> pd.DataFrame:
     """Apply all 7 gates. Used by P4 test script (scripts/43_test_pred_P4_orthologs.py).
@@ -687,8 +708,11 @@ def apply_all_gates(
     df = apply_gate_2(df)
     df = apply_gate_3(df)
     df = apply_gate_4(df, max_per_genus=max_per_genus)
-    df = apply_gate_5(df)    # requires Step 12 output columns
-    df = apply_gate_6(df, atlas_embeddings_path=atlas_embeddings_path,
-                      known_accessions=known_accessions or KNOWN_IS110_ACCESSIONS)
+    df = apply_gate_5(df)  # requires Step 12 output columns
+    df = apply_gate_6(
+        df,
+        atlas_embeddings_path=atlas_embeddings_path,
+        known_accessions=known_accessions or KNOWN_IS110_ACCESSIONS,
+    )
     df = apply_gate_7(df, pfam_hmm_path=pfam_hmm_path)
     return df

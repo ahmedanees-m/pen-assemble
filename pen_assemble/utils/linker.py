@@ -1,4 +1,5 @@
 """Linker design helpers for Strategy A domain-swap chimeras."""
+
 from __future__ import annotations
 
 from typing import Literal

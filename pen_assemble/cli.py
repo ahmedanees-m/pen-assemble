@@ -1,4 +1,5 @@
 """CLI for pen-assemble."""
+
 from __future__ import annotations
 
 import click

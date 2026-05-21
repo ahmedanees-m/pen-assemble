@@ -26,25 +26,30 @@ mhctools and breaking comparability with Paper 3 scores.
 See also: Paper 3 execution summary Deviation D4 (MHCflurry 2.0 rejected as
 class-I only; netMHCpan-4.1 used for class I + netMHCIIpan-4.0 for class II).
 """
+
 from __future__ import annotations
 
 import subprocess
 from pathlib import Path
-from typing import Optional
 
 # Allele sets used in Paper 3 S_Immuno (locked — must match for comparability).
 # Source: PAPER_3/pen-score/scripts/14_compute_S_Immuno.py
 # Class I: 4 alleles, NO asterisks (netMHCpan-4.1 format)
 # Class II: 3 DRB1 alleles, underscore notation (netMHCIIpan-4.0 Perl format)
 MHC_I_ALLELES_PAPER3 = [
-    "HLA-A02:01", "HLA-A01:01", "HLA-B07:02", "HLA-B44:02",
+    "HLA-A02:01",
+    "HLA-A01:01",
+    "HLA-B07:02",
+    "HLA-B44:02",
 ]
 MHC_II_ALLELES_PAPER3 = [
-    "DRB1_0101", "DRB1_0301", "DRB1_0401",
+    "DRB1_0101",
+    "DRB1_0301",
+    "DRB1_0401",
 ]
 
 # %Rank_EL thresholds — Paper 3 calls (NOT IC50 nM).
-RANK_EL_THRESHOLD_I = 0.5    # Class I: %Rank_EL < 0.5 → strong binder (Paper 3 Script 14)
+RANK_EL_THRESHOLD_I = 0.5  # Class I: %Rank_EL < 0.5 → strong binder (Paper 3 Script 14)
 RANK_EL_THRESHOLD_II = 10.0  # Class II: %Rank_EL ≤ 10.0 (Paper 3 Script 14)
 
 # Paper 3 S_Immuno normalization constant (95th-pct across 28 editors, locked).
@@ -55,10 +60,10 @@ IS621_S_IMMUNO_WT = 0.7594
 
 def find_mhc_i_binders(
     sequence: str,
-    alleles: Optional[list[str]] = None,
+    alleles: list[str] | None = None,
     peptide_length: int = 9,
     rank_el_threshold: float = RANK_EL_THRESHOLD_I,
-    netmhcpan_binary: Optional[str] = None,
+    netmhcpan_binary: str | None = None,
 ) -> list[dict]:
     """Find MHC-I strong binders via direct netMHCpan-4.1 subprocess call.
 
@@ -93,7 +98,7 @@ def find_mhc_i_binders(
     # Set required env vars (netMHCpan-4.1 needs NETMHCpan + TMPDIR)
     env = os.environ.copy()
     env["NETMHCpan"] = str(home / "netmhc/netMHCpan-4.1/Linux_x86_64")
-    env["TMPDIR"] = "/tmp"   # netMHCpan-4.1 uses mkdtemp under $TMPDIR; must be set
+    env["TMPDIR"] = "/tmp"  # netMHCpan-4.1 uses mkdtemp under $TMPDIR; must be set
 
     allele_str = ",".join(_alleles)
 
@@ -103,17 +108,17 @@ def find_mhc_i_binders(
 
     try:
         result = subprocess.run(
-            [_binary, "-f", fasta_path, "-a", allele_str,
-             "-l", str(peptide_length), "-BA"],
-            capture_output=True, text=True, timeout=300, env=env,
+            [_binary, "-f", fasta_path, "-a", allele_str, "-l", str(peptide_length), "-BA"],
+            capture_output=True,
+            text=True,
+            timeout=300,
+            env=env,
         )
     finally:
         Path(fasta_path).unlink(missing_ok=True)
 
     if result.returncode != 0:
-        raise RuntimeError(
-            f"netMHCpan failed (rc={result.returncode}): {result.stderr[:400]}"
-        )
+        raise RuntimeError(f"netMHCpan failed (rc={result.returncode}): {result.stderr[:400]}")
 
     binders: list[dict] = []
     seen: set[tuple] = set()  # deduplicate (pos, allele) pairs
@@ -141,21 +146,23 @@ def find_mhc_i_binders(
             key = (pos, allele)
             if key not in seen:
                 seen.add(key)
-                binders.append({
-                    "peptide": peptide,
-                    "start": pos,
-                    "allele": allele,
-                    "rank_el": rank_el,
-                })
+                binders.append(
+                    {
+                        "peptide": peptide,
+                        "start": pos,
+                        "allele": allele,
+                        "rank_el": rank_el,
+                    }
+                )
 
     return binders
 
 
 def find_mhc_ii_binders(
     sequence: str,
-    alleles: Optional[list[str]] = None,
+    alleles: list[str] | None = None,
     rank_el_threshold: float = RANK_EL_THRESHOLD_II,
-    netmhciipan_perl: Optional[str] = None,
+    netmhciipan_perl: str | None = None,
 ) -> list[dict]:
     """Find MHC-II strong binders via netMHCIIpan-4.0 Perl script call.
 
@@ -188,7 +195,7 @@ def find_mhc_ii_binders(
     env = os.environ.copy()
     env["NETMHCIIpan"] = str(home / "netmhc/netMHCIIpan-4.0")
     env["NetMHCIIpanPLAT"] = str(home / "netmhc/netMHCIIpan-4.0/Linux_x86_64")
-    env["TMPDIR"] = "/tmp"   # NetMHCIIpan-4.0 also requires $TMPDIR
+    env["TMPDIR"] = "/tmp"  # NetMHCIIpan-4.0 also requires $TMPDIR
 
     allele_str = ",".join(_alleles)
 
@@ -199,7 +206,10 @@ def find_mhc_ii_binders(
     try:
         result = subprocess.run(
             ["perl", _perl_script, "-f", fasta_path, "-a", allele_str],
-            capture_output=True, text=True, timeout=600, env=env,
+            capture_output=True,
+            text=True,
+            timeout=600,
+            env=env,
         )
     finally:
         Path(fasta_path).unlink(missing_ok=True)
@@ -227,19 +237,21 @@ def find_mhc_ii_binders(
             pos = int(parts[0])
             allele = parts[1]
             peptide = parts[2]
-            rank_el = float(parts[8])   # %Rank_EL at index 8 (verified)
+            rank_el = float(parts[8])  # %Rank_EL at index 8 (verified)
         except (ValueError, IndexError):
             continue
         if rank_el <= rank_el_threshold:
             key = (pos, allele)
             if key not in seen:
                 seen.add(key)
-                binders.append({
-                    "peptide": peptide,
-                    "start": pos,
-                    "allele": allele,
-                    "rank_el": rank_el,
-                })
+                binders.append(
+                    {
+                        "peptide": peptide,
+                        "start": pos,
+                        "allele": allele,
+                        "rank_el": rank_el,
+                    }
+                )
 
     return binders
 

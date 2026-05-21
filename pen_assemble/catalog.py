@@ -4,10 +4,11 @@ Catalog loading utilities for PEN-ASSEMBLE release data.
 Functions load the release CSV/Parquet files into pandas DataFrames and
 provide convenience views (P1 beaters, P5 top-5, strategy subsets).
 """
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Union
+
 import pandas as pd
 
 __all__ = [
@@ -19,7 +20,7 @@ __all__ = [
 ]
 
 # Default release directory (relative to package root)
-_PKG_ROOT   = Path(__file__).resolve().parent.parent
+_PKG_ROOT = Path(__file__).resolve().parent.parent
 RELEASE_DIR: Path = _PKG_ROOT / "catalog" / "release_v0.5.0"
 
 #: IS621 verbatim lockpoint used for P1 beater definition.
@@ -27,7 +28,7 @@ IS621_LOCKPOINT = 0.929
 
 
 def load_catalog(
-    release_dir: Optional[Union[str, Path]] = None,
+    release_dir: str | Path | None = None,
     fmt: str = "parquet",
 ) -> pd.DataFrame:
     """Load the full 1,029-design PEN-ASSEMBLE scorecard.
@@ -77,7 +78,7 @@ def load_catalog(
 
 
 def load_p1_beaters(
-    release_dir: Optional[Union[str, Path]] = None,
+    release_dir: str | Path | None = None,
 ) -> pd.DataFrame:
     """Load the 16 designs that beat the IS621 verbatim lockpoint (pen_score > 0.929).
 
@@ -109,7 +110,7 @@ def load_p1_beaters(
 
 
 def load_top5(
-    release_dir: Optional[Union[str, Path]] = None,
+    release_dir: str | Path | None = None,
 ) -> pd.DataFrame:
     """Load the five P5-compliant top designs (diversity-enforced top-5).
 

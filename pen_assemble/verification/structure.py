@@ -13,24 +13,24 @@ Boltz-1 fallback policy:
   Logged to structure_fallback_log.parquet. Designs with fallback get
   boltz_rna_fallback=True — reported transparently in paper.
 """
+
 from __future__ import annotations
 
-import json
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
-
 
 # ---------------------------------------------------------------------------
 # Tool availability checks
 # ---------------------------------------------------------------------------
 
-def _check_tool(cmd: str, args: list[str] = ["--help"]) -> bool:
+
+def _check_tool(cmd: str, args: list[str] | None = None) -> bool:
     try:
-        r = subprocess.run([cmd] + args, capture_output=True, timeout=10)
+        r = subprocess.run([cmd] + (args or ["--help"]), capture_output=True, timeout=10)
         return r.returncode in (0, 1)
     except (FileNotFoundError, subprocess.TimeoutExpired):
         return False
@@ -43,6 +43,7 @@ def _check_boltz() -> bool:
 def _check_esmfold() -> bool:
     try:
         import esm  # noqa: F401
+
         return True
     except ImportError:
         return False
@@ -56,6 +57,7 @@ def _check_colabfold() -> bool:
 # PDB mean pLDDT extraction
 # ---------------------------------------------------------------------------
 
+
 def _extract_plddt_from_pdb(pdb_path: Path) -> dict[str, float]:
     """Parse B-factor column (pLDDT) from PDB. Returns {mean, min, max, per_residue:[...]}."""
     plddts: list[float] = []
@@ -65,7 +67,7 @@ def _extract_plddt_from_pdb(pdb_path: Path) -> dict[str, float]:
             if not line.startswith("ATOM"):
                 continue
             atom_name = line[12:16].strip()
-            if atom_name != "CA":   # Cα only, one per residue
+            if atom_name != "CA":  # Cα only, one per residue
                 continue
             res_seq = int(line[22:26].strip())
             if res_seq in seen_residues:
@@ -81,6 +83,7 @@ def _extract_plddt_from_pdb(pdb_path: Path) -> dict[str, float]:
     if not plddts:
         return {"mean": 0.0, "min": 0.0, "max": 0.0, "per_residue": []}
     import statistics
+
     return {
         "mean": round(statistics.mean(plddts), 2),
         "min": round(min(plddts), 2),
@@ -92,6 +95,7 @@ def _extract_plddt_from_pdb(pdb_path: Path) -> dict[str, float]:
 # ---------------------------------------------------------------------------
 # Tier 1: ESMFold pre-filter
 # ---------------------------------------------------------------------------
+
 
 def predict_structure_esmfold(
     sequence: str,
@@ -117,8 +121,8 @@ def predict_structure_esmfold(
         return result
 
     try:
-        import torch
         import esm
+        import torch
 
         model = esm.pretrained.esmfold_v1()
         model = model.eval().cuda() if torch.cuda.is_available() else model.eval()
@@ -128,11 +132,13 @@ def predict_structure_esmfold(
 
         pdb_path.write_text(output)
         plddt_info = _extract_plddt_from_pdb(pdb_path)
-        result.update({
-            "pdb_path": str(pdb_path),
-            "mean_plddt": plddt_info["mean"],
-            "success": True,
-        })
+        result.update(
+            {
+                "pdb_path": str(pdb_path),
+                "mean_plddt": plddt_info["mean"],
+                "success": True,
+            }
+        )
     except Exception as e:
         result["error"] = str(e)
 
@@ -143,11 +149,12 @@ def predict_structure_esmfold(
 # Tier 2: Boltz-1
 # ---------------------------------------------------------------------------
 
+
 def _write_boltz_input(
     sequence: str,
     design_id: str,
     tmpdir: Path,
-    brna_sequence: Optional[str] = None,
+    brna_sequence: str | None = None,
 ) -> Path:
     """Write Boltz-1 input YAML (or FASTA for monomer mode)."""
     if brna_sequence:
@@ -160,6 +167,7 @@ def _write_boltz_input(
         }
         yaml_path = tmpdir / f"{design_id}.yaml"
         import yaml as _yaml
+
         yaml_path.write_text(_yaml.dump(content, default_flow_style=False))
         return yaml_path
     else:
@@ -174,7 +182,7 @@ def predict_structure_boltz(
     output_dir: Path,
     num_models: int = 1,
     num_recycle: int = 3,
-    brna_sequence: Optional[str] = None,
+    brna_sequence: str | None = None,
 ) -> dict[str, Any]:
     """Tier 2: Boltz-1 AF3-class prediction. Returns {pdb_path, mean_plddt, success, tool}.
 
@@ -201,15 +209,20 @@ def predict_structure_boltz(
         out_sub = tmpdir_p / "out"
 
         cmd = [
-            "boltz", "predict", str(input_path),
-            "--out_dir", str(out_sub),
-            "--num_models", str(num_models),
-            "--num_recycle", str(num_recycle),
+            "boltz",
+            "predict",
+            str(input_path),
+            "--out_dir",
+            str(out_sub),
+            "--num_models",
+            str(num_models),
+            "--num_recycle",
+            str(num_recycle),
             "--override",
         ]
         try:
             r = subprocess.run(cmd, capture_output=True, timeout=1800)  # 30 min max
-            boltz_ok = (r.returncode == 0)
+            boltz_ok = r.returncode == 0
         except subprocess.TimeoutExpired:
             boltz_ok = False
             result["error"] = "Boltz-1 timed out (30 min)"
@@ -222,11 +235,13 @@ def predict_structure_boltz(
                 dst_pdb = output_dir / f"{design_id}_boltz.pdb"
                 dst_pdb.write_bytes(src_pdb.read_bytes())
                 plddt_info = _extract_plddt_from_pdb(dst_pdb)
-                result.update({
-                    "pdb_path": str(dst_pdb),
-                    "mean_plddt": plddt_info["mean"],
-                    "success": True,
-                })
+                result.update(
+                    {
+                        "pdb_path": str(dst_pdb),
+                        "mean_plddt": plddt_info["mean"],
+                        "success": True,
+                    }
+                )
                 return result
 
         # Boltz-1 failed — if RNA complex mode, try ColabFold fallback
@@ -238,13 +253,15 @@ def predict_structure_boltz(
                 output_dir=output_dir,
                 brna_sequence=brna_sequence,
             )
-            result.update({
-                "tool": f"Boltz-1+ColabFold_fallback",
-                "pdb_path": fallback.get("pdb_path"),
-                "mean_plddt": fallback.get("mean_plddt"),
-                "success": fallback.get("success", False),
-                "error": fallback.get("error"),
-            })
+            result.update(
+                {
+                    "tool": "Boltz-1+ColabFold_fallback",
+                    "pdb_path": fallback.get("pdb_path"),
+                    "mean_plddt": fallback.get("mean_plddt"),
+                    "success": fallback.get("success", False),
+                    "error": fallback.get("error"),
+                }
+            )
 
     return result
 
@@ -253,11 +270,12 @@ def predict_structure_boltz(
 # Boltz-1 fallback: ColabFold
 # ---------------------------------------------------------------------------
 
+
 def predict_structure_colabfold(
     sequence: str,
     design_id: str,
     output_dir: Path,
-    brna_sequence: Optional[str] = None,
+    brna_sequence: str | None = None,
     use_templates: bool = False,
 ) -> dict[str, Any]:
     """ColabFold v1.5.5 AF2-multimer fallback. Returns {pdb_path, mean_plddt, success}."""
@@ -278,23 +296,27 @@ def predict_structure_colabfold(
         tmpdir_p = Path(tmpdir)
         fasta_path = tmpdir_p / f"{design_id}.fasta"
         if brna_sequence:
-            fasta_path.write_text(f">{design_id}_protein\n{sequence}\n"
-                                  f">{design_id}_rna\n{brna_sequence}\n")
+            fasta_path.write_text(
+                f">{design_id}_protein\n{sequence}\n>{design_id}_rna\n{brna_sequence}\n"
+            )
         else:
             fasta_path.write_text(f">{design_id}\n{sequence}\n")
         out_sub = tmpdir_p / "out"
 
         cmd = [
             "colabfold_batch",
-            str(fasta_path), str(out_sub),
-            "--num-models", "1",
-            "--num-recycle", "3",
+            str(fasta_path),
+            str(out_sub),
+            "--num-models",
+            "1",
+            "--num-recycle",
+            "3",
         ]
         if not use_templates:
             cmd.append("--templates")
         try:
             r = subprocess.run(cmd, capture_output=True, timeout=3600)
-            cf_ok = (r.returncode == 0)
+            cf_ok = r.returncode == 0
         except subprocess.TimeoutExpired:
             result["error"] = "ColabFold timed out (60 min)"
             return result
@@ -305,11 +327,13 @@ def predict_structure_colabfold(
                 dst_pdb = output_dir / f"{design_id}_colabfold.pdb"
                 dst_pdb.write_bytes(pdbs[0].read_bytes())
                 plddt_info = _extract_plddt_from_pdb(dst_pdb)
-                result.update({
-                    "pdb_path": str(dst_pdb),
-                    "mean_plddt": plddt_info["mean"],
-                    "success": True,
-                })
+                result.update(
+                    {
+                        "pdb_path": str(dst_pdb),
+                        "mean_plddt": plddt_info["mean"],
+                        "success": True,
+                    }
+                )
         else:
             result["error"] = "ColabFold exited non-zero"
 
@@ -320,11 +344,12 @@ def predict_structure_colabfold(
 # Unified entry point
 # ---------------------------------------------------------------------------
 
+
 def predict_structure(
     sequence: str,
     design_id: str,
     output_dir: Path,
-    brna_sequence: Optional[str] = None,
+    brna_sequence: str | None = None,
     esmfold_plddt_cutoff: float = 50.0,
     skip_esmfold: bool = False,
 ) -> dict[str, Any]:
@@ -385,14 +410,15 @@ def predict_structure(
 # Batch prediction (used by driver script)
 # ---------------------------------------------------------------------------
 
+
 def run_batch_prediction(
     designs_df: pd.DataFrame,
     output_dir: Path,
     esmfold_plddt_cutoff: float = 50.0,
-    brna_col: Optional[str] = None,
+    brna_col: str | None = None,
     sequence_col: str = "protein_sequence",
     id_col: str = "design_id",
-    fallback_log_path: Optional[Path] = None,
+    fallback_log_path: Path | None = None,
 ) -> pd.DataFrame:
     """Predict structures for all designs in DataFrame. Adds structure columns in-place.
 
@@ -407,7 +433,7 @@ def run_batch_prediction(
         sequence = row[sequence_col]
         brna_seq = row.get(brna_col) if brna_col else None
 
-        print(f"  [{i+1}/{len(designs_df)}] {design_id} ({len(sequence)} aa) ...")
+        print(f"  [{i + 1}/{len(designs_df)}] {design_id} ({len(sequence)} aa) ...")
         r = predict_structure(
             sequence=sequence,
             design_id=design_id,
@@ -428,8 +454,16 @@ def run_batch_prediction(
 
     # Merge back onto input DataFrame
     out = designs_df.copy()
-    for col in ["esmfold_plddt", "esmfold_pass", "boltz_pdb", "boltz_plddt",
-                "boltz_rna_fallback", "final_pdb", "final_mean_plddt", "success"]:
+    for col in [
+        "esmfold_plddt",
+        "esmfold_pass",
+        "boltz_pdb",
+        "boltz_plddt",
+        "boltz_rna_fallback",
+        "final_pdb",
+        "final_mean_plddt",
+        "success",
+    ]:
         if col in results_df.columns:
             out[col] = results_df[col].values
 

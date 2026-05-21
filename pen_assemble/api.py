@@ -1,9 +1,9 @@
 """Public Designer API for pen-assemble."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 
@@ -15,19 +15,19 @@ class DesignResult:
     design_id: str
     strategy: str  # A, B, C, or D
     protein_sequence: str
-    guide_rna_sequence: Optional[str] = None
+    guide_rna_sequence: str | None = None
     scaffold_provenance: dict = field(default_factory=dict)
 
     # Verification outputs (populated after Steps 12–16)
-    predicted_pen_score: Optional[float] = None
-    mech_class_tier_a: Optional[str] = None
-    composite_flag: Optional[bool] = None
-    ddg_kcal_mol: Optional[float] = None
-    active_site_pass: Optional[bool] = None
-    mean_plddt: Optional[float] = None
+    predicted_pen_score: float | None = None
+    mech_class_tier_a: str | None = None
+    composite_flag: bool | None = None
+    ddg_kcal_mol: float | None = None
+    active_site_pass: bool | None = None
+    mean_plddt: float | None = None
 
     # Pre-registered check flags
-    beats_is621: Optional[bool] = None  # PenScore > 0.929
+    beats_is621: bool | None = None  # PenScore > 0.929
 
     def __post_init__(self) -> None:
         if self.predicted_pen_score is not None and self.beats_is621 is None:
@@ -42,12 +42,12 @@ class Designer:
 
     IS621_PENSCORE_LOCKPOINT = 0.929  # Paper 3 v0.1.0 public_scorecard.parquet
 
-    def __init__(self, data_dir: Optional[Path] = None) -> None:
+    def __init__(self, data_dir: Path | None = None) -> None:
         self._data_dir = data_dir or Path("/data")
-        self._catalog: Optional[pd.DataFrame] = None
+        self._catalog: pd.DataFrame | None = None
 
     @classmethod
-    def load(cls, data_dir: Optional[Path] = None) -> "Designer":
+    def load(cls, data_dir: Path | None = None) -> Designer:
         """Load Designer with data directory."""
         return cls(data_dir=data_dir)
 
@@ -71,8 +71,8 @@ class Designer:
             DesignResult for the best chimera generated, or raises ValueError
             if no designs pass the domain-swap filters.
         """
-        from pen_assemble.strategies.domain_swap import generate_chimera_designs
         from pen_assemble.data.loader import load_scaffold_universe
+        from pen_assemble.strategies.domain_swap import generate_chimera_designs
 
         scaffolds = load_scaffold_universe()
         scaffold_map = {s.id: s for s in scaffolds}
@@ -104,7 +104,7 @@ class Designer:
 
     def discover_orthologs(
         self,
-        is110_catalog_path: Optional[Path] = None,
+        is110_catalog_path: Path | None = None,
         min_composite_prob: float = 0.85,
     ) -> pd.DataFrame:
         """Run Strategy B ortholog discovery pipeline.
@@ -124,15 +124,17 @@ class Designer:
             accession, organism, genus, composite_prob, length_aa, gate_*_pass.
         """
         from pen_assemble.strategies.ortholog_discovery import (
-            apply_gate_1, apply_gate_2, apply_gate_3, apply_gate_4,
+            apply_gate_1,
+            apply_gate_2,
+            apply_gate_3,
+            apply_gate_4,
             fetch_lengths_and_organisms,
         )
 
         catalog = is110_catalog_path or Path("/data/mech-class/catalogs/is110_triage.parquet")
         if not Path(catalog).exists():
             raise FileNotFoundError(
-                f"IS110 triage catalog not found at {catalog}. "
-                "Run MECH-CLASS Step 10 first."
+                f"IS110 triage catalog not found at {catalog}. Run MECH-CLASS Step 10 first."
             )
 
         df = pd.read_parquet(catalog)
@@ -189,13 +191,15 @@ class Designer:
 
         results = []
         for _, row in variants_df.head(n_variants).iterrows():
-            results.append(DesignResult(
-                design_id=str(row.get("design_id", f"{scaffold_id}_deimm_{len(results)+1}")),
-                strategy="C",
-                protein_sequence=str(row.get("protein_sequence", "")),
-                scaffold_provenance={"parent": scaffold_id, "strategy": "C_deimm"},
-                predicted_pen_score=row.get("pen_score"),
-            ))
+            results.append(
+                DesignResult(
+                    design_id=str(row.get("design_id", f"{scaffold_id}_deimm_{len(results) + 1}")),
+                    strategy="C",
+                    protein_sequence=str(row.get("protein_sequence", "")),
+                    scaffold_provenance={"parent": scaffold_id, "strategy": "C_deimm"},
+                    predicted_pen_score=row.get("pen_score"),
+                )
+            )
         return results
 
     def redesign_backbone(
@@ -232,18 +236,20 @@ class Designer:
 
         results = []
         for v in variants:
-            results.append(DesignResult(
-                design_id=v.design_id,
-                strategy="D",
-                protein_sequence=v.protmpnn_sequence,
-                scaffold_provenance={
-                    "parent": scaffold_id,
-                    "strategy": "D_protmpnn",
-                    "sequence_identity_to_wt": v.sequence_identity_to_wt,
-                    "novel_residues": v.novel_residues_count,
-                },
-                predicted_pen_score=getattr(v, "pen_score", None),
-            ))
+            results.append(
+                DesignResult(
+                    design_id=v.design_id,
+                    strategy="D",
+                    protein_sequence=v.protmpnn_sequence,
+                    scaffold_provenance={
+                        "parent": scaffold_id,
+                        "strategy": "D_protmpnn",
+                        "sequence_identity_to_wt": v.sequence_identity_to_wt,
+                        "novel_residues": v.novel_residues_count,
+                    },
+                    predicted_pen_score=getattr(v, "pen_score", None),
+                )
+            )
         return results
 
     def get_catalog(self) -> pd.DataFrame:
@@ -258,7 +264,7 @@ class Designer:
 
     def select_designs(
         self,
-        strategy: Optional[str] = None,
+        strategy: str | None = None,
         require_dsb_free: bool = True,
         top_k: int = 10,
     ) -> pd.DataFrame:

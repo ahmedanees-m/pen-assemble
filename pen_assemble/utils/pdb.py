@@ -1,13 +1,13 @@
 """PDB / structure file helpers."""
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 
 
-def parse_plddt_from_pdb(pdb_path: Path) -> "np.ndarray":
+def parse_plddt_from_pdb(pdb_path: Path) -> np.ndarray:
     """Extract per-residue pLDDT from B-factor column of a PDB file."""
     plddts = []
     with open(pdb_path) as f:
@@ -20,7 +20,7 @@ def parse_plddt_from_pdb(pdb_path: Path) -> "np.ndarray":
     return np.array(plddts, dtype=float)
 
 
-def compute_backbone_rmsd(pdb_a: Path, pdb_b: Path) -> Optional[float]:
+def compute_backbone_rmsd(pdb_a: Path, pdb_b: Path) -> float | None:
     """Compute Cα RMSD between two PDB structures (requires BioPython). Step 12 helper."""
     try:
         from Bio.PDB import PDBParser, Superimposer
@@ -36,5 +36,5 @@ def compute_backbone_rmsd(pdb_a: Path, pdb_b: Path) -> Optional[float]:
         sup = Superimposer()
         sup.set_atoms(atoms_a[:n], atoms_b[:n])
         return float(sup.rms)
-    except ImportError:
-        raise ImportError("BioPython required: pip install biopython>=1.83")
+    except ImportError as exc:
+        raise ImportError("BioPython required: pip install biopython>=1.83") from exc

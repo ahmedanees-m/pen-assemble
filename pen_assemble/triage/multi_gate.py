@@ -8,9 +8,8 @@ Applies all verification gates in sequence:
   Gate 5: MECH-CLASS tier_a == 'DSB_FREE_TRANSEST_RECOMBINASE'
   Gate 6: PEN-SCORE computed (no sentinel flags)
 """
-from __future__ import annotations
 
-from typing import Optional
+from __future__ import annotations
 
 import pandas as pd
 
@@ -25,7 +24,7 @@ TRIAGE_GATES = {
 
 def run_triage(
     designs_df: pd.DataFrame,
-    gates: Optional[dict] = None,
+    gates: dict | None = None,
 ) -> pd.DataFrame:
     """Apply all triage gates sequentially; return surviving designs.
 
@@ -55,46 +54,46 @@ def run_triage(
     n_start = len(df)
 
     # Gate A: ESMFold pLDDT
-    plddt_col = next((c for c in ["esmfold_mean_plddt", "mean_plddt", "af3_mean_plddt"]
-                      if c in df.columns), None)
+    plddt_col = next(
+        (c for c in ["esmfold_mean_plddt", "mean_plddt", "af3_mean_plddt"] if c in df.columns), None
+    )
     if plddt_col:
         df["gate_A_pass"] = df[plddt_col] >= g["esmfold_mean_plddt_min"]
         df = df[df["gate_A_pass"]]
     else:
-        print(f"  [triage] Gate A: pLDDT column not found — skipped", file=sys.stderr)
+        print("  [triage] Gate A: pLDDT column not found — skipped", file=sys.stderr)
 
     # Gate B: Rosetta ΔΔG
     if "ddg_kcal_mol" in df.columns:
         df["gate_B_pass"] = df["ddg_kcal_mol"] <= g["ddg_max_kcal"]
         df = df[df["gate_B_pass"]]
     else:
-        print(f"  [triage] Gate B: ddg_kcal_mol column not found — skipped", file=sys.stderr)
+        print("  [triage] Gate B: ddg_kcal_mol column not found — skipped", file=sys.stderr)
 
     # Gate C: Active-site geometry
     if "active_site_pass" in df.columns:
         df["gate_C_pass"] = df["active_site_pass"].fillna(True).astype(bool)
         df = df[df["gate_C_pass"]]
     else:
-        print(f"  [triage] Gate C: active_site_pass column not found — skipped", file=sys.stderr)
+        print("  [triage] Gate C: active_site_pass column not found — skipped", file=sys.stderr)
 
     # Gate D: MECH-CLASS DSB-free
     if "mech_class_tier_a" in df.columns:
         df["gate_D_pass"] = df["mech_class_tier_a"] == g["required_tier_a"]
         df = df[df["gate_D_pass"]]
     else:
-        print(f"  [triage] Gate D: mech_class_tier_a column not found — skipped", file=sys.stderr)
+        print("  [triage] Gate D: mech_class_tier_a column not found — skipped", file=sys.stderr)
 
     # Gate E: PEN-SCORE sanity (>= 0 ensures no sentinel NaN made it through)
     if "pen_score" in df.columns:
         df["gate_E_pass"] = df["pen_score"].notna() & (df["pen_score"] >= 0.0)
         df = df[df["gate_E_pass"]]
     else:
-        print(f"  [triage] Gate E: pen_score column not found — skipped", file=sys.stderr)
+        print("  [triage] Gate E: pen_score column not found — skipped", file=sys.stderr)
 
     n_end = len(df)
     print(
-        f"  [triage] {n_start} → {n_end} designs survived all gates "
-        f"({n_start - n_end} eliminated)",
+        f"  [triage] {n_start} → {n_end} designs survived all gates ({n_start - n_end} eliminated)",
         file=sys.stderr,
     )
     return df.reset_index(drop=True)

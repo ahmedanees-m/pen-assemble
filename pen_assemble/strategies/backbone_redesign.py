@@ -16,13 +16,11 @@ P5 diversity contribution: Strategy D sequences are distinct from IS621 WT
 
 Target: ~25 ProteinMPNN-redesigned variants. Implemented in Step 11.5.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
-
-import pandas as pd
 
 # IS621 catalytic residues — MUST be pinned (Hiraizumi 2024 Nature 630:994–1002, Table 1)
 # DEDD tetrad: D11, E60, D102, D105 (RuvC-like fold); S241 (Tnp serine recombinase C-term)
@@ -42,17 +40,17 @@ class BackboneRedesignVariant:
     design_id: str
     protmpnn_sequence: str
     pinned_positions: list[int] = field(default_factory=list)
-    backbone_rmsd_to_wt_a: Optional[float] = None   # angstroms vs 8WT6
-    sequence_identity_to_wt: Optional[float] = None  # fraction 0–1
-    novel_residues_count: Optional[int] = None
+    backbone_rmsd_to_wt_a: float | None = None  # angstroms vs 8WT6
+    sequence_identity_to_wt: float | None = None  # fraction 0–1
+    novel_residues_count: int | None = None
 
-    def passes_backbone_check(self, rmsd_threshold: float = 1.5) -> Optional[bool]:
+    def passes_backbone_check(self, rmsd_threshold: float = 1.5) -> bool | None:
         """True if backbone RMSD to WT IS621 8WT6 <= rmsd_threshold Å."""
         if self.backbone_rmsd_to_wt_a is None:
             return None
         return self.backbone_rmsd_to_wt_a <= rmsd_threshold
 
-    def passes_identity_range(self, lo: float = 0.50, hi: float = 0.75) -> Optional[bool]:
+    def passes_identity_range(self, lo: float = 0.50, hi: float = 0.75) -> bool | None:
         """True if sequence identity to WT is in [lo, hi] — novel but plausible."""
         if self.sequence_identity_to_wt is None:
             return None
@@ -62,6 +60,7 @@ class BackboneRedesignVariant:
 def _write_fixed_positions_jsonl(pdb_path: Path, pinned: list[int], out_dir: Path) -> Path:
     """Write ProteinMPNN fixed_positions_jsonl file for pinned-residue inverse folding."""
     import json as _json
+
     chain_id = "A"
     fixed = {pdb_path.stem: {chain_id: pinned}}
     jsonl_path = out_dir / "fixed_positions.jsonl"
@@ -74,11 +73,13 @@ def _get_wt_sequence_from_pdb(pdb_path: Path) -> str:
     try:
         from Bio.PDB import PDBParser
         from Bio.SeqUtils import seq1
+
         parser = PDBParser(QUIET=True)
         struct = parser.get_structure("ref", str(pdb_path))
         return "".join(
-            seq1(r.get_resname()) for r in struct.get_residues()
-            if r.id[0] == " "   # HETATM excluded
+            seq1(r.get_resname())
+            for r in struct.get_residues()
+            if r.id[0] == " "  # HETATM excluded
         )
     except ImportError:
         return ""
@@ -89,6 +90,7 @@ def _parse_protmpnn_fasta(fasta_path: Path, wt_sequence: str) -> list[BackboneRe
     variants: list[BackboneRedesignVariant] = []
     try:
         from Bio import SeqIO as _SeqIO
+
         records = list(_SeqIO.parse(str(fasta_path), "fasta"))
     except (ImportError, FileNotFoundError):
         return variants
@@ -97,25 +99,27 @@ def _parse_protmpnn_fasta(fasta_path: Path, wt_sequence: str) -> list[BackboneRe
         seq = str(record.seq)
         if wt_sequence and seq == wt_sequence:
             continue  # skip exact WT recovery
-        n_match = sum(a == b for a, b in zip(seq, wt_sequence)) if wt_sequence else 0
+        n_match = sum(a == b for a, b in zip(seq, wt_sequence, strict=False)) if wt_sequence else 0
         identity = n_match / max(len(wt_sequence), len(seq)) if wt_sequence and seq else 0.0
-        variants.append(BackboneRedesignVariant(
-            design_id=f"D_{i:03d}_protmpnn",
-            protmpnn_sequence=seq,
-            pinned_positions=CATALYTIC_RESIDUES_IS621[:],
-            sequence_identity_to_wt=round(identity, 4),
-            novel_residues_count=(len(wt_sequence) - n_match) if wt_sequence else None,
-        ))
+        variants.append(
+            BackboneRedesignVariant(
+                design_id=f"D_{i:03d}_protmpnn",
+                protmpnn_sequence=seq,
+                pinned_positions=CATALYTIC_RESIDUES_IS621[:],
+                sequence_identity_to_wt=round(identity, 4),
+                novel_residues_count=(len(wt_sequence) - n_match) if wt_sequence else None,
+            )
+        )
     return variants
 
 
 def generate_backbone_redesigns(
-    scaffold_pdb: Optional[Path] = None,
+    scaffold_pdb: Path | None = None,
     n_designs: int = 30,
-    pinned_residues: Optional[list[int]] = None,
-    bRNA_contact_residues: Optional[list[int]] = None,
+    pinned_residues: list[int] | None = None,
+    bRNA_contact_residues: list[int] | None = None,
     seed: int = 42,
-    output_dir: Optional[Path] = None,
+    output_dir: Path | None = None,
 ) -> list[BackboneRedesignVariant]:
     """Run ProteinMPNN inverse-folding on IS621 backbone (Strategy D).
 
@@ -161,30 +165,40 @@ def generate_backbone_redesigns(
     # Confirm ProteinMPNN is importable
     try:
         import ProteinMPNN  # noqa: F401
-    except ImportError:
+    except ImportError as exc:
         raise ImportError(
             f"ProteinMPNN not installed. Install with:\n"
             f"  pip install 'git+https://github.com/dauparas/ProteinMPNN.git"
             f"@{PROTEINMPNN_COMMIT}'\n"
             f"inside the pen-stack/design:0.1.0 Docker image."
-        )
+        ) from exc
 
     # Build pinned position list
-    pinned = sorted(set(pinned_residues or CATALYTIC_RESIDUES_IS621)
-                    | set(bRNA_contact_residues or []))
+    pinned = sorted(
+        set(pinned_residues or CATALYTIC_RESIDUES_IS621) | set(bRNA_contact_residues or [])
+    )
 
     fixed_jsonl = _write_fixed_positions_jsonl(pdb, pinned, out)
     wt_seq = _get_wt_sequence_from_pdb(pdb)
 
     cmd = [
-        "python", "-m", "ProteinMPNN.protein_mpnn_run",
-        "--pdb_path", str(pdb),
-        "--out_folder", str(out),
-        "--num_seq_per_target", str(n_designs),
-        "--sampling_temp", "0.1",
-        "--seed", str(seed),
-        "--fixed_positions_jsonl", str(fixed_jsonl),
-        "--batch_size", "1",
+        "python",
+        "-m",
+        "ProteinMPNN.protein_mpnn_run",
+        "--pdb_path",
+        str(pdb),
+        "--out_folder",
+        str(out),
+        "--num_seq_per_target",
+        str(n_designs),
+        "--sampling_temp",
+        "0.1",
+        "--seed",
+        str(seed),
+        "--fixed_positions_jsonl",
+        str(fixed_jsonl),
+        "--batch_size",
+        "1",
     ]
     result = _subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
@@ -197,9 +211,9 @@ def generate_backbone_redesigns(
 
     # Filter to novelty range [50%, 75%] identity (pre-registered Step 11.5 criterion)
     variants = [
-        v for v in variants
-        if v.sequence_identity_to_wt is None
-        or (0.50 <= v.sequence_identity_to_wt <= 0.75)
+        v
+        for v in variants
+        if v.sequence_identity_to_wt is None or (0.50 <= v.sequence_identity_to_wt <= 0.75)
     ]
 
     # Sort most novel first

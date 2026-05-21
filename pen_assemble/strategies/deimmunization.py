@@ -16,6 +16,7 @@ Active-site constraint (Hiraizumi 2024 Nature 630:994-1002):
 P3 pre-registration: best deimm variant S_Immuno delta >= 0.10 vs IS621 WT (0.7594).
 Target: ~10 deimmunized variants. Run in pen-stack/biophysics Docker image.
 """
+
 from __future__ import annotations
 
 import random
@@ -23,7 +24,7 @@ import subprocess
 import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -31,8 +32,8 @@ import numpy as np
 # Constants
 # ---------------------------------------------------------------------------
 
-IS621_S_IMMUNO_WT = 0.7594           # locked from Paper 3 public_scorecard.parquet
-P3_TARGET_MINIMUM = 0.8594           # = 0.7594 + 0.10 (P3 threshold)
+IS621_S_IMMUNO_WT = 0.7594  # locked from Paper 3 public_scorecard.parquet
+P3_TARGET_MINIMUM = 0.8594  # = 0.7594 + 0.10 (P3 threshold)
 
 # Catalytic residues — must not be mutated (Hiraizumi 2024)
 IS621_CATALYTIC_RESIDUES: list[int] = [11, 60, 102, 105, 241]
@@ -41,26 +42,84 @@ IS621_CATALYTIC_RESIDUES: list[int] = [11, 60, 102, 105, 241]
 # confirmed bRNA-binding loop contacts (TBL+DBL, Hiraizumi 2024 Fig 4).
 # Positions are 1-indexed. This list is pre-computed from 8WT6 SASA analysis;
 # runtime structure analysis (--pdb path) will override this when available.
-IS621_FROZEN_POSITIONS: frozenset[int] = frozenset([
-    # Catalytic core 10 Å buffer — DEDD tetrad + Tnp-Ser neighbors
-    9, 10, 11, 12, 13,      # D11 neighborhood
-    58, 59, 60, 61, 62,     # E60 neighborhood
-    100, 101, 102, 103, 104, 105, 106,  # D102/D105 neighborhood
-    239, 240, 241, 242, 243,            # S241 neighborhood
-    # bRNA-binding loop contacts (TBL: ~110-130; DBL: ~135-150)
-    111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
-    121, 122, 123, 124, 125, 126, 127, 128, 129, 130,
-    135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150,
-])
+IS621_FROZEN_POSITIONS: frozenset[int] = frozenset(
+    [
+        # Catalytic core 10 Å buffer — DEDD tetrad + Tnp-Ser neighbors
+        9,
+        10,
+        11,
+        12,
+        13,  # D11 neighborhood
+        58,
+        59,
+        60,
+        61,
+        62,  # E60 neighborhood
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,  # D102/D105 neighborhood
+        239,
+        240,
+        241,
+        242,
+        243,  # S241 neighborhood
+        # bRNA-binding loop contacts (TBL: ~110-130; DBL: ~135-150)
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+    ]
+)
 
 # MHC-I allele panel — 4 alleles, Paper 3 Script 14 (locked; no asterisks)
 MHC_I_ALLELES: list[str] = [
-    "HLA-A02:01", "HLA-A01:01", "HLA-B07:02", "HLA-B44:02",
+    "HLA-A02:01",
+    "HLA-A01:01",
+    "HLA-B07:02",
+    "HLA-B44:02",
 ]
 
 # MHC-II allele panel — 3 DRB1 alleles, Paper 3 Script 14 (locked; underscore notation)
 MHC_II_ALLELES: list[str] = [
-    "DRB1_0101", "DRB1_0301", "DRB1_0401",
+    "DRB1_0101",
+    "DRB1_0301",
+    "DRB1_0401",
 ]
 
 # S_Immuno normalization constant locked from Paper 3 (95th-pct across 28 editors).
@@ -75,15 +134,17 @@ _CONSERVATIVE_AA = list("ACDEFHIKLMNQRSTVWY")  # excludes G, P (structure-disrup
 # Dataclasses
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class EpitopeProfile:
     """MHC epitope load for a protein sequence."""
-    n_mhc_i_binders: int = 0       # unique 9-mer start positions with %Rank_EL < 0.5 (Paper 3)
-    n_mhc_ii_binders: int = 0      # unique 15-mer start positions with %Rank_EL <= 10.0 (Paper 3)
-    epitope_positions_i: list[int] = field(default_factory=list)   # start positions (1-indexed)
+
+    n_mhc_i_binders: int = 0  # unique 9-mer start positions with %Rank_EL < 0.5 (Paper 3)
+    n_mhc_ii_binders: int = 0  # unique 15-mer start positions with %Rank_EL <= 10.0 (Paper 3)
+    epitope_positions_i: list[int] = field(default_factory=list)  # start positions (1-indexed)
     epitope_positions_ii: list[int] = field(default_factory=list)
-    weighted_load: float = 0.0     # n_MHC_I + 0.5 * n_MHC_II (optimization target)
-    s_immuno_estimate: Optional[float] = None  # calibrated to Paper 3 scale
+    weighted_load: float = 0.0  # n_MHC_I + 0.5 * n_MHC_II (optimization target)
+    s_immuno_estimate: float | None = None  # calibrated to Paper 3 scale
 
 
 @dataclass
@@ -97,12 +158,12 @@ class DeimmVariant:
     n_mhc_i_epitopes_removed: int = 0
     n_mhc_ii_epitopes_removed: int = 0
     total_mutations: int = 0
-    predicted_s_immuno: Optional[float] = None
-    predicted_s_immuno_delta: Optional[float] = None
-    predicted_ddg_total: Optional[float] = None
-    epitope_profile: Optional[EpitopeProfile] = None
+    predicted_s_immuno: float | None = None
+    predicted_s_immuno_delta: float | None = None
+    predicted_ddg_total: float | None = None
+    epitope_profile: EpitopeProfile | None = None
 
-    def passes_p3(self) -> Optional[bool]:
+    def passes_p3(self) -> bool | None:
         """Return True if P3: S_Immuno delta >= 0.10 vs IS621 WT."""
         if self.predicted_s_immuno_delta is None:
             return None
@@ -127,6 +188,7 @@ class DeimmVariant:
 # MHC epitope prediction (direct subprocess, NOT mhctools)
 # ---------------------------------------------------------------------------
 
+
 def _check_mhcpan_available() -> bool:
     """Return True if the Paper 3 VM netMHCpan-4.1 binary is accessible."""
     binary = Path.home() / "netmhc/netMHCpan-4.1/Linux_x86_64/bin/netMHCpan"
@@ -143,7 +205,7 @@ def _run_netmhcpan(
     sequence: str,
     alleles: list[str],
     peptide_length: int = 9,
-    rank_threshold: float = 0.5,   # Paper 3: %Rank_EL < 0.5 for Class I
+    rank_threshold: float = 0.5,  # Paper 3: %Rank_EL < 0.5 for Class I
 ) -> tuple[int, list[int]]:
     """Run netMHCpan-4.1 via subprocess. Returns (n_unique_positions, [sorted_positions]).
 
@@ -154,6 +216,7 @@ def _run_netmhcpan(
       - Threshold: %Rank_EL < 0.5
     """
     import os
+
     home = Path.home()
     binary = str(home / "netmhc/netMHCpan-4.1/Linux_x86_64/bin/netMHCpan")
     if not Path(binary).exists():
@@ -161,7 +224,7 @@ def _run_netmhcpan(
 
     env = os.environ.copy()
     env["NETMHCpan"] = str(home / "netmhc/netMHCpan-4.1/Linux_x86_64")
-    env["TMPDIR"] = "/tmp"   # netMHCpan-4.1 requires $TMPDIR to create its working dir
+    env["TMPDIR"] = "/tmp"  # netMHCpan-4.1 requires $TMPDIR to create its working dir
 
     allele_str = ",".join(alleles)
 
@@ -170,9 +233,12 @@ def _run_netmhcpan(
         fasta.write_text(f">query\n{sequence}\n")
         try:
             result = subprocess.run(
-                [binary, "-f", str(fasta), "-a", allele_str,
-                 "-l", str(peptide_length), "-BA"],
-                capture_output=True, text=True, timeout=300, env=env, check=False,
+                [binary, "-f", str(fasta), "-a", allele_str, "-l", str(peptide_length), "-BA"],
+                capture_output=True,
+                text=True,
+                timeout=300,
+                env=env,
+                check=False,
             )
         except (FileNotFoundError, subprocess.TimeoutExpired):
             return 0, []
@@ -221,6 +287,7 @@ def _run_netmhciipan(
       - Threshold: %Rank <= 10.0
     """
     import os
+
     home = Path.home()
     perl_script = home / "netmhc/netMHCIIpan-4.0/NetMHCIIpan-4.0.pl"
     if not perl_script.exists():
@@ -229,7 +296,7 @@ def _run_netmhciipan(
     env = os.environ.copy()
     env["NETMHCIIpan"] = str(home / "netmhc/netMHCIIpan-4.0")
     env["NetMHCIIpanPLAT"] = str(home / "netmhc/netMHCIIpan-4.0/Linux_x86_64")
-    env["TMPDIR"] = "/tmp"   # netMHCIIpan-4.0 also requires $TMPDIR
+    env["TMPDIR"] = "/tmp"  # netMHCIIpan-4.0 also requires $TMPDIR
 
     allele_str = ",".join(alleles)
 
@@ -239,7 +306,11 @@ def _run_netmhciipan(
         try:
             result = subprocess.run(
                 ["perl", str(perl_script), "-f", str(fasta), "-a", allele_str],
-                capture_output=True, text=True, timeout=600, env=env, check=False,
+                capture_output=True,
+                text=True,
+                timeout=600,
+                env=env,
+                check=False,
             )
         except (FileNotFoundError, subprocess.TimeoutExpired):
             return 0, []
@@ -263,7 +334,7 @@ def _run_netmhciipan(
             continue
         try:
             pos = int(parts[0])
-            rank_el = float(parts[8])   # %Rank_EL at index 8 (verified)
+            rank_el = float(parts[8])  # %Rank_EL at index 8 (verified)
             if rank_el <= rank_threshold:
                 binder_positions.add(pos)
         except (ValueError, IndexError):
@@ -286,10 +357,26 @@ def _immuno_fallback(sequence: str) -> EpitopeProfile:
     # Per-residue immunogenicity weights (Parker et al. 1994, J Immunol 152:163)
     # High: aromatic/hydrophobic (anchor residues); Low: P/G (helix breakers)
     _imm: dict[str, float] = {
-        "A": 0.20, "C": 0.15, "D": 0.25, "E": 0.35, "F": 0.85,
-        "G": 0.10, "H": 0.50, "I": 0.65, "K": 0.40, "L": 0.75,
-        "M": 0.55, "N": 0.30, "P": 0.10, "Q": 0.30, "R": 0.45,
-        "S": 0.20, "T": 0.25, "V": 0.45, "W": 0.90, "Y": 0.80,
+        "A": 0.20,
+        "C": 0.15,
+        "D": 0.25,
+        "E": 0.35,
+        "F": 0.85,
+        "G": 0.10,
+        "H": 0.50,
+        "I": 0.65,
+        "K": 0.40,
+        "L": 0.75,
+        "M": 0.55,
+        "N": 0.30,
+        "P": 0.10,
+        "Q": 0.30,
+        "R": 0.45,
+        "S": 0.20,
+        "T": 0.25,
+        "V": 0.45,
+        "W": 0.90,
+        "Y": 0.80,
     }
     scores = [_imm.get(aa, 0.30) for aa in sequence]
     n = len(sequence)
@@ -301,18 +388,18 @@ def _immuno_fallback(sequence: str) -> EpitopeProfile:
     # score lower (fewer binders), which is biologically sensible.
     # These are heuristic proxies only — netMHCpan-4.1/IIpan-4.0 are used in production.
     i_window, ii_window = 9, 15
-    i_threshold = 0.43   # mean window score; gives ~27 binders for IS621 WT 8WT6
+    i_threshold = 0.43  # mean window score; gives ~27 binders for IS621 WT 8WT6
     ii_threshold = 0.38  # 15-mer windows; gives ~18 binders for IS621 WT 8WT6
 
     epitope_i: list[int] = []
     for start in range(n - i_window + 1):
-        w_score = sum(scores[start:start + i_window]) / i_window
+        w_score = sum(scores[start : start + i_window]) / i_window
         if w_score > i_threshold:
-            epitope_i.append(start + 1)   # 1-indexed
+            epitope_i.append(start + 1)  # 1-indexed
 
     epitope_ii: list[int] = []
     for start in range(n - ii_window + 1):
-        w_score = sum(scores[start:start + ii_window]) / ii_window
+        w_score = sum(scores[start : start + ii_window]) / ii_window
         if w_score > ii_threshold:
             epitope_ii.append(start + 1)
 
@@ -325,7 +412,7 @@ def _immuno_fallback(sequence: str) -> EpitopeProfile:
         epitope_positions_i=epitope_i,
         epitope_positions_ii=epitope_ii,
         weighted_load=weighted,
-        s_immuno_estimate=None,   # calibrated in calibrate_s_immuno()
+        s_immuno_estimate=None,  # calibrated in calibrate_s_immuno()
     )
 
 
@@ -342,14 +429,10 @@ def compute_epitope_profile(
     """
     if use_netmhcpan and _check_mhcpan_available():
         # Class I — Paper 3: 4 HLA alleles, %Rank_EL < 0.5
-        n_i, pos_i = _run_netmhcpan(
-            sequence, MHC_I_ALLELES, peptide_length=9, rank_threshold=0.5
-        )
+        n_i, pos_i = _run_netmhcpan(sequence, MHC_I_ALLELES, peptide_length=9, rank_threshold=0.5)
         # Class II — Paper 3: 3 DRB1 alleles, %Rank_EL <= 10.0
         if _check_mhciipan_available():
-            n_ii, pos_ii = _run_netmhciipan(
-                sequence, MHC_II_ALLELES, rank_threshold=10.0
-            )
+            n_ii, pos_ii = _run_netmhciipan(sequence, MHC_II_ALLELES, rank_threshold=10.0)
         else:
             n_ii, pos_ii = 0, []
     else:
@@ -369,7 +452,7 @@ def compute_epitope_profile(
 
 def calibrate_s_immuno(
     variant_weighted_load: float,
-    wt_weighted_load: float = 61.0,        # IS621 WT (not used in Paper 3 formula)
+    wt_weighted_load: float = 61.0,  # IS621 WT (not used in Paper 3 formula)
     wt_s_immuno: float = IS621_S_IMMUNO_WT,  # kept for API compatibility
     max_total: float = _S_IMMUNO_MAX_TOTAL,
 ) -> float:
@@ -406,6 +489,7 @@ def calibrate_s_immuno(
 # Values are empirical mean ΔΔG per Grantham unit (kcal/mol per unit).
 _GRANTHAM: dict[tuple[str, str], float] = {}  # populated lazily
 
+
 def _grantham_ddg(wt_aa: str, mut_aa: str) -> float:
     """Estimate ΔΔG from Grantham chemical distance. Rough proxy only."""
     # Grantham 1974 Science 185:862-864 distance categories
@@ -414,23 +498,67 @@ def _grantham_ddg(wt_aa: str, mut_aa: str) -> float:
     # Penalty escalation: same group < cross-group < size change
     wt_p = wt_aa in _polar
     mu_p = mut_aa in _polar
-    cross_group = (wt_p != mu_p)
-    size_change = abs(
-        {"G": 57, "A": 71, "V": 99, "L": 113, "I": 113, "P": 97, "F": 147,
-         "W": 186, "M": 131, "S": 87, "T": 101, "C": 103, "Y": 163, "H": 137,
-         "D": 115, "E": 129, "N": 114, "Q": 128, "K": 128, "R": 156}.get(wt_aa, 115) -
-        {"G": 57, "A": 71, "V": 99, "L": 113, "I": 113, "P": 97, "F": 147,
-         "W": 186, "M": 131, "S": 87, "T": 101, "C": 103, "Y": 163, "H": 137,
-         "D": 115, "E": 129, "N": 114, "Q": 128, "K": 128, "R": 156}.get(mut_aa, 115)
-    ) / 30.0  # normalize
+    cross_group = wt_p != mu_p
+    size_change = (
+        abs(
+            {
+                "G": 57,
+                "A": 71,
+                "V": 99,
+                "L": 113,
+                "I": 113,
+                "P": 97,
+                "F": 147,
+                "W": 186,
+                "M": 131,
+                "S": 87,
+                "T": 101,
+                "C": 103,
+                "Y": 163,
+                "H": 137,
+                "D": 115,
+                "E": 129,
+                "N": 114,
+                "Q": 128,
+                "K": 128,
+                "R": 156,
+            }.get(wt_aa, 115)
+            - {
+                "G": 57,
+                "A": 71,
+                "V": 99,
+                "L": 113,
+                "I": 113,
+                "P": 97,
+                "F": 147,
+                "W": 186,
+                "M": 131,
+                "S": 87,
+                "T": 101,
+                "C": 103,
+                "Y": 163,
+                "H": 137,
+                "D": 115,
+                "E": 129,
+                "N": 114,
+                "Q": 128,
+                "K": 128,
+                "R": 156,
+            }.get(mut_aa, 115)
+        )
+        / 30.0
+    )  # normalize
     base = 0.3 + (0.8 if cross_group else 0.0) + size_change * 0.5
     return round(min(base, 5.0), 2)
 
 
 def _check_rosetta_available() -> bool:
     try:
-        r = subprocess.run(["rosetta_cartesian_ddg.default.linuxgccrelease", "-help"],
-                           capture_output=True, timeout=5)
+        r = subprocess.run(
+            ["rosetta_cartesian_ddg.default.linuxgccrelease", "-help"],
+            capture_output=True,
+            timeout=5,
+        )
         return r.returncode in (0, 1)
     except (FileNotFoundError, subprocess.TimeoutExpired):
         return False
@@ -441,7 +569,7 @@ def predict_ddg(
     position: int,
     wt_aa: str,
     mut_aa: str,
-    pdb_path: Optional[Path] = None,
+    pdb_path: Path | None = None,
     use_rosetta: bool = True,
 ) -> float:
     """Predict ΔΔG for a single substitution.
@@ -462,9 +590,10 @@ def predict_ddg(
 # Surface residue identification
 # ---------------------------------------------------------------------------
 
+
 def identify_surface_residues(
     sequence: str,
-    pdb_path: Optional[Path] = None,
+    pdb_path: Path | None = None,
     frozen: frozenset[int] = IS621_FROZEN_POSITIONS,
     sasa_threshold: float = 30.0,
 ) -> list[int]:
@@ -481,7 +610,7 @@ def identify_surface_residues(
             parser = PDBParser(QUIET=True)
             structure = parser.get_structure("target", str(pdb_path))
             sr = ShrakeRupley()
-            sr.compute(structure, level="R")   # residue-level SASA
+            sr.compute(structure, level="R")  # residue-level SASA
 
             surface = []
             for model in structure:
@@ -503,8 +632,7 @@ def identify_surface_residues(
     # Excluded: G (too small, structural), P (helix-breaker, structural), A (often buried).
     _surface_aa = set("KREDQNSTHYLVIMFWY")  # all except G, P, A, C
     surface = [
-        i + 1 for i, aa in enumerate(sequence)
-        if aa in _surface_aa and (i + 1) not in frozen
+        i + 1 for i, aa in enumerate(sequence) if aa in _surface_aa and (i + 1) not in frozen
     ]
     # Also include positions that flank confirmed surface residues (window expansion)
     expanded = set(surface)
@@ -518,14 +646,15 @@ def identify_surface_residues(
 # Monte Carlo optimizer
 # ---------------------------------------------------------------------------
 
+
 def iterative_monte_carlo_optimizer(
     parent_sequence: str,
     objective: str = "minimize_immunogenicity",
     max_n_mutations: int = 15,
     max_ddg: float = 8.0,
     max_per_mutation_ddg: float = 3.0,
-    frozen_positions: Optional[frozenset[int]] = None,
-    pdb_path: Optional[Path] = None,
+    frozen_positions: frozenset[int] | None = None,
+    pdb_path: Path | None = None,
     n_mc_steps: int = 2000,
     seed: int = 42,
     use_netmhcpan: bool = True,
@@ -562,7 +691,6 @@ def iterative_monte_carlo_optimizer(
         Accepted mutations: [{position, wt_aa, mut_aa, ddg_pred, objective_delta}]
     """
     rng = random.Random(seed)
-    np_rng = np.random.default_rng(seed)
 
     frozen = frozen_positions if frozen_positions is not None else IS621_FROZEN_POSITIONS
 
@@ -582,7 +710,8 @@ def iterative_monte_carlo_optimizer(
         def _score(sequence_list: list[str], mutations: list[dict]) -> float:
             total_ddg = sum(m["ddg_pred"] for m in mutations)
             n_size_reducing = sum(
-                1 for m in mutations
+                1
+                for m in mutations
                 if len(m["mut_aa"]) < len(m["wt_aa"]) or m["mut_aa"] in "GSATCV"
             )
             return -total_ddg + n_size_reducing * 0.5  # higher = better (lower ddG, smaller)
@@ -604,7 +733,7 @@ def iterative_monte_carlo_optimizer(
             break
 
         # Propose a random surface mutation
-        pos = rng.choice(surface)   # 1-indexed
+        pos = rng.choice(surface)  # 1-indexed
         wt_aa = current_seq[pos - 1]
         candidates = [aa for aa in _CONSERVATIVE_AA if aa != wt_aa]
         if not candidates:
@@ -620,8 +749,9 @@ def iterative_monte_carlo_optimizer(
         # Evaluate proposed mutation
         proposed_seq = current_seq.copy()
         proposed_seq[pos - 1] = mut_aa
-        proposed_mutations = accepted + [{"position": pos, "wt_aa": wt_aa, "mut_aa": mut_aa,
-                                          "ddg_pred": ddg}]
+        proposed_mutations = accepted + [
+            {"position": pos, "wt_aa": wt_aa, "mut_aa": mut_aa, "ddg_pred": ddg}
+        ]
         proposed_score = _score(proposed_seq, proposed_mutations)
 
         # MC acceptance: always accept improvements; probabilistic for worsening
@@ -632,14 +762,16 @@ def iterative_monte_carlo_optimizer(
             current_seq = proposed_seq
             current_score = proposed_score
             cumulative_ddg += ddg
-            accepted.append({
-                "position": pos,
-                "wt_aa": wt_aa,
-                "mut_aa": mut_aa,
-                "ddg_pred": ddg,
-                "objective_delta": round(delta, 4),
-                "step": step,
-            })
+            accepted.append(
+                {
+                    "position": pos,
+                    "wt_aa": wt_aa,
+                    "mut_aa": mut_aa,
+                    "ddg_pred": ddg,
+                    "objective_delta": round(delta, 4),
+                    "step": step,
+                }
+            )
             # Remove accepted position from future consideration (each position mutated once)
             if pos in surface:
                 surface.remove(pos)
@@ -651,14 +783,15 @@ def iterative_monte_carlo_optimizer(
 # Multi-trajectory MC: generate N variants
 # ---------------------------------------------------------------------------
 
+
 def run_mc_trajectories(
     sequence: str,
     n_variants: int = 10,
     max_mutations: int = 15,
     max_ddg: float = 8.0,
     max_per_mutation_ddg: float = 3.0,
-    frozen_positions: Optional[frozenset[int]] = None,
-    pdb_path: Optional[Path] = None,
+    frozen_positions: frozenset[int] | None = None,
+    pdb_path: Path | None = None,
     n_mc_steps: int = 2000,
     base_seed: int = 42,
     use_netmhcpan: bool = True,
@@ -681,18 +814,24 @@ def run_mc_trajectories(
     _frozen = frozen_positions or IS621_FROZEN_POSITIONS
 
     # WT baseline: REAL netMHCpan (1 call)
-    print(f"  Computing WT epitope profile (real netMHCpan: {use_netmhcpan and _check_mhcpan_available()})...")
+    print(
+        f"  Computing WT epitope profile (real netMHCpan: {use_netmhcpan and _check_mhcpan_available()})..."
+    )
     wt_profile = compute_epitope_profile(sequence, use_netmhcpan=use_netmhcpan)
     wt_load = wt_profile.weighted_load
-    print(f"  WT: MHC-I={wt_profile.n_mhc_i_binders}, MHC-II={wt_profile.n_mhc_ii_binders}, "
-          f"load={wt_load:.1f}, S_Immuno={calibrate_s_immuno(wt_load):.4f}")
+    print(
+        f"  WT: MHC-I={wt_profile.n_mhc_i_binders}, MHC-II={wt_profile.n_mhc_ii_binders}, "
+        f"load={wt_load:.1f}, S_Immuno={calibrate_s_immuno(wt_load):.4f}"
+    )
 
     variants: list[DeimmVariant] = []
 
     for i in range(n_variants * 3):  # 3× over-sampling, then deduplicate to n_variants
-        seed_i = base_seed + i * 137   # coprime multiplier for seed diversity
-        print(f"  Trajectory {i+1}/{n_variants*3} (seed={seed_i}, "
-              f"MC scoring: HEURISTIC)...", flush=True)
+        seed_i = base_seed + i * 137  # coprime multiplier for seed diversity
+        print(
+            f"  Trajectory {i + 1}/{n_variants * 3} (seed={seed_i}, MC scoring: HEURISTIC)...",
+            flush=True,
+        )
 
         # MC INNER LOOP uses heuristic scoring (fast — avoids 2000 netMHCpan calls)
         mutations = iterative_monte_carlo_optimizer(
@@ -705,7 +844,7 @@ def run_mc_trajectories(
             pdb_path=pdb_path,
             n_mc_steps=n_mc_steps,
             seed=seed_i,
-            use_netmhcpan=False,   # HEURISTIC during MC — DO NOT change to True
+            use_netmhcpan=False,  # HEURISTIC during MC — DO NOT change to True
         )
 
         if not mutations:
@@ -728,13 +867,15 @@ def run_mc_trajectories(
         n_i_removed = wt_profile.n_mhc_i_binders - var_profile.n_mhc_i_binders
         n_ii_removed = wt_profile.n_mhc_ii_binders - var_profile.n_mhc_ii_binders
 
-        print(f"    -> MHC-I={var_profile.n_mhc_i_binders} (-{max(0,n_i_removed)}), "
-              f"MHC-II={var_profile.n_mhc_ii_binders} (-{max(0,n_ii_removed)}), "
-              f"S_Immuno={s_immuno:.4f} (delta={delta:+.4f}), "
-              f"muts={len(mutations)}, ddG={ddg_total:.1f}")
+        print(
+            f"    -> MHC-I={var_profile.n_mhc_i_binders} (-{max(0, n_i_removed)}), "
+            f"MHC-II={var_profile.n_mhc_ii_binders} (-{max(0, n_ii_removed)}), "
+            f"S_Immuno={s_immuno:.4f} (delta={delta:+.4f}), "
+            f"muts={len(mutations)}, ddG={ddg_total:.1f}"
+        )
 
         v = DeimmVariant(
-            variant_id=f"C_{i+1:03d}_seed{seed_i}",
+            variant_id=f"C_{i + 1:03d}_seed{seed_i}",
             protein_sequence=variant_seq,
             mutations_introduced=mutations,
             n_mhc_i_epitopes_removed=max(0, n_i_removed),
@@ -769,7 +910,7 @@ def run_mc_trajectories(
 
     # Re-assign clean variant IDs
     for j, v in enumerate(deduped):
-        v.variant_id = f"C_{j+1:03d}"
+        v.variant_id = f"C_{j + 1:03d}"
 
     return deduped
 
@@ -778,17 +919,18 @@ def run_mc_trajectories(
 # Full pipeline entry point
 # ---------------------------------------------------------------------------
 
+
 def run_deimmunization(
     scaffold_id: str = "IS621",
-    scaffold_sequence: Optional[str] = None,
-    scaffold_pdb: Optional[Path] = None,
+    scaffold_sequence: str | None = None,
+    scaffold_pdb: Path | None = None,
     max_mutations: int = 15,
     max_ddg_total: float = 8.0,
     max_per_mutation_ddg: float = 3.0,
     n_variants: int = 10,
     n_mc_steps: int = 2000,
     seed: int = 42,
-    output_dir: Optional[Path] = None,
+    output_dir: Path | None = None,
     use_netmhcpan: bool = True,
 ) -> list[DeimmVariant]:
     """Run Strategy C iterative MC deimmunization.
@@ -814,12 +956,16 @@ def run_deimmunization(
     print(f"\nStrategy C: deimmunizing {scaffold_id} ({len(scaffold_sequence)} aa)")
     print(f"  Active-site frozen positions: {len(IS621_FROZEN_POSITIONS)}")
     print(f"  Max mutations: {max_mutations}, max ddG: {max_ddg_total} kcal/mol")
-    print(f"  MC steps: {n_mc_steps}, trajectories: {n_variants}×3 (then deduplicate to {n_variants})")
+    print(
+        f"  MC steps: {n_mc_steps}, trajectories: {n_variants}×3 (then deduplicate to {n_variants})"
+    )
     _mhc_i_ok = _check_mhcpan_available()
     _mhc_ii_ok = _check_mhciipan_available()
     _mhc_status = (
-        "ENABLED (I+II)" if (use_netmhcpan and _mhc_i_ok and _mhc_ii_ok)
-        else "CLASS-I ONLY" if (use_netmhcpan and _mhc_i_ok)
+        "ENABLED (I+II)"
+        if (use_netmhcpan and _mhc_i_ok and _mhc_ii_ok)
+        else "CLASS-I ONLY"
+        if (use_netmhcpan and _mhc_i_ok)
         else "FALLBACK HEURISTIC"
     )
     print(f"  netMHCpan: {_mhc_status}")
@@ -827,8 +973,10 @@ def run_deimmunization(
 
     # Compute WT baseline
     wt_profile = compute_epitope_profile(scaffold_sequence, use_netmhcpan=use_netmhcpan)
-    print(f"  WT {scaffold_id}: MHC-I={wt_profile.n_mhc_i_binders}, MHC-II={wt_profile.n_mhc_ii_binders}, "
-          f"weighted_load={wt_profile.weighted_load:.1f}, S_Immuno={IS621_S_IMMUNO_WT}")
+    print(
+        f"  WT {scaffold_id}: MHC-I={wt_profile.n_mhc_i_binders}, MHC-II={wt_profile.n_mhc_ii_binders}, "
+        f"weighted_load={wt_profile.weighted_load:.1f}, S_Immuno={IS621_S_IMMUNO_WT}"
+    )
 
     # Run MC trajectories
     variants = run_mc_trajectories(
@@ -852,9 +1000,11 @@ def run_deimmunization(
     best = variants[0]
     print(f"\n  Variants produced: {len(variants)}")
     print(f"  P3 passing (delta >= 0.10): {n_p3_pass}/{len(variants)}")
-    print(f"  Best: {best.variant_id} — S_Immuno={best.predicted_s_immuno:.4f}, "
-          f"delta={best.predicted_s_immuno_delta:+.4f}, "
-          f"mutations={best.total_mutations}, ddG={best.predicted_ddg_total:.2f} kcal/mol")
+    print(
+        f"  Best: {best.variant_id} — S_Immuno={best.predicted_s_immuno:.4f}, "
+        f"delta={best.predicted_s_immuno_delta:+.4f}, "
+        f"mutations={best.total_mutations}, ddG={best.predicted_ddg_total:.2f} kcal/mol"
+    )
 
     if output_dir:
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -862,6 +1012,7 @@ def run_deimmunization(
         # Parquet
         rows = [v.to_dict() for v in variants]
         import pandas as pd
+
         df = pd.DataFrame(rows)
         df["strategy"] = "C_deimmunization"
         df["scaffold_id"] = scaffold_id
@@ -873,7 +1024,9 @@ def run_deimmunization(
         fasta_path = output_dir / "deimmunized_variants.fasta"
         with fasta_path.open("w") as f:
             for v in variants:
-                delta_str = f"{v.predicted_s_immuno_delta:+.4f}" if v.predicted_s_immuno_delta else "NA"
+                delta_str = (
+                    f"{v.predicted_s_immuno_delta:+.4f}" if v.predicted_s_immuno_delta else "NA"
+                )
                 f.write(
                     f">{v.variant_id} {scaffold_id}_deimm "
                     f"delta_s_immuno={delta_str} "

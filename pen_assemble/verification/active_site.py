@@ -9,10 +9,11 @@ Reference distance matrices pre-computed from reference PDBs and hardcoded here
 to allow validation without requiring the reference PDB at runtime. Override
 by providing reference_pdb_path to use live structure.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -26,14 +27,14 @@ REFERENCE_STRUCTURES: dict[str, dict] = {
         # Computed from 8WT6 (Hiraizumi 2024 Nature 630:994). Rows/cols = [11,60,102,105,241].
         # Approximate values from literature; overridden by live PDB when available.
         "reference_distances": {
-            (11, 60):   22.1,
-            (11, 102):  18.4,
-            (11, 105):  16.9,
-            (11, 241):  42.3,
-            (60, 102):   9.8,
-            (60, 105):  11.5,
-            (60, 241):  35.7,
-            (102, 105):  3.8,
+            (11, 60): 22.1,
+            (11, 102): 18.4,
+            (11, 105): 16.9,
+            (11, 241): 42.3,
+            (60, 102): 9.8,
+            (60, 105): 11.5,
+            (60, 241): 35.7,
+            (102, 105): 3.8,
             (102, 241): 28.6,
             (105, 241): 27.1,
         },
@@ -80,7 +81,7 @@ def _compute_pairwise_distances(
     """Compute pairwise Cα-Cα distances for a set of residue positions."""
     distances: dict[tuple[int, int], float] = {}
     for i, r1 in enumerate(residues):
-        for r2 in residues[i + 1:]:
+        for r2 in residues[i + 1 :]:
             if r1 in coords and r2 in coords:
                 dist = float(np.linalg.norm(coords[r1] - coords[r2]))
                 distances[(r1, r2)] = round(dist, 2)
@@ -91,7 +92,7 @@ def validate_active_site_geometry(
     design_pdb: Path,
     reference_id: str = "IS621",
     tolerance_a: float = TOLERANCE_ANGSTROMS,
-    reference_pdb_path: Optional[Path] = None,
+    reference_pdb_path: Path | None = None,
 ) -> dict[str, Any]:
     """Validate catalytic residue geometry in a designed structure vs WT reference.
 
@@ -130,7 +131,9 @@ def validate_active_site_geometry(
     }
 
     if reference_id not in REFERENCE_STRUCTURES:
-        result["error"] = f"Unknown reference_id '{reference_id}'. Use: {list(REFERENCE_STRUCTURES)}"
+        result["error"] = (
+            f"Unknown reference_id '{reference_id}'. Use: {list(REFERENCE_STRUCTURES)}"
+        )
         return result
 
     ref = REFERENCE_STRUCTURES[reference_id]
@@ -203,18 +206,18 @@ def validate_active_site_geometry(
 
     result["residue_deviations"] = deviations
     result["max_deviation_A"] = round(max_dev, 3)
-    result["valid"] = (max_dev <= tolerance_a)
+    result["valid"] = max_dev <= tolerance_a
 
     return result
 
 
 def filter_by_active_site(
-    designs_df: "pd.DataFrame",  # noqa: F821
+    designs_df: pd.DataFrame,  # noqa: F821
     pdb_col: str = "final_pdb",
     reference_col: str = "reference_id",
     default_reference: str = "IS621",
     tolerance_a: float = TOLERANCE_ANGSTROMS,
-) -> "pd.DataFrame":  # noqa: F821
+) -> pd.DataFrame:  # noqa: F821
     """Add active_site_valid and active_site_max_dev_A columns; return input DataFrame."""
     import pandas as pd
 
@@ -226,17 +229,21 @@ def filter_by_active_site(
             r = validate_active_site_geometry(
                 Path(pdb_path_str), reference_id=ref_id, tolerance_a=tolerance_a
             )
-            results.append({
-                "active_site_valid": r["valid"],
-                "active_site_max_dev_A": r["max_deviation_A"],
-                "active_site_missing_residues": str(r["missing_residues"]),
-            })
+            results.append(
+                {
+                    "active_site_valid": r["valid"],
+                    "active_site_max_dev_A": r["max_deviation_A"],
+                    "active_site_missing_residues": str(r["missing_residues"]),
+                }
+            )
         else:
-            results.append({
-                "active_site_valid": None,
-                "active_site_max_dev_A": None,
-                "active_site_missing_residues": "[]",
-            })
+            results.append(
+                {
+                    "active_site_valid": None,
+                    "active_site_max_dev_A": None,
+                    "active_site_missing_residues": "[]",
+                }
+            )
 
     res_df = pd.DataFrame(results)
     out = designs_df.copy()

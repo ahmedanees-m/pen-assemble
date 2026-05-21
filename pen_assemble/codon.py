@@ -11,6 +11,7 @@ This is a rule-based optimiser (one preferred codon per amino acid). For
 synthesis orders, verify the codon-adaptation index (CAI) with a commercial
 tool (IDT CodonOpt, Twist, GeneArt) before submitting.
 """
+
 from __future__ import annotations
 
 __all__ = [
@@ -54,20 +55,21 @@ CODON_TABLE_HUMAN: dict[str, str] = {
 # Common restriction enzyme recognition sites
 # ---------------------------------------------------------------------------
 RESTRICTION_SITES: dict[str, str] = {
-    "EcoRI":   "GAATTC",
-    "BamHI":   "GGATCC",
+    "EcoRI": "GAATTC",
+    "BamHI": "GGATCC",
     "HindIII": "AAGCTT",
-    "NotI":    "GCGGCCGC",
-    "XhoI":    "CTCGAG",
-    "NheI":    "GCTAGC",
-    "XbaI":    "TCTAGA",
-    "SalI":    "GTCGAC",
+    "NotI": "GCGGCCGC",
+    "XhoI": "CTCGAG",
+    "NheI": "GCTAGC",
+    "XbaI": "TCTAGA",
+    "SalI": "GTCGAC",
 }
 
 
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 def codon_optimise(aa_sequence: str) -> str:
     """Translate an amino acid sequence to human-preferred-codon DNA.
@@ -93,10 +95,7 @@ def codon_optimise(aa_sequence: str) -> str:
     >>> codon_optimise("M*")
     'ATGTGA'
     """
-    return "".join(
-        CODON_TABLE_HUMAN.get(aa.upper(), "NNN")
-        for aa in aa_sequence
-    )
+    return "".join(CODON_TABLE_HUMAN.get(aa.upper(), "NNN") for aa in aa_sequence)
 
 
 def gc_content(dna: str) -> float:
@@ -192,9 +191,7 @@ def build_expression_orf(
     if not aa_sequence:
         raise ValueError("aa_sequence must not be empty")
     if aa_sequence[0].upper() != "M":
-        raise ValueError(
-            f"aa_sequence must start with Met (M); got {aa_sequence[0]!r}"
-        )
+        raise ValueError(f"aa_sequence must start with Met (M); got {aa_sequence[0]!r}")
     orf = codon_optimise(aa_sequence)
     if kozak:
         orf = "GCCACC" + orf

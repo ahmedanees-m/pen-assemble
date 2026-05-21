@@ -8,21 +8,23 @@ Method cascade (auto):
   2. RaSP (Blaabjerg et al. 2023) — requires rasp package + mutations list
   3. Grantham proxy — always available; requires mutations list only
 """
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
-DDG_HARD_GATE_KCAL   = 5.0    # designs above this are discarded
-DDG_SOFT_FLAG_KCAL   = 3.0    # designs above this get stability_warning=True
-DDG_STABLE_THRESHOLD = -0.5   # designs below this are considered stabilized variants
+DDG_HARD_GATE_KCAL = 5.0  # designs above this are discarded
+DDG_SOFT_FLAG_KCAL = 3.0  # designs above this get stability_warning=True
+DDG_STABLE_THRESHOLD = -0.5  # designs below this are considered stabilized variants
 
 
 def _check_pyrosetta() -> bool:
     try:
         import pyrosetta  # noqa: F401
+
         return True
     except ImportError:
         return False
@@ -31,16 +33,33 @@ def _check_pyrosetta() -> bool:
 def _check_rasp() -> bool:
     try:
         import rasp  # noqa: F401
+
         return True
     except ImportError:
         return False
 
 
 _MW: dict[str, float] = {
-    "G": 57, "A": 71, "V": 99, "L": 113, "I": 113, "P": 97,
-    "F": 147, "W": 186, "M": 131, "S": 87, "T": 101, "C": 103,
-    "Y": 163, "H": 137, "D": 115, "E": 129, "N": 114, "Q": 128,
-    "K": 128, "R": 156,
+    "G": 57,
+    "A": 71,
+    "V": 99,
+    "L": 113,
+    "I": 113,
+    "P": 97,
+    "F": 147,
+    "W": 186,
+    "M": 131,
+    "S": 87,
+    "T": 101,
+    "C": 103,
+    "Y": 163,
+    "H": 137,
+    "D": 115,
+    "E": 129,
+    "N": 114,
+    "Q": 128,
+    "K": 128,
+    "R": 156,
 }
 
 
@@ -55,11 +74,12 @@ def _grantham_ddg_proxy(mutations: list[dict]) -> float:
     return round(total, 2)
 
 
-def _compute_ddg_rosetta(design_pdb: Path, parent_pdb: Path) -> Optional[float]:
+def _compute_ddg_rosetta(design_pdb: Path, parent_pdb: Path) -> float | None:
     if not _check_pyrosetta():
         return None
     try:
         import pyrosetta
+
         pyrosetta.init("-mute all")
         parent_pose = pyrosetta.pose_from_pdb(str(parent_pdb))
         design_pose = pyrosetta.pose_from_pdb(str(design_pdb))
@@ -70,31 +90,40 @@ def _compute_ddg_rosetta(design_pdb: Path, parent_pdb: Path) -> Optional[float]:
         return None
 
 
-def _compute_ddg_rasp(sequence: str, mutations: list[dict]) -> Optional[float]:
+def _compute_ddg_rasp(sequence: str, mutations: list[dict]) -> float | None:
     if not _check_rasp():
         return None
     try:
         import rasp
-        return round(sum(rasp.predict_single(sequence=sequence, position=m["pos"],
-                                             wt=m["wt_aa"], mt=m["mut_aa"])
-                         for m in mutations), 3)
+
+        return round(
+            sum(
+                rasp.predict_single(
+                    sequence=sequence, position=m["pos"], wt=m["wt_aa"], mt=m["mut_aa"]
+                )
+                for m in mutations
+            ),
+            3,
+        )
     except Exception:
         return None
 
 
 def compute_ddg(
-    design_pdb: Optional[Path] = None,
-    parent_pdb: Optional[Path] = None,
-    sequence: Optional[str] = None,
-    mutations: Optional[list[dict]] = None,
+    design_pdb: Path | None = None,
+    parent_pdb: Path | None = None,
+    sequence: str | None = None,
+    mutations: list[dict] | None = None,
     method: str = "auto",
 ) -> dict[str, Any]:
     """Compute ΔΔG for a design. Method cascade: rosetta → rasp → grantham."""
     result: dict[str, Any] = {
-        "ddg_kcal_mol": None, "ddg_method": None,
-        "stability_warning": False, "ddg_hard_gate_fail": False,
+        "ddg_kcal_mol": None,
+        "ddg_method": None,
+        "stability_warning": False,
+        "ddg_hard_gate_fail": False,
     }
-    ddg: Optional[float] = None
+    ddg: float | None = None
     method_used = "none"
 
     if method in ("auto", "rosetta") and design_pdb and parent_pdb:
@@ -129,18 +158,18 @@ def filter_by_ddg(
     if ddg_column not in designs_df.columns:
         return designs_df
     before = len(designs_df)
-    out = designs_df[
-        designs_df[ddg_column].isna() | (designs_df[ddg_column] <= hard_gate)
-    ].copy()
-    print(f"  ddG filter: {before} -> {len(out)} (removed {before - len(out)} above {hard_gate} kcal/mol)")
+    out = designs_df[designs_df[ddg_column].isna() | (designs_df[ddg_column] <= hard_gate)].copy()
+    print(
+        f"  ddG filter: {before} -> {len(out)} (removed {before - len(out)} above {hard_gate} kcal/mol)"
+    )
     return out
 
 
 def run_stability_filter(
     designs_df: pd.DataFrame,
     design_pdb_col: str = "final_pdb",
-    parent_pdb_path: Optional[Path] = None,
-    mutations_col: Optional[str] = "mutations_introduced",
+    parent_pdb_path: Path | None = None,
+    mutations_col: str | None = "mutations_introduced",
     sequence_col: str = "protein_sequence",
 ) -> pd.DataFrame:
     """Add ddG columns to designs_df; remove hard-gate failures."""
@@ -150,8 +179,10 @@ def run_stability_filter(
         seq = row.get(sequence_col)
         muts = row.get(mutations_col) if mutations_col else None
         r = compute_ddg(
-            design_pdb=pdb, parent_pdb=parent_pdb_path,
-            sequence=seq, mutations=muts if isinstance(muts, list) else None,
+            design_pdb=pdb,
+            parent_pdb=parent_pdb_path,
+            sequence=seq,
+            mutations=muts if isinstance(muts, list) else None,
         )
         rows.append(r)
 

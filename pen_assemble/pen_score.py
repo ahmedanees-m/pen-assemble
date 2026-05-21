@@ -10,10 +10,10 @@ References
 - IS621 published lockpoint: pen_score = 0.929 (verbatim pre-registered)
 - MHCflurry 2.2.1-calibrated lockpoint: 0.9255 (secondary analysis)
 """
+
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 
 __all__ = [
     "WEIGHTS",
@@ -30,12 +30,12 @@ __all__ = [
 
 #: Axis weights for human_therapeutic_aav_insertion use-case.
 WEIGHTS: dict[str, float] = {
-    "S_DSB":    0.25,
-    "S_Spec":   0.10,
-    "S_Cargo":  0.20,
-    "S_Deliv":  0.15,
+    "S_DSB": 0.25,
+    "S_Spec": 0.10,
+    "S_Cargo": 0.20,
+    "S_Deliv": 0.15,
     "S_Immuno": 0.10,
-    "S_Prog":   0.15,
+    "S_Prog": 0.15,
     "S_Mature": 0.05,
 }
 
@@ -49,6 +49,7 @@ IS621_LOCKPOINT_CALIBRATED: float = 0.9255
 # ---------------------------------------------------------------------------
 # Data class for axis scores
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class PenScoreAxes:
@@ -74,23 +75,24 @@ class PenScoreAxes:
     S_Mature:
         Maturity / technology-readiness score.
     """
-    S_DSB:    float = 0.0
-    S_Spec:   float = 0.0
-    S_Cargo:  float = 0.0
-    S_Deliv:  float = 0.0
+
+    S_DSB: float = 0.0
+    S_Spec: float = 0.0
+    S_Cargo: float = 0.0
+    S_Deliv: float = 0.0
     S_Immuno: float = 0.0
-    S_Prog:   float = 0.0
+    S_Prog: float = 0.0
     S_Mature: float = 0.0
 
     def as_dict(self) -> dict[str, float]:
         """Return axes as a plain dict."""
         return {
-            "S_DSB":    self.S_DSB,
-            "S_Spec":   self.S_Spec,
-            "S_Cargo":  self.S_Cargo,
-            "S_Deliv":  self.S_Deliv,
+            "S_DSB": self.S_DSB,
+            "S_Spec": self.S_Spec,
+            "S_Cargo": self.S_Cargo,
+            "S_Deliv": self.S_Deliv,
             "S_Immuno": self.S_Immuno,
-            "S_Prog":   self.S_Prog,
+            "S_Prog": self.S_Prog,
             "S_Mature": self.S_Mature,
         }
 
@@ -102,6 +104,7 @@ class PenScoreAxes:
 # ---------------------------------------------------------------------------
 # Core formula
 # ---------------------------------------------------------------------------
+
 
 def pen_score(axes: PenScoreAxes) -> float:
     """Compute the composite PenScore for a single design.

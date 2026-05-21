@@ -1,14 +1,15 @@
 """
 Tests for pen_assemble.codon
 """
+
 import pytest
+
 from pen_assemble.codon import (
     CODON_TABLE_HUMAN,
-    RESTRICTION_SITES,
+    build_expression_orf,
+    check_restriction_sites,
     codon_optimise,
     gc_content,
-    check_restriction_sites,
-    build_expression_orf,
 )
 
 
@@ -80,6 +81,7 @@ class TestGCContent:
     def test_typical_human_range(self):
         # Human-preferred codon table should yield GC ~50-60%
         from pen_assemble.codon import codon_optimise
+
         seq = "MDRFFPVIRICKVGFTMEHELHYIGICTAKEKLDVD"
         dna = codon_optimise(seq)
         gc = gc_content(dna)

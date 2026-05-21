@@ -15,32 +15,32 @@ dCas9 requirement: any Cas9-derived module MUST use D10A+H840A double mutation.
   Cas9 backbone is reused for guide-RNA-binding scaffold only.
   MECH-CLASS Step 15 verifies no chimera fires DSB_NUCLEASE Tier A.
 """
+
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 from pydantic import BaseModel
-
-from pen_assemble.data.loader import load_scaffold_universe
 
 # ---------------------------------------------------------------------------
 # Module definitions
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class DomainModule:
     """A single extractable domain module from a scaffold editor."""
+
     name: str
     source_scaffold: str
-    sequence: str              # aa slice; populated at runtime from scaffold_sequences.fasta
-    start_residue: int         # 1-indexed in source protein
-    end_residue: int           # inclusive
+    sequence: str  # aa slice; populated at runtime from scaffold_sequences.fasta
+    start_residue: int  # 1-indexed in source protein
+    end_residue: int  # inclusive
     catalytic_residues: list[int] = field(default_factory=list)  # global source coords
-    pfam_acc: Optional[str] = None
+    pfam_acc: str | None = None
     notes: str = ""
 
     @property
@@ -53,17 +53,21 @@ class DomainModule:
 DOMAIN_MODULES: dict[str, DomainModule] = {
     # --- IS621 modules (Hiraizumi 2024 Nature 630:994-1002) ---
     "RuvC_fold_DEDD": DomainModule(
-        name="RuvC_fold_DEDD", source_scaffold="IS621",
+        name="RuvC_fold_DEDD",
+        source_scaffold="IS621",
         sequence="",  # populated at runtime; residues 1-110 of IS621 (A0A2X3M8B0)
-        start_residue=1, end_residue=110,
+        start_residue=1,
+        end_residue=110,
         catalytic_residues=[11, 60, 102, 105],  # D11/E60/D102/D105 DEDD tetrad
         pfam_acc="PF01548",
         notes="DEDD tetrad per Hiraizumi 2024. Boundary extended to 110 to include D102/D105.",
     ),
     "bRNA_binding_loop": DomainModule(
-        name="bRNA_binding_loop", source_scaffold="IS621",
+        name="bRNA_binding_loop",
+        source_scaffold="IS621",
         sequence="",  # residues 110-150 of IS621
-        start_residue=110, end_residue=150,
+        start_residue=110,
+        end_residue=150,
         catalytic_residues=[],
         notes=(
             "Central bRNA-binding loop (41 aa); contact residues per Hiraizumi 2024 SI. "
@@ -73,9 +77,11 @@ DOMAIN_MODULES: dict[str, DomainModule] = {
         ),
     ),
     "IS621_bRNA_extended": DomainModule(
-        name="IS621_bRNA_extended", source_scaffold="IS621",
+        name="IS621_bRNA_extended",
+        source_scaffold="IS621",
         sequence="",  # residues 100-260 of IS621 (161 aa)
-        start_residue=100, end_residue=260,
+        start_residue=100,
+        end_residue=260,
         catalytic_residues=[],
         notes=(
             "Extended IS621 central scaffold for standalone chimeric RNA-binding use (161 aa). "
@@ -91,103 +97,119 @@ DOMAIN_MODULES: dict[str, DomainModule] = {
         ),
     ),
     "Tnp_serine_C_term": DomainModule(
-        name="Tnp_serine_C_term", source_scaffold="IS621",
+        name="Tnp_serine_C_term",
+        source_scaffold="IS621",
         sequence="",  # residues 150-260 of IS621
-        start_residue=150, end_residue=260,
+        start_residue=150,
+        end_residue=260,
         catalytic_residues=[241],  # S241 Tnp-serine (global IS621 coords); Hiraizumi 2024
         pfam_acc="PF02371",
         notes="S241 per Hiraizumi 2024 (corrected from S180).",
     ),
-
     # --- Cre recombinase modules ---
     "loxP_HTH": DomainModule(
-        name="loxP_HTH", source_scaffold="Cre",
+        name="loxP_HTH",
+        source_scaffold="Cre",
         sequence="",  # residues 30-100 of Cre (P06956)
-        start_residue=30, end_residue=100,
+        start_residue=30,
+        end_residue=100,
         catalytic_residues=[],
         notes="HTH loxP-recognition domain.",
     ),
     "catalytic_tyrosine_compact": DomainModule(
-        name="catalytic_tyrosine_compact", source_scaffold="Cre",
+        name="catalytic_tyrosine_compact",
+        source_scaffold="Cre",
         sequence="",  # residues 200-343 of Cre (P06956); includes Y324
-        start_residue=200, end_residue=343,
+        start_residue=200,
+        end_residue=343,
         catalytic_residues=[324],  # Y324 canonical catalytic tyrosine
         notes="Compact tyrosine recombinase catalytic domain; smallest tyrosine scaffold (343 aa total).",
     ),
-
     # --- Lambda integrase modules ---
     "catalytic_tyrosine": DomainModule(
-        name="catalytic_tyrosine", source_scaffold="Lambda_Int",
+        name="catalytic_tyrosine",
+        source_scaffold="Lambda_Int",
         sequence="",  # residues 150-356 of Lambda_Int (P03700); includes Y342
-        start_residue=150, end_residue=356,
+        start_residue=150,
+        end_residue=356,
         catalytic_residues=[342],  # Y342 catalytic tyrosine in Lambda Int
         pfam_acc="PF02899",
         notes="Lambda Int tyrosine recombinase catalytic domain + C-terminal.",
     ),
     "attL_attR_recognition_HTH": DomainModule(
-        name="attL_attR_recognition_HTH", source_scaffold="Lambda_Int",
+        name="attL_attR_recognition_HTH",
+        source_scaffold="Lambda_Int",
         sequence="",  # residues 1-75 of Lambda_Int (P03700); N-terminal arm-binding domain
-        start_residue=1, end_residue=75,
+        start_residue=1,
+        end_residue=75,
         catalytic_residues=[],
         notes="Lambda Int N-terminal arm-binding domain for att-site recognition.",
     ),
-
     # --- IscB modules (RNA-binding only; HNH nuclease excluded — see note below) ---
     "omega_RNA_binding": DomainModule(
-        name="omega_RNA_binding", source_scaffold="IscB",
+        name="omega_RNA_binding",
+        source_scaffold="IscB",
         sequence="",  # residues 1-200 of IscB (K9VH02, 400 aa)
-        start_residue=1, end_residue=200,
+        start_residue=1,
+        end_residue=200,
         catalytic_residues=[],
         notes="IscB ωRNA-binding scaffold. ONLY module extracted from IscB for chimeras."
-              " IscB HNH/RuvC nuclease (DSB-creating) is intentionally excluded.",
+        " IscB HNH/RuvC nuclease (DSB-creating) is intentionally excluded.",
     ),
     # HNH_catalytic_compact from IscB is EXCLUDED from all Strategy A catalytic cores.
     # IscB is an RNA-guided HNH endonuclease (Cas9 ancestor, Altae-Tran 2021 Science).
     # Incorporating its HNH domain would make the chimera a DSB nuclease, not a writer.
-
     # --- Bxb1 serine recombinase modules ---
     "catalytic_serine_recombinase": DomainModule(
-        name="catalytic_serine_recombinase", source_scaffold="Bxb1",
+        name="catalytic_serine_recombinase",
+        source_scaffold="Bxb1",
         sequence="",  # residues 10-100 of Bxb1 (Q9B086); S12 catalytic serine
-        start_residue=10, end_residue=100,
+        start_residue=10,
+        end_residue=100,
         catalytic_residues=[12],  # S12 catalytic serine
         pfam_acc="PF07508",
         notes="Canonical serine recombinase catalytic domain.",
     ),
     "attP_attB_binding_domain": DomainModule(
-        name="attP_attB_binding_domain", source_scaffold="Bxb1",
+        name="attP_attB_binding_domain",
+        source_scaffold="Bxb1",
         sequence="",  # residues 220-500 of Bxb1 (Q9B086)
-        start_residue=220, end_residue=500,
+        start_residue=220,
+        end_residue=500,
         catalytic_residues=[],
         notes="Bxb1 C-terminal att-site recognition domain.",
     ),
-
     # --- phiC31 serine integrase modules ---
     "phiC31_serine_catalytic": DomainModule(
-        name="phiC31_serine_catalytic", source_scaffold="phiC31",
+        name="phiC31_serine_catalytic",
+        source_scaffold="phiC31",
         sequence="",  # residues 1-140 of phiC31 (Q9T221, 613 aa); S12 catalytic serine
-        start_residue=1, end_residue=140,
+        start_residue=1,
+        end_residue=140,
         catalytic_residues=[12],  # S12 conserved catalytic serine in large serine integrases
         pfam_acc="PF07508",
         notes="phiC31 large serine integrase N-terminal catalytic domain.",
     ),
     "phiC31_attP_attB_compact": DomainModule(
-        name="phiC31_attP_attB_compact", source_scaffold="phiC31",
+        name="phiC31_attP_attB_compact",
+        source_scaffold="phiC31",
         sequence="",  # residues 460-613 of phiC31 (Q9T221); C-terminal ZD/RBD
-        start_residue=460, end_residue=613,
+        start_residue=460,
+        end_residue=613,
         catalytic_residues=[],
         notes="phiC31 C-terminal zinc ribbon domain for attP/attB specificity.",
     ),
-
     # --- CAST-V-K (Cas12k) programmability module ---
     "Cas12k_compact_RNP": DomainModule(
-        name="Cas12k_compact_RNP", source_scaffold="CAST_VK",
+        name="Cas12k_compact_RNP",
+        source_scaffold="CAST_VK",
         sequence="",  # residues 1-600 of Cas12k (A0A8M0FGU0, 600 aa)
-        start_residue=1, end_residue=600,
+        start_residue=1,
+        end_residue=600,
         catalytic_residues=[],  # nuclease activity disabled in chimera context
         notes="Cas12k compact RNP scaffold (600 aa Type V-K). "
-              "Programmability (crRNA-guided) only; catalytic nuclease activity "
-              "engineered out in chimera context (dREC1 mutation analogous to dCas9).",
+        "Programmability (crRNA-guided) only; catalytic nuclease activity "
+        "engineered out in chimera context (dREC1 mutation analogous to dCas9).",
     ),
 }
 
@@ -197,10 +219,10 @@ DOMAIN_MODULES: dict[str, DomainModule] = {
 # ---------------------------------------------------------------------------
 
 LINKERS: dict[str, str] = {
-    "rigid":            "EAAAKEAAAK",        # 10 aa rigid alpha-helix
-    "flexible_short":   "GGGGSGGGGS",        # 10 aa flexible GS
-    "flexible_long":    "GGGGS" * 4,         # 20 aa flexible GS
-    "natural_IS_family": "QRSAEELNREL",      # natural 11 aa from IS621 paralog linker region
+    "rigid": "EAAAKEAAAK",  # 10 aa rigid alpha-helix
+    "flexible_short": "GGGGSGGGGS",  # 10 aa flexible GS
+    "flexible_long": "GGGGS" * 4,  # 20 aa flexible GS
+    "natural_IS_family": "QRSAEELNREL",  # natural 11 aa from IS621 paralog linker region
 }
 
 
@@ -208,17 +230,19 @@ LINKERS: dict[str, str] = {
 # Design model
 # ---------------------------------------------------------------------------
 
+
 class ChimericDesign(BaseModel):
     """A single Strategy A domain-swap chimeric design."""
+
     design_id: str
     strategy: str = "A_domain_swap"
-    modules_used: list[dict]        # [{module_name, source_scaffold, position_in_chimera}]
-    linkers: list[dict]             # [{junction_index, linker_name, sequence}]
+    modules_used: list[dict]  # [{module_name, source_scaffold, position_in_chimera}]
+    linkers: list[dict]  # [{junction_index, linker_name, sequence}]
     full_sequence: str
     total_aa: int
     bRNA_or_guide_template: str
-    expected_mechanism: str         # always "DSB_FREE_TRANSEST_RECOMBINASE" for Strategy A
-    scaffold_provenance: dict       # {catalytic_core: str, rna_module: str, linker: str}
+    expected_mechanism: str  # always "DSB_FREE_TRANSEST_RECOMBINASE" for Strategy A
+    scaffold_provenance: dict  # {catalytic_core: str, rna_module: str, linker: str}
 
 
 # ---------------------------------------------------------------------------
@@ -227,12 +251,12 @@ class ChimericDesign(BaseModel):
 
 # Strategy A catalytic cores: (label, primary_module, secondary_module_or_None)
 # Secondary is used for composite architectures (e.g. IS621 needs both RuvC + Tnp-serine)
-_CATALYTIC_CORES: list[tuple[str, str, Optional[str]]] = [
-    ("IS621_full_composite",    "RuvC_fold_DEDD",               "Tnp_serine_C_term"),
-    ("IS621_RuvC_only",         "RuvC_fold_DEDD",               None),   # half-composite test
-    ("Bxb1_serine_compact",     "catalytic_serine_recombinase", None),
-    ("Lambda_Int_tyrosine",     "catalytic_tyrosine_compact",   None),
-    ("phiC31_serine",           "phiC31_serine_catalytic",      None),
+_CATALYTIC_CORES: list[tuple[str, str, str | None]] = [
+    ("IS621_full_composite", "RuvC_fold_DEDD", "Tnp_serine_C_term"),
+    ("IS621_RuvC_only", "RuvC_fold_DEDD", None),  # half-composite test
+    ("Bxb1_serine_compact", "catalytic_serine_recombinase", None),
+    ("Lambda_Int_tyrosine", "catalytic_tyrosine_compact", None),
+    ("phiC31_serine", "phiC31_serine_catalytic", None),
 ]
 
 # RNA-binding modules: (label, module_name)
@@ -243,9 +267,9 @@ _CATALYTIC_CORES: list[tuple[str, str, Optional[str]]] = [
 # provenance when combined with IS621_full_composite (overlap at residues 150-260 with
 # Tnp_serine_C_term); these 4 chimeras are valid candidates but flagged for Step 12 review.
 _RNA_MODULES: list[tuple[str, str]] = [
-    ("IS621_bRNA",    "IS621_bRNA_extended"),   # 161 aa standalone; passes 250 aa min
-    ("IscB_omega",    "omega_RNA_binding"),
-    ("Cas12k_crRNA",  "Cas12k_compact_RNP"),
+    ("IS621_bRNA", "IS621_bRNA_extended"),  # 161 aa standalone; passes 250 aa min
+    ("IscB_omega", "omega_RNA_binding"),
+    ("Cas12k_crRNA", "Cas12k_compact_RNP"),
 ]
 
 # Linker variants to try for each combination
@@ -259,9 +283,9 @@ def _module_length(mod: DomainModule) -> int:
     return mod.expected_length
 
 
-def _assemble_sequence(module_names: list[str],
-                       linker_name: str,
-                       catalog: dict[str, DomainModule]) -> str:
+def _assemble_sequence(
+    module_names: list[str], linker_name: str, catalog: dict[str, DomainModule]
+) -> str:
     """Concatenate module sequences with linker between each junction."""
     linker_seq = LINKERS[linker_name]
     parts: list[str] = []
@@ -276,11 +300,11 @@ def _assemble_sequence(module_names: list[str],
 
 def _choose_bRNA_template(rna_mod_name: str) -> str:
     if "IS621" in rna_mod_name or "bRNA" in rna_mod_name:
-        return "ACCTGTACCGAGGGCCTGTA"   # IS621 canonical bRNA protospacer (Hiraizumi 2024)
+        return "ACCTGTACCGAGGGCCTGTA"  # IS621 canonical bRNA protospacer (Hiraizumi 2024)
     if "omega" in rna_mod_name or "IscB" in rna_mod_name:
-        return "GGCTGTGTGGAGAACGATCC"   # IscB canonical ωRNA template
+        return "GGCTGTGTGGAGAACGATCC"  # IscB canonical ωRNA template
     if "Cas12k" in rna_mod_name or "CAST" in rna_mod_name or "crRNA" in rna_mod_name:
-        return "GTTCATTTCGGTAATTATGG"   # Cas12k crRNA repeat
+        return "GTTCATTTCGGTAATTATGG"  # Cas12k crRNA repeat
     return "NNNNNNNNNNNNNNNNNNNN"
 
 
@@ -341,40 +365,43 @@ def generate_chimera_designs(
                 # Tnp_serine_C_term (aa 150-260); IS621_bRNA_extended also covers
                 # aa 100-260.  When combined, residues 150-260 appear twice.
                 is_is621_seq_repeat = (
-                    cat_label == "IS621_full_composite"
-                    and rna_mod == "IS621_bRNA_extended"
+                    cat_label == "IS621_full_composite" and rna_mod == "IS621_bRNA_extended"
                 )
 
-                designs.append(ChimericDesign(
-                    design_id=design_id,
-                    modules_used=[
-                        {
-                            "module_name": m,
-                            "source_scaffold": catalog[m].source_scaffold if m in catalog else "unknown",
-                            "position_in_chimera": idx + 1,
-                        }
-                        for idx, m in enumerate(mod_list)
-                    ],
-                    linkers=[
-                        {
-                            "junction_index": j + 1,
-                            "linker_name": linker_name,
-                            "sequence": linker_seq,
-                        }
-                        for j in range(n_junctions)
-                    ],
-                    full_sequence=full_seq,
-                    total_aa=len(full_seq) if "<" not in full_seq else total_aa,
-                    bRNA_or_guide_template=_choose_bRNA_template(rna_mod),
-                    expected_mechanism="DSB_FREE_TRANSEST_RECOMBINASE",
-                    scaffold_provenance={
-                        "catalytic_core": cat_label,
-                        "rna_module": rna_label,
-                        "linker": linker_name,
-                        "modules": mod_list,
-                        "IS621_seq_repeat": is_is621_seq_repeat,  # True → lower Gate 5 priority
-                    },
-                ))
+                designs.append(
+                    ChimericDesign(
+                        design_id=design_id,
+                        modules_used=[
+                            {
+                                "module_name": m,
+                                "source_scaffold": catalog[m].source_scaffold
+                                if m in catalog
+                                else "unknown",
+                                "position_in_chimera": idx + 1,
+                            }
+                            for idx, m in enumerate(mod_list)
+                        ],
+                        linkers=[
+                            {
+                                "junction_index": j + 1,
+                                "linker_name": linker_name,
+                                "sequence": linker_seq,
+                            }
+                            for j in range(n_junctions)
+                        ],
+                        full_sequence=full_seq,
+                        total_aa=len(full_seq) if "<" not in full_seq else total_aa,
+                        bRNA_or_guide_template=_choose_bRNA_template(rna_mod),
+                        expected_mechanism="DSB_FREE_TRANSEST_RECOMBINASE",
+                        scaffold_provenance={
+                            "catalytic_core": cat_label,
+                            "rna_module": rna_label,
+                            "linker": linker_name,
+                            "modules": mod_list,
+                            "IS621_seq_repeat": is_is621_seq_repeat,  # True → lower Gate 5 priority
+                        },
+                    )
+                )
 
     return designs
 
@@ -382,6 +409,7 @@ def generate_chimera_designs(
 # ---------------------------------------------------------------------------
 # Runtime: populate module sequences from scaffold_sequences.fasta
 # ---------------------------------------------------------------------------
+
 
 def populate_module_sequences(
     scaffold_seqs: dict[str, str],
@@ -395,12 +423,12 @@ def populate_module_sequences(
     if catalog is None:
         catalog = DOMAIN_MODULES
 
-    for mod_name, mod in catalog.items():
+    for _mod_name, mod in catalog.items():
         src = mod.source_scaffold
         if src not in scaffold_seqs:
             continue
         src_seq = scaffold_seqs[src]
-        start0 = mod.start_residue - 1        # convert to 0-indexed
+        start0 = mod.start_residue - 1  # convert to 0-indexed
         end0 = min(mod.end_residue, len(src_seq))
         mod.sequence = src_seq[start0:end0]
 
@@ -410,7 +438,7 @@ def populate_module_sequences(
 def load_scaffold_sequences(fasta_path: Path) -> dict[str, str]:
     """Parse scaffold_sequences.fasta -> {scaffold_id: sequence}."""
     seqs: dict[str, str] = {}
-    current_id: Optional[str] = None
+    current_id: str | None = None
     parts: list[str] = []
 
     with fasta_path.open() as f:
@@ -433,6 +461,7 @@ def load_scaffold_sequences(fasta_path: Path) -> dict[str, str]:
 # ---------------------------------------------------------------------------
 # main() — run as script or via scripts/10_strategy_A_domain_swap.py
 # ---------------------------------------------------------------------------
+
 
 def main(
     scaffold_fasta: Path = Path("/data/pen-assemble/designs/scaffold_sequences.fasta"),
@@ -460,7 +489,9 @@ def main(
     populate_module_sequences(scaffold_seqs)
 
     populated = sum(1 for m in DOMAIN_MODULES.values() if m.sequence)
-    console.print(f"  Module catalog populated: {populated}/{len(DOMAIN_MODULES)} modules have sequences")
+    console.print(
+        f"  Module catalog populated: {populated}/{len(DOMAIN_MODULES)} modules have sequences"
+    )
 
     # Step 9.2: generate combinatorial designs
     designs = generate_chimera_designs(max_protein_size_aa=max_aa, min_protein_size_aa=min_aa)
@@ -518,7 +549,9 @@ def main(
     console.print(f"\n  Parquet  -> {parquet_path}")
     console.print(f"  FASTA    -> {fasta_path}")
     console.print(f"  Manifest -> {manifest_path}")
-    console.print(f"\n[bold green]Step 9 complete. {len(designs)} Strategy A designs ready for Step 12 (structure prediction).[/bold green]")
+    console.print(
+        f"\n[bold green]Step 9 complete. {len(designs)} Strategy A designs ready for Step 12 (structure prediction).[/bold green]"
+    )
 
     return designs
 

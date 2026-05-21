@@ -22,12 +22,16 @@ keywords = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.10"
 dependencies = [
@@ -40,6 +44,8 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "pytest-cov>=4.0",
+    "ruff>=0.4.0",
+    "mypy>=1.9",
 ]
 docs = [
     "sphinx>=7.0",
@@ -48,10 +54,11 @@ docs = [
 ]
 
 [project.urls]
-Homepage      = "https://github.com/ahmedaneesm/pen-assemble"
-Documentation = "https://pen-assemble.readthedocs.io"
-Repository    = "https://github.com/ahmedaneesm/pen-assemble"
-"Bug Tracker" = "https://github.com/ahmedaneesm/pen-assemble/issues"
+Homepage      = "https://github.com/ahmedanees-m/pen-assemble"
+Documentation = "https://ahmedanees-m.github.io/pen-assemble/"
+Repository    = "https://github.com/ahmedanees-m/pen-assemble"
+"Bug Tracker" = "https://github.com/ahmedanees-m/pen-assemble/issues"
+Changelog     = "https://github.com/ahmedanees-m/pen-assemble/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -64,3 +71,20 @@ addopts   = "-v --tb=short"
 [tool.coverage.run]
 source = ["pen_assemble"]
 omit   = ["tests/*"]
+
+[tool.ruff]
+line-length    = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "TID"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pen_assemble"]
+
+[tool.mypy]
+python_version      = "3.10"
+warn_return_any     = true
+warn_unused_configs = true
+ignore_missing_imports = true

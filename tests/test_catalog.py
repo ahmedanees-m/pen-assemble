@@ -1,22 +1,24 @@
 """
 Tests for pen_assemble.catalog
 """
-import pytest
+
 import pandas as pd
+import pytest
+
 from pen_assemble.catalog import (
+    IS621_LOCKPOINT,
+    filter_strategy,
     load_catalog,
     load_p1_beaters,
     load_top5,
-    filter_strategy,
-    IS621_LOCKPOINT,
 )
 
 # These tests require the release catalog to exist.
 # Mark the whole module to skip gracefully if catalog is absent.
 pytestmark = pytest.mark.skipif(
-    not __import__("pathlib").Path(
-        __import__("pen_assemble.catalog", fromlist=["RELEASE_DIR"]).RELEASE_DIR
-    ).exists(),
+    not __import__("pathlib")
+    .Path(__import__("pen_assemble.catalog", fromlist=["RELEASE_DIR"]).RELEASE_DIR)
+    .exists(),
     reason="Release catalog not built (run 50_assemble_catalog.py first)",
 )
 
@@ -28,9 +30,20 @@ class TestLoadCatalog:
 
     def test_required_columns(self):
         df = load_catalog()
-        required = {"design_id", "strategy", "pen_score", "protein_sequence",
-                    "S_DSB", "S_Spec", "S_Cargo", "S_Deliv", "S_Immuno",
-                    "S_Prog", "S_Mature", "beats_is621"}
+        required = {
+            "design_id",
+            "strategy",
+            "pen_score",
+            "protein_sequence",
+            "S_DSB",
+            "S_Spec",
+            "S_Cargo",
+            "S_Deliv",
+            "S_Immuno",
+            "S_Prog",
+            "S_Mature",
+            "beats_is621",
+        }
         assert required.issubset(set(df.columns))
 
     def test_pen_score_range(self):
