@@ -1,0 +1,10 @@
+{
+  "n_input": 1041,
+  "n_passed": 1041,
+  "n_failed": 0,
+  "n_rosetta": 49,
+  "n_grantham": 0,
+  "n_no_ddg": 992,
+  "n_stability_warning": 0,
+  "failed_design_ids": []
+}

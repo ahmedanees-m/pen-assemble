@@ -1,0 +1,409 @@
+======================================================================
+Strategy C: Targeted Anchor-Position Deimmunization of IS621
+Started: 2026-05-16 12:45:04
+WT: n_I=15, n_II=92, S_Immuno=0.7594
+P3 target: delta >= 0.1 (S_Immuno >= 0.8594)
+======================================================================
+netMHCpan-4.1: FOUND
+NetMHCIIpan-4.0: FOUND
+
+=== Phase 1: MHC-I targeted mutagenesis ===
+  Starting positions: 15 binders, 0 mutations
+  Anchor-only mode: True
+
+  Iteration 1: 15 MHC-I binders, testing 26 positions × 3 substitutions = 78 netMHCpan calls...
+    Pos 16 T->C: MHC-I=15 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=16 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=16 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=14 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=14 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=14 (removed=1), ddG=1.67
+    Pos 82 M->E: MHC-I=14 (removed=1), ddG=1.13
+    Pos 82 M->K: MHC-I=14 (removed=1), ddG=1.15
+    Pos 82 M->Q: MHC-I=14 (removed=1), ddG=1.15
+    Pos 87 E->M: MHC-I=14 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=14 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=14 (removed=1), ddG=1.37
+    Pos 89 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 89 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 89 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 94 Y->R: MHC-I=14 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=15 (removed=0), ddG=1.53
+    Pos 94 Y->E: MHC-I=14 (removed=1), ddG=1.67
+    Pos 158 T->C: MHC-I=14 (removed=1), ddG=1.13
+    Pos 158 T->V: MHC-I=14 (removed=1), ddG=1.13
+    Pos 158 T->I: MHC-I=15 (removed=0), ddG=1.30
+    Pos 165 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 165 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 165 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 177 P->T: MHC-I=14 (removed=1), ddG=1.17
+    Pos 177 P->S: MHC-I=14 (removed=1), ddG=1.27
+    Pos 177 P->N: MHC-I=14 (removed=1), ddG=1.38
+    Pos 183 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 183 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 183 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 184 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 184 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 184 L->T: MHC-I=13 (removed=2), ddG=1.30
+    Pos 190 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 190 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 190 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 201 T->C: MHC-I=14 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=14 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=14 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=15 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=14 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=15 (removed=0), ddG=1.35
+    Pos 213 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 213 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 213 L->T: MHC-I=15 (removed=0), ddG=1.30
+    Pos 220 I->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 220 I->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 220 I->T: MHC-I=15 (removed=0), ddG=1.30
+    Pos 222 E->M: MHC-I=14 (removed=1), ddG=1.13
+    Pos 222 E->I: MHC-I=14 (removed=1), ddG=1.37
+    Pos 222 E->L: MHC-I=14 (removed=1), ddG=1.37
+    Pos 224 T->C: MHC-I=13 (removed=2), ddG=1.13
+    Pos 224 T->V: MHC-I=15 (removed=0), ddG=1.13
+    Pos 224 T->I: MHC-I=15 (removed=0), ddG=1.30
+    Pos 229 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 229 L->D: MHC-I=15 (removed=0), ddG=1.13
+    Pos 229 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 231 Y->R: MHC-I=14 (removed=1), ddG=1.22
+    Pos 231 Y->H: MHC-I=14 (removed=1), ddG=1.53
+    Pos 231 Y->E: MHC-I=15 (removed=0), ddG=1.67
+    Pos 268 S->V: MHC-I=15 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=15 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=14 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=16 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=15 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=14 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=15 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=14 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=14 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=14 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=14 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=14 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=14 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=14 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=14 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=14 (removed=1), ddG=1.35
+  APPLIED: Pos 224 T->C | MHC-I: 15 -> 13 (-2) | cumDDG=1.13
+
+  Iteration 2: 13 MHC-I binders, testing 22 positions × 3 substitutions = 66 netMHCpan calls...
+    Pos 16 T->C: MHC-I=13 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=14 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=14 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=12 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=12 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=12 (removed=1), ddG=1.67
+    Pos 82 M->E: MHC-I=12 (removed=1), ddG=1.13
+    Pos 82 M->K: MHC-I=12 (removed=1), ddG=1.15
+    Pos 82 M->Q: MHC-I=12 (removed=1), ddG=1.15
+    Pos 87 E->M: MHC-I=12 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=12 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=12 (removed=1), ddG=1.37
+    Pos 89 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 89 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 89 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 94 Y->R: MHC-I=12 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=13 (removed=0), ddG=1.53
+    Pos 94 Y->E: MHC-I=12 (removed=1), ddG=1.67
+    Pos 158 T->C: MHC-I=12 (removed=1), ddG=1.13
+    Pos 158 T->V: MHC-I=12 (removed=1), ddG=1.13
+    Pos 158 T->I: MHC-I=13 (removed=0), ddG=1.30
+    Pos 165 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 165 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 165 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 177 P->T: MHC-I=12 (removed=1), ddG=1.17
+    Pos 177 P->S: MHC-I=12 (removed=1), ddG=1.27
+    Pos 177 P->N: MHC-I=12 (removed=1), ddG=1.38
+    Pos 183 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 183 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 183 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 184 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 184 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 184 L->T: MHC-I=11 (removed=2), ddG=1.30
+    Pos 190 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 190 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 190 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 201 T->C: MHC-I=12 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=12 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=12 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=13 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=12 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=13 (removed=0), ddG=1.35
+    Pos 213 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 213 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 213 L->T: MHC-I=13 (removed=0), ddG=1.30
+    Pos 220 I->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 220 I->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 220 I->T: MHC-I=13 (removed=0), ddG=1.30
+    Pos 268 S->V: MHC-I=13 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=13 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=12 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=14 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=13 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=12 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=13 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=12 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=12 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=12 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=12 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=12 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=12 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=12 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=12 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=12 (removed=1), ddG=1.35
+  APPLIED: Pos 184 L->T | MHC-I: 15 -> 11 (-2) | cumDDG=2.43
+
+  Iteration 3: 11 MHC-I binders, testing 18 positions × 3 substitutions = 54 netMHCpan calls...
+    Pos 16 T->C: MHC-I=11 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=12 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=12 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=10 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=10 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=10 (removed=1), ddG=1.67
+    Pos 82 M->E: MHC-I=10 (removed=1), ddG=1.13
+    Pos 82 M->K: MHC-I=10 (removed=1), ddG=1.15
+    Pos 82 M->Q: MHC-I=10 (removed=1), ddG=1.15
+    Pos 87 E->M: MHC-I=10 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=10 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=10 (removed=1), ddG=1.37
+    Pos 89 L->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 89 L->D: MHC-I=10 (removed=1), ddG=1.13
+    Pos 89 L->T: MHC-I=10 (removed=1), ddG=1.30
+    Pos 94 Y->R: MHC-I=10 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=11 (removed=0), ddG=1.53
+    Pos 94 Y->E: MHC-I=10 (removed=1), ddG=1.67
+    Pos 158 T->C: MHC-I=10 (removed=1), ddG=1.13
+    Pos 158 T->V: MHC-I=10 (removed=1), ddG=1.13
+    Pos 158 T->I: MHC-I=11 (removed=0), ddG=1.30
+    Pos 165 L->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 165 L->D: MHC-I=10 (removed=1), ddG=1.13
+    Pos 165 L->T: MHC-I=10 (removed=1), ddG=1.30
+    Pos 201 T->C: MHC-I=10 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=10 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=10 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=11 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=10 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=11 (removed=0), ddG=1.35
+    Pos 213 L->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 213 L->D: MHC-I=10 (removed=1), ddG=1.13
+    Pos 213 L->T: MHC-I=11 (removed=0), ddG=1.30
+    Pos 220 I->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 220 I->D: MHC-I=10 (removed=1), ddG=1.13
+    Pos 220 I->T: MHC-I=11 (removed=0), ddG=1.30
+    Pos 268 S->V: MHC-I=11 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=11 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=10 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=12 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=10 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=11 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=10 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=11 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=10 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=10 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=10 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=10 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=10 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=10 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=10 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=10 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=10 (removed=1), ddG=1.35
+  APPLIED: Pos 89 L->N | MHC-I: 15 -> 10 (-1) | cumDDG=3.55
+
+  Iteration 4: 10 MHC-I binders, testing 16 positions × 3 substitutions = 48 netMHCpan calls...
+    Pos 16 T->C: MHC-I=10 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=11 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=11 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=9 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=9 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=9 (removed=1), ddG=1.67
+    Pos 87 E->M: MHC-I=9 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=9 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=9 (removed=1), ddG=1.37
+    Pos 94 Y->R: MHC-I=9 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=9 (removed=1), ddG=1.53
+    Pos 94 Y->E: MHC-I=9 (removed=1), ddG=1.67
+    Pos 158 T->C: MHC-I=9 (removed=1), ddG=1.13
+    Pos 158 T->V: MHC-I=9 (removed=1), ddG=1.13
+    Pos 158 T->I: MHC-I=10 (removed=0), ddG=1.30
+    Pos 165 L->N: MHC-I=9 (removed=1), ddG=1.12
+    Pos 165 L->D: MHC-I=9 (removed=1), ddG=1.13
+    Pos 165 L->T: MHC-I=9 (removed=1), ddG=1.30
+    Pos 201 T->C: MHC-I=9 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=9 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=9 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=10 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=9 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=10 (removed=0), ddG=1.35
+    Pos 213 L->N: MHC-I=9 (removed=1), ddG=1.12
+    Pos 213 L->D: MHC-I=9 (removed=1), ddG=1.13
+    Pos 213 L->T: MHC-I=10 (removed=0), ddG=1.30
+    Pos 220 I->N: MHC-I=9 (removed=1), ddG=1.12
+    Pos 220 I->D: MHC-I=9 (removed=1), ddG=1.13
+    Pos 220 I->T: MHC-I=10 (removed=0), ddG=1.30
+    Pos 268 S->V: MHC-I=10 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=10 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=9 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=9 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=11 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=9 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=10 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=9 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=10 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=9 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=9 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=9 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=9 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=9 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=9 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=9 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=9 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=9 (removed=1), ddG=1.35
+  APPLIED: Pos 165 L->N | MHC-I: 15 -> 9 (-1) | cumDDG=4.67
+
+  Iteration 5: 9 MHC-I binders, testing 14 positions × 3 substitutions = 42 netMHCpan calls...
+    Pos 16 T->C: MHC-I=9 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=10 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=10 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=8 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=8 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=8 (removed=1), ddG=1.67
+    Pos 87 E->M: MHC-I=8 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=8 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=8 (removed=1), ddG=1.37
+    Pos 94 Y->R: MHC-I=8 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=8 (removed=1), ddG=1.53
+    Pos 94 Y->E: MHC-I=8 (removed=1), ddG=1.67
+    Pos 201 T->C: MHC-I=8 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=8 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=8 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=9 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=8 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=9 (removed=0), ddG=1.35
+    Pos 213 L->N: MHC-I=8 (removed=1), ddG=1.12
+    Pos 213 L->D: MHC-I=8 (removed=1), ddG=1.13
+    Pos 213 L->T: MHC-I=9 (removed=0), ddG=1.30
+    Pos 220 I->N: MHC-I=8 (removed=1), ddG=1.12
+    Pos 220 I->D: MHC-I=8 (removed=1), ddG=1.13
+    Pos 220 I->T: MHC-I=9 (removed=0), ddG=1.30
+    Pos 268 S->V: MHC-I=9 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=9 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=8 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=8 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=10 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=8 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=9 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=8 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=9 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=8 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=8 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=8 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=8 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=8 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=8 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=8 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=8 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=8 (removed=1), ddG=1.35
+  APPLIED: Pos 213 L->N | MHC-I: 15 -> 8 (-1) | cumDDG=5.79
+
+  Iteration 6: 8 MHC-I binders, testing 12 positions × 3 substitutions = 36 netMHCpan calls...
+    Pos 16 T->C: MHC-I=8 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=9 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=9 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=7 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=7 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=7 (removed=1), ddG=1.67
+    Pos 87 E->M: MHC-I=7 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=7 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=7 (removed=1), ddG=1.37
+    Pos 94 Y->R: MHC-I=7 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=7 (removed=1), ddG=1.53
+    Pos 94 Y->E: MHC-I=7 (removed=1), ddG=1.67
+    Pos 201 T->C: MHC-I=7 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=7 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=7 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=8 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=7 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=8 (removed=0), ddG=1.35
+    Pos 268 S->V: MHC-I=8 (removed=0), ddG=1.30
+    Pos 268 S->A: MHC-I=8 (removed=0), ddG=1.37
+    Pos 268 S->C: MHC-I=7 (removed=1), ddG=1.37
+    Pos 275 L->N: MHC-I=7 (removed=1), ddG=1.12
+    Pos 275 L->D: MHC-I=9 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=7 (removed=1), ddG=1.30
+    Pos 314 M->E: MHC-I=8 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=7 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=8 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=7 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=7 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=7 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=7 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=7 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=7 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=7 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=7 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=7 (removed=1), ddG=1.35
+  APPLIED: Pos 275 L->N | MHC-I: 15 -> 7 (-1) | cumDDG=6.91
+
+  Iteration 7: 7 MHC-I binders, testing 10 positions × 3 substitutions = 30 netMHCpan calls...
+    Pos 16 T->C: MHC-I=7 (removed=0), ddG=1.13
+    Pos 16 T->V: MHC-I=8 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=8 (removed=-1), ddG=1.30
+    Pos 23 Y->R: MHC-I=6 (removed=1), ddG=1.22
+    Pos 23 Y->H: MHC-I=6 (removed=1), ddG=1.53
+    Pos 23 Y->E: MHC-I=6 (removed=1), ddG=1.67
+    Pos 87 E->M: MHC-I=6 (removed=1), ddG=1.13
+    Pos 87 E->I: MHC-I=6 (removed=1), ddG=1.37
+    Pos 87 E->L: MHC-I=6 (removed=1), ddG=1.37
+    Pos 94 Y->R: MHC-I=6 (removed=1), ddG=1.22
+    Pos 94 Y->H: MHC-I=6 (removed=1), ddG=1.53
+    Pos 94 Y->E: MHC-I=6 (removed=1), ddG=1.67
+    Pos 201 T->C: MHC-I=6 (removed=1), ddG=1.13
+    Pos 201 T->V: MHC-I=6 (removed=1), ddG=1.13
+    Pos 201 T->I: MHC-I=6 (removed=1), ddG=1.30
+    Pos 208 K->M: MHC-I=7 (removed=0), ddG=1.15
+    Pos 208 K->I: MHC-I=6 (removed=1), ddG=1.35
+    Pos 208 K->L: MHC-I=7 (removed=0), ddG=1.35
+    Pos 314 M->E: MHC-I=7 (removed=0), ddG=1.13
+    Pos 314 M->K: MHC-I=6 (removed=1), ddG=1.15
+    Pos 314 M->Q: MHC-I=7 (removed=0), ddG=1.15
+    Pos 318 L->N: MHC-I=6 (removed=1), ddG=1.12
+    Pos 318 L->D: MHC-I=6 (removed=1), ddG=1.13
+    Pos 318 L->T: MHC-I=6 (removed=1), ddG=1.30
+    Pos 321 V->T: MHC-I=6 (removed=1), ddG=1.13
+    Pos 321 V->S: MHC-I=6 (removed=1), ddG=1.30
+    Pos 321 V->N: MHC-I=6 (removed=1), ddG=1.35
+    Pos 325 V->T: MHC-I=6 (removed=1), ddG=1.13
+    Pos 325 V->S: MHC-I=6 (removed=1), ddG=1.30
+    Pos 325 V->N: MHC-I=6 (removed=1), ddG=1.35
+  Best mutation removes 0 binders. Stopping Phase 1.
+
+=== Phase 2: MHC-II targeted mutagenesis ===
+  Remaining mutation budget: 9
+  Running netMHCpan-II on current sequence to get binder positions...
+  Current MHC-II: 92 binders
+  Testing 20 MHC-II epitope positions × 3 substitutions...
+
+  MHC-II iteration 1: testing 10 positions...
+  No MHC-II improvement found. Stopping Phase 2.
+
+=== Final evaluation (real netMHCpan) ===
+  Sequence with 6 mutations, cumDDG=6.91
+  Final MHC-I:  15 -> 7 (-8)
+  Final MHC-II: 92 -> 92 (-0)
+  Final combined: 61.0 -> 53.0
+  Final S_Immuno: 0.7594 -> 0.7909 (delta=+0.0315)
+  P3 pass (delta>=0.10): NO
+
+======================================================================
+DONE. Elapsed: 4.0 min
+P3 pass: NO (delta=+0.0315)
+Results in: /home/anees_22phd0670/strategy_C_targeted_results

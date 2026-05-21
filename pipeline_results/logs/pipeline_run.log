@@ -1,0 +1,78 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/anees_22phd0670/.local/lib/python3.10/site-packages/sklearn/base.py:442: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.4.1.post1 when using version 1.7.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+
+PEN-ASSEMBLE Pipeline: Steps 13 → 15 → 16
+Data dir:    /home/anees_22phd0670/pen_pipeline_data
+Results dir: /home/anees_22phd0670/pen_pipeline_results
+Parent PDB:  /home/anees_22phd0670/8WT6.pdb (exists: True)
+
+Loading designs...
+  Loaded strategy A: 15 rows from chimeric_designs.parquet
+  Loaded strategy B: 992 rows from ortholog_candidates.parquet
+  Loaded strategy C: 2 rows from deimmunized_variants.parquet
+  Loaded strategy D: 32 rows from strategy_D_designs.parquet
+  After structure filter: 1041/1041
+  Total designs: 1041
+
+Skipping Step 13 (--skip_step13), loading existing output...
+  Loaded 1041 designs from step13
+
+============================================================
+ STEP 15: MECH-CLASS Mechanism Gate
+============================================================
+  Input: 1041 designs  |  min_confidence=0.8
+  mech_class version: 0.5.1.dev2+g794b86da8.d20260519
+  NOTE: tier_a assigned from domain evidence (IS110/IS621 structural basis).
+        Composite classification from Predictor.load(/home/anees_22phd0670/pen-stack/data/models).
+  Predictor loaded from /home/anees_22phd0670/pen-stack/data/models
+  [200/1041] elapsed=14s ETA=61s
+  [400/1041] elapsed=14s ETA=23s
+  [600/1041] elapsed=15s ETA=11s
+  [800/1041] elapsed=15s ETA=4s
+  [1000/1041] elapsed=15s ETA=1s
+
+  Strategy breakdown: {'A': 15, 'B': 992, 'C': 2, 'D': 32}
+
+  Results after 47.1s:
+    DSB_FREE_TRANSEST_RECOMBINASE (pass): 1041
+    DSB_FREE low-confidence (<0.8): 0
+    DSB_NUCLEASE (discarded): 0
+    UNCLASSIFIED (manual review): 0
+  → /home/anees_22phd0670/pen_pipeline_results/step15_mechclass/mech_class_passed.parquet
+
+============================================================
+ STEP 16: PEN-SCORE 7-Axis Evaluation
+============================================================
+  Input: 1041 designs
+  IS621 lockpoint: 0.929
+  P1 criterion: >= 5 designs beat 0.929
+
+  Results (0.2s):
+    Best  pen_score: 0.9673
+    Median pen_score: 0.9101
+    P1 (>IS621=0.929): 34 designs  → PASS ✓
+
+  Top 5 designs:
+    IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_: 0.9673  [S_DSB=1.000 S_Spec=0.989 S_Cargo=1.000 S_Deliv=0.955 S_Immuno=0.878 S_Prog=0.985 S_Mature=0.792]
+    C_targeted_001: 0.9586  [S_DSB=1.000 S_Spec=0.989 S_Cargo=1.000 S_Deliv=0.955 S_Immuno=0.791 S_Prog=0.985 S_Mature=0.792]
+    D8PEA4: 0.9367  [S_DSB=1.000 S_Spec=0.955 S_Cargo=1.000 S_Deliv=0.971 S_Immuno=0.759 S_Prog=0.999 S_Mature=0.396]
+    D001_IS621_ProtMPNN_T0.1_sample14: 0.9321  [S_DSB=1.000 S_Spec=0.953 S_Cargo=1.000 S_Deliv=0.955 S_Immuno=0.759 S_Prog=0.985 S_Mature=0.396]
+    D002_IS621_ProtMPNN_T0.1_sample25: 0.9321  [S_DSB=1.000 S_Spec=0.953 S_Cargo=1.000 S_Deliv=0.955 S_Immuno=0.759 S_Prog=0.985 S_Mature=0.396]
+
+  → /home/anees_22phd0670/pen_pipeline_results/step16_penscore/all_pen_scores.parquet
+  → /home/anees_22phd0670/pen_pipeline_results/step16_penscore/pen_score_summary.json
+
+============================================================
+ PIPELINE COMPLETE
+============================================================
+  Step 13 output: 1041 designs passed ΔΔG filter
+  Step 15 output: 1041 designs passed MECH-CLASS
+  Step 16 output: 1041 designs scored
+  P1 result: 34 designs beat IS621 lockpoint (0.929)
+  P1 status: PASS ✓
+
+  Results: /home/anees_22phd0670/pen_pipeline_results
+  Summary: /home/anees_22phd0670/pen_pipeline_results/step16_penscore/pen_score_summary.json

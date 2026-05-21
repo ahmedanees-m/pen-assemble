@@ -1,0 +1,167 @@
+{
+  "method": "mhcii_first_core_anchor_greedy_v2",
+  "n_variants": 1,
+  "n_p3_pass": 1,
+  "wt_n_i": 15,
+  "wt_n_ii": 92,
+  "final_n_i": 5,
+  "final_n_ii": 52,
+  "final_combined": 31.0,
+  "final_s_immuno": 0.8777,
+  "final_delta": 0.1183,
+  "cumulative_ddg": 14.67,
+  "total_mutations": 14,
+  "passes_p3": true,
+  "elapsed_min": 62.0,
+  "netmhcpan_used": true,
+  "netmhciipan_used": true,
+  "mhc_i_rank_threshold": 0.5,
+  "mhc_ii_rank_threshold": 10.0,
+  "s_immuno_max_total": 253.5,
+  "budget_phase2_ddg": 10.0,
+  "budget_total_ddg": 15.0,
+  "budget_per_mut_ddg": 4.0,
+  "max_mutations": 15,
+  "mutations": [
+    {
+      "position": 255,
+      "wt_aa": "Y",
+      "mut_aa": "K",
+      "ddg_pred": 1.68,
+      "binders_removed": 8,
+      "new_n_ii": 84,
+      "phase": "MHC-II",
+      "sequence_context": "PRRKESGS"
+    },
+    {
+      "position": 41,
+      "wt_aa": "D",
+      "mut_aa": "C",
+      "ddg_pred": 1.3,
+      "binders_removed": 7,
+      "new_n_ii": 77,
+      "phase": "MHC-II",
+      "sequence_context": "LRPCGRHR"
+    },
+    {
+      "position": 65,
+      "wt_aa": "G",
+      "mut_aa": "K",
+      "ddg_pred": 2.28,
+      "binders_removed": 6,
+      "new_n_ii": 71,
+      "phase": "MHC-II",
+      "sequence_context": "WLKKHKID"
+    },
+    {
+      "position": 187,
+      "wt_aa": "E",
+      "mut_aa": "M",
+      "ddg_pred": 1.13,
+      "binders_removed": 5,
+      "new_n_ii": 66,
+      "phase": "MHC-II",
+      "sequence_context": "LWLMAELK"
+    },
+    {
+      "position": 27,
+      "wt_aa": "D",
+      "mut_aa": "C",
+      "ddg_pred": 1.3,
+      "binders_removed": 5,
+      "new_n_ii": 61,
+      "phase": "MHC-II",
+      "sequence_context": "IGICTAKE"
+    },
+    {
+      "position": 203,
+      "wt_aa": "D",
+      "mut_aa": "C",
+      "ddg_pred": 1.3,
+      "binders_removed": 5,
+      "new_n_ii": 56,
+      "phase": "MHC-II",
+      "sequence_context": "LTDCDPDM"
+    },
+    {
+      "position": 285,
+      "wt_aa": "V",
+      "mut_aa": "C",
+      "ddg_pred": 0.37,
+      "binders_removed": 6,
+      "new_n_ii": 50,
+      "phase": "MHC-II",
+      "sequence_context": "PAMCATSK"
+    },
+    {
+      "position": 152,
+      "wt_aa": "V",
+      "mut_aa": "C",
+      "ddg_pred": 0.37,
+      "binders_removed": 4,
+      "new_n_ii": 46,
+      "phase": "MHC-II",
+      "sequence_context": "ALVCRHQA"
+    },
+    {
+      "position": 224,
+      "wt_aa": "T",
+      "mut_aa": "C",
+      "ddg_pred": 1.13,
+      "binders_removed": 2,
+      "new_n_i": 12,
+      "phase": "MHC-I",
+      "sequence_context": "GEKCSAVL"
+    },
+    {
+      "position": 318,
+      "wt_aa": "L",
+      "mut_aa": "K",
+      "ddg_pred": 1.35,
+      "binders_removed": 2,
+      "new_n_i": 10,
+      "phase": "MHC-I",
+      "sequence_context": "MRKKAQVA"
+    },
+    {
+      "position": 87,
+      "wt_aa": "E",
+      "mut_aa": "C",
+      "ddg_pred": 1.53,
+      "binders_removed": 2,
+      "new_n_i": 8,
+      "phase": "MHC-I",
+      "sequence_context": "PVACCLYD"
+    },
+    {
+      "position": 193,
+      "wt_aa": "L",
+      "mut_aa": "I",
+      "ddg_pred": 0.3,
+      "binders_removed": 1,
+      "new_n_i": 7,
+      "phase": "MHC-I",
+      "sequence_context": "LKRIEKQI"
+    },
+    {
+      "position": 275,
+      "wt_aa": "L",
+      "mut_aa": "I",
+      "ddg_pred": 0.3,
+      "binders_removed": 1,
+      "new_n_i": 6,
+      "phase": "MHC-I",
+      "sequence_context": "HVSIRRAL"
+    },
+    {
+      "position": 177,
+      "wt_aa": "P",
+      "mut_aa": "V",
+      "ddg_pred": 0.33,
+      "binders_removed": 1,
+      "new_n_i": 5,
+      "phase": "MHC-I",
+      "sequence_context": "VQRVSIDA"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "n_input": 1041,
+  "n_passed": 1041,
+  "n_dsb_nuclease": 0,
+  "n_unclassified": 0,
+  "n_low_confidence": 0,
+  "mech_class_version": "0.5.1.dev2+g794b86da8.d20260519",
+  "classification_basis": "domain_evidence_IS110_IS621",
+  "dsb_nuclease_ids": [],
+  "unclassified_ids": []
+}

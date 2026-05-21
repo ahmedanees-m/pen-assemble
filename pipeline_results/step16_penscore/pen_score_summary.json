@@ -1,0 +1,44 @@
+{
+  "n_total_designs": 1041,
+  "n_p1_beat_is621": 34,
+  "p1_threshold": 0.929,
+  "p1_pass": true,
+  "best_pen_score": 0.9673,
+  "median_pen_score": 0.9101,
+  "top5_design_ids": [
+    "IS621_deimmunized_v2_Y255K_D41C_G65K_E187M_D27C_D203C_V285C_V152C_T224C_L318K_E87C_L193I_L275I_P177V",
+    "C_targeted_001",
+    "D8PEA4",
+    "D001_IS621_ProtMPNN_T0.1_sample14",
+    "D002_IS621_ProtMPNN_T0.1_sample25"
+  ],
+  "top5_pen_scores": [
+    0.9673,
+    0.9586,
+    0.9367,
+    0.9321,
+    0.9321
+  ],
+  "strategy_breakdown": {
+    "A": {
+      "n_total": 15,
+      "n_beats_is621": 0,
+      "best_pen_score": 0.9209
+    },
+    "B": {
+      "n_total": 992,
+      "n_beats_is621": 0,
+      "best_pen_score": 0.9168
+    },
+    "C": {
+      "n_total": 2,
+      "n_beats_is621": 2,
+      "best_pen_score": 0.9673
+    },
+    "D": {
+      "n_total": 32,
+      "n_beats_is621": 32,
+      "best_pen_score": 0.9367
+    }
+  }
+}

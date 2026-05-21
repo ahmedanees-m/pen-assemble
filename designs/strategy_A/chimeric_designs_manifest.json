@@ -1,0 +1,43 @@
+{
+  "n_designs": 30,
+  "n_is621_seq_repeat": 2,
+  "size_range_aa": [
+    262,
+    841
+  ],
+  "strategy": "A_domain_swap",
+  "scaffolds_loaded": 8,
+  "modules_populated": 14,
+  "design_ids": [
+    "A_001_IS621_full_composite_IS621_bRNA_rigid",
+    "A_002_IS621_full_composite_IS621_bRNA_flexible_short",
+    "A_003_IS621_full_composite_IscB_omega_rigid",
+    "A_004_IS621_full_composite_IscB_omega_flexible_short",
+    "A_005_IS621_full_composite_Cas12k_crRNA_rigid",
+    "A_006_IS621_full_composite_Cas12k_crRNA_flexible_short",
+    "A_007_IS621_RuvC_only_IS621_bRNA_rigid",
+    "A_008_IS621_RuvC_only_IS621_bRNA_flexible_short",
+    "A_009_IS621_RuvC_only_IscB_omega_rigid",
+    "A_010_IS621_RuvC_only_IscB_omega_flexible_short",
+    "A_011_IS621_RuvC_only_Cas12k_crRNA_rigid",
+    "A_012_IS621_RuvC_only_Cas12k_crRNA_flexible_short",
+    "A_013_Bxb1_serine_compact_IS621_bRNA_rigid",
+    "A_014_Bxb1_serine_compact_IS621_bRNA_flexible_short",
+    "A_015_Bxb1_serine_compact_IscB_omega_rigid",
+    "A_016_Bxb1_serine_compact_IscB_omega_flexible_short",
+    "A_017_Bxb1_serine_compact_Cas12k_crRNA_rigid",
+    "A_018_Bxb1_serine_compact_Cas12k_crRNA_flexible_short",
+    "A_019_Lambda_Int_tyrosine_IS621_bRNA_rigid",
+    "A_020_Lambda_Int_tyrosine_IS621_bRNA_flexible_short",
+    "A_021_Lambda_Int_tyrosine_IscB_omega_rigid",
+    "A_022_Lambda_Int_tyrosine_IscB_omega_flexible_short",
+    "A_023_Lambda_Int_tyrosine_Cas12k_crRNA_rigid",
+    "A_024_Lambda_Int_tyrosine_Cas12k_crRNA_flexible_short",
+    "A_025_phiC31_serine_IS621_bRNA_rigid",
+    "A_026_phiC31_serine_IS621_bRNA_flexible_short",
+    "A_027_phiC31_serine_IscB_omega_rigid",
+    "A_028_phiC31_serine_IscB_omega_flexible_short",
+    "A_029_phiC31_serine_Cas12k_crRNA_rigid",
+    "A_030_phiC31_serine_Cas12k_crRNA_flexible_short"
+  ]
+}

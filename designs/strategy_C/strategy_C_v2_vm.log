@@ -1,0 +1,2173 @@
+======================================================================
+Strategy C v2: MHC-II-first Core-Anchor Deimmunization of IS621
+Started: 2026-05-16 13:05:44
+WT: n_I=15, n_II=92, S_Immuno=0.7594
+P3 target: delta >= 0.1
+Budget: Phase2_MHC-II=10.0, Total=15.0, Per-mut=4.0, Max_muts=15
+======================================================================
+netMHCpan-4.1:  FOUND
+NetMHCIIpan-4.0: FOUND
+
+=== Phase 2: MHC-II core-anchor targeted mutagenesis ===
+  Budget: 10.0 DDG, 9 rounds max
+  Getting WT MHC-II binder positions with core offsets...
+  MHC-II binders: 92 (WT)
+
+  Round 1: 92 binders, 38 anchor positions, budget_remaining=10.00
+    Pos 21 L->N: MHC-II=91 (removed=+1), ddG=1.12, score=0.828
+    Pos 21 L->D: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 21 L->T: MHC-II=90 (removed=+2), ddG=1.30, score=1.436
+    Pos 21 L->K: MHC-II=90 (removed=+2), ddG=1.35, score=1.386
+    Pos 21 L->Q: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 23 Y->R: MHC-II=94 (removed=-2), ddG=1.22, score=-1.508
+    Pos 23 Y->H: MHC-II=91 (removed=+1), ddG=1.53, score=0.620
+    Pos 23 Y->E: MHC-II=90 (removed=+2), ddG=1.67, score=1.136
+    Pos 23 Y->K: MHC-II=91 (removed=+1), ddG=1.68, score=0.567
+    Pos 23 Y->Q: MHC-II=92 (removed=+0), ddG=1.68, score=0.006
+    Pos 24 I->N: MHC-II=92 (removed=+0), ddG=1.12, score=0.008
+    Pos 24 I->D: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 24 I->T: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 24 I->K: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 24 I->Q: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->N: MHC-II=92 (removed=+0), ddG=1.12, score=0.008
+    Pos 26 I->D: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 26 I->T: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 26 I->K: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->Q: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 27 D->I: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 27 D->L: MHC-II=89 (removed=+3), ddG=1.13, score=2.447
+    Pos 27 D->C: MHC-II=87 (removed=+5), ddG=1.30, score=3.579
+    Pos 27 D->M: MHC-II=88 (removed=+4), ddG=1.37, score=2.728
+    Pos 27 D->V: MHC-II=90 (removed=+2), ddG=1.37, score=1.367
+    Pos 28 T->C: MHC-II=89 (removed=+3), ddG=1.13, score=2.447
+    Pos 28 T->V: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 28 T->I: MHC-II=91 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->L: MHC-II=91 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->A: MHC-II=92 (removed=+0), ddG=1.60, score=0.006
+    Pos 29 A->S: MHC-II=92 (removed=+0), ddG=1.37, score=0.007
+    Pos 29 A->T: MHC-II=91 (removed=+1), ddG=1.60, score=0.594
+    Pos 29 A->N: MHC-II=91 (removed=+1), ddG=1.82, score=0.526
+    Pos 29 A->D: MHC-II=92 (removed=+0), ddG=1.83, score=0.005
+    Pos 29 A->K: MHC-II=90 (removed=+2), ddG=2.05, score=0.935
+    Pos 31 E->M: MHC-II=94 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=94 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=94 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=93 (removed=-1), ddG=1.40, score=-0.660
+    Pos 31 E->C: MHC-II=91 (removed=+1), ddG=1.53, score=0.620
+    Pos 32 K->M: MHC-II=90 (removed=+2), ddG=1.15, score=1.608
+    Pos 32 K->I: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 32 K->L: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 32 K->F: MHC-II=91 (removed=+1), ddG=1.42, score=0.664
+    Pos 32 K->C: MHC-II=88 (removed=+4), ddG=1.52, score=2.475
+    Pos 33 L->N: MHC-II=90 (removed=+2), ddG=1.12, score=1.648
+    Pos 33 L->D: MHC-II=88 (removed=+4), ddG=1.13, score=3.260
+    Pos 33 L->T: MHC-II=90 (removed=+2), ddG=1.30, score=1.436
+    Pos 33 L->K: MHC-II=89 (removed=+3), ddG=1.35, score=2.076
+    Pos 33 L->Q: MHC-II=89 (removed=+3), ddG=1.35, score=2.076
+    Pos 36 D->I: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 36 D->L: MHC-II=89 (removed=+3), ddG=1.13, score=2.447
+    Pos 36 D->C: MHC-II=87 (removed=+5), ddG=1.30, score=3.579
+    Pos 36 D->M: MHC-II=87 (removed=+5), ddG=1.37, score=3.408
+    Pos 36 D->V: MHC-II=93 (removed=-1), ddG=1.37, score=-0.673
+    Pos 38 L->N: MHC-II=88 (removed=+4), ddG=1.12, score=3.287
+    Pos 38 L->D: MHC-II=88 (removed=+4), ddG=1.13, score=3.260
+    Pos 38 L->T: MHC-II=90 (removed=+2), ddG=1.30, score=1.436
+    Pos 38 L->K: MHC-II=87 (removed=+5), ddG=1.35, score=3.455
+    Pos 38 L->Q: MHC-II=89 (removed=+3), ddG=1.35, score=2.076
+    Pos 41 D->I: MHC-II=89 (removed=+3), ddG=1.13, score=2.447
+    Pos 41 D->L: MHC-II=87 (removed=+5), ddG=1.13, score=4.073
+    Pos 41 D->C: MHC-II=85 (removed=+7), ddG=1.30, score=5.007
+    Pos 41 D->M: MHC-II=87 (removed=+5), ddG=1.37, score=3.408
+    Pos 41 D->V: MHC-II=87 (removed=+5), ddG=1.37, score=3.408
+    Pos 43 R->Y: MHC-II=88 (removed=+4), ddG=1.22, score=3.038
+    Pos 43 R->F: MHC-II=86 (removed=+6), ddG=1.25, score=4.452
+    Pos 43 R->M: MHC-II=90 (removed=+2), ddG=1.52, score=1.241
+    Pos 43 R->W: MHC-II=86 (removed=+6), ddG=1.60, score=3.535
+    Pos 43 R->I: MHC-II=94 (removed=-2), ddG=1.82, score=-1.036
+    Pos 46 T->C: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 46 T->V: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 46 T->I: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 46 T->L: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 46 T->A: MHC-II=92 (removed=+0), ddG=1.60, score=0.006
+    Pos 63 L->N: MHC-II=88 (removed=+4), ddG=1.12, score=3.287
+    Pos 63 L->D: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 63 L->T: MHC-II=89 (removed=+3), ddG=1.30, score=2.150
+    Pos 63 L->K: MHC-II=87 (removed=+5), ddG=1.35, score=3.455
+    Pos 63 L->Q: MHC-II=90 (removed=+2), ddG=1.35, score=1.386
+    Pos 65 G->S: MHC-II=91 (removed=+1), ddG=1.60, score=0.594
+    Pos 65 G->T: MHC-II=90 (removed=+2), ddG=1.83, score=1.041
+    Pos 65 G->N: MHC-II=90 (removed=+2), ddG=2.05, score=0.935
+    Pos 65 G->D: MHC-II=92 (removed=+0), ddG=2.07, score=0.005
+    Pos 65 G->K: MHC-II=86 (removed=+6), ddG=2.28, score=2.525
+    Pos 68 I->N: MHC-II=91 (removed=+1), ddG=1.12, score=0.828
+    Pos 68 I->D: MHC-II=89 (removed=+3), ddG=1.13, score=2.447
+    Pos 68 I->T: MHC-II=91 (removed=+1), ddG=1.30, score=0.721
+    Pos 68 I->K: MHC-II=88 (removed=+4), ddG=1.35, score=2.766
+    Pos 68 I->Q: MHC-II=90 (removed=+2), ddG=1.35, score=1.386
+    Pos 94 Y->R: MHC-II=90 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=90 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=90 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=90 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=90 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=92 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=91 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=94 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=92 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=91 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=95 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=94 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=93 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=92 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=92 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=94 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 200 L->N: MHC-II=89 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=90 (removed=+2), ddG=1.13, score=1.634
+    Pos 200 L->T: MHC-II=89 (removed=+3), ddG=1.30, score=2.150
+    Pos 200 L->K: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 200 L->Q: MHC-II=89 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=93 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=93 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=87 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=93 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=93 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=93 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=95 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=93 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=91 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=93 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=91 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=91 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=91 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=89 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=88 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=88 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=88 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=88 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=88 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=92 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=94 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=90 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=92 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=92 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=90 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=89 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=90 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=94 (removed=-2), ddG=1.37, score=-1.354
+    Pos 255 Y->R: MHC-II=86 (removed=+6), ddG=1.22, score=4.553
+    Pos 255 Y->H: MHC-II=86 (removed=+6), ddG=1.53, score=3.687
+    Pos 255 Y->E: MHC-II=86 (removed=+6), ddG=1.67, score=3.395
+    Pos 255 Y->K: MHC-II=84 (removed=+8), ddG=1.68, score=4.500
+    Pos 255 Y->Q: MHC-II=86 (removed=+6), ddG=1.68, score=3.376
+    Pos 258 G->S: MHC-II=92 (removed=+0), ddG=1.60, score=0.006
+    Pos 258 G->T: MHC-II=92 (removed=+0), ddG=1.83, score=0.005
+    Pos 258 G->N: MHC-II=92 (removed=+0), ddG=2.05, score=0.005
+    Pos 258 G->D: MHC-II=92 (removed=+0), ddG=2.07, score=0.005
+    Pos 258 G->K: MHC-II=90 (removed=+2), ddG=2.28, score=0.845
+    Pos 260 S->V: MHC-II=90 (removed=+2), ddG=1.30, score=1.436
+    Pos 260 S->A: MHC-II=92 (removed=+0), ddG=1.37, score=0.007
+    Pos 260 S->C: MHC-II=86 (removed=+6), ddG=1.37, score=4.088
+    Pos 260 S->I: MHC-II=91 (removed=+1), ddG=1.53, score=0.620
+    Pos 260 S->L: MHC-II=88 (removed=+4), ddG=1.53, score=2.460
+    Pos 263 G->S: MHC-II=92 (removed=+0), ddG=1.60, score=0.006
+    Pos 263 G->T: MHC-II=91 (removed=+1), ddG=1.83, score=0.523
+    Pos 263 G->N: MHC-II=90 (removed=+2), ddG=2.05, score=0.935
+    Pos 263 G->D: MHC-II=90 (removed=+2), ddG=2.07, score=0.926
+    Pos 263 G->K: MHC-II=88 (removed=+4), ddG=2.28, score=1.685
+    Pos 280 Y->R: MHC-II=88 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=88 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=88 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=88 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=88 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=91 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=91 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=91 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=92 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=89 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=90 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=90 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=90 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=90 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=87 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=92 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=93 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=88 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=94 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=91 (removed=+1), ddG=1.53, score=0.620
+  APPLIED: Pos 255 Y->K | MHC-II: 92 -> 84 (-8) | cumDDG=1.68
+
+  Round 2: 84 binders, 42 anchor positions, budget_remaining=8.32
+    Pos 21 L->N: MHC-II=83 (removed=+1), ddG=1.12, score=0.828
+    Pos 21 L->D: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 21 L->T: MHC-II=82 (removed=+2), ddG=1.30, score=1.436
+    Pos 21 L->K: MHC-II=82 (removed=+2), ddG=1.35, score=1.386
+    Pos 21 L->Q: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 23 Y->R: MHC-II=86 (removed=-2), ddG=1.22, score=-1.508
+    Pos 23 Y->H: MHC-II=83 (removed=+1), ddG=1.53, score=0.620
+    Pos 23 Y->E: MHC-II=82 (removed=+2), ddG=1.67, score=1.136
+    Pos 23 Y->K: MHC-II=83 (removed=+1), ddG=1.68, score=0.567
+    Pos 23 Y->Q: MHC-II=84 (removed=+0), ddG=1.68, score=0.006
+    Pos 24 I->N: MHC-II=84 (removed=+0), ddG=1.12, score=0.008
+    Pos 24 I->D: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 24 I->T: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 24 I->K: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 24 I->Q: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->N: MHC-II=84 (removed=+0), ddG=1.12, score=0.008
+    Pos 26 I->D: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 26 I->T: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 26 I->K: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->Q: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 27 D->I: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 27 D->L: MHC-II=81 (removed=+3), ddG=1.13, score=2.447
+    Pos 27 D->C: MHC-II=79 (removed=+5), ddG=1.30, score=3.579
+    Pos 27 D->M: MHC-II=80 (removed=+4), ddG=1.37, score=2.728
+    Pos 27 D->V: MHC-II=82 (removed=+2), ddG=1.37, score=1.367
+    Pos 28 T->C: MHC-II=81 (removed=+3), ddG=1.13, score=2.447
+    Pos 28 T->V: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 28 T->I: MHC-II=83 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->L: MHC-II=83 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->A: MHC-II=84 (removed=+0), ddG=1.60, score=0.006
+    Pos 29 A->S: MHC-II=84 (removed=+0), ddG=1.37, score=0.007
+    Pos 29 A->T: MHC-II=83 (removed=+1), ddG=1.60, score=0.594
+    Pos 29 A->N: MHC-II=83 (removed=+1), ddG=1.82, score=0.526
+    Pos 29 A->D: MHC-II=84 (removed=+0), ddG=1.83, score=0.005
+    Pos 29 A->K: MHC-II=82 (removed=+2), ddG=2.05, score=0.935
+    Pos 31 E->M: MHC-II=86 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=86 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=86 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=85 (removed=-1), ddG=1.40, score=-0.660
+    Pos 31 E->C: MHC-II=83 (removed=+1), ddG=1.53, score=0.620
+    Pos 32 K->M: MHC-II=82 (removed=+2), ddG=1.15, score=1.608
+    Pos 32 K->I: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 32 K->L: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 32 K->F: MHC-II=83 (removed=+1), ddG=1.42, score=0.664
+    Pos 32 K->C: MHC-II=80 (removed=+4), ddG=1.52, score=2.475
+    Pos 33 L->N: MHC-II=82 (removed=+2), ddG=1.12, score=1.648
+    Pos 33 L->D: MHC-II=80 (removed=+4), ddG=1.13, score=3.260
+    Pos 33 L->T: MHC-II=82 (removed=+2), ddG=1.30, score=1.436
+    Pos 33 L->K: MHC-II=81 (removed=+3), ddG=1.35, score=2.076
+    Pos 33 L->Q: MHC-II=81 (removed=+3), ddG=1.35, score=2.076
+    Pos 36 D->I: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 36 D->L: MHC-II=81 (removed=+3), ddG=1.13, score=2.447
+    Pos 36 D->C: MHC-II=79 (removed=+5), ddG=1.30, score=3.579
+    Pos 36 D->M: MHC-II=79 (removed=+5), ddG=1.37, score=3.408
+    Pos 36 D->V: MHC-II=85 (removed=-1), ddG=1.37, score=-0.673
+    Pos 38 L->N: MHC-II=80 (removed=+4), ddG=1.12, score=3.287
+    Pos 38 L->D: MHC-II=80 (removed=+4), ddG=1.13, score=3.260
+    Pos 38 L->T: MHC-II=82 (removed=+2), ddG=1.30, score=1.436
+    Pos 38 L->K: MHC-II=79 (removed=+5), ddG=1.35, score=3.455
+    Pos 38 L->Q: MHC-II=81 (removed=+3), ddG=1.35, score=2.076
+    Pos 41 D->I: MHC-II=81 (removed=+3), ddG=1.13, score=2.447
+    Pos 41 D->L: MHC-II=79 (removed=+5), ddG=1.13, score=4.073
+    Pos 41 D->C: MHC-II=77 (removed=+7), ddG=1.30, score=5.007
+    Pos 41 D->M: MHC-II=79 (removed=+5), ddG=1.37, score=3.408
+    Pos 41 D->V: MHC-II=79 (removed=+5), ddG=1.37, score=3.408
+    Pos 43 R->Y: MHC-II=80 (removed=+4), ddG=1.22, score=3.038
+    Pos 43 R->F: MHC-II=78 (removed=+6), ddG=1.25, score=4.452
+    Pos 43 R->M: MHC-II=82 (removed=+2), ddG=1.52, score=1.241
+    Pos 43 R->W: MHC-II=78 (removed=+6), ddG=1.60, score=3.535
+    Pos 43 R->I: MHC-II=86 (removed=-2), ddG=1.82, score=-1.036
+    Pos 46 T->C: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 46 T->V: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 46 T->I: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 46 T->L: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 46 T->A: MHC-II=84 (removed=+0), ddG=1.60, score=0.006
+    Pos 63 L->N: MHC-II=80 (removed=+4), ddG=1.12, score=3.287
+    Pos 63 L->D: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 63 L->T: MHC-II=81 (removed=+3), ddG=1.30, score=2.150
+    Pos 63 L->K: MHC-II=79 (removed=+5), ddG=1.35, score=3.455
+    Pos 63 L->Q: MHC-II=82 (removed=+2), ddG=1.35, score=1.386
+    Pos 65 G->S: MHC-II=83 (removed=+1), ddG=1.60, score=0.594
+    Pos 65 G->T: MHC-II=82 (removed=+2), ddG=1.83, score=1.041
+    Pos 65 G->N: MHC-II=82 (removed=+2), ddG=2.05, score=0.935
+    Pos 65 G->D: MHC-II=84 (removed=+0), ddG=2.07, score=0.005
+    Pos 65 G->K: MHC-II=78 (removed=+6), ddG=2.28, score=2.525
+    Pos 68 I->N: MHC-II=83 (removed=+1), ddG=1.12, score=0.828
+    Pos 68 I->D: MHC-II=81 (removed=+3), ddG=1.13, score=2.447
+    Pos 68 I->T: MHC-II=83 (removed=+1), ddG=1.30, score=0.721
+    Pos 68 I->K: MHC-II=80 (removed=+4), ddG=1.35, score=2.766
+    Pos 68 I->Q: MHC-II=82 (removed=+2), ddG=1.35, score=1.386
+    Pos 94 Y->R: MHC-II=82 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=82 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=82 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=82 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=82 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=84 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=83 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=86 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=84 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=83 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=87 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=86 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=85 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=84 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=84 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=86 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 107 F->R: MHC-II=80 (removed=+4), ddG=1.25, score=2.970
+    Pos 107 F->H: MHC-II=80 (removed=+4), ddG=1.27, score=2.927
+    Pos 107 F->E: MHC-II=80 (removed=+4), ddG=1.40, score=2.673
+    Pos 107 F->K: MHC-II=80 (removed=+4), ddG=1.42, score=2.638
+    Pos 107 F->Q: MHC-II=80 (removed=+4), ddG=1.42, score=2.638
+    Pos 110 S->V: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 110 S->A: MHC-II=84 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->C: MHC-II=84 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->I: MHC-II=84 (removed=+0), ddG=1.53, score=0.006
+    Pos 110 S->L: MHC-II=86 (removed=-2), ddG=1.53, score=-1.221
+    Pos 200 L->N: MHC-II=81 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=82 (removed=+2), ddG=1.13, score=1.634
+    Pos 200 L->T: MHC-II=81 (removed=+3), ddG=1.30, score=2.150
+    Pos 200 L->K: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 200 L->Q: MHC-II=81 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=85 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=85 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=79 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=85 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=85 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=85 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=87 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=85 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=83 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=85 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=83 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=83 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=83 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=81 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=80 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=80 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=80 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=80 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=80 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=84 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=86 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=82 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=84 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=84 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=82 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=81 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=82 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=86 (removed=-2), ddG=1.37, score=-1.354
+    Pos 238 F->R: MHC-II=83 (removed=+1), ddG=1.25, score=0.748
+    Pos 238 F->H: MHC-II=83 (removed=+1), ddG=1.27, score=0.737
+    Pos 238 F->E: MHC-II=82 (removed=+2), ddG=1.40, score=1.340
+    Pos 238 F->K: MHC-II=83 (removed=+1), ddG=1.42, score=0.664
+    Pos 238 F->Q: MHC-II=83 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->R: MHC-II=82 (removed=+2), ddG=1.25, score=1.489
+    Pos 244 F->H: MHC-II=84 (removed=+0), ddG=1.27, score=0.007
+    Pos 244 F->E: MHC-II=84 (removed=+0), ddG=1.40, score=0.007
+    Pos 244 F->K: MHC-II=83 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->Q: MHC-II=84 (removed=+0), ddG=1.42, score=0.007
+    Pos 246 A->S: MHC-II=84 (removed=+0), ddG=1.37, score=0.007
+    Pos 246 A->T: MHC-II=82 (removed=+2), ddG=1.60, score=1.182
+    Pos 246 A->N: MHC-II=81 (removed=+3), ddG=1.82, score=1.568
+    Pos 246 A->D: MHC-II=80 (removed=+4), ddG=1.83, score=2.078
+    Pos 246 A->K: MHC-II=82 (removed=+2), ddG=2.05, score=0.935
+    Pos 247 F->R: MHC-II=82 (removed=+2), ddG=1.25, score=1.489
+    Pos 247 F->H: MHC-II=83 (removed=+1), ddG=1.27, score=0.737
+    Pos 247 F->E: MHC-II=86 (removed=-2), ddG=1.40, score=-1.327
+    Pos 247 F->K: MHC-II=82 (removed=+2), ddG=1.42, score=1.322
+    Pos 247 F->Q: MHC-II=86 (removed=-2), ddG=1.42, score=-1.309
+    Pos 249 G->S: MHC-II=87 (removed=-3), ddG=1.60, score=-1.759
+    Pos 249 G->T: MHC-II=87 (removed=-3), ddG=1.83, score=-1.549
+    Pos 249 G->N: MHC-II=85 (removed=-1), ddG=2.05, score=-0.460
+    Pos 249 G->D: MHC-II=85 (removed=-1), ddG=2.07, score=-0.456
+    Pos 249 G->K: MHC-II=81 (removed=+3), ddG=2.28, score=1.265
+    Pos 252 P->T: MHC-II=85 (removed=-1), ddG=1.17, score=-0.780
+    Pos 252 P->S: MHC-II=86 (removed=-2), ddG=1.27, score=-1.453
+    Pos 252 P->N: MHC-II=84 (removed=+0), ddG=1.38, score=0.007
+    Pos 252 P->D: MHC-II=84 (removed=+0), ddG=1.40, score=0.007
+    Pos 252 P->K: MHC-II=83 (removed=+1), ddG=1.62, score=0.587
+    Pos 280 Y->R: MHC-II=80 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=80 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=80 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=80 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=80 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=83 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=83 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=83 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=84 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=81 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=82 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=82 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=82 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=82 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=79 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=84 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=85 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=80 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=86 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=83 (removed=+1), ddG=1.53, score=0.620
+  APPLIED: Pos 41 D->C | MHC-II: 92 -> 77 (-7) | cumDDG=2.98
+
+  Round 3: 77 binders, 50 anchor positions, budget_remaining=7.02
+    Pos 15 F->R: MHC-II=74 (removed=+3), ddG=1.25, score=2.230
+    Pos 15 F->H: MHC-II=74 (removed=+3), ddG=1.27, score=2.197
+    Pos 15 F->E: MHC-II=74 (removed=+3), ddG=1.40, score=2.007
+    Pos 15 F->K: MHC-II=74 (removed=+3), ddG=1.42, score=1.980
+    Pos 15 F->Q: MHC-II=74 (removed=+3), ddG=1.42, score=1.980
+    Pos 18 E->M: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 18 E->I: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->L: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->F: MHC-II=74 (removed=+3), ddG=1.40, score=2.007
+    Pos 18 E->C: MHC-II=73 (removed=+4), ddG=1.53, score=2.460
+    Pos 20 E->M: MHC-II=74 (removed=+3), ddG=1.13, score=2.447
+    Pos 20 E->I: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 20 E->L: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 20 E->F: MHC-II=74 (removed=+3), ddG=1.40, score=2.007
+    Pos 20 E->C: MHC-II=74 (removed=+3), ddG=1.53, score=1.847
+    Pos 21 L->N: MHC-II=76 (removed=+1), ddG=1.12, score=0.828
+    Pos 21 L->D: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 21 L->T: MHC-II=75 (removed=+2), ddG=1.30, score=1.436
+    Pos 21 L->K: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 21 L->Q: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 23 Y->R: MHC-II=79 (removed=-2), ddG=1.22, score=-1.508
+    Pos 23 Y->H: MHC-II=76 (removed=+1), ddG=1.53, score=0.620
+    Pos 23 Y->E: MHC-II=75 (removed=+2), ddG=1.67, score=1.136
+    Pos 23 Y->K: MHC-II=76 (removed=+1), ddG=1.68, score=0.567
+    Pos 23 Y->Q: MHC-II=77 (removed=+0), ddG=1.68, score=0.006
+    Pos 24 I->N: MHC-II=77 (removed=+0), ddG=1.12, score=0.008
+    Pos 24 I->D: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 24 I->T: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 24 I->K: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 24 I->Q: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->N: MHC-II=77 (removed=+0), ddG=1.12, score=0.008
+    Pos 26 I->D: MHC-II=77 (removed=+0), ddG=1.13, score=0.008
+    Pos 26 I->T: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 26 I->K: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->Q: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 27 D->I: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 27 D->L: MHC-II=74 (removed=+3), ddG=1.13, score=2.447
+    Pos 27 D->C: MHC-II=72 (removed=+5), ddG=1.30, score=3.579
+    Pos 27 D->M: MHC-II=73 (removed=+4), ddG=1.37, score=2.728
+    Pos 27 D->V: MHC-II=75 (removed=+2), ddG=1.37, score=1.367
+    Pos 28 T->C: MHC-II=75 (removed=+2), ddG=1.13, score=1.634
+    Pos 28 T->V: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 28 T->I: MHC-II=76 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->L: MHC-II=76 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->A: MHC-II=77 (removed=+0), ddG=1.60, score=0.006
+    Pos 29 A->S: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 29 A->T: MHC-II=76 (removed=+1), ddG=1.60, score=0.594
+    Pos 29 A->N: MHC-II=76 (removed=+1), ddG=1.82, score=0.526
+    Pos 29 A->D: MHC-II=77 (removed=+0), ddG=1.83, score=0.005
+    Pos 29 A->K: MHC-II=75 (removed=+2), ddG=2.05, score=0.935
+    Pos 31 E->M: MHC-II=79 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=79 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=79 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=78 (removed=-1), ddG=1.40, score=-0.660
+    Pos 31 E->C: MHC-II=75 (removed=+2), ddG=1.53, score=1.233
+    Pos 32 K->M: MHC-II=74 (removed=+3), ddG=1.15, score=2.408
+    Pos 32 K->I: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 32 K->L: MHC-II=74 (removed=+3), ddG=1.35, score=2.076
+    Pos 32 K->F: MHC-II=74 (removed=+3), ddG=1.42, score=1.980
+    Pos 32 K->C: MHC-II=73 (removed=+4), ddG=1.52, score=2.475
+    Pos 33 L->N: MHC-II=73 (removed=+4), ddG=1.12, score=3.287
+    Pos 33 L->D: MHC-II=73 (removed=+4), ddG=1.13, score=3.260
+    Pos 33 L->T: MHC-II=73 (removed=+4), ddG=1.30, score=2.864
+    Pos 33 L->K: MHC-II=73 (removed=+4), ddG=1.35, score=2.766
+    Pos 33 L->Q: MHC-II=73 (removed=+4), ddG=1.35, score=2.766
+    Pos 36 D->I: MHC-II=73 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->L: MHC-II=73 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->C: MHC-II=73 (removed=+4), ddG=1.30, score=2.864
+    Pos 36 D->M: MHC-II=73 (removed=+4), ddG=1.37, score=2.728
+    Pos 36 D->V: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 38 L->N: MHC-II=79 (removed=-2), ddG=1.12, score=-1.631
+    Pos 38 L->D: MHC-II=80 (removed=-3), ddG=1.13, score=-2.431
+    Pos 38 L->T: MHC-II=78 (removed=-1), ddG=1.30, score=-0.707
+    Pos 38 L->K: MHC-II=79 (removed=-2), ddG=1.35, score=-1.372
+    Pos 38 L->Q: MHC-II=78 (removed=-1), ddG=1.35, score=-0.683
+    Pos 63 L->N: MHC-II=73 (removed=+4), ddG=1.12, score=3.287
+    Pos 63 L->D: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 63 L->T: MHC-II=74 (removed=+3), ddG=1.30, score=2.150
+    Pos 63 L->K: MHC-II=72 (removed=+5), ddG=1.35, score=3.455
+    Pos 63 L->Q: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 65 G->S: MHC-II=76 (removed=+1), ddG=1.60, score=0.594
+    Pos 65 G->T: MHC-II=75 (removed=+2), ddG=1.83, score=1.041
+    Pos 65 G->N: MHC-II=75 (removed=+2), ddG=2.05, score=0.935
+    Pos 65 G->D: MHC-II=77 (removed=+0), ddG=2.07, score=0.005
+    Pos 65 G->K: MHC-II=71 (removed=+6), ddG=2.28, score=2.525
+    Pos 68 I->N: MHC-II=76 (removed=+1), ddG=1.12, score=0.828
+    Pos 68 I->D: MHC-II=74 (removed=+3), ddG=1.13, score=2.447
+    Pos 68 I->T: MHC-II=76 (removed=+1), ddG=1.30, score=0.721
+    Pos 68 I->K: MHC-II=73 (removed=+4), ddG=1.35, score=2.766
+    Pos 68 I->Q: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 94 Y->R: MHC-II=75 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=75 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=75 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=75 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=75 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=77 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=76 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=79 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=80 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=79 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=77 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=78 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=77 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=77 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=79 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 107 F->R: MHC-II=73 (removed=+4), ddG=1.25, score=2.970
+    Pos 107 F->H: MHC-II=73 (removed=+4), ddG=1.27, score=2.927
+    Pos 107 F->E: MHC-II=73 (removed=+4), ddG=1.40, score=2.673
+    Pos 107 F->K: MHC-II=73 (removed=+4), ddG=1.42, score=2.638
+    Pos 107 F->Q: MHC-II=73 (removed=+4), ddG=1.42, score=2.638
+    Pos 110 S->V: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 110 S->A: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->C: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->I: MHC-II=77 (removed=+0), ddG=1.53, score=0.006
+    Pos 110 S->L: MHC-II=79 (removed=-2), ddG=1.53, score=-1.221
+    Pos 157 L->N: MHC-II=75 (removed=+2), ddG=1.12, score=1.648
+    Pos 157 L->D: MHC-II=75 (removed=+2), ddG=1.13, score=1.634
+    Pos 157 L->T: MHC-II=75 (removed=+2), ddG=1.30, score=1.436
+    Pos 157 L->K: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 157 L->Q: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 160 M->E: MHC-II=77 (removed=+0), ddG=1.13, score=0.008
+    Pos 160 M->K: MHC-II=76 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->Q: MHC-II=76 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->H: MHC-II=75 (removed=+2), ddG=1.20, score=1.546
+    Pos 160 M->D: MHC-II=79 (removed=-2), ddG=1.37, score=-1.354
+    Pos 162 T->C: MHC-II=74 (removed=+3), ddG=1.13, score=2.447
+    Pos 162 T->V: MHC-II=77 (removed=+0), ddG=1.13, score=0.008
+    Pos 162 T->I: MHC-II=75 (removed=+2), ddG=1.30, score=1.436
+    Pos 162 T->L: MHC-II=76 (removed=+1), ddG=1.30, score=0.721
+    Pos 162 T->A: MHC-II=79 (removed=-2), ddG=1.60, score=-1.171
+    Pos 165 L->N: MHC-II=80 (removed=-3), ddG=1.12, score=-2.451
+    Pos 165 L->D: MHC-II=80 (removed=-3), ddG=1.13, score=-2.431
+    Pos 165 L->T: MHC-II=80 (removed=-3), ddG=1.30, score=-2.136
+    Pos 165 L->K: MHC-II=74 (removed=+3), ddG=1.35, score=2.076
+    Pos 165 L->Q: MHC-II=78 (removed=-1), ddG=1.35, score=-0.683
+    Pos 184 L->N: MHC-II=74 (removed=+3), ddG=1.12, score=2.467
+    Pos 184 L->D: MHC-II=73 (removed=+4), ddG=1.13, score=3.260
+    Pos 184 L->T: MHC-II=74 (removed=+3), ddG=1.30, score=2.150
+    Pos 184 L->K: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 184 L->Q: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 187 E->M: MHC-II=72 (removed=+5), ddG=1.13, score=4.073
+    Pos 187 E->I: MHC-II=72 (removed=+5), ddG=1.37, score=3.408
+    Pos 187 E->L: MHC-II=72 (removed=+5), ddG=1.37, score=3.408
+    Pos 187 E->F: MHC-II=72 (removed=+5), ddG=1.40, score=3.340
+    Pos 187 E->C: MHC-II=72 (removed=+5), ddG=1.53, score=3.074
+    Pos 189 E->M: MHC-II=72 (removed=+5), ddG=1.13, score=4.073
+    Pos 189 E->I: MHC-II=74 (removed=+3), ddG=1.37, score=2.048
+    Pos 189 E->L: MHC-II=72 (removed=+5), ddG=1.37, score=3.408
+    Pos 189 E->F: MHC-II=72 (removed=+5), ddG=1.40, score=3.340
+    Pos 189 E->C: MHC-II=72 (removed=+5), ddG=1.53, score=3.074
+    Pos 192 R->Y: MHC-II=76 (removed=+1), ddG=1.22, score=0.765
+    Pos 192 R->F: MHC-II=75 (removed=+2), ddG=1.25, score=1.489
+    Pos 192 R->M: MHC-II=75 (removed=+2), ddG=1.52, score=1.241
+    Pos 192 R->W: MHC-II=73 (removed=+4), ddG=1.60, score=2.359
+    Pos 192 R->I: MHC-II=76 (removed=+1), ddG=1.82, score=0.526
+    Pos 200 L->N: MHC-II=74 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=75 (removed=+2), ddG=1.13, score=1.634
+    Pos 200 L->T: MHC-II=74 (removed=+3), ddG=1.30, score=2.150
+    Pos 200 L->K: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 200 L->Q: MHC-II=74 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=78 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=78 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=72 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=78 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=78 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=78 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=80 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=78 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=76 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=78 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=76 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=76 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=76 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=74 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=73 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=73 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=73 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=73 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=73 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=77 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=79 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=77 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=77 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=75 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=74 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=75 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=79 (removed=-2), ddG=1.37, score=-1.354
+    Pos 238 F->R: MHC-II=76 (removed=+1), ddG=1.25, score=0.748
+    Pos 238 F->H: MHC-II=76 (removed=+1), ddG=1.27, score=0.737
+    Pos 238 F->E: MHC-II=75 (removed=+2), ddG=1.40, score=1.340
+    Pos 238 F->K: MHC-II=76 (removed=+1), ddG=1.42, score=0.664
+    Pos 238 F->Q: MHC-II=76 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->R: MHC-II=75 (removed=+2), ddG=1.25, score=1.489
+    Pos 244 F->H: MHC-II=77 (removed=+0), ddG=1.27, score=0.007
+    Pos 244 F->E: MHC-II=77 (removed=+0), ddG=1.40, score=0.007
+    Pos 244 F->K: MHC-II=76 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->Q: MHC-II=77 (removed=+0), ddG=1.42, score=0.007
+    Pos 246 A->S: MHC-II=77 (removed=+0), ddG=1.37, score=0.007
+    Pos 246 A->T: MHC-II=75 (removed=+2), ddG=1.60, score=1.182
+    Pos 246 A->N: MHC-II=74 (removed=+3), ddG=1.82, score=1.568
+    Pos 246 A->D: MHC-II=73 (removed=+4), ddG=1.83, score=2.078
+    Pos 246 A->K: MHC-II=75 (removed=+2), ddG=2.05, score=0.935
+    Pos 247 F->R: MHC-II=75 (removed=+2), ddG=1.25, score=1.489
+    Pos 247 F->H: MHC-II=76 (removed=+1), ddG=1.27, score=0.737
+    Pos 247 F->E: MHC-II=79 (removed=-2), ddG=1.40, score=-1.327
+    Pos 247 F->K: MHC-II=75 (removed=+2), ddG=1.42, score=1.322
+    Pos 247 F->Q: MHC-II=79 (removed=-2), ddG=1.42, score=-1.309
+    Pos 249 G->S: MHC-II=80 (removed=-3), ddG=1.60, score=-1.759
+    Pos 249 G->T: MHC-II=80 (removed=-3), ddG=1.83, score=-1.549
+    Pos 249 G->N: MHC-II=78 (removed=-1), ddG=2.05, score=-0.460
+    Pos 249 G->D: MHC-II=78 (removed=-1), ddG=2.07, score=-0.456
+    Pos 249 G->K: MHC-II=74 (removed=+3), ddG=2.28, score=1.265
+    Pos 252 P->T: MHC-II=78 (removed=-1), ddG=1.17, score=-0.780
+    Pos 252 P->S: MHC-II=79 (removed=-2), ddG=1.27, score=-1.453
+    Pos 252 P->N: MHC-II=77 (removed=+0), ddG=1.38, score=0.007
+    Pos 252 P->D: MHC-II=77 (removed=+0), ddG=1.40, score=0.007
+    Pos 252 P->K: MHC-II=76 (removed=+1), ddG=1.62, score=0.587
+    Pos 280 Y->R: MHC-II=73 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=73 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=73 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=73 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=73 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=76 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=76 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=76 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=77 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=74 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=75 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=75 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=75 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=75 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=72 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=77 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=78 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=73 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=79 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=76 (removed=+1), ddG=1.53, score=0.620
+  APPLIED: Pos 65 G->K | MHC-II: 92 -> 71 (-6) | cumDDG=5.26
+
+  Round 4: 71 binders, 47 anchor positions, budget_remaining=4.74
+    Pos 15 F->R: MHC-II=68 (removed=+3), ddG=1.25, score=2.230
+    Pos 15 F->H: MHC-II=68 (removed=+3), ddG=1.27, score=2.197
+    Pos 15 F->E: MHC-II=68 (removed=+3), ddG=1.40, score=2.007
+    Pos 15 F->K: MHC-II=68 (removed=+3), ddG=1.42, score=1.980
+    Pos 15 F->Q: MHC-II=68 (removed=+3), ddG=1.42, score=1.980
+    Pos 18 E->M: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 18 E->I: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->L: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->F: MHC-II=68 (removed=+3), ddG=1.40, score=2.007
+    Pos 18 E->C: MHC-II=67 (removed=+4), ddG=1.53, score=2.460
+    Pos 20 E->M: MHC-II=68 (removed=+3), ddG=1.13, score=2.447
+    Pos 20 E->I: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 20 E->L: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 20 E->F: MHC-II=68 (removed=+3), ddG=1.40, score=2.007
+    Pos 20 E->C: MHC-II=68 (removed=+3), ddG=1.53, score=1.847
+    Pos 21 L->N: MHC-II=70 (removed=+1), ddG=1.12, score=0.828
+    Pos 21 L->D: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 21 L->T: MHC-II=69 (removed=+2), ddG=1.30, score=1.436
+    Pos 21 L->K: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 21 L->Q: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 23 Y->R: MHC-II=73 (removed=-2), ddG=1.22, score=-1.508
+    Pos 23 Y->H: MHC-II=70 (removed=+1), ddG=1.53, score=0.620
+    Pos 23 Y->E: MHC-II=69 (removed=+2), ddG=1.67, score=1.136
+    Pos 23 Y->K: MHC-II=70 (removed=+1), ddG=1.68, score=0.567
+    Pos 23 Y->Q: MHC-II=71 (removed=+0), ddG=1.68, score=0.006
+    Pos 24 I->N: MHC-II=71 (removed=+0), ddG=1.12, score=0.008
+    Pos 24 I->D: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 24 I->T: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 24 I->K: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 24 I->Q: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->N: MHC-II=71 (removed=+0), ddG=1.12, score=0.008
+    Pos 26 I->D: MHC-II=71 (removed=+0), ddG=1.13, score=0.008
+    Pos 26 I->T: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 26 I->K: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->Q: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 27 D->I: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 27 D->L: MHC-II=68 (removed=+3), ddG=1.13, score=2.447
+    Pos 27 D->C: MHC-II=66 (removed=+5), ddG=1.30, score=3.579
+    Pos 27 D->M: MHC-II=67 (removed=+4), ddG=1.37, score=2.728
+    Pos 27 D->V: MHC-II=69 (removed=+2), ddG=1.37, score=1.367
+    Pos 28 T->C: MHC-II=69 (removed=+2), ddG=1.13, score=1.634
+    Pos 28 T->V: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 28 T->I: MHC-II=70 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->L: MHC-II=70 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->A: MHC-II=71 (removed=+0), ddG=1.60, score=0.006
+    Pos 29 A->S: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 29 A->T: MHC-II=70 (removed=+1), ddG=1.60, score=0.594
+    Pos 29 A->N: MHC-II=70 (removed=+1), ddG=1.82, score=0.526
+    Pos 29 A->D: MHC-II=71 (removed=+0), ddG=1.83, score=0.005
+    Pos 29 A->K: MHC-II=69 (removed=+2), ddG=2.05, score=0.935
+    Pos 31 E->M: MHC-II=73 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=73 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=73 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=72 (removed=-1), ddG=1.40, score=-0.660
+    Pos 31 E->C: MHC-II=69 (removed=+2), ddG=1.53, score=1.233
+    Pos 32 K->M: MHC-II=68 (removed=+3), ddG=1.15, score=2.408
+    Pos 32 K->I: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 32 K->L: MHC-II=68 (removed=+3), ddG=1.35, score=2.076
+    Pos 32 K->F: MHC-II=68 (removed=+3), ddG=1.42, score=1.980
+    Pos 32 K->C: MHC-II=67 (removed=+4), ddG=1.52, score=2.475
+    Pos 33 L->N: MHC-II=67 (removed=+4), ddG=1.12, score=3.287
+    Pos 33 L->D: MHC-II=67 (removed=+4), ddG=1.13, score=3.260
+    Pos 33 L->T: MHC-II=67 (removed=+4), ddG=1.30, score=2.864
+    Pos 33 L->K: MHC-II=67 (removed=+4), ddG=1.35, score=2.766
+    Pos 33 L->Q: MHC-II=67 (removed=+4), ddG=1.35, score=2.766
+    Pos 36 D->I: MHC-II=67 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->L: MHC-II=67 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->C: MHC-II=67 (removed=+4), ddG=1.30, score=2.864
+    Pos 36 D->M: MHC-II=67 (removed=+4), ddG=1.37, score=2.728
+    Pos 36 D->V: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 38 L->N: MHC-II=73 (removed=-2), ddG=1.12, score=-1.631
+    Pos 38 L->D: MHC-II=74 (removed=-3), ddG=1.13, score=-2.431
+    Pos 38 L->T: MHC-II=72 (removed=-1), ddG=1.30, score=-0.707
+    Pos 38 L->K: MHC-II=73 (removed=-2), ddG=1.35, score=-1.372
+    Pos 38 L->Q: MHC-II=72 (removed=-1), ddG=1.35, score=-0.683
+    Pos 94 Y->R: MHC-II=69 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=69 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=69 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=69 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=69 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=71 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=70 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=73 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=74 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=73 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=71 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=72 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=71 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=71 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=73 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 107 F->R: MHC-II=67 (removed=+4), ddG=1.25, score=2.970
+    Pos 107 F->H: MHC-II=67 (removed=+4), ddG=1.27, score=2.927
+    Pos 107 F->E: MHC-II=67 (removed=+4), ddG=1.40, score=2.673
+    Pos 107 F->K: MHC-II=67 (removed=+4), ddG=1.42, score=2.638
+    Pos 107 F->Q: MHC-II=67 (removed=+4), ddG=1.42, score=2.638
+    Pos 110 S->V: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 110 S->A: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->C: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->I: MHC-II=71 (removed=+0), ddG=1.53, score=0.006
+    Pos 110 S->L: MHC-II=73 (removed=-2), ddG=1.53, score=-1.221
+    Pos 157 L->N: MHC-II=69 (removed=+2), ddG=1.12, score=1.648
+    Pos 157 L->D: MHC-II=69 (removed=+2), ddG=1.13, score=1.634
+    Pos 157 L->T: MHC-II=69 (removed=+2), ddG=1.30, score=1.436
+    Pos 157 L->K: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 157 L->Q: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 160 M->E: MHC-II=71 (removed=+0), ddG=1.13, score=0.008
+    Pos 160 M->K: MHC-II=70 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->Q: MHC-II=70 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->H: MHC-II=69 (removed=+2), ddG=1.20, score=1.546
+    Pos 160 M->D: MHC-II=73 (removed=-2), ddG=1.37, score=-1.354
+    Pos 162 T->C: MHC-II=68 (removed=+3), ddG=1.13, score=2.447
+    Pos 162 T->V: MHC-II=71 (removed=+0), ddG=1.13, score=0.008
+    Pos 162 T->I: MHC-II=69 (removed=+2), ddG=1.30, score=1.436
+    Pos 162 T->L: MHC-II=70 (removed=+1), ddG=1.30, score=0.721
+    Pos 162 T->A: MHC-II=73 (removed=-2), ddG=1.60, score=-1.171
+    Pos 165 L->N: MHC-II=74 (removed=-3), ddG=1.12, score=-2.451
+    Pos 165 L->D: MHC-II=74 (removed=-3), ddG=1.13, score=-2.431
+    Pos 165 L->T: MHC-II=74 (removed=-3), ddG=1.30, score=-2.136
+    Pos 165 L->K: MHC-II=68 (removed=+3), ddG=1.35, score=2.076
+    Pos 165 L->Q: MHC-II=72 (removed=-1), ddG=1.35, score=-0.683
+    Pos 184 L->N: MHC-II=68 (removed=+3), ddG=1.12, score=2.467
+    Pos 184 L->D: MHC-II=67 (removed=+4), ddG=1.13, score=3.260
+    Pos 184 L->T: MHC-II=68 (removed=+3), ddG=1.30, score=2.150
+    Pos 184 L->K: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 184 L->Q: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 187 E->M: MHC-II=66 (removed=+5), ddG=1.13, score=4.073
+    Pos 187 E->I: MHC-II=66 (removed=+5), ddG=1.37, score=3.408
+    Pos 187 E->L: MHC-II=66 (removed=+5), ddG=1.37, score=3.408
+    Pos 187 E->F: MHC-II=66 (removed=+5), ddG=1.40, score=3.340
+    Pos 187 E->C: MHC-II=66 (removed=+5), ddG=1.53, score=3.074
+    Pos 189 E->M: MHC-II=66 (removed=+5), ddG=1.13, score=4.073
+    Pos 189 E->I: MHC-II=68 (removed=+3), ddG=1.37, score=2.048
+    Pos 189 E->L: MHC-II=66 (removed=+5), ddG=1.37, score=3.408
+    Pos 189 E->F: MHC-II=66 (removed=+5), ddG=1.40, score=3.340
+    Pos 189 E->C: MHC-II=66 (removed=+5), ddG=1.53, score=3.074
+    Pos 192 R->Y: MHC-II=70 (removed=+1), ddG=1.22, score=0.765
+    Pos 192 R->F: MHC-II=69 (removed=+2), ddG=1.25, score=1.489
+    Pos 192 R->M: MHC-II=69 (removed=+2), ddG=1.52, score=1.241
+    Pos 192 R->W: MHC-II=67 (removed=+4), ddG=1.60, score=2.359
+    Pos 192 R->I: MHC-II=70 (removed=+1), ddG=1.82, score=0.526
+    Pos 200 L->N: MHC-II=68 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=69 (removed=+2), ddG=1.13, score=1.634
+    Pos 200 L->T: MHC-II=68 (removed=+3), ddG=1.30, score=2.150
+    Pos 200 L->K: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 200 L->Q: MHC-II=68 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=72 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=72 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=66 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=72 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=72 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=72 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=74 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=72 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=70 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=72 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=70 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=70 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=70 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=68 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=67 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=67 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=67 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=67 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=67 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=71 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=73 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=71 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=71 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=69 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=68 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=69 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=73 (removed=-2), ddG=1.37, score=-1.354
+    Pos 238 F->R: MHC-II=70 (removed=+1), ddG=1.25, score=0.748
+    Pos 238 F->H: MHC-II=70 (removed=+1), ddG=1.27, score=0.737
+    Pos 238 F->E: MHC-II=69 (removed=+2), ddG=1.40, score=1.340
+    Pos 238 F->K: MHC-II=70 (removed=+1), ddG=1.42, score=0.664
+    Pos 238 F->Q: MHC-II=70 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->R: MHC-II=69 (removed=+2), ddG=1.25, score=1.489
+    Pos 244 F->H: MHC-II=71 (removed=+0), ddG=1.27, score=0.007
+    Pos 244 F->E: MHC-II=71 (removed=+0), ddG=1.40, score=0.007
+    Pos 244 F->K: MHC-II=70 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->Q: MHC-II=71 (removed=+0), ddG=1.42, score=0.007
+    Pos 246 A->S: MHC-II=71 (removed=+0), ddG=1.37, score=0.007
+    Pos 246 A->T: MHC-II=69 (removed=+2), ddG=1.60, score=1.182
+    Pos 246 A->N: MHC-II=68 (removed=+3), ddG=1.82, score=1.568
+    Pos 246 A->D: MHC-II=67 (removed=+4), ddG=1.83, score=2.078
+    Pos 246 A->K: MHC-II=69 (removed=+2), ddG=2.05, score=0.935
+    Pos 247 F->R: MHC-II=69 (removed=+2), ddG=1.25, score=1.489
+    Pos 247 F->H: MHC-II=70 (removed=+1), ddG=1.27, score=0.737
+    Pos 247 F->E: MHC-II=73 (removed=-2), ddG=1.40, score=-1.327
+    Pos 247 F->K: MHC-II=69 (removed=+2), ddG=1.42, score=1.322
+    Pos 247 F->Q: MHC-II=73 (removed=-2), ddG=1.42, score=-1.309
+    Pos 249 G->S: MHC-II=74 (removed=-3), ddG=1.60, score=-1.759
+    Pos 249 G->T: MHC-II=74 (removed=-3), ddG=1.83, score=-1.549
+    Pos 249 G->N: MHC-II=72 (removed=-1), ddG=2.05, score=-0.460
+    Pos 249 G->D: MHC-II=72 (removed=-1), ddG=2.07, score=-0.456
+    Pos 249 G->K: MHC-II=68 (removed=+3), ddG=2.28, score=1.265
+    Pos 252 P->T: MHC-II=72 (removed=-1), ddG=1.17, score=-0.780
+    Pos 252 P->S: MHC-II=73 (removed=-2), ddG=1.27, score=-1.453
+    Pos 252 P->N: MHC-II=71 (removed=+0), ddG=1.38, score=0.007
+    Pos 252 P->D: MHC-II=71 (removed=+0), ddG=1.40, score=0.007
+    Pos 252 P->K: MHC-II=70 (removed=+1), ddG=1.62, score=0.587
+    Pos 280 Y->R: MHC-II=67 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=67 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=67 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=67 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=67 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=70 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=70 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=70 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=71 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=68 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=69 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=69 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=69 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=69 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=66 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=71 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=72 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=67 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=73 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=70 (removed=+1), ddG=1.53, score=0.620
+  APPLIED: Pos 187 E->M | MHC-II: 92 -> 66 (-5) | cumDDG=6.39
+
+  Round 5: 66 binders, 43 anchor positions, budget_remaining=3.61
+    Pos 15 F->R: MHC-II=63 (removed=+3), ddG=1.25, score=2.230
+    Pos 15 F->H: MHC-II=63 (removed=+3), ddG=1.27, score=2.197
+    Pos 15 F->E: MHC-II=63 (removed=+3), ddG=1.40, score=2.007
+    Pos 15 F->K: MHC-II=63 (removed=+3), ddG=1.42, score=1.980
+    Pos 15 F->Q: MHC-II=63 (removed=+3), ddG=1.42, score=1.980
+    Pos 18 E->M: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 18 E->I: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->L: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->F: MHC-II=63 (removed=+3), ddG=1.40, score=2.007
+    Pos 18 E->C: MHC-II=62 (removed=+4), ddG=1.53, score=2.460
+    Pos 20 E->M: MHC-II=63 (removed=+3), ddG=1.13, score=2.447
+    Pos 20 E->I: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 20 E->L: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 20 E->F: MHC-II=63 (removed=+3), ddG=1.40, score=2.007
+    Pos 20 E->C: MHC-II=63 (removed=+3), ddG=1.53, score=1.847
+    Pos 21 L->N: MHC-II=65 (removed=+1), ddG=1.12, score=0.828
+    Pos 21 L->D: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 21 L->T: MHC-II=64 (removed=+2), ddG=1.30, score=1.436
+    Pos 21 L->K: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 21 L->Q: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 23 Y->R: MHC-II=68 (removed=-2), ddG=1.22, score=-1.508
+    Pos 23 Y->H: MHC-II=65 (removed=+1), ddG=1.53, score=0.620
+    Pos 23 Y->E: MHC-II=64 (removed=+2), ddG=1.67, score=1.136
+    Pos 23 Y->K: MHC-II=65 (removed=+1), ddG=1.68, score=0.567
+    Pos 23 Y->Q: MHC-II=66 (removed=+0), ddG=1.68, score=0.006
+    Pos 24 I->N: MHC-II=66 (removed=+0), ddG=1.12, score=0.008
+    Pos 24 I->D: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 24 I->T: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 24 I->K: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 24 I->Q: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->N: MHC-II=66 (removed=+0), ddG=1.12, score=0.008
+    Pos 26 I->D: MHC-II=66 (removed=+0), ddG=1.13, score=0.008
+    Pos 26 I->T: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 26 I->K: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 26 I->Q: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 27 D->I: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 27 D->L: MHC-II=63 (removed=+3), ddG=1.13, score=2.447
+    Pos 27 D->C: MHC-II=61 (removed=+5), ddG=1.30, score=3.579
+    Pos 27 D->M: MHC-II=62 (removed=+4), ddG=1.37, score=2.728
+    Pos 27 D->V: MHC-II=64 (removed=+2), ddG=1.37, score=1.367
+    Pos 28 T->C: MHC-II=64 (removed=+2), ddG=1.13, score=1.634
+    Pos 28 T->V: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 28 T->I: MHC-II=65 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->L: MHC-II=65 (removed=+1), ddG=1.30, score=0.721
+    Pos 28 T->A: MHC-II=66 (removed=+0), ddG=1.60, score=0.006
+    Pos 29 A->S: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 29 A->T: MHC-II=65 (removed=+1), ddG=1.60, score=0.594
+    Pos 29 A->N: MHC-II=65 (removed=+1), ddG=1.82, score=0.526
+    Pos 29 A->D: MHC-II=66 (removed=+0), ddG=1.83, score=0.005
+    Pos 29 A->K: MHC-II=64 (removed=+2), ddG=2.05, score=0.935
+    Pos 31 E->M: MHC-II=68 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=68 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=68 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=67 (removed=-1), ddG=1.40, score=-0.660
+    Pos 31 E->C: MHC-II=64 (removed=+2), ddG=1.53, score=1.233
+    Pos 32 K->M: MHC-II=63 (removed=+3), ddG=1.15, score=2.408
+    Pos 32 K->I: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 32 K->L: MHC-II=63 (removed=+3), ddG=1.35, score=2.076
+    Pos 32 K->F: MHC-II=63 (removed=+3), ddG=1.42, score=1.980
+    Pos 32 K->C: MHC-II=62 (removed=+4), ddG=1.52, score=2.475
+    Pos 33 L->N: MHC-II=62 (removed=+4), ddG=1.12, score=3.287
+    Pos 33 L->D: MHC-II=62 (removed=+4), ddG=1.13, score=3.260
+    Pos 33 L->T: MHC-II=62 (removed=+4), ddG=1.30, score=2.864
+    Pos 33 L->K: MHC-II=62 (removed=+4), ddG=1.35, score=2.766
+    Pos 33 L->Q: MHC-II=62 (removed=+4), ddG=1.35, score=2.766
+    Pos 36 D->I: MHC-II=62 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->L: MHC-II=62 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->C: MHC-II=62 (removed=+4), ddG=1.30, score=2.864
+    Pos 36 D->M: MHC-II=62 (removed=+4), ddG=1.37, score=2.728
+    Pos 36 D->V: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 38 L->N: MHC-II=68 (removed=-2), ddG=1.12, score=-1.631
+    Pos 38 L->D: MHC-II=69 (removed=-3), ddG=1.13, score=-2.431
+    Pos 38 L->T: MHC-II=67 (removed=-1), ddG=1.30, score=-0.707
+    Pos 38 L->K: MHC-II=68 (removed=-2), ddG=1.35, score=-1.372
+    Pos 38 L->Q: MHC-II=67 (removed=-1), ddG=1.35, score=-0.683
+    Pos 94 Y->R: MHC-II=64 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=64 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=64 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=64 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=64 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=66 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=68 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=69 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=68 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=66 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=67 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=66 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=66 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=68 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 107 F->R: MHC-II=62 (removed=+4), ddG=1.25, score=2.970
+    Pos 107 F->H: MHC-II=62 (removed=+4), ddG=1.27, score=2.927
+    Pos 107 F->E: MHC-II=62 (removed=+4), ddG=1.40, score=2.673
+    Pos 107 F->K: MHC-II=62 (removed=+4), ddG=1.42, score=2.638
+    Pos 107 F->Q: MHC-II=62 (removed=+4), ddG=1.42, score=2.638
+    Pos 110 S->V: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 110 S->A: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->C: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->I: MHC-II=66 (removed=+0), ddG=1.53, score=0.006
+    Pos 110 S->L: MHC-II=68 (removed=-2), ddG=1.53, score=-1.221
+    Pos 157 L->N: MHC-II=64 (removed=+2), ddG=1.12, score=1.648
+    Pos 157 L->D: MHC-II=64 (removed=+2), ddG=1.13, score=1.634
+    Pos 157 L->T: MHC-II=64 (removed=+2), ddG=1.30, score=1.436
+    Pos 157 L->K: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 157 L->Q: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 160 M->E: MHC-II=66 (removed=+0), ddG=1.13, score=0.008
+    Pos 160 M->K: MHC-II=65 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->Q: MHC-II=65 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->H: MHC-II=64 (removed=+2), ddG=1.20, score=1.546
+    Pos 160 M->D: MHC-II=68 (removed=-2), ddG=1.37, score=-1.354
+    Pos 162 T->C: MHC-II=63 (removed=+3), ddG=1.13, score=2.447
+    Pos 162 T->V: MHC-II=66 (removed=+0), ddG=1.13, score=0.008
+    Pos 162 T->I: MHC-II=64 (removed=+2), ddG=1.30, score=1.436
+    Pos 162 T->L: MHC-II=65 (removed=+1), ddG=1.30, score=0.721
+    Pos 162 T->A: MHC-II=68 (removed=-2), ddG=1.60, score=-1.171
+    Pos 165 L->N: MHC-II=69 (removed=-3), ddG=1.12, score=-2.451
+    Pos 165 L->D: MHC-II=69 (removed=-3), ddG=1.13, score=-2.431
+    Pos 165 L->T: MHC-II=69 (removed=-3), ddG=1.30, score=-2.136
+    Pos 165 L->K: MHC-II=63 (removed=+3), ddG=1.35, score=2.076
+    Pos 165 L->Q: MHC-II=67 (removed=-1), ddG=1.35, score=-0.683
+    Pos 200 L->N: MHC-II=63 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=65 (removed=+1), ddG=1.13, score=0.821
+    Pos 200 L->T: MHC-II=62 (removed=+4), ddG=1.30, score=2.864
+    Pos 200 L->K: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 200 L->Q: MHC-II=63 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=67 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=67 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=61 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=67 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=67 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=67 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=69 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=67 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=65 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=67 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=65 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=65 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=65 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=63 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=62 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=62 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=62 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=62 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=62 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=66 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=68 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=66 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=66 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=64 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=63 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=64 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=68 (removed=-2), ddG=1.37, score=-1.354
+    Pos 238 F->R: MHC-II=65 (removed=+1), ddG=1.25, score=0.748
+    Pos 238 F->H: MHC-II=65 (removed=+1), ddG=1.27, score=0.737
+    Pos 238 F->E: MHC-II=64 (removed=+2), ddG=1.40, score=1.340
+    Pos 238 F->K: MHC-II=65 (removed=+1), ddG=1.42, score=0.664
+    Pos 238 F->Q: MHC-II=65 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->R: MHC-II=64 (removed=+2), ddG=1.25, score=1.489
+    Pos 244 F->H: MHC-II=66 (removed=+0), ddG=1.27, score=0.007
+    Pos 244 F->E: MHC-II=66 (removed=+0), ddG=1.40, score=0.007
+    Pos 244 F->K: MHC-II=65 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->Q: MHC-II=66 (removed=+0), ddG=1.42, score=0.007
+    Pos 246 A->S: MHC-II=66 (removed=+0), ddG=1.37, score=0.007
+    Pos 246 A->T: MHC-II=64 (removed=+2), ddG=1.60, score=1.182
+    Pos 246 A->N: MHC-II=63 (removed=+3), ddG=1.82, score=1.568
+    Pos 246 A->D: MHC-II=62 (removed=+4), ddG=1.83, score=2.078
+    Pos 246 A->K: MHC-II=64 (removed=+2), ddG=2.05, score=0.935
+    Pos 247 F->R: MHC-II=64 (removed=+2), ddG=1.25, score=1.489
+    Pos 247 F->H: MHC-II=65 (removed=+1), ddG=1.27, score=0.737
+    Pos 247 F->E: MHC-II=68 (removed=-2), ddG=1.40, score=-1.327
+    Pos 247 F->K: MHC-II=64 (removed=+2), ddG=1.42, score=1.322
+    Pos 247 F->Q: MHC-II=68 (removed=-2), ddG=1.42, score=-1.309
+    Pos 249 G->S: MHC-II=69 (removed=-3), ddG=1.60, score=-1.759
+    Pos 249 G->T: MHC-II=69 (removed=-3), ddG=1.83, score=-1.549
+    Pos 249 G->N: MHC-II=67 (removed=-1), ddG=2.05, score=-0.460
+    Pos 249 G->D: MHC-II=67 (removed=-1), ddG=2.07, score=-0.456
+    Pos 249 G->K: MHC-II=63 (removed=+3), ddG=2.28, score=1.265
+    Pos 252 P->T: MHC-II=67 (removed=-1), ddG=1.17, score=-0.780
+    Pos 252 P->S: MHC-II=68 (removed=-2), ddG=1.27, score=-1.453
+    Pos 252 P->N: MHC-II=66 (removed=+0), ddG=1.38, score=0.007
+    Pos 252 P->D: MHC-II=66 (removed=+0), ddG=1.40, score=0.007
+    Pos 252 P->K: MHC-II=65 (removed=+1), ddG=1.62, score=0.587
+    Pos 280 Y->R: MHC-II=62 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=62 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=62 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=62 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=62 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=65 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=65 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=65 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=66 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=63 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=64 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=64 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=64 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=64 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=61 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=66 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=67 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=62 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=68 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=65 (removed=+1), ddG=1.53, score=0.620
+  APPLIED: Pos 27 D->C | MHC-II: 92 -> 61 (-5) | cumDDG=7.69
+
+  Round 6: 61 binders, 44 anchor positions, budget_remaining=2.31
+    Pos 15 F->R: MHC-II=58 (removed=+3), ddG=1.25, score=2.230
+    Pos 15 F->H: MHC-II=58 (removed=+3), ddG=1.27, score=2.197
+    Pos 15 F->E: MHC-II=58 (removed=+3), ddG=1.40, score=2.007
+    Pos 15 F->K: MHC-II=58 (removed=+3), ddG=1.42, score=1.980
+    Pos 15 F->Q: MHC-II=58 (removed=+3), ddG=1.42, score=1.980
+    Pos 18 E->M: MHC-II=60 (removed=+1), ddG=1.13, score=0.821
+    Pos 18 E->I: MHC-II=60 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->L: MHC-II=60 (removed=+1), ddG=1.37, score=0.687
+    Pos 18 E->F: MHC-II=58 (removed=+3), ddG=1.40, score=2.007
+    Pos 18 E->C: MHC-II=58 (removed=+3), ddG=1.53, score=1.847
+    Pos 20 E->M: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 20 E->I: MHC-II=61 (removed=+0), ddG=1.37, score=0.007
+    Pos 20 E->L: MHC-II=58 (removed=+3), ddG=1.37, score=2.048
+    Pos 20 E->F: MHC-II=56 (removed=+5), ddG=1.40, score=3.340
+    Pos 20 E->C: MHC-II=56 (removed=+5), ddG=1.53, score=3.074
+    Pos 23 Y->R: MHC-II=60 (removed=+1), ddG=1.22, score=0.765
+    Pos 23 Y->H: MHC-II=57 (removed=+4), ddG=1.53, score=2.460
+    Pos 23 Y->E: MHC-II=57 (removed=+4), ddG=1.67, score=2.266
+    Pos 23 Y->K: MHC-II=57 (removed=+4), ddG=1.68, score=2.253
+    Pos 23 Y->Q: MHC-II=58 (removed=+3), ddG=1.68, score=1.691
+    Pos 26 I->N: MHC-II=64 (removed=-3), ddG=1.12, score=-2.451
+    Pos 26 I->D: MHC-II=64 (removed=-3), ddG=1.13, score=-2.431
+    Pos 26 I->T: MHC-II=64 (removed=-3), ddG=1.30, score=-2.136
+    Pos 26 I->K: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 26 I->Q: MHC-II=63 (removed=-2), ddG=1.35, score=-1.372
+    Pos 28 T->C: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 28 T->V: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 28 T->I: MHC-II=58 (removed=+3), ddG=1.30, score=2.150
+    Pos 28 T->L: MHC-II=58 (removed=+3), ddG=1.30, score=2.150
+    Pos 28 T->A: MHC-II=60 (removed=+1), ddG=1.60, score=0.594
+    Pos 31 E->M: MHC-II=63 (removed=-2), ddG=1.13, score=-1.618
+    Pos 31 E->I: MHC-II=63 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->L: MHC-II=63 (removed=-2), ddG=1.37, score=-1.354
+    Pos 31 E->F: MHC-II=60 (removed=+1), ddG=1.40, score=0.673
+    Pos 31 E->C: MHC-II=60 (removed=+1), ddG=1.53, score=0.620
+    Pos 33 L->N: MHC-II=58 (removed=+3), ddG=1.12, score=2.467
+    Pos 33 L->D: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 33 L->T: MHC-II=58 (removed=+3), ddG=1.30, score=2.150
+    Pos 33 L->K: MHC-II=58 (removed=+3), ddG=1.35, score=2.076
+    Pos 33 L->Q: MHC-II=58 (removed=+3), ddG=1.35, score=2.076
+    Pos 36 D->I: MHC-II=57 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->L: MHC-II=57 (removed=+4), ddG=1.13, score=3.260
+    Pos 36 D->C: MHC-II=57 (removed=+4), ddG=1.30, score=2.864
+    Pos 36 D->M: MHC-II=57 (removed=+4), ddG=1.37, score=2.728
+    Pos 36 D->V: MHC-II=60 (removed=+1), ddG=1.37, score=0.687
+    Pos 38 L->N: MHC-II=63 (removed=-2), ddG=1.12, score=-1.631
+    Pos 38 L->D: MHC-II=64 (removed=-3), ddG=1.13, score=-2.431
+    Pos 38 L->T: MHC-II=62 (removed=-1), ddG=1.30, score=-0.707
+    Pos 38 L->K: MHC-II=63 (removed=-2), ddG=1.35, score=-1.372
+    Pos 38 L->Q: MHC-II=62 (removed=-1), ddG=1.35, score=-0.683
+    Pos 94 Y->R: MHC-II=59 (removed=+2), ddG=1.22, score=1.523
+    Pos 94 Y->H: MHC-II=59 (removed=+2), ddG=1.53, score=1.233
+    Pos 94 Y->E: MHC-II=59 (removed=+2), ddG=1.67, score=1.136
+    Pos 94 Y->K: MHC-II=59 (removed=+2), ddG=1.68, score=1.129
+    Pos 94 Y->Q: MHC-II=59 (removed=+2), ddG=1.68, score=1.129
+    Pos 95 I->N: MHC-II=61 (removed=+0), ddG=1.12, score=0.008
+    Pos 95 I->D: MHC-II=60 (removed=+1), ddG=1.13, score=0.821
+    Pos 95 I->T: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 95 I->K: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 95 I->Q: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 97 S->V: MHC-II=63 (removed=-2), ddG=1.30, score=-1.421
+    Pos 97 S->A: MHC-II=61 (removed=+0), ddG=1.37, score=0.007
+    Pos 97 S->C: MHC-II=60 (removed=+1), ddG=1.37, score=0.687
+    Pos 97 S->I: MHC-II=64 (removed=-3), ddG=1.53, score=-1.834
+    Pos 97 S->L: MHC-II=63 (removed=-2), ddG=1.53, score=-1.221
+    Pos 98 V->T: MHC-II=61 (removed=+0), ddG=1.13, score=0.008
+    Pos 98 V->S: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 98 V->N: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 98 V->D: MHC-II=62 (removed=-1), ddG=1.37, score=-0.673
+    Pos 98 V->K: MHC-II=61 (removed=+0), ddG=1.58, score=0.006
+    Pos 99 I->N: MHC-II=61 (removed=+0), ddG=1.12, score=0.008
+    Pos 99 I->D: MHC-II=63 (removed=-2), ddG=1.13, score=-1.618
+    Pos 99 I->T: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 99 I->K: MHC-II=60 (removed=+1), ddG=1.35, score=0.697
+    Pos 99 I->Q: MHC-II=60 (removed=+1), ddG=1.35, score=0.697
+    Pos 107 F->R: MHC-II=57 (removed=+4), ddG=1.25, score=2.970
+    Pos 107 F->H: MHC-II=57 (removed=+4), ddG=1.27, score=2.927
+    Pos 107 F->E: MHC-II=57 (removed=+4), ddG=1.40, score=2.673
+    Pos 107 F->K: MHC-II=57 (removed=+4), ddG=1.42, score=2.638
+    Pos 107 F->Q: MHC-II=57 (removed=+4), ddG=1.42, score=2.638
+    Pos 110 S->V: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 110 S->A: MHC-II=61 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->C: MHC-II=61 (removed=+0), ddG=1.37, score=0.007
+    Pos 110 S->I: MHC-II=61 (removed=+0), ddG=1.53, score=0.006
+    Pos 110 S->L: MHC-II=63 (removed=-2), ddG=1.53, score=-1.221
+    Pos 157 L->N: MHC-II=59 (removed=+2), ddG=1.12, score=1.648
+    Pos 157 L->D: MHC-II=59 (removed=+2), ddG=1.13, score=1.634
+    Pos 157 L->T: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 157 L->K: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 157 L->Q: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 160 M->E: MHC-II=61 (removed=+0), ddG=1.13, score=0.008
+    Pos 160 M->K: MHC-II=60 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->Q: MHC-II=60 (removed=+1), ddG=1.15, score=0.808
+    Pos 160 M->H: MHC-II=59 (removed=+2), ddG=1.20, score=1.546
+    Pos 160 M->D: MHC-II=63 (removed=-2), ddG=1.37, score=-1.354
+    Pos 162 T->C: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 162 T->V: MHC-II=61 (removed=+0), ddG=1.13, score=0.008
+    Pos 162 T->I: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 162 T->L: MHC-II=60 (removed=+1), ddG=1.30, score=0.721
+    Pos 162 T->A: MHC-II=63 (removed=-2), ddG=1.60, score=-1.171
+    Pos 165 L->N: MHC-II=64 (removed=-3), ddG=1.12, score=-2.451
+    Pos 165 L->D: MHC-II=64 (removed=-3), ddG=1.13, score=-2.431
+    Pos 165 L->T: MHC-II=64 (removed=-3), ddG=1.30, score=-2.136
+    Pos 165 L->K: MHC-II=58 (removed=+3), ddG=1.35, score=2.076
+    Pos 165 L->Q: MHC-II=62 (removed=-1), ddG=1.35, score=-0.683
+    Pos 200 L->N: MHC-II=58 (removed=+3), ddG=1.12, score=2.467
+    Pos 200 L->D: MHC-II=60 (removed=+1), ddG=1.13, score=0.821
+    Pos 200 L->T: MHC-II=57 (removed=+4), ddG=1.30, score=2.864
+    Pos 200 L->K: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 200 L->Q: MHC-II=58 (removed=+3), ddG=1.35, score=2.076
+    Pos 203 D->I: MHC-II=62 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->L: MHC-II=62 (removed=-1), ddG=1.13, score=-0.805
+    Pos 203 D->C: MHC-II=56 (removed=+5), ddG=1.30, score=3.579
+    Pos 203 D->M: MHC-II=62 (removed=-1), ddG=1.37, score=-0.673
+    Pos 203 D->V: MHC-II=62 (removed=-1), ddG=1.37, score=-0.673
+    Pos 205 P->T: MHC-II=62 (removed=-1), ddG=1.17, score=-0.780
+    Pos 205 P->S: MHC-II=64 (removed=-3), ddG=1.27, score=-2.182
+    Pos 205 P->N: MHC-II=62 (removed=-1), ddG=1.38, score=-0.669
+    Pos 205 P->D: MHC-II=60 (removed=+1), ddG=1.40, score=0.673
+    Pos 205 P->K: MHC-II=62 (removed=-1), ddG=1.62, score=-0.576
+    Pos 208 K->M: MHC-II=60 (removed=+1), ddG=1.15, score=0.808
+    Pos 208 K->I: MHC-II=60 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->L: MHC-II=60 (removed=+1), ddG=1.35, score=0.697
+    Pos 208 K->F: MHC-II=60 (removed=+1), ddG=1.42, score=0.664
+    Pos 208 K->C: MHC-II=58 (removed=+3), ddG=1.52, score=1.858
+    Pos 231 Y->R: MHC-II=57 (removed=+4), ddG=1.22, score=3.038
+    Pos 231 Y->H: MHC-II=57 (removed=+4), ddG=1.53, score=2.460
+    Pos 231 Y->E: MHC-II=57 (removed=+4), ddG=1.67, score=2.266
+    Pos 231 Y->K: MHC-II=57 (removed=+4), ddG=1.68, score=2.253
+    Pos 231 Y->Q: MHC-II=57 (removed=+4), ddG=1.68, score=2.253
+    Pos 234 L->N: MHC-II=61 (removed=+0), ddG=1.12, score=0.008
+    Pos 234 L->D: MHC-II=63 (removed=-2), ddG=1.13, score=-1.618
+    Pos 234 L->T: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 234 L->K: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 234 L->Q: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 236 D->I: MHC-II=61 (removed=+0), ddG=1.13, score=0.008
+    Pos 236 D->L: MHC-II=59 (removed=+2), ddG=1.13, score=1.634
+    Pos 236 D->C: MHC-II=58 (removed=+3), ddG=1.30, score=2.150
+    Pos 236 D->M: MHC-II=59 (removed=+2), ddG=1.37, score=1.367
+    Pos 236 D->V: MHC-II=63 (removed=-2), ddG=1.37, score=-1.354
+    Pos 238 F->R: MHC-II=60 (removed=+1), ddG=1.25, score=0.748
+    Pos 238 F->H: MHC-II=60 (removed=+1), ddG=1.27, score=0.737
+    Pos 238 F->E: MHC-II=59 (removed=+2), ddG=1.40, score=1.340
+    Pos 238 F->K: MHC-II=60 (removed=+1), ddG=1.42, score=0.664
+    Pos 238 F->Q: MHC-II=60 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->R: MHC-II=59 (removed=+2), ddG=1.25, score=1.489
+    Pos 244 F->H: MHC-II=61 (removed=+0), ddG=1.27, score=0.007
+    Pos 244 F->E: MHC-II=61 (removed=+0), ddG=1.40, score=0.007
+    Pos 244 F->K: MHC-II=60 (removed=+1), ddG=1.42, score=0.664
+    Pos 244 F->Q: MHC-II=61 (removed=+0), ddG=1.42, score=0.007
+    Pos 246 A->S: MHC-II=61 (removed=+0), ddG=1.37, score=0.007
+    Pos 246 A->T: MHC-II=59 (removed=+2), ddG=1.60, score=1.182
+    Pos 246 A->N: MHC-II=58 (removed=+3), ddG=1.82, score=1.568
+    Pos 246 A->D: MHC-II=57 (removed=+4), ddG=1.83, score=2.078
+    Pos 246 A->K: MHC-II=59 (removed=+2), ddG=2.05, score=0.935
+    Pos 247 F->R: MHC-II=59 (removed=+2), ddG=1.25, score=1.489
+    Pos 247 F->H: MHC-II=60 (removed=+1), ddG=1.27, score=0.737
+    Pos 247 F->E: MHC-II=63 (removed=-2), ddG=1.40, score=-1.327
+    Pos 247 F->K: MHC-II=59 (removed=+2), ddG=1.42, score=1.322
+    Pos 247 F->Q: MHC-II=63 (removed=-2), ddG=1.42, score=-1.309
+    Pos 249 G->S: MHC-II=64 (removed=-3), ddG=1.60, score=-1.759
+    Pos 249 G->T: MHC-II=64 (removed=-3), ddG=1.83, score=-1.549
+    Pos 249 G->N: MHC-II=62 (removed=-1), ddG=2.05, score=-0.460
+    Pos 249 G->D: MHC-II=62 (removed=-1), ddG=2.07, score=-0.456
+    Pos 249 G->K: MHC-II=58 (removed=+3), ddG=2.28, score=1.265
+    Pos 252 P->T: MHC-II=62 (removed=-1), ddG=1.17, score=-0.780
+    Pos 252 P->S: MHC-II=63 (removed=-2), ddG=1.27, score=-1.453
+    Pos 252 P->N: MHC-II=61 (removed=+0), ddG=1.38, score=0.007
+    Pos 252 P->D: MHC-II=61 (removed=+0), ddG=1.40, score=0.007
+    Pos 252 P->K: MHC-II=60 (removed=+1), ddG=1.62, score=0.587
+    Pos 280 Y->R: MHC-II=57 (removed=+4), ddG=1.22, score=3.038
+    Pos 280 Y->H: MHC-II=57 (removed=+4), ddG=1.53, score=2.460
+    Pos 280 Y->E: MHC-II=57 (removed=+4), ddG=1.67, score=2.266
+    Pos 280 Y->K: MHC-II=57 (removed=+4), ddG=1.68, score=2.253
+    Pos 280 Y->Q: MHC-II=57 (removed=+4), ddG=1.68, score=2.253
+    Pos 283 A->S: MHC-II=60 (removed=+1), ddG=1.37, score=0.687
+    Pos 283 A->T: MHC-II=60 (removed=+1), ddG=1.60, score=0.594
+    Pos 283 A->N: MHC-II=60 (removed=+1), ddG=1.82, score=0.526
+    Pos 283 A->D: MHC-II=61 (removed=+0), ddG=1.83, score=0.005
+    Pos 283 A->K: MHC-II=58 (removed=+3), ddG=2.05, score=1.400
+    Pos 285 V->T: MHC-II=59 (removed=+2), ddG=1.13, score=1.634
+    Pos 285 V->S: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 285 V->N: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 285 V->D: MHC-II=59 (removed=+2), ddG=1.37, score=1.367
+    Pos 285 V->K: MHC-II=56 (removed=+5), ddG=1.58, score=2.982
+    Pos 288 S->V: MHC-II=61 (removed=+0), ddG=1.30, score=0.007
+    Pos 288 S->A: MHC-II=62 (removed=-1), ddG=1.37, score=-0.673
+    Pos 288 S->C: MHC-II=57 (removed=+4), ddG=1.37, score=2.728
+    Pos 288 S->I: MHC-II=63 (removed=-2), ddG=1.53, score=-1.221
+    Pos 288 S->L: MHC-II=60 (removed=+1), ddG=1.53, score=0.620
+    Pos 290 T->C: MHC-II=58 (removed=+3), ddG=1.13, score=2.447
+    Pos 290 T->V: MHC-II=60 (removed=+1), ddG=1.13, score=0.821
+    Pos 290 T->I: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 290 T->L: MHC-II=60 (removed=+1), ddG=1.30, score=0.721
+    Pos 290 T->A: MHC-II=60 (removed=+1), ddG=1.60, score=0.594
+    Pos 293 G->S: MHC-II=61 (removed=+0), ddG=1.60, score=0.006
+    Pos 293 G->T: MHC-II=59 (removed=+2), ddG=1.83, score=1.041
+    Pos 293 G->N: MHC-II=59 (removed=+2), ddG=2.05, score=0.935
+    Pos 293 G->D: MHC-II=59 (removed=+2), ddG=2.07, score=0.926
+    Pos 293 G->K: MHC-II=60 (removed=+1), ddG=2.28, score=0.424
+    Pos 323 Y->R: MHC-II=60 (removed=+1), ddG=1.22, score=0.765
+    Pos 323 Y->H: MHC-II=59 (removed=+2), ddG=1.53, score=1.233
+    Pos 323 Y->E: MHC-II=60 (removed=+1), ddG=1.67, score=0.571
+    Pos 323 Y->K: MHC-II=60 (removed=+1), ddG=1.68, score=0.567
+    Pos 323 Y->Q: MHC-II=60 (removed=+1), ddG=1.68, score=0.567
+    Pos 326 L->N: MHC-II=59 (removed=+2), ddG=1.12, score=1.648
+    Pos 326 L->D: MHC-II=63 (removed=-2), ddG=1.13, score=-1.618
+    Pos 326 L->T: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 326 L->K: MHC-II=59 (removed=+2), ddG=1.35, score=1.386
+    Pos 326 L->Q: MHC-II=61 (removed=+0), ddG=1.35, score=0.007
+    Pos 328 S->V: MHC-II=59 (removed=+2), ddG=1.30, score=1.436
+    Pos 328 S->A: MHC-II=63 (removed=-2), ddG=1.37, score=-1.354
+    Pos 328 S->C: MHC-II=59 (removed=+2), ddG=1.37, score=1.367
+    Pos 328 S->I: MHC-II=59 (removed=+2), ddG=1.53, score=1.233
+    Pos 328 S->L: MHC-II=59 (removed=+2), ddG=1.53, score=1.233
+    Pos 331 P->T: MHC-II=66 (removed=-5), ddG=1.17, score=-3.929
+    Pos 331 P->S: MHC-II=66 (removed=-5), ddG=1.27, score=-3.642
+    Pos 331 P->N: MHC-II=65 (removed=-4), ddG=1.38, score=-2.696
+    Pos 331 P->D: MHC-II=64 (removed=-3), ddG=1.40, score=-1.993
+    Pos 331 P->K: MHC-II=65 (removed=-4), ddG=1.62, score=-2.320
+  APPLIED: Pos 203 D->C | MHC-II: 92 -> 56 (-5) | cumDDG=8.99
+
+  Round 7: 56 binders, 44 anchor positions, budget_remaining=1.01
+    Pos 15 F->M: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 15 F->Y: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 15 F->I: MHC-II=58 (removed=-2), ddG=0.87, score=-2.052
+    Pos 15 F->L: MHC-II=57 (removed=-1), ddG=0.87, score=-1.021
+    Pos 15 F->W: MHC-II=55 (removed=+1), ddG=0.95, score=0.962
+    Pos 18 E->K: MHC-II=53 (removed=+3), ddG=0.32, score=7.167
+    Pos 18 E->Q: MHC-II=55 (removed=+1), ddG=0.32, score=2.405
+    Pos 18 E->H: MHC-II=53 (removed=+3), ddG=0.43, score=5.679
+    Pos 18 E->D: MHC-II=59 (removed=-3), ddG=0.53, score=-4.746
+    Pos 18 E->N: MHC-II=57 (removed=-1), ddG=0.55, score=-1.523
+    Pos 20 E->K: MHC-II=59 (removed=-3), ddG=0.32, score=-7.119
+    Pos 20 E->Q: MHC-II=57 (removed=-1), ddG=0.32, score=-2.357
+    Pos 20 E->H: MHC-II=58 (removed=-2), ddG=0.43, score=-3.755
+    Pos 20 E->D: MHC-II=58 (removed=-2), ddG=0.53, score=-3.159
+    Pos 20 E->N: MHC-II=58 (removed=-2), ddG=0.55, score=-3.062
+    Pos 23 Y->F: MHC-II=55 (removed=+1), ddG=0.57, score=1.507
+    Pos 23 Y->W: MHC-II=51 (removed=+5), ddG=0.68, score=6.423
+    Pos 23 Y->M: MHC-II=53 (removed=+3), ddG=0.83, score=3.237
+    Pos 26 I->L: MHC-II=56 (removed=+0), ddG=0.30, score=0.025
+    Pos 26 I->C: MHC-II=53 (removed=+3), ddG=0.47, score=5.281
+    Pos 26 I->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 26 I->M: MHC-II=57 (removed=-1), ddG=0.60, score=-1.414
+    Pos 26 I->F: MHC-II=54 (removed=+2), ddG=0.87, score=2.072
+    Pos 28 T->N: MHC-II=56 (removed=+0), ddG=0.52, score=0.016
+    Pos 28 T->D: MHC-II=57 (removed=-1), ddG=0.53, score=-1.571
+    Pos 28 T->S: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 28 T->K: MHC-II=54 (removed=+2), ddG=0.75, score=2.365
+    Pos 28 T->Q: MHC-II=54 (removed=+2), ddG=0.75, score=2.365
+    Pos 31 E->K: MHC-II=54 (removed=+2), ddG=0.32, score=4.786
+    Pos 31 E->Q: MHC-II=59 (removed=-3), ddG=0.32, score=-7.119
+    Pos 31 E->H: MHC-II=58 (removed=-2), ddG=0.43, score=-3.755
+    Pos 31 E->D: MHC-II=57 (removed=-1), ddG=0.53, score=-1.571
+    Pos 31 E->N: MHC-II=56 (removed=+0), ddG=0.55, score=0.015
+    Pos 33 L->I: MHC-II=59 (removed=-3), ddG=0.30, score=-7.475
+    Pos 33 L->C: MHC-II=52 (removed=+4), ddG=0.47, score=7.035
+    Pos 33 L->V: MHC-II=59 (removed=-3), ddG=0.53, score=-4.746
+    Pos 33 L->M: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 33 L->F: MHC-II=56 (removed=+0), ddG=0.87, score=0.010
+    Pos 36 D->N: MHC-II=55 (removed=+1), ddG=0.32, score=2.405
+    Pos 36 D->K: MHC-II=57 (removed=-1), ddG=0.52, score=-1.597
+    Pos 36 D->Q: MHC-II=54 (removed=+2), ddG=0.52, score=3.242
+    Pos 36 D->E: MHC-II=52 (removed=+4), ddG=0.53, score=6.365
+    Pos 36 D->T: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 38 L->I: MHC-II=58 (removed=-2), ddG=0.30, score=-4.975
+    Pos 38 L->C: MHC-II=54 (removed=+2), ddG=0.47, score=3.526
+    Pos 38 L->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 38 L->M: MHC-II=55 (removed=+1), ddG=0.60, score=1.443
+    Pos 38 L->F: MHC-II=52 (removed=+4), ddG=0.87, score=4.134
+    Pos 94 Y->F: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 94 Y->W: MHC-II=55 (removed=+1), ddG=0.68, score=1.295
+    Pos 94 Y->M: MHC-II=54 (removed=+2), ddG=0.83, score=2.161
+    Pos 95 I->L: MHC-II=55 (removed=+1), ddG=0.30, score=2.525
+    Pos 95 I->C: MHC-II=52 (removed=+4), ddG=0.47, score=7.035
+    Pos 95 I->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 95 I->M: MHC-II=55 (removed=+1), ddG=0.60, score=1.443
+    Pos 95 I->F: MHC-II=56 (removed=+0), ddG=0.87, score=0.010
+    Pos 97 S->T: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 97 S->N: MHC-II=56 (removed=+0), ddG=0.75, score=0.012
+    Pos 97 S->D: MHC-II=56 (removed=+0), ddG=0.77, score=0.011
+    Pos 97 S->K: MHC-II=55 (removed=+1), ddG=0.98, score=0.935
+    Pos 97 S->Q: MHC-II=56 (removed=+0), ddG=0.98, score=0.009
+    Pos 98 V->C: MHC-II=54 (removed=+2), ddG=0.37, score=4.277
+    Pos 98 V->I: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 98 V->L: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 98 V->A: MHC-II=56 (removed=+0), ddG=0.77, score=0.011
+    Pos 98 V->M: MHC-II=56 (removed=+0), ddG=0.83, score=0.011
+    Pos 99 I->L: MHC-II=55 (removed=+1), ddG=0.30, score=2.525
+    Pos 99 I->C: MHC-II=54 (removed=+2), ddG=0.47, score=3.526
+    Pos 99 I->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 99 I->M: MHC-II=54 (removed=+2), ddG=0.60, score=2.871
+    Pos 99 I->F: MHC-II=56 (removed=+0), ddG=0.87, score=0.010
+    Pos 107 F->M: MHC-II=54 (removed=+2), ddG=0.57, score=3.000
+    Pos 107 F->Y: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 107 F->I: MHC-II=57 (removed=-1), ddG=0.87, score=-1.021
+    Pos 107 F->L: MHC-II=56 (removed=+0), ddG=0.87, score=0.010
+    Pos 107 F->W: MHC-II=54 (removed=+2), ddG=0.95, score=1.914
+    Pos 110 S->T: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 110 S->N: MHC-II=56 (removed=+0), ddG=0.75, score=0.012
+    Pos 110 S->D: MHC-II=56 (removed=+0), ddG=0.77, score=0.011
+    Pos 110 S->K: MHC-II=53 (removed=+3), ddG=0.98, score=2.787
+    Pos 110 S->Q: MHC-II=56 (removed=+0), ddG=0.98, score=0.009
+    Pos 152 V->C: MHC-II=52 (removed=+4), ddG=0.37, score=8.532
+    Pos 152 V->I: MHC-II=53 (removed=+3), ddG=0.53, score=4.778
+    Pos 152 V->L: MHC-II=53 (removed=+3), ddG=0.53, score=4.778
+    Pos 152 V->A: MHC-II=58 (removed=-2), ddG=0.77, score=-2.287
+    Pos 152 V->M: MHC-II=52 (removed=+4), ddG=0.83, score=4.312
+    Pos 157 L->I: MHC-II=58 (removed=-2), ddG=0.30, score=-4.975
+    Pos 157 L->C: MHC-II=52 (removed=+4), ddG=0.47, score=7.035
+    Pos 157 L->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 157 L->M: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 157 L->F: MHC-II=58 (removed=-2), ddG=0.87, score=-2.052
+    Pos 160 M->F: MHC-II=58 (removed=-2), ddG=0.57, score=-2.970
+    Pos 160 M->I: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 160 M->L: MHC-II=57 (removed=-1), ddG=0.60, score=-1.414
+    Pos 160 M->C: MHC-II=54 (removed=+2), ddG=0.77, score=2.310
+    Pos 160 M->V: MHC-II=54 (removed=+2), ddG=0.83, score=2.161
+    Pos 162 T->N: MHC-II=57 (removed=-1), ddG=0.52, score=-1.597
+    Pos 162 T->D: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 162 T->S: MHC-II=58 (removed=-2), ddG=0.53, score=-3.159
+    Pos 162 T->K: MHC-II=55 (removed=+1), ddG=0.75, score=1.188
+    Pos 162 T->Q: MHC-II=55 (removed=+1), ddG=0.75, score=1.188
+    Pos 165 L->I: MHC-II=59 (removed=-3), ddG=0.30, score=-7.475
+    Pos 165 L->C: MHC-II=55 (removed=+1), ddG=0.47, score=1.772
+    Pos 165 L->V: MHC-II=60 (removed=-4), ddG=0.53, score=-6.333
+    Pos 165 L->M: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 165 L->F: MHC-II=57 (removed=-1), ddG=0.87, score=-1.021
+    Pos 168 T->N: MHC-II=58 (removed=-2), ddG=0.52, score=-3.210
+    Pos 168 T->D: MHC-II=62 (removed=-6), ddG=0.53, score=-9.508
+    Pos 168 T->S: MHC-II=57 (removed=-1), ddG=0.53, score=-1.571
+    Pos 168 T->K: MHC-II=56 (removed=+0), ddG=0.75, score=0.012
+    Pos 168 T->Q: MHC-II=60 (removed=-4), ddG=0.75, score=-4.694
+    Pos 170 T->N: MHC-II=56 (removed=+0), ddG=0.52, score=0.016
+    Pos 170 T->D: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 170 T->S: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 170 T->K: MHC-II=57 (removed=-1), ddG=0.75, score=-1.165
+    Pos 170 T->Q: MHC-II=55 (removed=+1), ddG=0.75, score=1.188
+    Pos 173 E->K: MHC-II=55 (removed=+1), ddG=0.32, score=2.405
+    Pos 173 E->Q: MHC-II=59 (removed=-3), ddG=0.32, score=-7.119
+    Pos 173 E->H: MHC-II=57 (removed=-1), ddG=0.43, score=-1.868
+    Pos 173 E->D: MHC-II=57 (removed=-1), ddG=0.53, score=-1.571
+    Pos 173 E->N: MHC-II=57 (removed=-1), ddG=0.55, score=-1.523
+    Pos 231 Y->F: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 231 Y->W: MHC-II=55 (removed=+1), ddG=0.68, score=1.295
+    Pos 231 Y->M: MHC-II=54 (removed=+2), ddG=0.83, score=2.161
+    Pos 234 L->I: MHC-II=56 (removed=+0), ddG=0.30, score=0.025
+    Pos 234 L->C: MHC-II=54 (removed=+2), ddG=0.47, score=3.526
+    Pos 234 L->V: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 234 L->M: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 234 L->F: MHC-II=54 (removed=+2), ddG=0.87, score=2.072
+    Pos 236 D->N: MHC-II=57 (removed=-1), ddG=0.32, score=-2.357
+    Pos 236 D->K: MHC-II=53 (removed=+3), ddG=0.52, score=4.855
+    Pos 236 D->Q: MHC-II=55 (removed=+1), ddG=0.52, score=1.629
+    Pos 236 D->E: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 236 D->T: MHC-II=57 (removed=-1), ddG=0.53, score=-1.571
+    Pos 238 F->M: MHC-II=54 (removed=+2), ddG=0.57, score=3.000
+    Pos 238 F->Y: MHC-II=58 (removed=-2), ddG=0.57, score=-2.970
+    Pos 238 F->I: MHC-II=54 (removed=+2), ddG=0.87, score=2.072
+    Pos 238 F->L: MHC-II=55 (removed=+1), ddG=0.87, score=1.041
+    Pos 238 F->W: MHC-II=55 (removed=+1), ddG=0.95, score=0.962
+    Pos 244 F->M: MHC-II=54 (removed=+2), ddG=0.57, score=3.000
+    Pos 244 F->Y: MHC-II=57 (removed=-1), ddG=0.57, score=-1.478
+    Pos 244 F->I: MHC-II=57 (removed=-1), ddG=0.87, score=-1.021
+    Pos 244 F->L: MHC-II=54 (removed=+2), ddG=0.87, score=2.072
+    Pos 244 F->W: MHC-II=55 (removed=+1), ddG=0.95, score=0.962
+    Pos 246 A->V: MHC-II=56 (removed=+0), ddG=0.77, score=0.011
+    Pos 246 A->C: MHC-II=53 (removed=+3), ddG=0.83, score=3.237
+    Pos 246 A->I: MHC-II=57 (removed=-1), ddG=1.00, score=-0.900
+    Pos 246 A->L: MHC-II=54 (removed=+2), ddG=1.00, score=1.827
+    Pos 247 F->M: MHC-II=57 (removed=-1), ddG=0.57, score=-1.478
+    Pos 247 F->Y: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 247 F->I: MHC-II=56 (removed=+0), ddG=0.87, score=0.010
+    Pos 247 F->L: MHC-II=57 (removed=-1), ddG=0.87, score=-1.021
+    Pos 247 F->W: MHC-II=53 (removed=+3), ddG=0.95, score=2.867
+    Pos 249 G->A: MHC-II=58 (removed=-2), ddG=0.53, score=-3.159
+    Pos 249 G->V: MHC-II=58 (removed=-2), ddG=1.00, score=-1.809
+    Pos 252 P->V: MHC-II=57 (removed=-1), ddG=0.33, score=-2.302
+    Pos 252 P->C: MHC-II=56 (removed=+0), ddG=0.40, score=0.020
+    Pos 252 P->I: MHC-II=57 (removed=-1), ddG=0.57, score=-1.478
+    Pos 252 P->L: MHC-II=57 (removed=-1), ddG=0.57, score=-1.478
+    Pos 252 P->A: MHC-II=59 (removed=-3), ddG=0.73, score=-3.602
+    Pos 280 Y->F: MHC-II=55 (removed=+1), ddG=0.57, score=1.507
+    Pos 280 Y->W: MHC-II=54 (removed=+2), ddG=0.68, score=2.577
+    Pos 280 Y->M: MHC-II=52 (removed=+4), ddG=0.83, score=4.312
+    Pos 283 A->V: MHC-II=55 (removed=+1), ddG=0.77, score=1.161
+    Pos 283 A->C: MHC-II=51 (removed=+5), ddG=0.83, score=5.387
+    Pos 283 A->I: MHC-II=56 (removed=+0), ddG=1.00, score=0.009
+    Pos 283 A->L: MHC-II=54 (removed=+2), ddG=1.00, score=1.827
+    Pos 285 V->C: MHC-II=50 (removed=+6), ddG=0.37, score=12.787
+    Pos 285 V->I: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 285 V->L: MHC-II=53 (removed=+3), ddG=0.53, score=4.778
+    Pos 285 V->A: MHC-II=54 (removed=+2), ddG=0.77, score=2.310
+    Pos 285 V->M: MHC-II=52 (removed=+4), ddG=0.83, score=4.312
+    Pos 288 S->T: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 288 S->N: MHC-II=55 (removed=+1), ddG=0.75, score=1.188
+    Pos 288 S->D: MHC-II=57 (removed=-1), ddG=0.77, score=-1.138
+    Pos 288 S->K: MHC-II=50 (removed=+6), ddG=0.98, score=5.565
+    Pos 288 S->Q: MHC-II=57 (removed=-1), ddG=0.98, score=-0.917
+    Pos 290 T->N: MHC-II=57 (removed=-1), ddG=0.52, score=-1.597
+    Pos 290 T->D: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 290 T->S: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 290 T->K: MHC-II=55 (removed=+1), ddG=0.75, score=1.188
+    Pos 290 T->Q: MHC-II=56 (removed=+0), ddG=0.75, score=0.012
+    Pos 293 G->A: MHC-II=56 (removed=+0), ddG=0.53, score=0.016
+    Pos 293 G->V: MHC-II=55 (removed=+1), ddG=1.00, score=0.918
+    Pos 323 Y->F: MHC-II=56 (removed=+0), ddG=0.57, score=0.015
+    Pos 323 Y->W: MHC-II=54 (removed=+2), ddG=0.68, score=2.577
+    Pos 323 Y->M: MHC-II=54 (removed=+2), ddG=0.83, score=2.161
+    Pos 326 L->I: MHC-II=56 (removed=+0), ddG=0.30, score=0.025
+    Pos 326 L->C: MHC-II=54 (removed=+2), ddG=0.47, score=3.526
+    Pos 326 L->V: MHC-II=54 (removed=+2), ddG=0.53, score=3.190
+    Pos 326 L->M: MHC-II=56 (removed=+0), ddG=0.60, score=0.014
+    Pos 326 L->F: MHC-II=58 (removed=-2), ddG=0.87, score=-2.052
+    Pos 328 S->T: MHC-II=55 (removed=+1), ddG=0.53, score=1.603
+    Pos 328 S->N: MHC-II=56 (removed=+0), ddG=0.75, score=0.012
+    Pos 328 S->D: MHC-II=58 (removed=-2), ddG=0.77, score=-2.287
+    Pos 328 S->K: MHC-II=54 (removed=+2), ddG=0.98, score=1.861
+    Pos 328 S->Q: MHC-II=54 (removed=+2), ddG=0.98, score=1.861
+    Pos 331 P->V: MHC-II=64 (removed=-8), ddG=0.33, score=-18.581
+    Pos 331 P->C: MHC-II=59 (removed=-3), ddG=0.40, score=-5.980
+    Pos 331 P->I: MHC-II=63 (removed=-7), ddG=0.57, score=-10.433
+    Pos 331 P->L: MHC-II=63 (removed=-7), ddG=0.57, score=-10.433
+    Pos 331 P->A: MHC-II=65 (removed=-9), ddG=0.73, score=-10.831
+  APPLIED: Pos 285 V->C | MHC-II: 92 -> 50 (-6) | cumDDG=9.36
+
+  Round 8: 50 binders, 38 anchor positions, budget_remaining=0.64
+    Pos 15 F->M: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 15 F->Y: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 18 E->K: MHC-II=47 (removed=+3), ddG=0.32, score=7.167
+    Pos 18 E->Q: MHC-II=49 (removed=+1), ddG=0.32, score=2.405
+    Pos 18 E->H: MHC-II=47 (removed=+3), ddG=0.43, score=5.679
+    Pos 18 E->D: MHC-II=53 (removed=-3), ddG=0.53, score=-4.746
+    Pos 18 E->N: MHC-II=51 (removed=-1), ddG=0.55, score=-1.523
+    Pos 20 E->K: MHC-II=53 (removed=-3), ddG=0.32, score=-7.119
+    Pos 20 E->Q: MHC-II=51 (removed=-1), ddG=0.32, score=-2.357
+    Pos 20 E->H: MHC-II=52 (removed=-2), ddG=0.43, score=-3.755
+    Pos 20 E->D: MHC-II=52 (removed=-2), ddG=0.53, score=-3.159
+    Pos 20 E->N: MHC-II=52 (removed=-2), ddG=0.55, score=-3.062
+    Pos 23 Y->F: MHC-II=49 (removed=+1), ddG=0.57, score=1.507
+    Pos 26 I->L: MHC-II=50 (removed=+0), ddG=0.30, score=0.025
+    Pos 26 I->C: MHC-II=47 (removed=+3), ddG=0.47, score=5.281
+    Pos 26 I->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 26 I->M: MHC-II=51 (removed=-1), ddG=0.60, score=-1.414
+    Pos 28 T->N: MHC-II=50 (removed=+0), ddG=0.52, score=0.016
+    Pos 28 T->D: MHC-II=51 (removed=-1), ddG=0.53, score=-1.571
+    Pos 28 T->S: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 31 E->K: MHC-II=48 (removed=+2), ddG=0.32, score=4.786
+    Pos 31 E->Q: MHC-II=53 (removed=-3), ddG=0.32, score=-7.119
+    Pos 31 E->H: MHC-II=52 (removed=-2), ddG=0.43, score=-3.755
+    Pos 31 E->D: MHC-II=51 (removed=-1), ddG=0.53, score=-1.571
+    Pos 31 E->N: MHC-II=50 (removed=+0), ddG=0.55, score=0.015
+    Pos 33 L->I: MHC-II=53 (removed=-3), ddG=0.30, score=-7.475
+    Pos 33 L->C: MHC-II=46 (removed=+4), ddG=0.47, score=7.035
+    Pos 33 L->V: MHC-II=53 (removed=-3), ddG=0.53, score=-4.746
+    Pos 33 L->M: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 36 D->N: MHC-II=49 (removed=+1), ddG=0.32, score=2.405
+    Pos 36 D->K: MHC-II=51 (removed=-1), ddG=0.52, score=-1.597
+    Pos 36 D->Q: MHC-II=48 (removed=+2), ddG=0.52, score=3.242
+    Pos 36 D->E: MHC-II=46 (removed=+4), ddG=0.53, score=6.365
+    Pos 36 D->T: MHC-II=49 (removed=+1), ddG=0.53, score=1.603
+    Pos 38 L->I: MHC-II=52 (removed=-2), ddG=0.30, score=-4.975
+    Pos 38 L->C: MHC-II=48 (removed=+2), ddG=0.47, score=3.526
+    Pos 38 L->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 38 L->M: MHC-II=49 (removed=+1), ddG=0.60, score=1.443
+    Pos 94 Y->F: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 95 I->L: MHC-II=49 (removed=+1), ddG=0.30, score=2.525
+    Pos 95 I->C: MHC-II=46 (removed=+4), ddG=0.47, score=7.035
+    Pos 95 I->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 95 I->M: MHC-II=49 (removed=+1), ddG=0.60, score=1.443
+    Pos 97 S->T: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 98 V->C: MHC-II=48 (removed=+2), ddG=0.37, score=4.277
+    Pos 98 V->I: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 98 V->L: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 99 I->L: MHC-II=49 (removed=+1), ddG=0.30, score=2.525
+    Pos 99 I->C: MHC-II=48 (removed=+2), ddG=0.47, score=3.526
+    Pos 99 I->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 99 I->M: MHC-II=48 (removed=+2), ddG=0.60, score=2.871
+    Pos 107 F->M: MHC-II=48 (removed=+2), ddG=0.57, score=3.000
+    Pos 107 F->Y: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 110 S->T: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 152 V->C: MHC-II=46 (removed=+4), ddG=0.37, score=8.532
+    Pos 152 V->I: MHC-II=47 (removed=+3), ddG=0.53, score=4.778
+    Pos 152 V->L: MHC-II=47 (removed=+3), ddG=0.53, score=4.778
+    Pos 157 L->I: MHC-II=52 (removed=-2), ddG=0.30, score=-4.975
+    Pos 157 L->C: MHC-II=46 (removed=+4), ddG=0.47, score=7.035
+    Pos 157 L->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 157 L->M: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 160 M->F: MHC-II=52 (removed=-2), ddG=0.57, score=-2.970
+    Pos 160 M->I: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 160 M->L: MHC-II=51 (removed=-1), ddG=0.60, score=-1.414
+    Pos 162 T->N: MHC-II=51 (removed=-1), ddG=0.52, score=-1.597
+    Pos 162 T->D: MHC-II=49 (removed=+1), ddG=0.53, score=1.603
+    Pos 162 T->S: MHC-II=52 (removed=-2), ddG=0.53, score=-3.159
+    Pos 165 L->I: MHC-II=53 (removed=-3), ddG=0.30, score=-7.475
+    Pos 165 L->C: MHC-II=49 (removed=+1), ddG=0.47, score=1.772
+    Pos 165 L->V: MHC-II=54 (removed=-4), ddG=0.53, score=-6.333
+    Pos 165 L->M: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 168 T->N: MHC-II=52 (removed=-2), ddG=0.52, score=-3.210
+    Pos 168 T->D: MHC-II=56 (removed=-6), ddG=0.53, score=-9.508
+    Pos 168 T->S: MHC-II=51 (removed=-1), ddG=0.53, score=-1.571
+    Pos 170 T->N: MHC-II=50 (removed=+0), ddG=0.52, score=0.016
+    Pos 170 T->D: MHC-II=49 (removed=+1), ddG=0.53, score=1.603
+    Pos 170 T->S: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 173 E->K: MHC-II=49 (removed=+1), ddG=0.32, score=2.405
+    Pos 173 E->Q: MHC-II=53 (removed=-3), ddG=0.32, score=-7.119
+    Pos 173 E->H: MHC-II=51 (removed=-1), ddG=0.43, score=-1.868
+    Pos 173 E->D: MHC-II=51 (removed=-1), ddG=0.53, score=-1.571
+    Pos 173 E->N: MHC-II=51 (removed=-1), ddG=0.55, score=-1.523
+    Pos 231 Y->F: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 234 L->I: MHC-II=50 (removed=+0), ddG=0.30, score=0.025
+    Pos 234 L->C: MHC-II=48 (removed=+2), ddG=0.47, score=3.526
+    Pos 234 L->V: MHC-II=50 (removed=+0), ddG=0.53, score=0.016
+    Pos 234 L->M: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 236 D->N: MHC-II=51 (removed=-1), ddG=0.32, score=-2.357
+    Pos 236 D->K: MHC-II=47 (removed=+3), ddG=0.52, score=4.855
+    Pos 236 D->Q: MHC-II=49 (removed=+1), ddG=0.52, score=1.629
+    Pos 236 D->E: MHC-II=49 (removed=+1), ddG=0.53, score=1.603
+    Pos 236 D->T: MHC-II=51 (removed=-1), ddG=0.53, score=-1.571
+    Pos 238 F->M: MHC-II=48 (removed=+2), ddG=0.57, score=3.000
+    Pos 238 F->Y: MHC-II=52 (removed=-2), ddG=0.57, score=-2.970
+    Pos 244 F->M: MHC-II=48 (removed=+2), ddG=0.57, score=3.000
+    Pos 244 F->Y: MHC-II=51 (removed=-1), ddG=0.57, score=-1.478
+    Pos 247 F->M: MHC-II=51 (removed=-1), ddG=0.57, score=-1.478
+    Pos 247 F->Y: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 249 G->A: MHC-II=52 (removed=-2), ddG=0.53, score=-3.159
+    Pos 252 P->V: MHC-II=51 (removed=-1), ddG=0.33, score=-2.302
+    Pos 252 P->C: MHC-II=50 (removed=+0), ddG=0.40, score=0.020
+    Pos 252 P->I: MHC-II=51 (removed=-1), ddG=0.57, score=-1.478
+    Pos 252 P->L: MHC-II=51 (removed=-1), ddG=0.57, score=-1.478
+    Pos 323 Y->F: MHC-II=50 (removed=+0), ddG=0.57, score=0.015
+    Pos 326 L->I: MHC-II=50 (removed=+0), ddG=0.30, score=0.025
+    Pos 326 L->C: MHC-II=48 (removed=+2), ddG=0.47, score=3.526
+    Pos 326 L->V: MHC-II=48 (removed=+2), ddG=0.53, score=3.190
+    Pos 326 L->M: MHC-II=50 (removed=+0), ddG=0.60, score=0.014
+    Pos 328 S->T: MHC-II=49 (removed=+1), ddG=0.53, score=1.603
+    Pos 331 P->V: MHC-II=58 (removed=-8), ddG=0.33, score=-18.581
+    Pos 331 P->C: MHC-II=53 (removed=-3), ddG=0.40, score=-5.980
+    Pos 331 P->I: MHC-II=57 (removed=-7), ddG=0.57, score=-10.433
+    Pos 331 P->L: MHC-II=57 (removed=-7), ddG=0.57, score=-10.433
+  APPLIED: Pos 152 V->C | MHC-II: 92 -> 46 (-4) | cumDDG=9.73
+
+  Round 9: 46 binders, 41 anchor positions, budget_remaining=0.27
+  No MHC-II improvement found in round 9. Stopping Phase 2.
+
+=== Phase 1: MHC-I anchor-position mutagenesis ===
+  Budget remaining: 5.27 DDG, 7 rounds max
+  Current MHC-I: 14 binders (WT: 15)
+
+  Round 1: 14 binders, 24 anchor positions, budget_remaining=5.27
+    Pos 16 T->C: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 16 T->V: MHC-I=15 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=15 (removed=-1), ddG=1.30
+    Pos 16 T->L: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 16 T->A: MHC-I=15 (removed=-1), ddG=1.60
+    Pos 23 Y->R: MHC-I=13 (removed=+1), ddG=1.22
+    Pos 23 Y->H: MHC-I=13 (removed=+1), ddG=1.53
+    Pos 23 Y->E: MHC-I=13 (removed=+1), ddG=1.67
+    Pos 23 Y->K: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 23 Y->Q: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 82 M->E: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 82 M->K: MHC-I=13 (removed=+1), ddG=1.15
+    Pos 82 M->Q: MHC-I=13 (removed=+1), ddG=1.15
+    Pos 82 M->H: MHC-I=13 (removed=+1), ddG=1.20
+    Pos 82 M->D: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 87 E->M: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 87 E->I: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 87 E->L: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 87 E->F: MHC-I=13 (removed=+1), ddG=1.40
+    Pos 87 E->C: MHC-I=12 (removed=+2), ddG=1.53
+    Pos 89 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 89 L->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 89 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 89 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 89 L->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 94 Y->R: MHC-I=13 (removed=+1), ddG=1.22
+    Pos 94 Y->H: MHC-I=14 (removed=+0), ddG=1.53
+    Pos 94 Y->E: MHC-I=13 (removed=+1), ddG=1.67
+    Pos 94 Y->K: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 94 Y->Q: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 158 T->C: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 158 T->V: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 158 T->I: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 158 T->L: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 158 T->A: MHC-I=13 (removed=+1), ddG=1.60
+    Pos 165 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 165 L->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 165 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 165 L->K: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 165 L->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 177 P->T: MHC-I=13 (removed=+1), ddG=1.17
+    Pos 177 P->S: MHC-I=13 (removed=+1), ddG=1.27
+    Pos 177 P->N: MHC-I=13 (removed=+1), ddG=1.38
+    Pos 177 P->D: MHC-I=13 (removed=+1), ddG=1.40
+    Pos 177 P->K: MHC-I=13 (removed=+1), ddG=1.62
+    Pos 184 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 184 L->D: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 184 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 184 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 184 L->Q: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 186 L->N: MHC-I=14 (removed=+0), ddG=1.12
+    Pos 186 L->D: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 186 L->T: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 186 L->K: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 186 L->Q: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 193 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 193 L->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 193 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 193 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 193 L->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 213 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 213 L->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 213 L->T: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 213 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 213 L->Q: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 220 I->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 220 I->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 220 I->T: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 220 I->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 220 I->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 222 E->M: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 222 E->I: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 222 E->L: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 222 E->F: MHC-I=14 (removed=+0), ddG=1.40
+    Pos 222 E->C: MHC-I=13 (removed=+1), ddG=1.53
+    Pos 224 T->C: MHC-I=12 (removed=+2), ddG=1.13
+    Pos 224 T->V: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 224 T->I: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 224 T->L: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 224 T->A: MHC-I=14 (removed=+0), ddG=1.60
+    Pos 229 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 229 L->D: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 229 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 229 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 229 L->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 231 Y->R: MHC-I=13 (removed=+1), ddG=1.22
+    Pos 231 Y->H: MHC-I=13 (removed=+1), ddG=1.53
+    Pos 231 Y->E: MHC-I=14 (removed=+0), ddG=1.67
+    Pos 231 Y->K: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 231 Y->Q: MHC-I=13 (removed=+1), ddG=1.68
+    Pos 268 S->V: MHC-I=14 (removed=+0), ddG=1.30
+    Pos 268 S->A: MHC-I=14 (removed=+0), ddG=1.37
+    Pos 268 S->C: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 268 S->I: MHC-I=14 (removed=+0), ddG=1.53
+    Pos 268 S->L: MHC-I=15 (removed=-1), ddG=1.53
+    Pos 275 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 275 L->D: MHC-I=15 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 275 L->K: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 275 L->Q: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 314 M->E: MHC-I=14 (removed=+0), ddG=1.13
+    Pos 314 M->K: MHC-I=13 (removed=+1), ddG=1.15
+    Pos 314 M->Q: MHC-I=14 (removed=+0), ddG=1.15
+    Pos 314 M->H: MHC-I=13 (removed=+1), ddG=1.20
+    Pos 314 M->D: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 318 L->N: MHC-I=13 (removed=+1), ddG=1.12
+    Pos 318 L->D: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 318 L->T: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 318 L->K: MHC-I=12 (removed=+2), ddG=1.35
+    Pos 318 L->Q: MHC-I=14 (removed=+0), ddG=1.35
+    Pos 321 V->T: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 321 V->S: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 321 V->N: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 321 V->D: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 321 V->K: MHC-I=13 (removed=+1), ddG=1.58
+    Pos 325 V->T: MHC-I=13 (removed=+1), ddG=1.13
+    Pos 325 V->S: MHC-I=13 (removed=+1), ddG=1.30
+    Pos 325 V->N: MHC-I=13 (removed=+1), ddG=1.35
+    Pos 325 V->D: MHC-I=13 (removed=+1), ddG=1.37
+    Pos 325 V->K: MHC-I=13 (removed=+1), ddG=1.58
+  APPLIED: Pos 224 T->C | MHC-I: 15 -> 12 (-2) | cumDDG=10.86
+
+  Round 2: 12 binders, 20 anchor positions, budget_remaining=4.14
+    Pos 16 T->C: MHC-I=12 (removed=+0), ddG=1.13
+    Pos 16 T->V: MHC-I=13 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=13 (removed=-1), ddG=1.30
+    Pos 16 T->L: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 16 T->A: MHC-I=13 (removed=-1), ddG=1.60
+    Pos 23 Y->R: MHC-I=11 (removed=+1), ddG=1.22
+    Pos 23 Y->H: MHC-I=11 (removed=+1), ddG=1.53
+    Pos 23 Y->E: MHC-I=11 (removed=+1), ddG=1.67
+    Pos 23 Y->K: MHC-I=11 (removed=+1), ddG=1.68
+    Pos 23 Y->Q: MHC-I=11 (removed=+1), ddG=1.68
+    Pos 82 M->E: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 82 M->K: MHC-I=11 (removed=+1), ddG=1.15
+    Pos 82 M->Q: MHC-I=11 (removed=+1), ddG=1.15
+    Pos 82 M->H: MHC-I=11 (removed=+1), ddG=1.20
+    Pos 82 M->D: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 87 E->M: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 87 E->I: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 87 E->L: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 87 E->F: MHC-I=11 (removed=+1), ddG=1.40
+    Pos 87 E->C: MHC-I=10 (removed=+2), ddG=1.53
+    Pos 89 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 89 L->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 89 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 89 L->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 89 L->Q: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 94 Y->R: MHC-I=11 (removed=+1), ddG=1.22
+    Pos 94 Y->H: MHC-I=12 (removed=+0), ddG=1.53
+    Pos 94 Y->E: MHC-I=11 (removed=+1), ddG=1.67
+    Pos 94 Y->K: MHC-I=11 (removed=+1), ddG=1.68
+    Pos 94 Y->Q: MHC-I=11 (removed=+1), ddG=1.68
+    Pos 158 T->C: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 158 T->V: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 158 T->I: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 158 T->L: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 158 T->A: MHC-I=11 (removed=+1), ddG=1.60
+    Pos 165 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 165 L->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 165 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 165 L->K: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 165 L->Q: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 177 P->T: MHC-I=11 (removed=+1), ddG=1.17
+    Pos 177 P->S: MHC-I=11 (removed=+1), ddG=1.27
+    Pos 177 P->N: MHC-I=11 (removed=+1), ddG=1.38
+    Pos 177 P->D: MHC-I=11 (removed=+1), ddG=1.40
+    Pos 177 P->K: MHC-I=11 (removed=+1), ddG=1.62
+    Pos 184 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 184 L->D: MHC-I=12 (removed=+0), ddG=1.13
+    Pos 184 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 184 L->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 184 L->Q: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 186 L->N: MHC-I=12 (removed=+0), ddG=1.12
+    Pos 186 L->D: MHC-I=12 (removed=+0), ddG=1.13
+    Pos 186 L->T: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 186 L->K: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 186 L->Q: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 193 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 193 L->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 193 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 193 L->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 193 L->Q: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 213 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 213 L->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 213 L->T: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 213 L->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 213 L->Q: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 220 I->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 220 I->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 220 I->T: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 220 I->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 220 I->Q: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 268 S->V: MHC-I=12 (removed=+0), ddG=1.30
+    Pos 268 S->A: MHC-I=12 (removed=+0), ddG=1.37
+    Pos 268 S->C: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 268 S->I: MHC-I=12 (removed=+0), ddG=1.53
+    Pos 268 S->L: MHC-I=13 (removed=-1), ddG=1.53
+    Pos 275 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 275 L->D: MHC-I=13 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 275 L->K: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 275 L->Q: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 314 M->E: MHC-I=12 (removed=+0), ddG=1.13
+    Pos 314 M->K: MHC-I=11 (removed=+1), ddG=1.15
+    Pos 314 M->Q: MHC-I=12 (removed=+0), ddG=1.15
+    Pos 314 M->H: MHC-I=11 (removed=+1), ddG=1.20
+    Pos 314 M->D: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 318 L->N: MHC-I=11 (removed=+1), ddG=1.12
+    Pos 318 L->D: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 318 L->T: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 318 L->K: MHC-I=10 (removed=+2), ddG=1.35
+    Pos 318 L->Q: MHC-I=12 (removed=+0), ddG=1.35
+    Pos 321 V->T: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 321 V->S: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 321 V->N: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 321 V->D: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 321 V->K: MHC-I=11 (removed=+1), ddG=1.58
+    Pos 325 V->T: MHC-I=11 (removed=+1), ddG=1.13
+    Pos 325 V->S: MHC-I=11 (removed=+1), ddG=1.30
+    Pos 325 V->N: MHC-I=11 (removed=+1), ddG=1.35
+    Pos 325 V->D: MHC-I=11 (removed=+1), ddG=1.37
+    Pos 325 V->K: MHC-I=11 (removed=+1), ddG=1.58
+  APPLIED: Pos 318 L->K | MHC-I: 15 -> 10 (-2) | cumDDG=12.21
+
+  Round 3: 10 binders, 16 anchor positions, budget_remaining=2.79
+    Pos 16 T->C: MHC-I=10 (removed=+0), ddG=1.13
+    Pos 16 T->V: MHC-I=11 (removed=-1), ddG=1.13
+    Pos 16 T->I: MHC-I=11 (removed=-1), ddG=1.30
+    Pos 16 T->L: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 16 T->A: MHC-I=11 (removed=-1), ddG=1.60
+    Pos 23 Y->R: MHC-I=9 (removed=+1), ddG=1.22
+    Pos 23 Y->H: MHC-I=9 (removed=+1), ddG=1.53
+    Pos 23 Y->E: MHC-I=9 (removed=+1), ddG=1.67
+    Pos 23 Y->K: MHC-I=9 (removed=+1), ddG=1.68
+    Pos 23 Y->Q: MHC-I=9 (removed=+1), ddG=1.68
+    Pos 82 M->E: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 82 M->K: MHC-I=9 (removed=+1), ddG=1.15
+    Pos 82 M->Q: MHC-I=9 (removed=+1), ddG=1.15
+    Pos 82 M->H: MHC-I=9 (removed=+1), ddG=1.20
+    Pos 82 M->D: MHC-I=9 (removed=+1), ddG=1.37
+    Pos 87 E->M: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 87 E->I: MHC-I=9 (removed=+1), ddG=1.37
+    Pos 87 E->L: MHC-I=9 (removed=+1), ddG=1.37
+    Pos 87 E->F: MHC-I=9 (removed=+1), ddG=1.40
+    Pos 87 E->C: MHC-I=8 (removed=+2), ddG=1.53
+    Pos 89 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 89 L->D: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 89 L->T: MHC-I=9 (removed=+1), ddG=1.30
+    Pos 89 L->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 89 L->Q: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 94 Y->R: MHC-I=9 (removed=+1), ddG=1.22
+    Pos 94 Y->H: MHC-I=10 (removed=+0), ddG=1.53
+    Pos 94 Y->E: MHC-I=9 (removed=+1), ddG=1.67
+    Pos 94 Y->K: MHC-I=9 (removed=+1), ddG=1.68
+    Pos 94 Y->Q: MHC-I=9 (removed=+1), ddG=1.68
+    Pos 158 T->C: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 158 T->V: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 158 T->I: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 158 T->L: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 158 T->A: MHC-I=9 (removed=+1), ddG=1.60
+    Pos 165 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 165 L->D: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 165 L->T: MHC-I=9 (removed=+1), ddG=1.30
+    Pos 165 L->K: MHC-I=10 (removed=+0), ddG=1.35
+    Pos 165 L->Q: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 177 P->T: MHC-I=9 (removed=+1), ddG=1.17
+    Pos 177 P->S: MHC-I=9 (removed=+1), ddG=1.27
+    Pos 177 P->N: MHC-I=9 (removed=+1), ddG=1.38
+    Pos 177 P->D: MHC-I=9 (removed=+1), ddG=1.40
+    Pos 177 P->K: MHC-I=9 (removed=+1), ddG=1.62
+    Pos 184 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 184 L->D: MHC-I=10 (removed=+0), ddG=1.13
+    Pos 184 L->T: MHC-I=9 (removed=+1), ddG=1.30
+    Pos 184 L->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 184 L->Q: MHC-I=10 (removed=+0), ddG=1.35
+    Pos 186 L->N: MHC-I=10 (removed=+0), ddG=1.12
+    Pos 186 L->D: MHC-I=10 (removed=+0), ddG=1.13
+    Pos 186 L->T: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 186 L->K: MHC-I=10 (removed=+0), ddG=1.35
+    Pos 186 L->Q: MHC-I=10 (removed=+0), ddG=1.35
+    Pos 193 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 193 L->D: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 193 L->T: MHC-I=9 (removed=+1), ddG=1.30
+    Pos 193 L->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 193 L->Q: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 213 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 213 L->D: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 213 L->T: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 213 L->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 213 L->Q: MHC-I=10 (removed=+0), ddG=1.35
+    Pos 220 I->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 220 I->D: MHC-I=9 (removed=+1), ddG=1.13
+    Pos 220 I->T: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 220 I->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 220 I->Q: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 268 S->V: MHC-I=10 (removed=+0), ddG=1.30
+    Pos 268 S->A: MHC-I=10 (removed=+0), ddG=1.37
+    Pos 268 S->C: MHC-I=9 (removed=+1), ddG=1.37
+    Pos 268 S->I: MHC-I=10 (removed=+0), ddG=1.53
+    Pos 268 S->L: MHC-I=11 (removed=-1), ddG=1.53
+    Pos 275 L->N: MHC-I=9 (removed=+1), ddG=1.12
+    Pos 275 L->D: MHC-I=11 (removed=-1), ddG=1.13
+    Pos 275 L->T: MHC-I=9 (removed=+1), ddG=1.30
+    Pos 275 L->K: MHC-I=9 (removed=+1), ddG=1.35
+    Pos 275 L->Q: MHC-I=9 (removed=+1), ddG=1.35
+  APPLIED: Pos 87 E->C | MHC-I: 15 -> 8 (-2) | cumDDG=13.74
+
+  Round 4: 8 binders, 12 anchor positions, budget_remaining=1.26
+    Pos 16 T->C: MHC-I=8 (removed=+0), ddG=1.13
+    Pos 16 T->V: MHC-I=9 (removed=-1), ddG=1.13
+    Pos 16 T->N: MHC-I=8 (removed=+0), ddG=0.52
+    Pos 16 T->D: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 16 T->S: MHC-I=9 (removed=-1), ddG=0.53
+    Pos 23 Y->R: MHC-I=7 (removed=+1), ddG=1.22
+    Pos 23 Y->F: MHC-I=7 (removed=+1), ddG=0.57
+    Pos 23 Y->W: MHC-I=7 (removed=+1), ddG=0.68
+    Pos 23 Y->M: MHC-I=8 (removed=+0), ddG=0.83
+    Pos 23 Y->I: MHC-I=8 (removed=+0), ddG=1.13
+    Pos 158 T->C: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 158 T->V: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 158 T->N: MHC-I=7 (removed=+1), ddG=0.52
+    Pos 158 T->D: MHC-I=7 (removed=+1), ddG=0.53
+    Pos 158 T->S: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 165 L->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 165 L->D: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 165 L->I: MHC-I=8 (removed=+0), ddG=0.30
+    Pos 165 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 165 L->V: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 177 P->T: MHC-I=7 (removed=+1), ddG=1.17
+    Pos 177 P->V: MHC-I=7 (removed=+1), ddG=0.33
+    Pos 177 P->C: MHC-I=7 (removed=+1), ddG=0.40
+    Pos 177 P->I: MHC-I=7 (removed=+1), ddG=0.57
+    Pos 177 P->L: MHC-I=7 (removed=+1), ddG=0.57
+    Pos 184 L->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 184 L->D: MHC-I=8 (removed=+0), ddG=1.13
+    Pos 184 L->I: MHC-I=8 (removed=+0), ddG=0.30
+    Pos 184 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 184 L->V: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 186 L->N: MHC-I=8 (removed=+0), ddG=1.12
+    Pos 186 L->D: MHC-I=8 (removed=+0), ddG=1.13
+    Pos 186 L->I: MHC-I=8 (removed=+0), ddG=0.30
+    Pos 186 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 186 L->V: MHC-I=9 (removed=-1), ddG=0.53
+    Pos 193 L->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 193 L->D: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 193 L->I: MHC-I=7 (removed=+1), ddG=0.30
+    Pos 193 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 193 L->V: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 213 L->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 213 L->D: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 213 L->I: MHC-I=8 (removed=+0), ddG=0.30
+    Pos 213 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 213 L->V: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 220 I->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 220 I->D: MHC-I=7 (removed=+1), ddG=1.13
+    Pos 220 I->L: MHC-I=8 (removed=+0), ddG=0.30
+    Pos 220 I->C: MHC-I=8 (removed=+0), ddG=0.47
+    Pos 220 I->V: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 268 S->T: MHC-I=8 (removed=+0), ddG=0.53
+    Pos 268 S->N: MHC-I=7 (removed=+1), ddG=0.75
+    Pos 268 S->D: MHC-I=7 (removed=+1), ddG=0.77
+    Pos 268 S->K: MHC-I=7 (removed=+1), ddG=0.98
+    Pos 268 S->Q: MHC-I=7 (removed=+1), ddG=0.98
+    Pos 275 L->N: MHC-I=7 (removed=+1), ddG=1.12
+    Pos 275 L->D: MHC-I=9 (removed=-1), ddG=1.13
+    Pos 275 L->I: MHC-I=7 (removed=+1), ddG=0.30
+    Pos 275 L->C: MHC-I=7 (removed=+1), ddG=0.47
+    Pos 275 L->V: MHC-I=7 (removed=+1), ddG=0.53
+  APPLIED: Pos 193 L->I | MHC-I: 15 -> 7 (-1) | cumDDG=14.04
+
+  Round 5: 7 binders, 10 anchor positions, budget_remaining=0.96
+    Pos 16 T->N: MHC-I=7 (removed=+0), ddG=0.52
+    Pos 16 T->D: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 16 T->S: MHC-I=8 (removed=-1), ddG=0.53
+    Pos 16 T->K: MHC-I=7 (removed=+0), ddG=0.75
+    Pos 16 T->Q: MHC-I=7 (removed=+0), ddG=0.75
+    Pos 23 Y->F: MHC-I=6 (removed=+1), ddG=0.57
+    Pos 23 Y->W: MHC-I=6 (removed=+1), ddG=0.68
+    Pos 23 Y->M: MHC-I=7 (removed=+0), ddG=0.83
+    Pos 158 T->N: MHC-I=6 (removed=+1), ddG=0.52
+    Pos 158 T->D: MHC-I=6 (removed=+1), ddG=0.53
+    Pos 158 T->S: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 158 T->K: MHC-I=6 (removed=+1), ddG=0.75
+    Pos 158 T->Q: MHC-I=6 (removed=+1), ddG=0.75
+    Pos 165 L->I: MHC-I=7 (removed=+0), ddG=0.30
+    Pos 165 L->C: MHC-I=6 (removed=+1), ddG=0.47
+    Pos 165 L->V: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 165 L->M: MHC-I=7 (removed=+0), ddG=0.60
+    Pos 165 L->F: MHC-I=7 (removed=+0), ddG=0.87
+    Pos 177 P->V: MHC-I=6 (removed=+1), ddG=0.33
+    Pos 177 P->C: MHC-I=6 (removed=+1), ddG=0.40
+    Pos 177 P->I: MHC-I=6 (removed=+1), ddG=0.57
+    Pos 177 P->L: MHC-I=6 (removed=+1), ddG=0.57
+    Pos 177 P->A: MHC-I=6 (removed=+1), ddG=0.73
+    Pos 184 L->I: MHC-I=7 (removed=+0), ddG=0.30
+    Pos 184 L->C: MHC-I=6 (removed=+1), ddG=0.47
+    Pos 184 L->V: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 184 L->M: MHC-I=9 (removed=-2), ddG=0.60
+    Pos 184 L->F: MHC-I=9 (removed=-2), ddG=0.87
+    Pos 213 L->I: MHC-I=7 (removed=+0), ddG=0.30
+    Pos 213 L->C: MHC-I=6 (removed=+1), ddG=0.47
+    Pos 213 L->V: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 213 L->M: MHC-I=7 (removed=+0), ddG=0.60
+    Pos 213 L->F: MHC-I=6 (removed=+1), ddG=0.87
+    Pos 220 I->L: MHC-I=7 (removed=+0), ddG=0.30
+    Pos 220 I->C: MHC-I=7 (removed=+0), ddG=0.47
+    Pos 220 I->V: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 220 I->M: MHC-I=7 (removed=+0), ddG=0.60
+    Pos 220 I->F: MHC-I=7 (removed=+0), ddG=0.87
+    Pos 268 S->T: MHC-I=7 (removed=+0), ddG=0.53
+    Pos 268 S->N: MHC-I=6 (removed=+1), ddG=0.75
+    Pos 268 S->D: MHC-I=6 (removed=+1), ddG=0.77
+    Pos 275 L->I: MHC-I=6 (removed=+1), ddG=0.30
+    Pos 275 L->C: MHC-I=6 (removed=+1), ddG=0.47
+    Pos 275 L->V: MHC-I=6 (removed=+1), ddG=0.53
+    Pos 275 L->M: MHC-I=6 (removed=+1), ddG=0.60
+    Pos 275 L->F: MHC-I=6 (removed=+1), ddG=0.87
+  APPLIED: Pos 275 L->I | MHC-I: 15 -> 6 (-1) | cumDDG=14.34
+
+  Round 6: 6 binders, 8 anchor positions, budget_remaining=0.66
+    Pos 16 T->N: MHC-I=6 (removed=+0), ddG=0.52
+    Pos 16 T->D: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 16 T->S: MHC-I=7 (removed=-1), ddG=0.53
+    Pos 23 Y->F: MHC-I=5 (removed=+1), ddG=0.57
+    Pos 158 T->N: MHC-I=5 (removed=+1), ddG=0.52
+    Pos 158 T->D: MHC-I=5 (removed=+1), ddG=0.53
+    Pos 158 T->S: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 165 L->I: MHC-I=6 (removed=+0), ddG=0.30
+    Pos 165 L->C: MHC-I=5 (removed=+1), ddG=0.47
+    Pos 165 L->V: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 165 L->M: MHC-I=6 (removed=+0), ddG=0.60
+    Pos 177 P->V: MHC-I=5 (removed=+1), ddG=0.33
+    Pos 177 P->C: MHC-I=5 (removed=+1), ddG=0.40
+    Pos 177 P->I: MHC-I=5 (removed=+1), ddG=0.57
+    Pos 177 P->L: MHC-I=5 (removed=+1), ddG=0.57
+    Pos 184 L->I: MHC-I=6 (removed=+0), ddG=0.30
+    Pos 184 L->C: MHC-I=5 (removed=+1), ddG=0.47
+    Pos 184 L->V: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 184 L->M: MHC-I=8 (removed=-2), ddG=0.60
+    Pos 213 L->I: MHC-I=6 (removed=+0), ddG=0.30
+    Pos 213 L->C: MHC-I=5 (removed=+1), ddG=0.47
+    Pos 213 L->V: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 213 L->M: MHC-I=6 (removed=+0), ddG=0.60
+    Pos 220 I->L: MHC-I=6 (removed=+0), ddG=0.30
+    Pos 220 I->C: MHC-I=6 (removed=+0), ddG=0.47
+    Pos 220 I->V: MHC-I=6 (removed=+0), ddG=0.53
+    Pos 220 I->M: MHC-I=6 (removed=+0), ddG=0.60
+  APPLIED: Pos 177 P->V | MHC-I: 15 -> 5 (-1) | cumDDG=14.67
+
+  Round 7: 5 binders, 6 anchor positions, budget_remaining=0.33
+    Pos 165 L->I: MHC-I=5 (removed=+0), ddG=0.30
+    Pos 213 L->I: MHC-I=5 (removed=+0), ddG=0.30
+    Pos 220 I->L: MHC-I=5 (removed=+0), ddG=0.30
+  No MHC-I improvement found in round 7. Stopping Phase 1.
+
+=== Final evaluation (real netMHCpan) ===
+  Variant: 14 mutations, cumDDG=14.67
+  MHC-I:  15 -> 5 (-10)
+  MHC-II: 92 -> 52 (-40)
+  Combined: 61.0 -> 31.0
+  S_Immuno: 0.7594 -> 0.8777 (delta=+0.1183)
+  P3 pass: YES ✓
+
+  Mutations applied:
+    [MHC-II] Pos 255: Y->K (ddG=1.68)
+    [MHC-II] Pos 41: D->C (ddG=1.30)
+    [MHC-II] Pos 65: G->K (ddG=2.28)
+    [MHC-II] Pos 187: E->M (ddG=1.13)
+    [MHC-II] Pos 27: D->C (ddG=1.30)
+    [MHC-II] Pos 203: D->C (ddG=1.30)
+    [MHC-II] Pos 285: V->C (ddG=0.37)
+    [MHC-II] Pos 152: V->C (ddG=0.37)
+    [MHC-I] Pos 224: T->C (ddG=1.13)
+    [MHC-I] Pos 318: L->K (ddG=1.35)
+    [MHC-I] Pos 87: E->C (ddG=1.53)
+    [MHC-I] Pos 193: L->I (ddG=0.30)
+    [MHC-I] Pos 275: L->I (ddG=0.30)
+    [MHC-I] Pos 177: P->V (ddG=0.33)
+
+Elapsed: 62.0 min
+
+Manifest: /home/anees_22phd0670/strategy_C_v2_results/deimmunized_v2_manifest.json
+FASTA:    /home/anees_22phd0670/strategy_C_v2_results/deimmunized_v2.fasta
+Parquet:  /home/anees_22phd0670/strategy_C_v2_results/deimmunized_v2.parquet
+
+======================================================================
+DONE. Elapsed: 62.0 min
+P3 pass: YES ✓ (delta=+0.1183)
+Results: /home/anees_22phd0670/strategy_C_v2_results
+[DONE.txt written]
