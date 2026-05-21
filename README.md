@@ -48,33 +48,28 @@ IS110-family bridge recombinases are a class of programmable genome editors capa
 
 ## Pipeline Architecture
 
-```mermaid
-flowchart TD
-    subgraph gen["Design Generation — 1,041 candidates"]
-        direction LR
-        A["Strategy A\nDomain-Swap Chimeras\n15 designs"]
-        B["Strategy B\nIS110 Ortholog Discovery\n992 designs"]
-        C["Strategy C\nMC Deimmunization\n2 designs"]
-        D["Strategy D\nProteinMPNN Redesign\n32 designs"]
-    end
+```
+Strategies · 1,041 candidates          Verification pipeline             Outputs
+──────────────────────────             ─────────────────────             ───────
 
-    gen --> gate1["Stability Gate\nESMFold pLDDT ≥ 90 global\npLDDT ≥ 95 active-site"]
-    gate1 --> gate2["Mechanism Gate\nIS110-family PFAM verification\nPF01548 + PF02371"]
-    gate2 --> triage["Multi-gate Triage\n1,041 → 1,029 designs\n12 fail bRNA gate"]
-
-    triage --> penscore["PenScore Evaluation\nSeven-axis weighted composite\nIS621 lockpoint = 0.929"]
-
-    penscore --> p1["16 designs beat IS621\nPenScore > 0.929"]
-    penscore --> catalog["Design Catalog\n1,029 designs\nCSV · Parquet · FASTA"]
-
-    catalog --> browser["Interactive HTML Browser"]
-    catalog --> wetlab["16 Wet-lab Reference Sheets"]
-    p1 --> result["5 / 5 Predictions PASS\nPublish with strong claim"]
-
-    style gen fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
-    style penscore fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
-    style p1 fill:#fefce8,stroke:#eab308,stroke-width:2px
-    style result fill:#d1fae5,stroke:#16a34a,stroke-width:2px
+Strategy A · Domain-Swap   ──┐
+  15 chimeras                 │
+                              │   Stability Gate    Mechanism Gate    Triage
+Strategy B · Orthologs   ────┼──► ESMFold pLDDT ──► IS110-family ──► 1,029 designs
+  992 candidates              │   ≥90 global         PF01548              │
+                              │   ≥95 active-site    PF02371              ▼
+Strategy C · Deimm   ────────┤                                      PenScore (7-axis)
+  2 deimmunized variants      │                                      IS621 = 0.929
+                              │
+Strategy D · ProteinMPNN ────┘                                           │
+  32 backbone redesigns                                    ┌─────────────┼──────────────┐
+                                                           ▼             ▼              ▼
+                                                   16 beat IS621    Catalog          Wetlab
+                                                   PenScore>0.929  1,029 designs    16 sheets
+                                                         │         CSV · Parquet    Markdown
+                                                         ▼         Browser HTML
+                                               5/5 predictions PASS
+                                               → PUBLISH with strong claim
 ```
 
 ---
