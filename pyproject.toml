@@ -58,11 +58,15 @@ atlas = [
     "duckdb>=0.10.0",
 ]
 mech-class = [
-    # Pinned to mech-class v0.5.1: the published version used for IS110-family
-    # classification via PFAM domain evidence (PF01548+PF02371). v0.5.1 carries
-    # its own atlas v0.6.0 pin; pinning here makes the transitive constraint
-    # explicit and prevents a conflict if the atlas extra is also installed.
-    "mech-class>=0.5.1,<0.6.0",
+    # Pinned to mech-class v0.5.2: fixes the IS110 Tier-A OOD misclassification
+    # (IS621 and novel IS110 proteins with no pre-computed ESM-2 embedding were
+    # scored as DSB_NUCLEASE at P=0.567–0.703; v0.5.2 adds a hard gate that
+    # returns DSB_FREE when PF01548∧PF02371 are both present). This corrects
+    # IS621's own PenScore from 0.929→0.954 retroactively; PEN-ASSEMBLE designs
+    # are unaffected (S_DSB=1.0 already via PFAM evidence, confidence=0.99).
+    # v0.5.2 carries its own atlas v0.6.0 pin; pinning here makes the transitive
+    # constraint explicit and prevents a conflict if the atlas extra is also installed.
+    "mech-class>=0.5.2,<0.6.0",
 ]
 pen-score = [
     # Pinned to pen-score v0.1.0: the published 7-axis PenScore implementation

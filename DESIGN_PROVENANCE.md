@@ -1001,3 +1001,52 @@ are closely related IS110-family proteins with nearly identical sequence/structu
 Our deimmunized (C: 0.9586–0.9673) and redesigned candidates (D: 0.9261–0.9353) computationally
 exceed IS622's estimated 0.9246 baseline, providing rational design shortlisting for wet-lab
 follow-up in the era of high-efficiency IS110-family editors.
+
+---
+
+## Deviation D28-2: mech-class v0.5.2 IS621 Reference Correction (2026-05-22)
+
+**Date:** 2026-05-22 (post-pipeline, post-release)
+
+### Root Cause
+
+mech-class v0.5.1 misclassified IS621 itself (and any novel IS110 protein without a pre-computed
+ESM-2 embedding) as `DSB_NUCLEASE` with P=0.567–0.703 during Paper 3 pipeline execution.
+Root cause: no pre-computed ESM-2 embedding → F_seq=zeros → OOD feature vector → LightGBM fires
+incorrectly. IS621's S_DSB was scored as `1 − P(DSB_NUCLEASE) = 1 − 0.703 = 0.297`, propagating
+through Paper 3's pen-score dsb.py to give IS621 S_DSB=0.90, PenScore=0.929.
+
+### The Fix (mech-class v0.5.2)
+
+A Tier-A IS110 hard gate: if PF01548∧PF02371 both present in PFAM hits → return
+`DSB_FREE_TRANSEST_RECOMBINASE` at confidence≥0.90 without touching ML probabilities.
+pen-score dsb.py updated to return S_DSB=1.0 when `tier_a_gate_override=True`.
+
+IS621 corrected PenScore: **0.954** (S_DSB 0.90→1.00, ΔPenScore = +0.025).
+
+### Impact on PEN-ASSEMBLE
+
+**Design scores: unchanged.** All 1,041 PEN-ASSEMBLE designs already had S_DSB=1.0 via PFAM
+domain evidence (confidence=0.99), computed independently of the IS621 ML path. No design PenScore
+changes.
+
+**IS621 reference score: retroactively corrected.**
+
+| Reference point | IS621 PenScore | Used for |
+|-----------------|----------------|----------|
+| Verbatim pre-registered (Paper 3, mech-class v0.5.1) | **0.929** | P1 threshold (locked; NOT changed) |
+| Corrected (mech-class v0.5.2, honest reporting) | **0.954** | Secondary analysis only |
+
+**P1 result (primary):** 16 designs beat verbatim lockpoint 0.929 — **PASS** (unchanged).
+**P1 against corrected IS621 (secondary):** 2 C designs (0.9673, 0.9586) exceed corrected 0.954.
+
+The pre-registered P1 lockpoint (0.929) is verbatim from the pre-registration record. It is
+**not** retroactively changed. The corrected IS621 reference is disclosed here and in
+`validation/P1_beat_is621_result.json` for honest reporting.
+
+### Files Updated
+- `pyproject.toml` — mech-class pin `>=0.5.1` → `>=0.5.2`
+- `zenodo-pen-assemble/provenance/MODEL_CARD.md` — P1 table note; Limitation #6
+- `zenodo-pen-assemble/validation/P1_beat_is621_result.json` — corrected IS621 reference field
+- `zenodo-pen-assemble/validation/honest_reporting_checklist.json` — HC2 updated
+- `zenodo-pen-assemble/reproducibility/dependency_versions.json` — mech-class v0.5.2, pen-score v0.1.0 entries
