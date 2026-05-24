@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+message: "If you use PEN-ASSEMBLE in your work, please cite it using the metadata below."
+type: software
+title: "PEN-ASSEMBLE: A computational pipeline for IS110-family bridge recombinase candidate nomination"
+abstract: >
+  PEN-ASSEMBLE is the computational nomination pipeline for IS110-family bridge recombinase design.
+  It evaluates 1,041 candidate designs across four orthogonal strategies (domain-swap chimeras,
+  IS110-family ortholog discovery, Monte Carlo deimmunization, and ProteinMPNN backbone redesign)
+  using the 8-axis PenScore composite metric. The pipeline produces a fully reproducible,
+  pre-registered design catalog of 1,029 scored designs with wet-lab synthesis sheets.
+  Pre-registered result: 16 designs beat the IS621 verbatim lockpoint (PenScore > 0.929),
+  5/5 predictions PASS — publication policy: PUBLISH with strong claim.
+authors:
+  - family-names: Ahmed
+    given-names: Anees
+    email: ahmedaneesm@gmail.com
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+version: "0.5.1"
+date-released: "2026-05-24"
+url: "https://github.com/ahmedanees-m/pen-assemble"
+repository-code: "https://github.com/ahmedanees-m/pen-assemble"
+license: MIT
+doi: "pending"
+keywords:
+  - bridge recombinase
+  - IS110-family
+  - genome editing
+  - computational protein design
+  - ProteinMPNN
+  - deimmunization
+  - PenScore
+  - drug discovery pipeline
+  - synthetic biology
+identifiers:
+  - type: url
+    value: "https://github.com/ahmedanees-m/pen-assemble/releases/tag/v0.5.1"
+    description: GitHub release v0.5.1
+references:
+  - type: software
+    title: "genome-atlas: Foundational knowledge graph for programmable genome editors"
+    authors:
+      - family-names: Ahmed
+        given-names: Anees
+    version: "0.7.1"
+    url: "https://github.com/ahmedanees-m/genome-atlas"
+    doi: "pending"
+  - type: software
+    title: "mech-class: Biochemical mechanism classifier for genome editors"
+    authors:
+      - family-names: Ahmed
+        given-names: Anees
+    version: "0.5.3"
+    url: "https://github.com/ahmedanees-m/mech-class"
+    doi: "pending"
+  - type: software
+    title: "pen-score: 8-axis writer scoring framework"
+    authors:
+      - family-names: Ahmed
+        given-names: Anees
+    version: "0.1.2"
+    url: "https://github.com/ahmedanees-m/pen-score"
+    doi: "pending"

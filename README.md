@@ -59,16 +59,17 @@ Strategy A · Domain-Swap   ──┐
 Strategy B · Orthologs   ────┼──► ESMFold pLDDT ──► IS110-family ──► 1,029 designs
   992 candidates              │   ≥90 global         PF01548              │
                               │   ≥95 active-site    PF02371              ▼
-Strategy C · Deimm   ────────┤                                      PenScore (7-axis)
-  2 deimmunized variants      │                                      IS621 = 0.929
-                              │
+Strategy C · Deimm   ────────┤                                      PenScore (8-axis)
+  2 deimmunized variants      │                                      IS621 = 0.957
+                              │                                      (v0.1.0 pre-reg: 0.929)
 Strategy D · ProteinMPNN ────┘                                           │
   32 backbone redesigns                                    ┌─────────────┼──────────────┐
                                                            ▼             ▼              ▼
                                                    16 beat IS621    Catalog          Wetlab
                                                    PenScore>0.929  1,029 designs    16 sheets
-                                                         │         CSV · Parquet    Markdown
-                                                         ▼         Browser HTML
+                                                   (pre-reg P1)    CSV · Parquet    Markdown
+                                                         │         Browser HTML
+                                                         ▼
                                                5/5 predictions PASS
                                                → PUBLISH with strong claim
 ```
@@ -82,31 +83,41 @@ Strategy D · ProteinMPNN ────┘                                       
 | **A** — Domain-Swap Chimeras | Recombine IS110 scaffold × guide modules from orthologous bRNA systems | 15 | 0 (best: 0.921) |
 | **B** — IS110 Ortholog Discovery | Screen 992 IS110-family sequences from NCBI via 7-gate triage | 992 | 0 (best: 0.917) |
 | **C** — Monte Carlo Deimmunization | Iterative substitution to reduce MHC-II epitopes while preserving activity | 2 | **2 / 2** |
-| **D** — ProteinMPNN Backbone Redesign | Sequence redesign conditioned on IS621 ESMFold structure (PDB: 8WT6) | 32 | **30 / 32** |
+| **D** — ProteinMPNN Backbone Redesign | Sequence redesign conditioned on IS621 ESMFold structure (PDB: 8WT6) | 32 | **14 / 32** |
 
 ---
 
 ## PenScore Formula
 
+### Current (pen-score v0.1.2 — 8-axis)
+
 ```
-PenScore = S_DSB × 0.25  +  S_Spec × 0.10  +  S_Cargo × 0.20
-         + S_Deliv × 0.15 +  S_Immuno × 0.10 +  S_Prog × 0.15
-         + S_Mature × 0.05
+PenScore = S_DSB × 0.24  +  S_Spec × 0.14  +  S_Cargo × 0.19
+         + S_Deliv × 0.19 +  S_Immuno × 0.09 +  S_Prog × 0.05
+         + S_Mature × 0.05 +  S_Energy × 0.05
 ```
 
 | Axis | Weight | Measures |
 |------|--------|----------|
-| `S_DSB` | 0.25 | Double-strand break avoidance (IS110 mechanism = 1.0) |
-| `S_Spec` | 0.10 | Guide-RNA target-site specificity |
-| `S_Cargo` | 0.20 | Payload capacity (IS110 = 1.0 by mechanism) |
-| `S_Deliv` | 0.15 | AAV packaging compatibility (sequence length proxy) |
-| `S_Immuno` | 0.10 | De-immunization (1 − normalised MHC-II binder fraction) |
-| `S_Prog` | 0.15 | bRNA re-targeting programmability |
+| `S_DSB` | 0.24 | Double-strand break avoidance (IS110 mechanism = 1.0) |
+| `S_Spec` | 0.14 | Guide-RNA target-site specificity |
+| `S_Cargo` | 0.19 | Payload capacity (IS110 = 1.0 by mechanism) |
+| `S_Deliv` | 0.19 | AAV packaging compatibility (sequence length proxy) |
+| `S_Immuno` | 0.09 | De-immunization (1 − normalised MHC-II binder fraction) |
+| `S_Prog` | 0.05 | bRNA re-targeting programmability |
 | `S_Mature` | 0.05 | Technology readiness / literature maturity |
+| `S_Energy` | 0.05 | Walker A/B motif absence (IS110-family = 1.0) |
+
+> **Pre-registration integrity:** P1 was evaluated using the 7-axis v0.1.0 formula
+> (weights: S_DSB 0.25, S_Spec 0.10, S_Cargo 0.20, S_Deliv 0.15, S_Immuno 0.10,
+> S_Prog 0.15, S_Mature 0.05). That result — **16 designs beat IS621 at 0.929** — is FINAL.
+> The v0.1.2 8-axis re-scoring is a secondary analysis only. See `RESCORING_v0.1.2.md`.
 
 **IS621 reference lockpoints:**
-- Verbatim pre-registered: **0.929** (primary threshold, P1)
-- MHCflurry 2.2.1-calibrated: **0.9255** (secondary analysis)
+- Verbatim pre-registered (v0.1.0): **0.929** (primary threshold, P1)
+- mech-class v0.5.2 corrected (v0.1.0): **0.954** (retroactive correction, secondary)
+- pen-score v0.1.2 updated (8-axis): **0.957** (current best estimate, secondary)
+- MHCflurry 2.2.1-calibrated (v0.1.0): **0.9255** (secondary analysis, 32 beaters)
 
 ---
 
@@ -281,6 +292,21 @@ Full details in [`DESIGN_PROVENANCE.md`](DESIGN_PROVENANCE.md) and
 
 ---
 
+## Part of PEN-STACK
+
+PEN-ASSEMBLE is the fourth package in the **PEN-STACK** computational biology pipeline
+for programmable genome editor discovery and benchmarking.
+
+| Package | Role | Version | DOI |
+|---------|------|---------|-----|
+| [genome-atlas](https://github.com/ahmedanees-m/genome-atlas) | Foundational knowledge graph (28 systems, AUROC 0.9714) | v0.7.1 | [![DOI](https://img.shields.io/badge/DOI-pending%20Zenodo-lightgrey)](#) |
+| [mech-class](https://github.com/ahmedanees-m/mech-class) | Biochemical mechanism classifier (IS110 Tier-A gate) | v0.5.3 | [![DOI](https://img.shields.io/badge/DOI-pending%20Zenodo-lightgrey)](#) |
+| [pen-score](https://github.com/ahmedanees-m/pen-score) | 8-axis writer scoring framework | v0.1.2 | [![DOI](https://img.shields.io/badge/DOI-pending%20Zenodo-lightgrey)](#) |
+| **pen-assemble** | IS110-family design catalog (1,029 designs, 5/5 PASS) | **v0.5.1** | [![DOI](https://img.shields.io/badge/DOI-pending%20Zenodo-lightgrey)](#) |
+| PEN-COMPARE *(in prep)* | Cross-system benchmarking + TrueWriterScore | — | — |
+
+---
+
 ## Citation
 
 If you use PEN-ASSEMBLE in your work, please cite:
@@ -291,15 +317,17 @@ If you use PEN-ASSEMBLE in your work, please cite:
   title     = {{PEN-ASSEMBLE}: A computational pipeline for IS110-family
                bridge recombinase candidate nomination},
   year      = {2026},
-  version   = {v0.5.0},
-  publisher = {GitHub},
+  version   = {v0.5.1},
+  publisher = {Zenodo},
   url       = {https://github.com/ahmedanees-m/pen-assemble},
   note      = {DOI pending Zenodo deposit}
 }
 ```
 
-> Ahmed A. *et al.* (2026). PEN-ASSEMBLE: A computational pipeline for IS110-family
-> bridge recombinase candidate nomination. *[journal pending]*. v0.5.0.
+> Ahmed A. (2026). PEN-ASSEMBLE: A computational pipeline for IS110-family
+> bridge recombinase candidate nomination. v0.5.1. DOI pending.
+
+See [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata.
 
 ---
 

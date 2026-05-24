@@ -117,20 +117,25 @@ jobs:
           body: |
             ## PEN-ASSEMBLE ${{ github.ref_name }}
 
-            IS110-family bridge recombinase design pipeline.
+            IS110-family bridge recombinase design pipeline — 8-axis PenScore (pen-score v0.1.2).
 
-            **Results summary (v0.5.0)**
+            **Results summary (v0.5.1)**
             - 1,029 designs scored across 4 strategies (A–D)
-            - 16 designs beat IS621 verbatim lockpoint (PenScore > 0.929)
+            - **16 designs beat IS621 verbatim lockpoint** (PenScore > 0.929, pre-registered P1)
+            - 2 designs beat corrected IS621 lockpoint (PenScore > 0.957, v0.1.2 secondary)
             - 5/5 pre-registered predictions **PASS** — *"PUBLISH with strong claim"*
             - Top design: IS621_deimmunized_v2 (PenScore = 0.9673)
+
+            **Dual catalog:**
+            - `catalog/pen_assemble_catalog.parquet` — v0.5.0 frozen pre-registration record
+            - `data/catalog_v0.5.1_current.parquet` — v0.5.1 current (8-axis re-scored)
 
             **Install**
             ```bash
             pip install pen-assemble==${{ github.ref_name }}
             ```
 
-            See [README.md](README.md) and `catalog/release_v0.5.0/` for the full design catalog.
+            See [README.md](README.md), `RESCORING_v0.1.2.md`, and `DESIGN_PROVENANCE.md` for full details.
           files: dist/*
           draft: false
           prerelease: false
