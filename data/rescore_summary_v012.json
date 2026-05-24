@@ -1,0 +1,14 @@
+{
+  "pen_score_version": "0.1.2",
+  "pen_assemble_version": "0.5.1",
+  "profile": "human_therapeutic_aav_insertion",
+  "n_designs": 1029,
+  "is621_lockpoint_v010_verbatim": 0.929,
+  "is621_lockpoint_v012": 0.957,
+  "n_beats_v010_lockpoint": 16,
+  "n_beats_v012_lockpoint": 2,
+  "median_penscore_delta": -0.0029,
+  "mean_penscore_delta": -0.0028,
+  "s_energy_all_designs": 1.0,
+  "note": "All 1029 designs are IS110-family (PF01548+PF02371). S_Energy=1.0 for all. PenScore change is approximately -0.002 to +0.001 due to weight redistribution (S_Prog weight decreased 0.15->0.05; S_Spec and S_Deliv increased; S_Energy=0.05 added). IS621 lockpoint increased 0.929->0.957. Only IS621-backbone C designs beat new lockpoint."
+}
