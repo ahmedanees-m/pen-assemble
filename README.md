@@ -162,7 +162,7 @@ ax = PenScoreAxes(
     S_DSB=1.0, S_Spec=1.0, S_Cargo=1.0, S_Deliv=1.0,
     S_Immuno=0.8777, S_Prog=1.0, S_Mature=1.0,
 )
-s = pen_score(ax)           # 0.9678
+s = pen_score(ax)           # 0.9878
 print(beats_is621(s))       # True
 print(ax.contributions())   # per-axis weighted contributions
 ```

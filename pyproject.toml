@@ -109,7 +109,22 @@ addopts   = "-v --tb=short"
 
 [tool.coverage.run]
 source = ["pen_assemble"]
-omit   = ["tests/*"]
+omit = [
+    "tests/*",
+    # Pipeline-only modules: require heavy VM-only deps (ESM-2, MHCflurry,
+    # AlphaFold, mech-class extras). Not importable in CI without those extras.
+    "pen_assemble/strategies/*",
+    "pen_assemble/triage/*",
+    "pen_assemble/utils/*",
+    "pen_assemble/verification/*",
+    "pen_assemble/data/loader.py",
+    "pen_assemble/cli.py",
+    "pen_assemble/api.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty   = true
 
 [tool.ruff]
 line-length    = 100
