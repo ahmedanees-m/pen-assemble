@@ -17,7 +17,7 @@
 
 IS110-family bridge recombinases are a class of programmable genome editors capable of inserting large DNA payloads (>50 kb) into specific genomic sites **without inducing double-strand breaks (DSBs)**. Their re-targetability — achieved by swapping the bridging RNA (bRNA) guide module — makes them highly attractive candidates for therapeutic genome writing.
 
-**PEN-ASSEMBLE** is the computational nomination pipeline that evaluates 1,041 candidate designs across four orthogonal strategies using the seven-axis **PenScore** composite metric. It produces a fully reproducible, pre-registered design catalog complete with wet-lab synthesis sheets ready for experimental validation.
+**PEN-ASSEMBLE** is the computational nomination pipeline that evaluates 1,041 candidate designs across four orthogonal strategies using the **8-axis PenScore** composite metric (pen-score v0.1.2). It produces a fully reproducible, pre-registered design catalog complete with wet-lab synthesis sheets ready for experimental validation.
 
 ---
 
@@ -27,8 +27,9 @@ IS110-family bridge recombinases are a class of programmable genome editors capa
 |--------|-------|
 | Designs sourced across all strategies | 1,041 |
 | Designs passing all triage gates | **1,029** |
-| Designs beating IS621 verbatim lockpoint (PenScore > 0.929) | **16** |
-| Designs beating calibrated lockpoint (PenScore > 0.9255) | **32** |
+| Designs beating IS621 verbatim lockpoint (PenScore > 0.929) | **16** *(pre-registered, pen-score v0.1.0)* |
+| Designs beating calibrated lockpoint (PenScore > 0.9255) | **32** *(secondary, pen-score v0.1.0)* |
+| Designs beating IS621 v0.1.2 lockpoint (PenScore > 0.957) | **2** *(secondary, pen-score v0.1.2)* |
 | Pre-registered predictions passing | **5 / 5** |
 | Publication policy | **PUBLISH with strong claim** |
 

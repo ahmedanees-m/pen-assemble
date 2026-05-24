@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pen-assemble"
-version = "0.5.0"
+version = "0.5.1"
 description = "Programmable Editor Nomination: pipeline for IS110-family bridge recombinase design and scoring"
 readme = "README.md"
 license = "MIT"
@@ -66,16 +66,19 @@ mech-class = [
     # are unaffected (S_DSB=1.0 already via PFAM evidence, confidence=0.99).
     # v0.5.2 carries its own atlas v0.6.0 pin; pinning here makes the transitive
     # constraint explicit and prevents a conflict if the atlas extra is also installed.
-    "mech-class>=0.5.2,<0.6.0",
+    "mech-class>=0.5.3,<0.6.0",
 ]
 pen-score = [
-    # Pinned to pen-score v0.1.0: the published 7-axis PenScore implementation
-    # with pre-registered weights for the human_therapeutic_aav_insertion profile
-    # (S_DSB×0.25 + S_Spec×0.10 + S_Cargo×0.20 + S_Deliv×0.15 + S_Immuno×0.10
-    # + S_Prog×0.15 + S_Mature×0.05). These weights are locked by the
-    # pre-registration SHA-256 hash in pen_assemble/data/hash_computation_log.txt.
-    # Upgrading before re-hashing would invalidate the pre-registration record.
-    "pen-score>=0.1.0,<0.2.0",
+    # Pinned to pen-score v0.1.2: 8-axis PenScore with S_Energy axis added.
+    # v0.1.0 (7-axis) scores are the pre-registration record (frozen in
+    # data/catalog_v0.5.0_FROZEN.parquet; DO NOT modify). v0.1.2 re-scoring
+    # produces the current best-estimate catalog (catalog_v0.5.1_current.parquet).
+    # All IS110-family designs gain S_Energy=1.0; PenScore change ≈±0.002
+    # (weight redistribution is nearly neutral for IS110 designs where
+    # S_DSB=S_Cargo=S_Prog=S_Energy=1.0). IS621 lockpoint bumps 0.929→0.957.
+    # Pre-registration P1 (≥5 designs beat 0.929) was tested against v0.1.0 and
+    # is FINAL. v0.1.2 lockpoint (0.957) is reported as secondary analysis only.
+    "pen-score>=0.1.2,<0.2.0",
 ]
 dev = [
     "pytest>=8.0",

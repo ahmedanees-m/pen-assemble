@@ -7,6 +7,39 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.5.1] — 2026-05-24
+
+### Changed
+
+**Dependency updates**
+- `pen-score>=0.1.0,<0.2.0` → `>=0.1.2,<0.2.0`: 8-axis PenScore with S_Energy axis.
+  All IS110-family designs gain `S_Energy = 1.0` (no Walker A/B motifs in PF01548/PF02371).
+  Weight redistribution is nearly neutral for IS110 designs: ΔPenScore ≈ −0.002 to +0.001.
+- `mech-class>=0.5.2,<0.6.0` → `>=0.5.3,<0.6.0`: ISCro4 (D2TGM5) added as 6th OOD holdout
+  probe; atlas pin bumped to ≥0.7.1.
+- `genome-atlas>=0.6.0,<0.7.0` → `>=0.7.1,<0.8.0`: restores SIMILAR_TO/HAS_RNA/PART_OF
+  edges via `graph_view='full'`; IS622/ISCro4 added as System node.
+
+**Re-scoring catalog** (v0.5.1 current best estimate)
+- `data/catalog_v0.5.1_current.parquet` produced from `scripts/rescore_v012.py` (8-axis, pen-score v0.1.2).
+- IS621 reference lockpoint: 0.929 → **0.957** (S_Energy axis + weight redistribution).
+- Designs beating new lockpoint (0.957): **2** (IS621_deimmunized_v2 ≈ 0.966, C_targeted_001 ≈ 0.959).
+- `catalog/pen_assemble_catalog.parquet` (v0.5.0, 7-axis) is the **frozen pre-registration record** — NOT modified.
+
+**Repository**
+- Version bumped to `0.5.1`.
+- Repository made **public** at https://github.com/ahmedanees-m/pen-assemble.
+- `RESCORING_v0.1.2.md` — full honest accounting of v0.1.2 re-scoring (weight table, key numbers, pre-reg integrity statement).
+- `scripts/rescore_v012.py` — reproducible re-scoring script.
+
+### Pre-registration integrity
+
+The P1 prediction ("≥5 designs beat IS621 verbatim lockpoint 0.929") was pre-registered and tested
+against v0.1.0 scores — **PASS, 16 designs, FINAL**. v0.5.1 reports the v0.1.2 lockpoint (0.957)
+as a secondary current-best-estimate analysis only.
+
+---
+
 ## [0.5.0] — 2026-05-20
 
 ### Added
