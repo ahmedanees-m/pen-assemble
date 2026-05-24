@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use PEN-ASSEMBLE in your work, please cite it using the metadata below."
 type: software
-title: "PEN-ASSEMBLE: A computational pipeline for IS110-family bridge recombinase candidate nomination"
+title: "PEN-ASSEMBLE: Automated Strategy and Scoring Engine for Molecular Bridge-recombinase Library Engineering"
 abstract: >
   PEN-ASSEMBLE is the computational nomination pipeline for IS110-family bridge recombinase design.
   It evaluates 1,041 candidate designs across four orthogonal strategies (domain-swap chimeras,
