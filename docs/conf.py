@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 project   = "PEN-ASSEMBLE"
 copyright = "2026, Anees Ahmed"
 author    = "Anees Ahmed"
-release   = "0.5.1"
+release   = "0.5.2"
 version   = "0.5"
 
 # -- General configuration -----------------------------------------------------
@@ -45,7 +45,7 @@ intersphinx_mapping = {
 
 # -- HTML output ---------------------------------------------------------------
 html_theme = "furo"
-html_title = "PEN-ASSEMBLE v0.5.1"
+html_title = "PEN-ASSEMBLE v0.5.2"
 
 # -- doctest -------------------------------------------------------------------
 doctest_global_setup = "import pen_assemble"

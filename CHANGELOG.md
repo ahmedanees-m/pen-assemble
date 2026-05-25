@@ -7,6 +7,52 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.5.2] — 2026-05-25
+
+### Added
+
+- **Catalog schema v0.5.2** (`data/catalog_v0.5.2_current.parquet`): two new boolean columns
+  required by PEN-COMPARE v3.2:
+  - `intrinsic_cargo_mechanism: bool` — `True` for all 1,029 designs (all passed IS110-family
+    PFAM triage: PF01548 ∧ PF02371). IS110 bridge recombinases insert cargo as part of their
+    catalytic mechanism; no external HDR donor template required.
+  - `cell_based_evidence: bool` — `False` for all 1,029 designs. All designs are computational
+    predictions with no peer-reviewed mammalian cell data. Enforces PEN-COMPARE v3.2
+    pre-registered prediction P2: "Zero designs classified TRUE_WRITER (all cap at
+    PROBABLE_WRITER due to missing cell_based_evidence)."
+- `parent_editor` column now populated with canonical editor names:
+  - Strategy A, C, D (ProteinMPNN): `"IS621"` (IS621-derived designs)
+  - Strategy B, D (natural orthologs): UniProt accession (the design IS the editor)
+- `scripts/upgrade_catalog_to_v052.py` — reproducible catalog upgrade script
+- `tests/test_catalog_v052.py` — 11 new tests verifying v3.2 compatibility invariants
+
+### Changed
+
+- Dependency pins updated to v3.2-compatible upstream packages:
+  - `genome-atlas>=0.7.1,<0.8.0` → `>=0.7.2,<0.8.0` (ISCro4 canonical naming)
+  - `mech-class>=0.5.3,<0.6.0` → `>=0.5.4,<0.6.0` (ISCro4 holdout probe renamed)
+  - `pen-score>=0.1.2,<0.2.0` → `>=0.1.3,<0.2.0` (new `get_editor_metadata()` API)
+- `parent_editor` column: no IS622 values (0 rows affected; no IS622-derived designs
+  were in the catalog; column was blank in v0.5.1 and is now populated)
+- Inline documentation: IS622 → ISCro4 (deprecated alias) in markdown files where
+  contextually appropriate
+
+### Pre-registration integrity
+
+All v0.5.0 pre-registration results unchanged. The v0.5.2 upgrade adds two columns
+without modifying any PenScore, strategy, or design_id values.
+
+- P1: **16 designs beat IS621 verbatim lockpoint 0.929** — FINAL, unchanged
+- Total designs: **1,029** — unchanged
+
+### Compatibility
+
+- Requires pen-score v0.1.3+ for full `get_editor_metadata()` API support
+- Required by PEN-COMPARE v3.2 (Gates 3 and TRUE_WRITER tier)
+- Backward compatible: all v0.5.1 catalog columns preserved unchanged at same positions
+
+---
+
 ## [0.5.1] — 2026-05-24
 
 ### Changed
@@ -18,7 +64,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `mech-class>=0.5.2,<0.6.0` → `>=0.5.3,<0.6.0`: ISCro4 (D2TGM5) added as 6th OOD holdout
   probe; atlas pin bumped to ≥0.7.1.
 - `genome-atlas>=0.6.0,<0.7.0` → `>=0.7.1,<0.8.0`: restores SIMILAR_TO/HAS_RNA/PART_OF
-  edges via `graph_view='full'`; IS622/ISCro4 added as System node.
+  edges via `graph_view='full'`; ISCro4 (formerly IS622 in Perry 2025 bioRxiv) added as System node.
 
 **Re-scoring catalog** (v0.5.1 current best estimate)
 - `data/catalog_v0.5.1_current.parquet` produced from `scripts/rescore_v012.py` (8-axis, pen-score v0.1.2).

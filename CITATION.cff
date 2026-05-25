@@ -15,8 +15,8 @@ authors:
     given-names: Anees
     email: ahmedaneesm@gmail.com
     orcid: "https://orcid.org/0000-0000-0000-0000"
-version: "0.5.1"
-date-released: "2026-05-24"
+version: "0.5.2"
+date-released: "2026-05-25"
 url: "https://github.com/ahmedanees-m/pen-assemble"
 repository-code: "https://github.com/ahmedanees-m/pen-assemble"
 license: MIT

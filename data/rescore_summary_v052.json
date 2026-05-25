@@ -1,0 +1,22 @@
+{
+  "catalog_version": "0.5.2",
+  "pen_score_version": "0.1.3",
+  "schema_version": "v3.2-compatible",
+  "n_designs": 1029,
+  "is621_lockpoint_v010_verbatim": 0.929,
+  "is621_lockpoint_v012": 0.957,
+  "n_beats_v010_lockpoint": 16,
+  "n_beats_v012_lockpoint": 2,
+  "median_penscore_delta": -0.0029,
+  "s_energy_all_designs": 1.0,
+  "intrinsic_cargo_mechanism_all_designs": true,
+  "cell_based_evidence_all_designs": false,
+  "n_is622_parents_renamed": 0,
+  "columns_added": [
+    "intrinsic_cargo_mechanism",
+    "cell_based_evidence"
+  ],
+  "upgrade_script": "scripts/upgrade_catalog_to_v052.py",
+  "source_catalog": "catalog_v0.5.1_current.parquet",
+  "note": "intrinsic_cargo_mechanism=True for all designs by PFAM-triage invariant (PF01548+PF02371 gate). cell_based_evidence=False for all designs by construction (computational, no wet-lab validation). Pre-registration P1 (16 designs > 0.929) unchanged."
+}

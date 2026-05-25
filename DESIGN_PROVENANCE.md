@@ -958,31 +958,34 @@ if abs(len(design_seq) - len(parent_seq)) > 20:
 
 ---
 
-## Post-Pipeline Comparator: IS622 / ISCro4 (2026-05-21)
+## Post-Pipeline Comparator: ISCro4 (canonical; formerly "IS622" in preprint) (2026-05-21, updated 2026-05-25)
 
-**Date:** 2026-05-21 (post-pipeline addition)
+**Date:** 2026-05-21 (post-pipeline addition) | **Updated:** 2026-05-25 (canonical naming applied per PEN-STACK v3.2)
 
 ### Identity Clarification
 
-IS622 (Perry et al. 2026, *Science* adz0276, Arc Institute) and ISCro4 (Pelea et al. 2026,
-*Science* adz1884) are the **same protein**: UniProt D2TGM5, ISCro4 transposase from
+**ISCro4** (canonical name, UniProt D2TGM5) and **IS622** (deprecated preprint label, Perry et al.
+2025 *bioRxiv* → 2026 *Science* adz0276) are the **same protein**: ISCro4 transposase from
 *Citrobacter rodentium* ICC168 (GN=ROD_00481, 326 aa, PF01548+PF02371 confirmed).
-ISCro4 is the ISFinder database designation; Perry et al. coined "IS622" for its 88%
-recombinase / 86.6% bRNA identity to IS621.
+ISCro4 is the ISFinder database designation and the canonical name per Pelea et al. 2026 *Science*
+and UniProt D2TGM5. As of pen-score v0.1.3 / pen-assemble v0.5.2, "IS622" is a deprecated alias
+that resolves to ISCro4 with a DeprecationWarning.
 
-| Name | Source | DOI |
-|------|--------|-----|
-| ISCro4 | ISFinder / Pelea et al. 2026 Science | 10.1126/science.adz1884 |
-| IS622 | Perry et al. 2026 Science (Arc Institute) | 10.1126/science.adz0276 |
-| Nature Biotech highlight | Nat Biotechnol 44, 369 (2026) | 10.1038/s41587-026-03071-x |
+| Name | Source | DOI | Status |
+|------|--------|-----|--------|
+| **ISCro4** | ISFinder / UniProt D2TGM5 / Pelea et al. 2026 *Science* | 10.1126/science.adz1884 | **Canonical (use this)** |
+| IS622 | Perry et al. 2026 *Science* (Arc Institute) | 10.1126/science.adz0276 | Deprecated alias |
+| Nature Biotech highlight | *Nat Biotechnol* 44, 369 (2026) | 10.1038/s41587-026-03071-x | — |
 
-### IS622 PenScore (estimated, pen-score v0.1.0 weights, human_therapeutic_aav_insertion)
+### ISCro4 PenScore (estimated, pen-score v0.1.0 weights, human_therapeutic_aav_insertion)
+
+*(Historical note: this table was produced when the editor was referred to as "IS622". Values unchanged.)*
 
 | Axis | Value | Notes |
 |------|-------|-------|
 | S_DSB | 1.0 | IS110-family; composite flag (PF01548+PF02371) |
-| S_Spec | 0.9891 | IS621 AAVS1 proxy; BWA-MEM not run on IS622 |
-| S_Cargo | 1.0 | 0.93 Mb inversion demonstrated (Perry 2026) |
+| S_Spec | 0.9891 | IS621 AAVS1 proxy; BWA-MEM not run on ISCro4 |
+| S_Cargo | 1.0 | 0.93 Mb inversion demonstrated (Perry/Pelea 2026) |
 | S_Deliv | 0.9463 | 326 aa; 1/(1+exp(0.005×(326-900))) |
 | S_Immuno | 0.7594 | IS621 published proxy; **MHCflurry 2.2.1 NOT run** |
 | S_Prog | 0.9851 | IS110-family bridge RNA IS621 proxy |
@@ -990,16 +993,16 @@ recombinase / 86.6% bRNA identity to IS621.
 | **PenScore** | **0.9246** | **BELOW IS621 lockpoints (verbatim 0.929; calibrated 0.9255)** |
 
 S_Mature sensitivity: range 0.15–0.30 → PenScore range 0.9221–0.9296. All values below IS621
-verbatim lockpoint (0.929). IS622 entry added to `pen-score/pen_score/data/editor_universe.yaml`
-v1.0.4 (2026-05-21).
+verbatim lockpoint (0.929). ISCro4 entry added to `pen-score/pen_score/data/editor_universe.yaml`
+v1.0.4 (2026-05-21); renamed from IS622 to ISCro4 in v1.0.7 (pen-score v0.1.3, 2026-05-25).
 
 ### Scientific Interpretation
 
-IS622's >6%→20% insertion efficiency gain is a wet-lab / bridge-RNA-engineering result not
-captured by PenScore's 7 computational axes. PenScore correctly reflects that IS622 and IS621
+ISCro4's >6%→20% insertion efficiency gain is a wet-lab / bridge-RNA-engineering result not
+captured by PenScore's 7 computational axes. PenScore correctly reflects that ISCro4 and IS621
 are closely related IS110-family proteins with nearly identical sequence/structural properties.
 Our deimmunized (C: 0.9586–0.9673) and redesigned candidates (D: 0.9261–0.9353) computationally
-exceed IS622's estimated 0.9246 baseline, providing rational design shortlisting for wet-lab
+exceed ISCro4's estimated 0.9246 baseline, providing rational design shortlisting for wet-lab
 follow-up in the era of high-efficiency IS110-family editors.
 
 ---

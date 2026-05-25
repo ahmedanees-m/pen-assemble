@@ -140,13 +140,19 @@ To reproduce: `python scripts/rescore_v012.py --frozen catalog/pen_assemble_cata
 ## Usage Guidance
 
 - **For P1 verification:** Use `catalog/pen_assemble_catalog.parquet` (frozen v0.5.0).
-- **For PEN-COMPARE TrueWriterScore analysis:** Use `data/catalog_v0.5.1_current.parquet`.
-- **For fair comparison with IS622/ISCro4:** Score IS622 using `pen_score.score('D2TGM5')` with
-  pen-score v0.1.2, optionally with `exclude_axes=['S_Mature']` for biophysical-only comparison
-  (IS622 has S_Mature ≈ 0.0 as a brand-new editor; pen-assemble C/D designs inherit IS621
-  S_Mature ≈ 0.8 from their parent scaffold).
+- **For PEN-COMPARE v3.2 analysis:** Use `data/catalog_v0.5.2_current.parquet` (adds
+  `intrinsic_cargo_mechanism` and `cell_based_evidence` columns required by v3.2 Gates).
+- **For PEN-COMPARE TrueWriterScore analysis:** Use `data/catalog_v0.5.1_current.parquet` or
+  `data/catalog_v0.5.2_current.parquet` (v0.5.2 is a superset).
+- **For fair comparison with ISCro4** (canonical; formerly "IS622" in Perry 2025 bioRxiv):
+  Score ISCro4 using `pen_score.score('ISCro4')` with pen-score v0.1.3, optionally with
+  `exclude_axes=['S_Mature']` for biophysical-only comparison (ISCro4 has S_Mature ≈ 0.0
+  as a brand-new editor; pen-assemble C/D designs inherit IS621 S_Mature ≈ 0.8 from
+  their parent scaffold). Note: `pen_score.score('IS622')` still works via alias
+  resolution but emits a DeprecationWarning.
 
 ---
 
 *Generated 2026-05-24. pen-assemble v0.5.1 / pen-score v0.1.2.*
+*Updated 2026-05-25. pen-assemble v0.5.2 / pen-score v0.1.3 (ISCro4 canonical naming).*
 *Pre-registration record: catalog/pen_assemble_catalog.parquet (DO NOT MODIFY).*

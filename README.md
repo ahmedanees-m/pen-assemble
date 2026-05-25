@@ -344,16 +344,19 @@ pen-assemble/
 │       ├── wetlab/                  #   16 wet-lab synthesis reference sheets (Markdown)
 │       └── validation/              #   Pre-registered prediction result JSONs (P1–P5)
 │
-├── data/                            # v0.5.1 8-axis rescored outputs
-│   ├── catalog_v0.5.1_current.parquet    # 1,029 designs with pen-score v0.1.2 columns
+├── data/                            # Rescored and extended catalog outputs
+│   ├── catalog_v0.5.1_current.parquet    # v0.5.1: 1,029 designs, pen-score v0.1.2 (8-axis)
+│   ├── catalog_v0.5.2_current.parquet    # v0.5.2: + intrinsic_cargo_mechanism + cell_based_evidence (PEN-COMPARE v3.2)
 │   ├── rescore_comparison_v010_v012.csv  # Side-by-side v0.1.0 vs v0.1.2 scores
-│   └── rescore_summary_v012.json         # Summary statistics
+│   ├── rescore_summary_v012.json         # Summary statistics (v0.1.2)
+│   └── rescore_summary_v052.json         # Summary statistics (v0.5.2 schema)
 │
 ├── scripts/                         # Numbered pipeline scripts
 │   ├── 50_assemble_catalog.py       #   Builds catalog/ artifacts
 │   ├── 51_build_browser.py          #   Generates interactive HTML browser
 │   ├── 52_generate_wetlab_reference.py  # Creates 16 wet-lab sheets
-│   └── rescore_v012.py              #   Re-scores catalog with pen-score v0.1.2
+│   ├── rescore_v012.py              #   Re-scores catalog with pen-score v0.1.2
+│   └── upgrade_catalog_to_v052.py   #   Adds v3.2 fields (intrinsic_cargo + cell_based)
 │
 ├── tests/                           # 63 pytest tests (Python 3.10 / 3.11 / 3.12)
 ├── docs/                            # Sphinx documentation (furo theme)
@@ -436,7 +439,7 @@ python scripts/rescore_v012.py --frozen catalog/release_v0.5.0/pen_assemble_cata
 | [**genome-atlas**](https://github.com/ahmedanees-m/genome-atlas) | Foundational knowledge graph of 28 enzyme systems (AUROC 0.9714) | v0.7.1 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
 | [**mech-class**](https://github.com/ahmedanees-m/mech-class) | Biochemical mechanism classifier — IS110 Tier-A gate (F1 = 0.986) | v0.5.3 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
 | [**pen-score**](https://github.com/ahmedanees-m/pen-score) | 8-axis writer scoring framework — IS621 = 0.957, SpCas9 = 0.402 | v0.1.2 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
-| **pen-assemble** *(this repo)* | IS110-family design catalog — 1,029 designs, 5/5 predictions PASS | **v0.5.1** | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
+| **pen-assemble** *(this repo)* | IS110-family design catalog — 1,029 designs, 5/5 predictions PASS | **v0.5.2** | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
 | **PEN-COMPARE** *(in prep)* | Cross-system benchmarking — TrueWriterScore 6-gate classifier | — | — |
 
 ---
@@ -451,7 +454,7 @@ If you use PEN-ASSEMBLE in your work, please cite:
   title     = {{PEN-ASSEMBLE}: Automated Strategy and Scoring Engine
                for Molecular Bridge-recombinase Library Engineering},
   year      = {2026},
-  version   = {v0.5.1},
+  version   = {v0.5.2},
   publisher = {Zenodo},
   url       = {https://github.com/ahmedanees-m/pen-assemble},
   note      = {DOI pending Zenodo deposit}
@@ -459,7 +462,7 @@ If you use PEN-ASSEMBLE in your work, please cite:
 ```
 
 > Ahmed A. (2026). PEN-ASSEMBLE: Automated Strategy and Scoring Engine for Molecular
-> Bridge-recombinase Library Engineering. v0.5.1. DOI pending.
+> Bridge-recombinase Library Engineering. v0.5.2. DOI pending.
 
 See [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata (GitHub renders this automatically as a "Cite this repository" widget).
 
