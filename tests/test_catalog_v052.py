@@ -8,6 +8,7 @@ columns required by PEN-COMPARE v3.2:
 
 Also verifies ISCro4 canonical naming (no IS622 in parent_editor).
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -20,8 +21,7 @@ CATALOG_V052 = Path(__file__).resolve().parents[1] / "data" / "catalog_v0.5.2_cu
 pytestmark = pytest.mark.skipif(
     not CATALOG_V052.exists(),
     reason=(
-        "catalog_v0.5.2_current.parquet not found. "
-        "Run: python scripts/upgrade_catalog_to_v052.py"
+        "catalog_v0.5.2_current.parquet not found. Run: python scripts/upgrade_catalog_to_v052.py"
     ),
 )
 
@@ -33,6 +33,7 @@ def cat() -> pd.DataFrame:
 
 # ── Existence and row count ───────────────────────────────────────────────────
 
+
 def test_catalog_loads(cat: pd.DataFrame) -> None:
     """Catalog must load and have exactly 1 029 designs."""
     assert len(cat) == 1029, f"Expected 1 029 rows, got {len(cat)}"
@@ -40,17 +41,21 @@ def test_catalog_loads(cat: pd.DataFrame) -> None:
 
 # ── New v3.2 columns present ─────────────────────────────────────────────────
 
+
 def test_intrinsic_cargo_mechanism_column_present(cat: pd.DataFrame) -> None:
-    assert "intrinsic_cargo_mechanism" in cat.columns, \
+    assert "intrinsic_cargo_mechanism" in cat.columns, (
         "Column 'intrinsic_cargo_mechanism' missing — run upgrade_catalog_to_v052.py"
+    )
 
 
 def test_cell_based_evidence_column_present(cat: pd.DataFrame) -> None:
-    assert "cell_based_evidence" in cat.columns, \
+    assert "cell_based_evidence" in cat.columns, (
         "Column 'cell_based_evidence' missing — run upgrade_catalog_to_v052.py"
+    )
 
 
 # ── PEN-COMPARE v3.2 invariants ───────────────────────────────────────────────
+
 
 def test_all_designs_intrinsic_cargo_true(cat: pd.DataFrame) -> None:
     """All IS110-family designs have intrinsic_cargo_mechanism = True.
@@ -97,12 +102,14 @@ def test_no_is622_in_parent_editor(cat: pd.DataFrame) -> None:
 
 # ── IS621-derived design parent assignment ────────────────────────────────────
 
+
 def test_strategy_c_parent_is_is621(cat: pd.DataFrame) -> None:
     """Strategy C designs (deimmunised IS621 variants) have parent_editor='IS621'."""
     strategy_c = cat[cat["strategy"] == "C"]
     if len(strategy_c) > 0:
-        assert (strategy_c["parent_editor"] == "IS621").all(), \
+        assert (strategy_c["parent_editor"] == "IS621").all(), (
             f"Strategy C parent_editor values: {strategy_c['parent_editor'].unique()}"
+        )
 
 
 def test_strategy_d_protmpnn_parent_is_is621(cat: pd.DataFrame) -> None:
@@ -111,11 +118,13 @@ def test_strategy_d_protmpnn_parent_is_is621(cat: pd.DataFrame) -> None:
     protmpnn_mask = strategy_d["design_id"].str.match(r"^D\d+_IS621_ProtMPNN_", na=False)
     protmpnn_designs = strategy_d[protmpnn_mask]
     if len(protmpnn_designs) > 0:
-        assert (protmpnn_designs["parent_editor"] == "IS621").all(), \
+        assert (protmpnn_designs["parent_editor"] == "IS621").all(), (
             f"ProteinMPNN redesign parent_editor values: {protmpnn_designs['parent_editor'].unique()}"
+        )
 
 
 # ── Backward-compatibility: pre-registration results unchanged ────────────────
+
 
 def test_p1_beaters_count_unchanged(cat: pd.DataFrame) -> None:
     """P1 pre-registration result must not change: exactly 16 designs > 0.929."""
