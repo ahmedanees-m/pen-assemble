@@ -10,7 +10,6 @@
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/ahmedanees-m/pen-assemble)](https://github.com/ahmedanees-m/pen-assemble/releases/latest)
-[![DOI](https://img.shields.io/badge/DOI-pending%20Zenodo-lightgrey)](#citation)
 
 > **Part of PEN-STACK** — the four-package computational biology pipeline for programmable genome editor discovery.
 > **Paper 4 of 5** · [genome-atlas](https://github.com/ahmedanees-m/genome-atlas) → [mech-class](https://github.com/ahmedanees-m/mech-class) → [pen-score](https://github.com/ahmedanees-m/pen-score) → **pen-assemble** → PEN-COMPARE *(in prep)*
