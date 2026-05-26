@@ -31,6 +31,142 @@ Most gene therapies today use CRISPR–Cas9, which cuts both strands of DNA (a d
 
 ---
 
+## Why PEN-ASSEMBLE Was Built
+
+### The problem
+
+IS110-family bridge recombinases are a large and largely uncharacterised protein family — NCBI holds over 31,000 sequences. Deciding which ones are worth synthesising and testing in a wet-lab requires answering four independent questions simultaneously:
+
+1. **Is the mechanism correct?** — Does this protein actually perform DSB-free insertion, or will mech-class's gradient-boosted model mis-call it as a nuclease?
+2. **Is the structure viable?** — Does ESMFold predict a well-folded protein with high pLDDT at the active site?
+3. **Is it therapeutically fit?** — Is it compact enough for AAV delivery? Low-immunogenicity enough for repeat dosing? Programmable?
+4. **Does it beat what we already have?** — IS621 is the current best-characterised bridge recombinase; any new candidate must demonstrably surpass it.
+
+No single tool answered all four questions. Researchers were left doing manual, ad-hoc assessments with no reproducible scoring framework and no pre-registered standards.
+
+### The solution
+
+PEN-ASSEMBLE assembles the four upstream PEN-STACK packages into a single, fully automated nomination pipeline:
+
+```
+  QUESTION                ANSWERED BY              HOW
+  ─────────────────────── ──────────────────────── ────────────────────────────
+  Is the mechanism right? mech-class v0.5.4        IS110 Tier-A hard gate
+                                                   (PF01548 + PF02371 Pfam)
+  Is the structure good?  ESMFold + quality gates  pLDDT ≥ 90 global,
+                                                   ≥ 95 at active-site
+  Is it therapeutically   pen-score v0.1.3         8-axis PenScore
+  fit?                    (IS621 = 0.957)          composite metric
+  Does it beat IS621?     Pre-registered           Verbatim lockpoint 0.929
+                          comparison               (locked before analysis)
+```
+
+The pipeline is end-to-end reproducible: every input, gate, weight, and prediction threshold was committed to GitHub and SHA-256 locked **before any candidate was scored**.
+
+### Who is it for?
+
+| Audience | How they use PEN-ASSEMBLE |
+|----------|--------------------------|
+| **Wet-lab gene therapy groups** | Download the 16 top-ranked designs with synthesis sheets. No re-running needed — the catalog is pre-built. |
+| **Computational biologists** | Use the `Designer` API to generate and rank new IS110-family designs against the same scoring framework. |
+| **Tool developers** | Benchmark a new genome editor against IS621 and ISCro4 using the 8-axis PenScore framework in pen-score. |
+| **Reproducibility researchers** | Audit the complete pre-registration → execution → deviation log → post-hoc rescoring chain. Every decision is documented. |
+
+---
+
+## How PEN-ASSEMBLE Works
+
+### Component diagram
+
+PEN-ASSEMBLE is not a monolith — it is an assembly layer that wires together four specialised packages:
+
+```
+  EXTERNAL PACKAGES                       PEN-ASSEMBLE INTERNALS
+  ═══════════════════                     ═══════════════════════════════════════════
+                                          ┌───────────────────────────────────────┐
+  ┌─────────────────┐   accession IDs     │  STRATEGY GENERATION  (Steps 01–11)  │
+  │  genome-atlas   │──────────────────►  │                                       │
+  │  v0.7.2         │   28 enzyme nodes   │  A: Domain-Swap    B: Ortholog Scan   │
+  │                 │   ESM-2 embeddings  │  15 chimeras       992 NCBI IS110s    │
+  │  Knowledge      │                     │                                       │
+  │  graph of       │                     │  C: Deimmunize     D: ProteinMPNN     │
+  │  genome editors │                     │  MC substitution   Sequence design    │
+  └─────────────────┘                     │  on IS621          from IS621 PDB     │
+                                          │                                       │
+                                          │          1,041 candidates             │
+                                          └─────────────────┬─────────────────────┘
+                                                            │
+                                                            ▼
+  ┌─────────────────┐   IS110 hard gate   ┌───────────────────────────────────────┐
+  │  mech-class     │──────────────────►  │  TRIAGE PIPELINE      (Step 12)       │
+  │  v0.5.4         │   DSB-free confirm  │                                       │
+  │                 │   PF01548+PF02371   │  Gate 1 │ PFAM domain check           │
+  │  Mechanism      │                     │         │ PF01548 (IS110 transposase) │
+  │  classifier     │                     │         │ PF02371 (HTH domain)        │
+  │  IS110 Tier-A   │                     │  Gate 2 │ ESMFold pLDDT ≥ 90 global  │
+  │  gate           │                     │  Gate 3 │ Active-site pLDDT ≥ 95     │
+  └─────────────────┘                     │  Gate 4 │ Length 300–400 aa          │
+                                          │  Gate 5 │ mech-class IS110 Tier-A    │
+                                          │                                       │
+                                          │          1,029 designs pass           │
+                                          └─────────────────┬─────────────────────┘
+                                                            │
+                                                            ▼
+  ┌─────────────────┐   8-axis weights    ┌───────────────────────────────────────┐
+  │  pen-score      │──────────────────►  │  PenScore EVALUATION  (Steps 13–16)  │
+  │  v0.1.3         │   IS621 lockpoints  │                                       │
+  │                 │   use-case profile  │  S_DSB    × 0.24  (DSB avoidance)    │
+  │  Writer scoring │                     │  S_Spec   × 0.14  (targeting prec.)  │
+  │  framework      │                     │  S_Cargo  × 0.19  (payload capacity) │
+  │  IS621 = 0.957  │                     │  S_Deliv  × 0.19  (AAV compat.)      │
+  │  SpCas9 = 0.402 │                     │  S_Immuno × 0.09  (immunogenicity)   │
+  └─────────────────┘                     │  S_Prog   × 0.05  (programmability)  │
+                                          │  S_Mature × 0.05  (tech. maturity)   │
+                                          │  S_Energy × 0.05  (ATP independence) │
+                                          └─────────────────┬─────────────────────┘
+                                                            │
+                                                            ▼
+                                          ┌───────────────────────────────────────┐
+                                          │  OUTPUT CATALOG       (Steps 17–25)  │
+                                          │                                       │
+                                          │  1,029 designs ranked by PenScore     │
+                                          │                                       │
+                                          │  16 designs > 0.929 ◄── P1 PASS      │
+                                          │   2 designs > 0.957 ◄── secondary    │
+                                          │                                       │
+                                          │  ┌────────────┐  ┌─────────────────┐ │
+                                          │  │ Parquet /  │  │ 16 wet-lab      │ │
+                                          │  │ CSV catalog│  │ synthesis sheets│ │
+                                          │  └────────────┘  └─────────────────┘ │
+                                          │  ┌────────────┐  ┌─────────────────┐ │
+                                          │  │ HTML design│  │ Pre-reg SHA-256 │ │
+                                          │  │ browser    │  │ lock record     │ │
+                                          │  └────────────┘  └─────────────────┘ │
+                                          └───────────────────────────────────────┘
+```
+
+### Pipeline stages in plain language
+
+| Stage | What happens | Key package used |
+|-------|-------------|------------------|
+| **Strategy generation** (Steps 01–11) | Four independent algorithms each produce a batch of IS110-family protein sequences. Strategy A: recombine domain boundaries. Strategy B: screen NCBI. Strategy C: optimise IS621 for low immunogenicity. Strategy D: ask ProteinMPNN for alternative sequences that fold into the same 3D shape. | genome-atlas |
+| **Triage** (Step 12) | Every candidate passes through 5 quality gates. Anything that fails is logged and dropped. 12 of the original 1,041 candidates are removed here. | mech-class |
+| **PenScore evaluation** (Steps 13–16) | Each surviving design is scored on 8 independent axes, then combined into a single PenScore. The IS621 reference lockpoint (0.929, pre-registered) acts as the pass/fail threshold. | pen-score |
+| **Catalog assembly** (Steps 17–25) | The 1,029 scored designs are written to Parquet and CSV, an interactive HTML browser is generated, and 16 wet-lab synthesis sheets are produced for the P1-passing designs. | pen-assemble |
+
+### Key design decisions
+
+> **Why four strategies instead of one?**
+> Because no single approach can overcome all limitations. Strategy B (NCBI scan) finds natural diversity but natural proteins are not optimised for human therapy. Strategy C (deimmunization) reduces immune reactivity but doesn't change the sequence radically. Strategy D (ProteinMPNN) redesigns the backbone but stays near IS621. Running all four in parallel and scoring them on the same metric reveals which approach actually wins — and the answer (Strategy D + C) was not obvious before the analysis.
+
+> **Why pre-registration?**
+> Because post-hoc threshold selection is the most common source of irreproducibility in computational biology. Every threshold in this pipeline (0.929, ≥ 5 beaters, Δ ≥ 0.10 for immunogenicity) was publicly committed and SHA-256 locked before a single protein was scored. This means the result — 16 beaters, 5/5 predictions PASS — is a genuine, non-inflated positive finding.
+
+> **Why build on pen-score instead of just comparing raw axis values?**
+> Raw axis values are not commensurable: a 0.05 improvement in S_DSB is not equivalent to a 0.05 improvement in S_Immuno. pen-score uses evidence-based weights derived from clinical AAV gene therapy requirements, so the composite PenScore reflects actual therapeutic relevance, not just mathematical convenience.
+
+---
+
 ## The PEN-STACK Pipeline
 
 PEN-ASSEMBLE is the fourth package in a four-paper computational stack. Each package provides critical inputs to the next:
@@ -42,7 +178,7 @@ PEN-ASSEMBLE is the fourth package in a four-paper computational stack. Each pac
   ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
   │  genome-atlas    │    │   mech-class     │    │   pen-score      │    │  pen-assemble    │
   │  Paper 1         │───►│   Paper 2        │───►│   Paper 3        │───►│   Paper 4  ◄ YOU │
-  │  v0.7.1          │    │   v0.5.3         │    │   v0.1.2         │    │   v0.5.1         │
+  │  v0.7.2          │    │   v0.5.4         │    │   v0.1.3         │    │   v0.5.2         │
   │                  │    │                  │    │                  │    │                  │
   │  Knowledge graph │    │  Mechanism       │    │  8-axis PenScore │    │  Design catalog  │
   │  28 enzyme       │    │  classifier      │    │  framework       │    │  1,029 IS110     │
@@ -60,10 +196,10 @@ PEN-ASSEMBLE is the fourth package in a four-paper computational stack. Each pac
 
 | Package | What it does | Key result | Repo |
 |---------|-------------|------------|------|
-| [**genome-atlas**](https://github.com/ahmedanees-m/genome-atlas) | Builds a knowledge graph of 28 DNA-editing enzyme systems from UniProt, PDB, and AlphaFold data | AUROC 0.9714 on protein–domain link prediction; 70% accuracy on 10 published therapeutic scenarios | v0.7.1 |
-| [**mech-class**](https://github.com/ahmedanees-m/mech-class) | Classifies any genome editor by its biochemical mechanism (DSB nuclease / DSB-free recombinase / transposase) and corrects 31,870 mis-classified IS110-family proteins | Tier-A macro-F1 = 0.9862; IS110 hard gate via PF01548 + PF02371 Pfam domains | v0.5.3 |
-| [**pen-score**](https://github.com/ahmedanees-m/pen-score) | Scores any genome editor on 8 axes covering safety, specificity, cargo capacity, delivery compatibility, immunogenicity, programmability, maturity, and energy independence | IS621 scores 0.957; SpCas9 scores 0.402; 7 clinical weight profiles | v0.1.2 |
-| **pen-assemble** *(this repo)* | Generates, screens, and ranks IS110-family design candidates using genome-atlas accession data, mech-class IS110 gating, and pen-score evaluation | 1,029 designs, 16 beat IS621, 5/5 pre-reg predictions PASS | v0.5.1 |
+| [**genome-atlas**](https://github.com/ahmedanees-m/genome-atlas) | Builds a knowledge graph of 28 DNA-editing enzyme systems from UniProt, PDB, and AlphaFold data | AUROC 0.9714 on protein–domain link prediction; 70% accuracy on 10 published therapeutic scenarios | v0.7.2 |
+| [**mech-class**](https://github.com/ahmedanees-m/mech-class) | Classifies any genome editor by its biochemical mechanism (DSB nuclease / DSB-free recombinase / transposase) and corrects 31,870 mis-classified IS110-family proteins | Tier-A macro-F1 = 0.9862; IS110 hard gate via PF01548 + PF02371 Pfam domains | v0.5.4 |
+| [**pen-score**](https://github.com/ahmedanees-m/pen-score) | Scores any genome editor on 8 axes covering safety, specificity, cargo capacity, delivery compatibility, immunogenicity, programmability, maturity, and energy independence | IS621 scores 0.957; SpCas9 scores 0.402; 7 clinical weight profiles | v0.1.3 |
+| **pen-assemble** *(this repo)* | Generates, screens, and ranks IS110-family design candidates using genome-atlas accession data, mech-class IS110 gating, and pen-score evaluation | 1,029 designs, 16 beat IS621, 5/5 pre-reg predictions PASS | v0.5.2 |
 
 ---
 
@@ -324,7 +460,7 @@ pen-assemble/
 │   ├── codon.py                     #   Human codon optimisation utilities
 │   ├── api.py                       #   High-level Designer API
 │   ├── cli.py                       #   Command-line entry point (pen-assemble --help)
-│   ├── _version.py                  #   Package version (0.5.1)
+│   ├── _version.py                  #   Package version (0.5.2)
 │   ├── strategies/                  #   Design generation modules (Steps 01–11)
 │   │   ├── domain_swap.py           #     Strategy A: chimeric fusions
 │   │   ├── ortholog_discovery.py    #     Strategy B: NCBI IS110 screen
@@ -358,7 +494,7 @@ pen-assemble/
 │   ├── rescore_v012.py              #   Re-scores catalog with pen-score v0.1.2
 │   └── upgrade_catalog_to_v052.py   #   Adds v3.2 fields (intrinsic_cargo + cell_based)
 │
-├── tests/                           # 63 pytest tests (Python 3.10 / 3.11 / 3.12)
+├── tests/                           # 74 pytest tests (Python 3.10 / 3.11 / 3.12)
 ├── docs/                            # Sphinx documentation (furo theme)
 │
 ├── CHANGELOG.md                     # Version history
@@ -378,7 +514,7 @@ pen-assemble/
 pytest tests/ -v
 ```
 
-All 63 tests pass on Python 3.10, 3.11, and 3.12. Coverage is measured on the public API surface (`pen_score.py`, `catalog.py`, `codon.py`) and reported to [Codecov](https://codecov.io/gh/ahmedanees-m/pen-assemble). Pipeline-only modules (`strategies/`, `triage/`, `verification/`) require VM-only dependencies (ESM-2, MHCflurry, mech-class extras) and are excluded from CI coverage.
+All 74 tests pass on Python 3.10, 3.11, and 3.12. Coverage is measured on the public API surface (`pen_score.py`, `catalog.py`, `codon.py`) and reported to [Codecov](https://codecov.io/gh/ahmedanees-m/pen-assemble). Pipeline-only modules (`strategies/`, `triage/`, `verification/`) require VM-only dependencies (ESM-2, MHCflurry, mech-class extras) and are excluded from CI coverage.
 
 ---
 
@@ -436,9 +572,9 @@ python scripts/rescore_v012.py --frozen catalog/release_v0.5.0/pen_assemble_cata
 
 | Package | Role in the pipeline | Version | Repo |
 |---------|---------------------|---------|------|
-| [**genome-atlas**](https://github.com/ahmedanees-m/genome-atlas) | Foundational knowledge graph of 28 enzyme systems (AUROC 0.9714) | v0.7.1 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
-| [**mech-class**](https://github.com/ahmedanees-m/mech-class) | Biochemical mechanism classifier — IS110 Tier-A gate (F1 = 0.986) | v0.5.3 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
-| [**pen-score**](https://github.com/ahmedanees-m/pen-score) | 8-axis writer scoring framework — IS621 = 0.957, SpCas9 = 0.402 | v0.1.2 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
+| [**genome-atlas**](https://github.com/ahmedanees-m/genome-atlas) | Foundational knowledge graph of 28 enzyme systems (AUROC 0.9714) | v0.7.2 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
+| [**mech-class**](https://github.com/ahmedanees-m/mech-class) | Biochemical mechanism classifier — IS110 Tier-A gate (F1 = 0.986) | v0.5.4 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
+| [**pen-score**](https://github.com/ahmedanees-m/pen-score) | 8-axis writer scoring framework — IS621 = 0.957, SpCas9 = 0.402 | v0.1.3 | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
 | **pen-assemble** *(this repo)* | IS110-family design catalog — 1,029 designs, 5/5 predictions PASS | **v0.5.2** | [![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](#) |
 | **PEN-COMPARE** *(in prep)* | Cross-system benchmarking — TrueWriterScore 6-gate classifier | — | — |
 
