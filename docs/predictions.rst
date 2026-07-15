@@ -83,4 +83,4 @@ to the full catalog.
 **Cluster-level probability of >= 1 Strategy D design in top-5 = 100%** (1,000
 bootstrap iterations, seed 42).
 
-Full details: ``pipeline_results_local_test/validation/all_predictions_summary.json``.
+Full details: ``catalog/release_v0.5.0/validation/all_predictions_summary.json``.

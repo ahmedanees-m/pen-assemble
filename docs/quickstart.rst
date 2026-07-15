@@ -57,7 +57,7 @@ Computing PenScore
         S_Immuno=0.8777, S_Prog=1.0, S_Mature=1.0,
     )
     s = pen_score(ax)
-    print(f"PenScore = {s:.4f}")       # 0.9678
+    print(f"PenScore = {s:.4f}")       # 0.9878
     print(f"Beats IS621: {beats_is621(s)}")  # True
 
 Codon optimisation
@@ -88,7 +88,7 @@ Running the pre-registered prediction tests
     py 44_test_pred_P5_diversity.py
     py 45_summarise_predictions.py
 
-Results are written to ``pipeline_results_local_test/validation/``.
+The committed reference results are in ``catalog/release_v0.5.0/validation/``.
 
 Running the test suite
 ----------------------

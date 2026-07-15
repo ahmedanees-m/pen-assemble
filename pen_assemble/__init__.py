@@ -1,5 +1,5 @@
 """
-PEN-ASSEMBLE v0.5.0: Programmable Editor Nomination pipeline for IS110-family
+PEN-ASSEMBLE: Programmable Editor Nomination pipeline for IS110-family
 bridge recombinase design and ranking.
 
 Subpackages

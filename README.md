@@ -384,7 +384,6 @@ ax = PenScoreAxes(
     S_Immuno=0.85,  # after Monte Carlo deimmunization
     S_Prog=1.0,     # bRNA re-targetable
     S_Mature=0.83,
-    S_Energy=1.0,   # ATP-free (no Walker A/B motifs)
 )
 score = pen_score(ax)           # composite PenScore
 print(f"PenScore: {score:.4f}")
@@ -430,7 +429,7 @@ redesigns = d.redesign_backbone(scaffold_id="IS621", n_designs=25)
 pen-assemble/
 │
 ├── pen_assemble/                    # Python package (importable)
-│   ├── pen_score.py                 #   PenScore composite formula (8 axes)
+│   ├── pen_score.py                 #   PenScore composite formula (7 axes)
 │   ├── catalog.py                   #   load_catalog(), load_p1_beaters(), load_top5()
 │   ├── codon.py                     #   Human codon optimisation utilities
 │   ├── api.py                       #   High-level Designer API
@@ -449,8 +448,8 @@ pen-assemble/
 ├── catalog/
 │   └── release_v0.5.0/             #   v0.5.0 FROZEN pre-registration record
 │       ├── pen_assemble_catalog.{csv,parquet}   # All 1,029 designs
-│       ├── p1_beaters_catalog.{csv,parquet}     # 16 designs > 0.929
-│       ├── p5_top5_catalog.{csv,parquet}        # Diversity top-5
+│       ├── p1_beaters_catalog.csv               # 16 designs > 0.929
+│       ├── p5_top5_catalog.csv                  # Diversity top-5
 │       ├── browser/index.html       #   Interactive HTML design browser (no server needed)
 │       ├── wetlab/                  #   16 wet-lab synthesis reference sheets (Markdown)
 │       └── validation/              #   Pre-registered prediction result JSONs (P1-P5)

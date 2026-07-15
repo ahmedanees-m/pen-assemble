@@ -1,72 +1,12 @@
 #!/usr/bin/env python3
 """
-Step 12b Boltz-1 Tier 2 runner - pen-stack/design:0.1.0 (boltz 2.2.1)
-SAFE VERSION v3: Batched processing + correct FASTA header format.
+Boltz-1 structure-prediction runner for the candidate sequences.
 
-ROOT CAUSE OF VM HANG:
-  Boltz's preprocessor spawns min(32, n_cpu) threads regardless of input size.
-  Feeding 188 sequences at once -> 32 simultaneous feature-extraction threads
-  -> 20-40 GB RAM spike -> kernel OOM -> entire VM freezes (only 2 GB swap).
-
-FIX (RAM OOM - VM freeze):
-  - Process BATCH_SIZE=1 sequence per boltz predict call.
-  - Between calls, subprocess exits, freeing all RAM before next sequence starts.
-  - Docker --memory=40g provides a hard OOM kill ceiling (exit 137 not VM freeze).
-
-FIX (VRAM OOM - "ran out of memory, skipping batch"):
-  - With BATCH_SIZE > 1, boltz loads feature tensors for ALL sequences into VRAM
-    simultaneously. For 10 long chimeric sequences (~400-700aa): > 16GB VRAM used.
-  - Fix: BATCH_SIZE=1. Each boltz call has only 1 sequence's tensors in VRAM.
-  - Cost: 188 individual subprocess calls, ~9 min each, total ~28h runtime.
-
-FIX (Docker shm bus error):
-  - num_workers=0 disables PyTorch DataLoader multiprocessing (no shm IPC).
-  - Plus --shm-size=4g on docker run for belt-and-suspenders safety.
-
-FIX (Critical - "Invalid record id"):
-  Boltz 2.2.1 FASTA parser ONLY accepts headers in the form:
-      >CHAIN_ID|entity_type   (e.g. >A|protein)
-  ANY other format (including plain ">seq_id") raises:
-      ValueError: Invalid record id: <name>
-  Fix: write one FASTA file per sequence, named {seq_id}.fasta, containing
-      >A|protein
-      SEQUENCE
-  Then pass the DIRECTORY of these files to boltz predict.
-  Output is at: predictions/{seq_id}/A/confidence_A_model_0.json
-
-FIX (MSA requirement - "Missing MSA's in input"):
-  Boltz-1 requires Multiple Sequence Alignments (MSAs) for structure prediction.
-  Without --use_msa_server, ALL sequences fail at preprocessing:
-      RuntimeError: Missing MSA's in input and --use_msa_server flag not set.
-  Fix: add --use_msa_server to boltz predict command.
-  This uses the MMSeqs2/ColabFold public API (api.colabfold.com) to compute MSAs.
-  Natural sequences (Strategy B): ColabFold returns rich MSAs -> high-quality predictions.
-  Novel chimeras (Strategy A/C/D): ColabFold finds distant homologs or returns
-    sparse MSAs; boltz still produces predictions (lower but non-zero quality).
-  Runtime note: MSA generation adds ~30-60s per sequence; total runtime ~34h.
-
-Additional safeguards:
-  - DONE.txt guard at startup (prevents restart loop after completion)
-    with auto-invalidation of bug-era artifacts (gate6_pass=0, results>0)
-  - Thermal monitor: SIGTERM boltz predict if GPU >= TEMP_ABORT_C
-  - Checkpoint CSV every CHECKPOINT_EVERY results parsed
-  - Heartbeat JSON every monitoring cycle
-  - Boltz skips existing output (idempotent; safe to restart mid-batch)
+Predicts one sequence per boltz call, parses mean pLDDT and pTM from each
+result, and applies the confidence gate (mean pLDDT >= 70, pTM >= 0.50).
 
 Input:  /input/step12b_boltz1_tier2_input.fasta
-Output: /output/
-  boltz_predictions/              -- boltz writes here (batched subdirs)
-    batch_0001/                   -- per-batch boltz out_dir
-      boltz_results_b0001_input/  -- boltz creates this
-        predictions/
-          {seq_id}/A/confidence_A_model_0.json
-          {seq_id}/A/{seq_id}_model_0.pdb
-  _batch/                         -- per-batch INPUT dirs (temp per-seq FASTAs)
-    b0001_input/{seq_id}.fasta
-  step12b_results.csv
-  step12b_results.parquet (if pandas available)
-  heartbeat.json
-  DONE.txt
+Output: /output/ (per-sequence predictions, step12b_results.csv, DONE.txt)
 """
 
 import sys, time, json, csv, subprocess, signal, threading, shutil

@@ -1,4 +1,4 @@
-PEN-ASSEMBLE v0.5.1
+PEN-ASSEMBLE v0.5.2
 ===================
 
 **Programmable Enzyme Networks - Automated Strategy and Scoring Engine for Molecular Bridge-recombinase Library Engineering**

@@ -70,7 +70,7 @@ without modifying any PenScore, strategy, or design_id values.
 - `data/catalog_v0.5.1_current.parquet` produced from `scripts/rescore_v012.py` (8-axis, pen-score v0.1.2).
 - IS621 reference lockpoint: 0.929 -> **0.957** (S_Energy axis + weight redistribution).
 - Designs beating new lockpoint (0.957): **2** (IS621_deimmunized_v2 ~ 0.966, C_targeted_001 ~ 0.959).
-- `catalog/pen_assemble_catalog.parquet` (v0.5.0, 7-axis) is the **frozen pre-registration record** - NOT modified.
+- `catalog/release_v0.5.0/pen_assemble_catalog.parquet` (v0.5.0, 7-axis) is the **frozen pre-registration record** - NOT modified.
 
 **Repository**
 - Version bumped to `0.5.1`.
@@ -117,7 +117,7 @@ as a secondary current-best-estimate analysis only.
 
 **CI/CD**
 - GitHub Actions CI: lint (ruff + mypy) -> test (Python 3.10/3.11/3.12) -> build -> GitHub Release
-- PyPI trusted publishing workflow (`publish.yml`)
+- Token-based PyPI publishing workflow (`publish.yml`)
 - GitHub Pages documentation workflow (`docs.yml`)
 
 **Tests** - 63 pytest tests covering PenScore formula, catalog integrity, codon optimisation

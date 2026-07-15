@@ -6,7 +6,7 @@ of seven mechanistic axes calibrated for the human_therapeutic_aav_insertion use
 
 References
 ----------
-- PEN-ASSEMBLE v0.5.0 documented methodology
+- PEN-ASSEMBLE documented methodology
 - IS621 published lockpoint: pen_score = 0.929 (verbatim pre-registered)
 - MHCflurry 2.2.1-calibrated lockpoint: 0.9255 (secondary analysis)
 """

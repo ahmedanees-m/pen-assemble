@@ -28,7 +28,7 @@ pen-score v0.1.2 introduces **two breaking changes**:
 > **The pre-registered prediction P1** (">=5 designs beat IS621 verbatim lockpoint 0.929")
 > **was tested against v0.1.0 scores and is FINAL as tested.**
 >
-> This document does **NOT** re-test P1. The v0.5.0 catalog (`catalog/pen_assemble_catalog.parquet`)
+> This document does **NOT** re-test P1. The v0.5.0 catalog (`catalog/release_v0.5.0/pen_assemble_catalog.parquet`)
 > is the pre-registration record. v0.5.1 (`data/catalog_v0.5.1_current.parquet`) is the
 > current best-estimate update.
 
@@ -129,17 +129,17 @@ exceed the lockpoint. This is reported for transparency; it does NOT invalidate 
 
 | File | Description | Version | Do NOT modify |
 |------|-------------|---------|---------------|
-| `catalog/pen_assemble_catalog.parquet` | v0.5.0 frozen, pre-registration record | pen-score v0.1.0, 7-axis |  YES - pre-registration |
+| `catalog/release_v0.5.0/pen_assemble_catalog.parquet` | v0.5.0 frozen, pre-registration record | pen-score v0.1.0, 7-axis |  YES - pre-registration |
 | `data/catalog_v0.5.1_current.parquet` | v0.5.1 current best estimate | pen-score v0.1.2, 8-axis | No |
-| `results/rescore_comparison_v010_v012.csv` | Side-by-side v0.1.0 vs v0.1.2 | - | No |
+| `data/rescore_comparison_v010_v012.csv` | Side-by-side v0.1.0 vs v0.1.2 | - | No |
 
-To reproduce: `python scripts/rescore_v012.py --frozen catalog/pen_assemble_catalog.parquet`
+To reproduce: `python scripts/rescore_v012.py --frozen catalog/release_v0.5.0/pen_assemble_catalog.parquet`
 
 ---
 
 ## Usage Guidance
 
-- **For P1 verification:** Use `catalog/pen_assemble_catalog.parquet` (frozen v0.5.0).
+- **For P1 verification:** Use `catalog/release_v0.5.0/pen_assemble_catalog.parquet` (frozen v0.5.0).
 - **For PEN-COMPARE v3.2 analysis:** Use `data/catalog_v0.5.2_current.parquet` (adds
   `intrinsic_cargo_mechanism` and `cell_based_evidence` columns required by v3.2 Gates).
 - **For PEN-COMPARE TrueWriterScore analysis:** Use `data/catalog_v0.5.1_current.parquet` or
@@ -155,4 +155,4 @@ To reproduce: `python scripts/rescore_v012.py --frozen catalog/pen_assemble_cata
 
 *Generated 2026-05-24. pen-assemble v0.5.1 / pen-score v0.1.2.*
 *Updated 2026-05-25. pen-assemble v0.5.2 / pen-score v0.1.3 (ISCro4 canonical naming).*
-*Pre-registration record: catalog/pen_assemble_catalog.parquet (DO NOT MODIFY).*
+*Pre-registration record: catalog/release_v0.5.0/pen_assemble_catalog.parquet (DO NOT MODIFY).*
