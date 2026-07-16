@@ -351,6 +351,10 @@ pip install -e ".[dev,docs]"
 
 ### Load the design catalog
 
+The loaders read the frozen v0.5.0 release catalog, which ships with the repository
+(it is the pre-registration record and is not bundled into the wheel). Use a source
+checkout, or pass `release_dir=` pointing at a downloaded `catalog/release_v0.5.0`.
+
 ```python
 from pen_assemble.catalog import load_catalog, load_p1_beaters, load_top5
 

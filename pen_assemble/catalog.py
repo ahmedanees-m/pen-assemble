@@ -23,6 +23,14 @@ __all__ = [
 _PKG_ROOT = Path(__file__).resolve().parent.parent
 RELEASE_DIR: Path = _PKG_ROOT / "catalog" / "release_v0.5.0"
 
+# The frozen v0.5.0 release catalog ships with the repository, not with the wheel:
+# it is the pre-registration record, so it is not duplicated into the package.
+_RELEASE_HINT = (
+    "The installed wheel ships the library, not the frozen v0.5.0 release catalog. "
+    "Clone the repository, or pass release_dir= pointing at a downloaded "
+    "catalog/release_v0.5.0 directory."
+)
+
 #: IS621 verbatim lockpoint used for P1 beater definition.
 IS621_LOCKPOINT = 0.929
 
@@ -63,8 +71,8 @@ def load_catalog(
     rdir = Path(release_dir) if release_dir else RELEASE_DIR
     if not rdir.exists():
         raise FileNotFoundError(
-            f"Release directory not found: {rdir}\n"
-            "Run scripts/50_assemble_catalog.py to generate it."
+            f"Release catalog not found: {rdir}\n{_RELEASE_HINT}\n"
+            "From a source checkout you can regenerate it with scripts/50_assemble_catalog.py."
         )
     if fmt == "parquet":
         fpath = rdir / "pen_assemble_catalog.parquet"
@@ -72,7 +80,7 @@ def load_catalog(
         fpath = rdir / "pen_assemble_catalog.csv"
 
     if not fpath.exists():
-        raise FileNotFoundError(f"Catalog file not found: {fpath}")
+        raise FileNotFoundError(f"Catalog file not found: {fpath}\n{_RELEASE_HINT}")
 
     return pd.read_parquet(fpath) if fmt == "parquet" else pd.read_csv(fpath)
 
@@ -104,7 +112,7 @@ def load_p1_beaters(
     rdir = Path(release_dir) if release_dir else RELEASE_DIR
     fpath = rdir / "p1_beaters_catalog.csv"
     if not fpath.exists():
-        raise FileNotFoundError(f"P1 beaters file not found: {fpath}")
+        raise FileNotFoundError(f"P1 beaters file not found: {fpath}\n{_RELEASE_HINT}")
     df = pd.read_csv(fpath)
     return df.sort_values("pen_score", ascending=False).reset_index(drop=True)
 
@@ -139,7 +147,7 @@ def load_top5(
     rdir = Path(release_dir) if release_dir else RELEASE_DIR
     fpath = rdir / "p5_top5_catalog.csv"
     if not fpath.exists():
-        raise FileNotFoundError(f"Top-5 file not found: {fpath}")
+        raise FileNotFoundError(f"Top-5 file not found: {fpath}\n{_RELEASE_HINT}")
     df = pd.read_csv(fpath)
     return df.sort_values("pen_score", ascending=False).reset_index(drop=True)
 
