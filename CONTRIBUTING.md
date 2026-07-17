@@ -22,7 +22,7 @@ This installs the package in editable mode with all development and documentatio
 pytest tests/ -v
 ```
 
-All 63 tests must pass before submitting a pull request. The CI matrix runs Python 3.10, 3.11, and 3.12.
+The full test suite must pass before submitting a pull request; it is run in continuous integration on the Python 3.10, 3.11, and 3.12 matrix.
 
 ---
 
